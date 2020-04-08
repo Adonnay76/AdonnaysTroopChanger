@@ -1,0 +1,1206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<NPCCharacters>
+	<!-- FEMALE CHAEL NADRA-->
+	<!-- Recruit T1 MAX Skill 60-->
+	<NPCCharacter id="chael_nadra_recruit_f"
+                default_group="Infantry"
+				is_female="true"
+                level="6"
+                civilianTemplate="NPCCharacter.vlandia_troop_civilian_template_t1"
+                name="{=0000001}Chael Nad'ra"
+                occupation="Soldier"
+                is_basic_troop="false"
+                culture="Culture.neutral_culture">
+	    <face>
+			<BodyProperties version="4" age="22.01" weight="0.3" build="0.01"  key="0000040000FC3001287644075661326233C387585545552284566C438364514302304724F35355650000000000000FFE00000000000000000000000050501000"  />
+			<BodyPropertiesMax version="4" age="33.01" weight="0.3" build="0.01"  key="0022840FC0FC3010A97B966BAAA6A79686E8889B96BAB8984BBBBF9D88DA774802704724F796C9A80000000000000FFE00000000000000000000000050E04000"  />
+        </face>		
+	    <skills>
+            <skill id="Athletics"   value="40" />
+            <skill id="Riding"      value="20" />
+            <skill id="OneHanded"   value="60" />
+            <skill id="TwoHanded"   value="60" />
+            <skill id="Polearm"     value="40" />
+            <skill id="Bow"         value="40" />
+            <skill id="Crossbow"    value="10" />
+            <skill id="Throwing"    value="5" />
+        </skills>
+	    <equipmentSet>
+            <equipment slot="Item0"       id="Item.cn_sword_1_t1" />
+            <equipment slot="Head"        id="Item.cn_hood" />
+            <equipment slot="Body"        id="Item.empire_short_dress" />
+			<equipment slot="Gloves"      id="Item.northern_brass_bracers" />
+			<equipment slot="Leg"         id="Item.woven_leather_boots" />
+        </equipmentSet>
+	    <equipmentSet>
+			<equipment slot="Item0"       id="Item.cn_sword_2_t1" />
+			<equipment slot="Head"        id="Item.cn_hood" />
+			<equipment slot="Body"        id="Item.empire_short_dress" />
+			<equipment slot="Gloves"      id="Item.northern_brass_bracers" />
+			<equipment slot="Leg"         id="Item.woven_leather_boots" />
+        </equipmentSet>
+	    <upgrade_targets>
+            <upgrade_target id="NPCCharacter.chael_nadra_fighter_f" />
+	        <upgrade_target id="NPCCharacter.chael_nadra_archer_f" />
+        </upgrade_targets>
+    </NPCCharacter>
+  
+	<!-- INFANTRY -->
+    <!-- Infantry T2 MAX Skill 100-->
+    <NPCCharacter id="chael_nadra_fighter_f"
+                default_group="Infantry"
+				is_female="True"
+                level="11"
+                civilianTemplate="NPCCharacter.vlandia_troop_civilian_template_t1"
+                name="{=0000002}Chael Nad'ra Initiate"
+                occupation="Soldier"
+                is_basic_troop="false"
+                culture="Culture.neutral_culture">
+	    <face>
+			<BodyProperties version="4" age="22.01" weight="0.3" build="0.01"  key="0000040000FC3001287644075661326233C387585545552284566C438364514302304724F35355650000000000000FFE00000000000000000000000050501000"  />
+			<BodyPropertiesMax version="4" age="33.01" weight="0.3" build="0.01"  key="0022840FC0FC3010A97B966BAAA6A79686E8889B96BAB8984BBBBF9D88DA774802704724F796C9A80000000000000FFE00000000000000000000000050E04000"  />
+        </face>		
+	    <skills>
+            <skill id="Athletics" value="80" />
+            <skill id="Riding"    value="40" />
+            <skill id="OneHanded" value="100" />
+            <skill id="TwoHanded" value="100" />
+            <skill id="Polearm"   value="20" />
+            <skill id="Bow"       value="50" />
+            <skill id="Crossbow"  value="10" />
+            <skill id="Throwing"  value="5" />
+        </skills>
+	    <equipmentSet>
+            <equipment slot="Item0"     id="Item.cn_sword_1_t2" />
+	        <equipment slot="Item1"     id="Item.decorated_steppe_shield" />			 
+            <equipment slot="Head"      id="Item.cn_hood" />
+            <equipment slot="Body"      id="Item.belted_leather_cuirass" />
+			<equipment slot="Gloves"    id="Item.northern_brass_bracers" />
+            <equipment slot="Leg"       id="Item.leather_cavalier_boots" />
+        </equipmentSet>
+	    <equipmentSet>
+			<equipment slot="Item0"     id="Item.cn_sword_2_t2" />
+			<equipment slot="Item1"     id="Item.decorated_steppe_shield" />
+			<equipment slot="Head"      id="Item.cn_hood" />
+			<equipment slot="Body"      id="Item.belted_leather_cuirass" />
+			<equipment slot="Gloves"    id="Item.northern_brass_bracers" />
+			<equipment slot="Leg"       id="Item.leather_cavalier_boots" />
+        </equipmentSet>
+	    <upgrade_targets>
+            <upgrade_target id="NPCCharacter.chael_nadra_warrior_t3_f" />
+	        <upgrade_target id="NPCCharacter.chael_nadra_lancer_t3_f" />
+        </upgrade_targets>
+	</NPCCharacter>
+
+	<!-- Infantry T3 MAX Skill 160-->
+	<NPCCharacter id="chael_nadra_warrior_t3_f"
+                default_group="Infantry"
+				is_female="True"
+                level="16"
+                civilianTemplate="NPCCharacter.vlandia_troop_civilian_template_t1"
+                name="{=0000003}Chael Nad'ra Chosen"
+                occupation="Soldier"
+                is_basic_troop="false"
+                culture="Culture.neutral_culture">
+		<face>
+			<BodyProperties version="4" age="22.01" weight="0.3" build="0.01"  key="0000040000FC3001287644075661326233C387585545552284566C438364514302304724F35355650000000000000FFE00000000000000000000000050501000"  />
+			<BodyPropertiesMax version="4" age="33.01" weight="0.3" build="0.01"  key="0022840FC0FC3010A97B966BAAA6A79686E8889B96BAB8984BBBBF9D88DA774802704724F796C9A80000000000000FFE00000000000000000000000050E04000"  />
+		</face>		
+		<skills>
+		    <skill id="Athletics"   value="120" />
+		    <skill id="Riding"      value="40" />
+		    <skill id="OneHanded"   value="160" />
+		    <skill id="TwoHanded"   value="160" />
+		    <skill id="Polearm"     value="20" />
+		    <skill id="Bow"         value="60" />
+		    <skill id="Crossbow"    value="10" />
+		    <skill id="Throwing"    value="5" />
+		</skills>
+		<equipmentSet>
+		    <equipment slot="Item0"     id="Item.cn_sword_1_t3" />
+		    <equipment slot="Item1"     id="Item.noyans_shield" />			 
+		    <equipment slot="Head"      id="Item.cn_hood" />
+		    <equipment slot="Body"      id="Item.eastern_studded_leather" />
+			<equipment slot="Gloves"    id="Item.northern_brass_bracers" />
+		    <equipment slot="Leg"       id="Item.leather_cavalier_boots" />
+		    <equipment slot="Cape"      id="Item.battania_shoulder_strap" />			 
+		</equipmentSet>
+		<equipmentSet>
+			<equipment slot="Item0"     id="Item.cn_sword_2_t3" />
+			<equipment slot="Item1"     id="Item.noyans_shield" />
+			<equipment slot="Head"      id="Item.cn_hood" />
+			<equipment slot="Body"      id="Item.eastern_studded_leather" />
+			<equipment slot="Gloves"    id="Item.northern_brass_bracers" />
+			<equipment slot="Leg"       id="Item.leather_cavalier_boots" />
+			<equipment slot="Cape"      id="Item.battania_shoulder_strap" />
+		</equipmentSet>
+		<upgrade_targets>
+		    <upgrade_target id="NPCCharacter.chael_nadra_warrior_t4_f" />
+		</upgrade_targets>
+	</NPCCharacter>
+
+	<!-- Infantry T4 MAX Skill 220-->
+	<NPCCharacter id="chael_nadra_warrior_t4_f"
+                default_group="Infantry"
+				is_female="True"
+                level="21"
+                civilianTemplate="NPCCharacter.vlandia_troop_civilian_template_t1"
+                name="{=0000004}Chael Nad'ra Blade Weaver"
+                occupation="Soldier"
+                is_basic_troop="false"
+                culture="Culture.neutral_culture">
+	    <face>
+			<BodyProperties version="4" age="22.01" weight="0.3" build="0.01"  key="0000040000FC3001287644075661326233C387585545552284566C438364514302304724F35355650000000000000FFE00000000000000000000000050501000"  />
+			<BodyPropertiesMax version="4" age="33.01" weight="0.3" build="0.01"  key="0022840FC0FC3010A97B966BAAA6A79686E8889B96BAB8984BBBBF9D88DA774802704724F796C9A80000000000000FFE00000000000000000000000050E04000"  />
+        </face>		
+	    <skills>
+            <skill id="Athletics"   value="160" />
+            <skill id="Riding"      value="40" />
+            <skill id="OneHanded"   value="220" />
+            <skill id="TwoHanded"   value="220" />
+            <skill id="Polearm"     value="40" />
+            <skill id="Bow"         value="70" />
+            <skill id="Crossbow"    value="10" />
+            <skill id="Throwing"    value="5" />
+        </skills>
+	    <equipmentSet>
+            <equipment slot="Item0"     id="Item.cn_sword_1_t3" />
+	        <equipment slot="Item1"     id="Item.noyans_shield" />			 
+	        <equipment slot="Head"      id="Item.cn_hood" />				 
+            <equipment slot="Body"      id="Item.imperial_lamellar_over_leather" />
+            <equipment slot="Gloves"    id="Item.decorated_imperial_gauntlets" />
+            <equipment slot="Leg"       id="Item.decorated_imperial_boots" />
+            <equipment slot="Cape"      id="Item.battania_shoulder_strap" />		 
+        </equipmentSet>
+	    <equipmentSet>
+			<equipment slot="Item0"     id="Item.cn_sword_2_t3" />
+			<equipment slot="Item1"     id="Item.noyans_shield" />
+			<equipment slot="Head"      id="Item.cn_hood" />
+			<equipment slot="Body"      id="Item.imperial_lamellar_over_leather" />
+			<equipment slot="Gloves"    id="Item.decorated_imperial_gauntlets" />
+			<equipment slot="Leg"       id="Item.decorated_imperial_boots" />
+			<equipment slot="Cape"      id="Item.battania_shoulder_strap" />
+        </equipmentSet>
+	    <upgrade_targets>
+            <upgrade_target id="NPCCharacter.chael_nadra_warrior_t5_f" />
+        </upgrade_targets>
+    </NPCCharacter>
+
+	<!-- Infantry T5 MAX Skill 280-->
+	<NPCCharacter id="chael_nadra_warrior_t5_f"
+                default_group="Infantry"
+				is_female="true"
+                level="26"
+                civilianTemplate="NPCCharacter.vlandia_troop_civilian_template_t1"
+                name="{=0000005}Shael'na Fain"
+                occupation="Soldier"
+                is_basic_troop="false"
+                culture="Culture.neutral_culture">
+	    <face>
+			<BodyProperties version="4" age="22.01" weight="0.3" build="0.01"  key="0000040000FC3001287644075661326233C387585545552284566C438364514302304724F35355650000000000000FFE00000000000000000000000050501000"  />
+			<BodyPropertiesMax version="4" age="33.01" weight="0.3" build="0.01"  key="0022840FC0FC3010A97B966BAAA6A79686E8889B96BAB8984BBBBF9D88DA774802704724F796C9A80000000000000FFE00000000000000000000000050E04000"  />
+        </face>		
+	    <skills>
+            <skill id="Athletics"   value="180" />
+            <skill id="Riding"      value="40" />
+            <skill id="OneHanded"   value="280" />
+            <skill id="TwoHanded"   value="280" />
+            <skill id="Polearm"     value="20" />
+            <skill id="Bow"         value="80" />
+            <skill id="Crossbow"    value="0" />
+            <skill id="Throwing"    value="5" />
+        </skills>
+	    <equipmentSet>
+            <equipment slot="Item0"     id="Item.cn_sword_1_t3" />
+	        <equipment slot="Item1"     id="Item.steel_round_shield" />			 
+	        <equipment slot="Head"      id="Item.cn_hood_t5" />	
+            <equipment slot="Body"      id="Item.lamellar_with_scale_skirt" />
+            <equipment slot="Gloves"    id="Item.decorated_imperial_gauntlets" />
+            <equipment slot="Leg"       id="Item.decorated_imperial_boots" />		 
+            <equipment slot="Cape"      id="Item.studded_imperial_neckguard" />				 
+        </equipmentSet>
+	    <equipmentSet>
+			<equipment slot="Item0"     id="Item.cn_sword_2_t3" />
+			<equipment slot="Item1"     id="Item.steel_round_shield" />
+			<equipment slot="Head"      id="Item.cn_hood_t5" />
+			<equipment slot="Body"      id="Item.lamellar_with_scale_skirt" />
+			<equipment slot="Gloves"    id="Item.decorated_imperial_gauntlets" />
+			<equipment slot="Leg"       id="Item.decorated_imperial_boots" />
+			<equipment slot="Cape"      id="Item.studded_imperial_neckguard" />
+		</equipmentSet>
+    </NPCCharacter>
+
+
+
+	<!-- ARCHERS -->
+	<!-- Archer T2 MAX Skill 100 -->
+    <NPCCharacter id="chael_nadra_archer_f"
+                default_group="Ranged"
+				is_female="true"
+                level="11"
+                civilianTemplate="NPCCharacter.vlandia_troop_civilian_template_t1"
+                name="{=0000006}Chael Nad'ra Scout"
+                occupation="Soldier"
+                is_basic_troop="false"
+                culture="Culture.neutral_culture">
+	    <face>
+			<BodyProperties version="4" age="22.01" weight="0.3" build="0.01"  key="0000040000FC3001287644075661326233C387585545552284566C438364514302304724F35355650000000000000FFE00000000000000000000000050501000"  />
+			<BodyPropertiesMax version="4" age="33.01" weight="0.3" build="0.01"  key="0022840FC0FC3010A97B966BAAA6A79686E8889B96BAB8984BBBBF9D88DA774802704724F796C9A80000000000000FFE00000000000000000000000050E04000"  />
+        </face>		
+	    <skills>
+            <skill id="Athletics"   value="100" />
+            <skill id="Riding"      value="20" />
+            <skill id="OneHanded"   value="80" />
+            <skill id="TwoHanded"   value="80" />
+            <skill id="Polearm"     value="20" />
+            <skill id="Bow"         value="100" />
+            <skill id="Crossbow"    value="0" />
+            <skill id="Throwing"    value="5" />
+        </skills>
+	    <equipmentSet>
+            <equipment slot="Item0"     id="Item.cn_sword_1_t2" />
+	        <equipment slot="Item1"     id="Item.cn_long_bow" />	
+            <equipment slot="Item2"     id="Item.cn_arrows" />
+            <equipment slot="Item3"     id="Item.cn_arrows" />				 
+            <equipment slot="Head"      id="Item.cn_hood" />
+            <equipment slot="Body"      id="Item.belted_leather_cuirass" />
+			<equipment slot="Gloves"    id="Item.northern_brass_bracers" />
+            <equipment slot="Leg"       id="Item.woven_leather_boots" />
+	        <equipment slot="Cape"      id="Item.battania_civil_cape" />					 
+        </equipmentSet>
+	    <equipmentSet>
+			<equipment slot="Item0"     id="Item.cn_sword_2_t2" />
+			<equipment slot="Item1"     id="Item.cn_long_bow" />
+			<equipment slot="Item2"     id="Item.cn_arrows" />
+			<equipment slot="Item3"     id="Item.cn_arrows" />
+			<equipment slot="Head"      id="Item.cn_hood" />
+			<equipment slot="Body"      id="Item.belted_leather_cuirass" />
+			<equipment slot="Gloves"    id="Item.northern_brass_bracers" />
+			<equipment slot="Leg"       id="Item.woven_leather_boots" />
+			<equipment slot="Cape"      id="Item.battania_civil_cape" />
+		</equipmentSet>
+	    <upgrade_targets>
+          <upgrade_target id="NPCCharacter.chael_nadra_ranger_t3_f" />
+        </upgrade_targets>
+    </NPCCharacter>
+
+	<!-- Archer T3 MAX Skill 160 -->
+    <NPCCharacter id="chael_nadra_ranger_t3_f"
+                default_group="Ranged"
+			    is_female="true"
+                level="16"
+                civilianTemplate="NPCCharacter.vlandia_troop_civilian_template_t1"
+                name="{=0000008}Chael Nad'ra Ranger"
+                occupation="Soldier"
+                is_basic_troop="false"
+                culture="Culture.neutral_culture">
+        <face>
+			<BodyProperties version="4" age="22.01" weight="0.3" build="0.01"  key="0000040000FC3001287644075661326233C387585545552284566C438364514302304724F35355650000000000000FFE00000000000000000000000050501000"  />
+			<BodyPropertiesMax version="4" age="33.01" weight="0.3" build="0.01"  key="0022840FC0FC3010A97B966BAAA6A79686E8889B96BAB8984BBBBF9D88DA774802704724F796C9A80000000000000FFE00000000000000000000000050E04000"  />
+        </face>		
+        <skills>
+            <skill id="Athletics"   value="160" />
+            <skill id="Riding"      value="20" />
+            <skill id="OneHanded"   value="120" />
+            <skill id="TwoHanded"   value="120" />
+            <skill id="Polearm"     value="20" />
+            <skill id="Bow"         value="160" />
+            <skill id="Crossbow"    value="0" />
+            <skill id="Throwing"    value="5" />
+        </skills>
+        <equipmentSet>
+            <equipment slot="Item0"     id="Item.cn_sword_1_t3" />
+	        <equipment slot="Item1"     id="Item.cn_long_bow" />	
+            <equipment slot="Item2"     id="Item.cn_arrows" />
+            <equipment slot="Item3"     id="Item.cn_arrows" />				 
+            <equipment slot="Head"      id="Item.cn_hood" />			 
+            <equipment slot="Body"      id="Item.basic_imperial_leather_armor" />
+            <equipment slot="Gloves"    id="Item.northern_brass_bracers" />				 
+            <equipment slot="Leg"       id="Item.leather_cavalier_boots" />
+	        <equipment slot="Cape"      id="Item.battania_civil_cape" />							 
+        </equipmentSet>
+        <equipmentSet>
+			<equipment slot="Item0"     id="Item.cn_sword_2_t3" />
+			<equipment slot="Item1"     id="Item.cn_long_bow" />
+			<equipment slot="Item2"     id="Item.cn_arrows" />
+			<equipment slot="Item3"     id="Item.cn_arrows" />
+			<equipment slot="Head"      id="Item.cn_hood" />
+			<equipment slot="Body"      id="Item.basic_imperial_leather_armor" />
+			<equipment slot="Gloves"    id="Item.northern_brass_bracers" />
+			<equipment slot="Leg"       id="Item.leather_cavalier_boots" />
+			<equipment slot="Cape"      id="Item.battania_civil_cape" />							 
+        </equipmentSet>
+        <upgrade_targets>
+            <upgrade_target id="NPCCharacter.chael_nadra_ranger_t4_f" />
+        </upgrade_targets>
+    </NPCCharacter>
+
+	<!-- Archer T4 MAX Skill 220-->
+	<NPCCharacter id="chael_nadra_ranger_t4_f"
+                default_group="Ranged"
+				is_female="true"
+                level="21"
+                civilianTemplate="NPCCharacter.vlandia_troop_civilian_template_t1"
+                name="{=0000009}Chael Nad'ra Warden"
+                occupation="Soldier"
+                is_basic_troop="false"
+                culture="Culture.neutral_culture">
+	    <face>
+			<BodyProperties version="4" age="22.01" weight="0.3" build="0.01"  key="0000040000FC3001287644075661326233C387585545552284566C438364514302304724F35355650000000000000FFE00000000000000000000000050501000"  />
+			<BodyPropertiesMax version="4" age="33.01" weight="0.3" build="0.01"  key="0022840FC0FC3010A97B966BAAA6A79686E8889B96BAB8984BBBBF9D88DA774802704724F796C9A80000000000000FFE00000000000000000000000050E04000"  />
+        </face>		
+	    <skills>
+            <skill id="Athletics" value="220" />
+            <skill id="Riding"    value="20" />
+            <skill id="OneHanded" value="160" />
+            <skill id="TwoHanded" value="160" />
+            <skill id="Polearm"   value="20" />
+            <skill id="Bow"       value="220" />
+            <skill id="Crossbow"  value="0" />
+            <skill id="Throwing"  value="5" />
+        </skills>
+	    <equipmentSet>
+            <equipment slot="Item0"   id="Item.cn_sword_1_t3" />
+	        <equipment slot="Item1"   id="Item.cn_long_bow" />	
+            <equipment slot="Item2"   id="Item.cn_arrows" />
+            <equipment slot="Item3"   id="Item.cn_arrows" />
+            <equipment slot="Head"    id="Item.cn_hood" />						 
+            <equipment slot="Body"    id="Item.eastern_studded_leather" />
+            <equipment slot="Gloves"  id="Item.northern_brass_bracers" />
+            <equipment slot="Leg"     id="Item.battania_woodland_boots" />			 
+            <equipment slot="Cape"    id="Item.battania_civil_cape" /> 				 
+        </equipmentSet>
+	    <equipmentSet>
+		    <equipment slot="Item0"   id="Item.cn_sword_2_t3" />
+		    <equipment slot="Item1"   id="Item.cn_long_bow" />
+		    <equipment slot="Item2"   id="Item.cn_arrows" />
+		    <equipment slot="Item3"   id="Item.cn_arrows" />
+		    <equipment slot="Head"    id="Item.cn_hood" />
+		    <equipment slot="Body"    id="Item.eastern_studded_leather" />
+		    <equipment slot="Gloves"  id="Item.northern_brass_bracers" />
+		    <equipment slot="Leg"     id="Item.battania_woodland_boots" />
+		    <equipment slot="Cape"    id="Item.battania_civil_cape" />
+		</equipmentSet>
+	    <upgrade_targets>
+            <upgrade_target id="NPCCharacter.chael_nadra_ranger_t5_f" />
+        </upgrade_targets>
+    </NPCCharacter>
+
+	<!-- Archer T5 MAX Skill 280 -->
+	<NPCCharacter id="chael_nadra_ranger_t5_f"
+                default_group="Ranged"
+				is_female="true"
+                level="26"
+                civilianTemplate="NPCCharacter.vlandia_troop_civilian_template_t1"
+                name="{=0000010}Aethil'na Fain"
+                occupation="Soldier"
+                is_basic_troop="false"
+                culture="Culture.neutral_culture">
+	    <face>
+			<BodyProperties version="4" age="22.01" weight="0.3" build="0.01"  key="0000040000FC3001287644075661326233C387585545552284566C438364514302304724F35355650000000000000FFE00000000000000000000000050501000"  />
+			<BodyPropertiesMax version="4" age="33.01" weight="0.3" build="0.01"  key="0022840FC0FC3010A97B966BAAA6A79686E8889B96BAB8984BBBBF9D88DA774802704724F796C9A80000000000000FFE00000000000000000000000050E04000"  />
+        </face>		
+	    <skills>
+            <skill id="Athletics" value="280" />
+            <skill id="Riding"    value="20" />
+            <skill id="OneHanded" value="200" />
+            <skill id="TwoHanded" value="200" />
+            <skill id="Polearm"   value="20" />
+            <skill id="Bow"       value="280" />
+            <skill id="Crossbow"  value="0" />
+            <skill id="Throwing"  value="5" />
+        </skills>
+	    <equipmentSet>
+            <equipment slot="Item0"   id="Item.cn_sword_1_t3" />
+	        <equipment slot="Item1"   id="Item.cn_long_bow" />	
+            <equipment slot="Item2"   id="Item.cn_arrows" />
+            <equipment slot="Item3"   id="Item.cn_arrows" />
+            <equipment slot="Head"    id="Item.cn_hood" />	
+            <equipment slot="Body"    id="Item.imperial_lamellar_over_leather" />
+            <equipment slot="Cape"    id="Item.battania_cloak_furr" />
+            <equipment slot="Gloves"  id="Item.decorated_imperial_gauntlets" />
+            <equipment slot="Leg"     id="Item.decorated_imperial_boots" />
+        </equipmentSet>
+	    <equipmentSet>
+		    <equipment slot="Item0"   id="Item.cn_sword_2_t3" />
+		    <equipment slot="Item1"   id="Item.cn_long_bow" />
+		    <equipment slot="Item2"   id="Item.cn_arrows" />
+		    <equipment slot="Item3"   id="Item.cn_arrows" />
+		    <equipment slot="Head"    id="Item.cn_hood" />
+		    <equipment slot="Body"    id="Item.imperial_lamellar_over_leather" />
+		    <equipment slot="Cape"    id="Item.battania_cloak_furr" />
+		    <equipment slot="Gloves"  id="Item.decorated_imperial_gauntlets" />
+		    <equipment slot="Leg"     id="Item.decorated_imperial_boots" />	 
+        </equipmentSet>
+    </NPCCharacter>
+
+
+	<!-- CAVALRY -->
+	<!-- Cavalry T3 MAX Skill 160-->
+    <NPCCharacter id="chael_nadra_lancer_t3_f"
+                default_group="Cavalry"
+				is_female="true"
+                level="16"
+                civilianTemplate="NPCCharacter.vlandia_troop_civilian_template_t1"
+                name="{=0000011}Chael Nad'ra Glade Rider"
+				upgrade_requires="ItemCategory.horse"
+                occupation="Soldier"
+                is_basic_troop="false"
+                culture="Culture.neutral_culture">
+	    <face>
+			<BodyProperties version="4" age="22.01" weight="0.3" build="0.01"  key="0000040000FC3001287644075661326233C387585545552284566C438364514302304724F35355650000000000000FFE00000000000000000000000050501000"  />
+			<BodyPropertiesMax version="4" age="33.01" weight="0.3" build="0.01"  key="0022840FC0FC3010A97B966BAAA6A79686E8889B96BAB8984BBBBF9D88DA774802704724F796C9A80000000000000FFE00000000000000000000000050E04000"  />
+        </face>
+		<skills>
+			<skill id="Athletics"  value="100" />
+			<skill id="Riding"     value="160" />
+			<skill id="OneHanded"  value="100" />
+			<skill id="TwoHanded"  value="100" />
+			<skill id="Polearm"    value="160" />
+			<skill id="Bow"        value="120" />
+			<skill id="Crossbow"   value="10" />
+			<skill id="Throwing"   value="5" />
+		</skills>
+	    <equipmentSet>
+            <equipment slot="Item0"           id="Item.empire_polearm_1_t4" />
+	        <equipment slot="Item1"           id="Item.cn_long_bow" />		
+            <equipment slot="Item2"           id="Item.cn_arrows" />
+            <equipment slot="Item3"           id="Item.decorated_steppe_shield" />	
+            <equipment slot="Head"            id="Item.cn_hood" />					 
+            <equipment slot="Body"            id="Item.eastern_studded_leather" />
+            <equipment slot="Leg"             id="Item.decorated_imperial_boots" />
+            <equipment slot="Gloves"          id="Item.northern_brass_bracers" />
+	        <equipment slot="Cape"            id="Item.battania_shoulder_strap" />	
+ 	        <equipment slot="Horse"           id="Item.vlandia_horse" />
+            <equipment slot="HorseHarness"    id="Item.light_harness" />			 
+        </equipmentSet>
+	    <equipmentSet>
+			<equipment slot="Item0"           id="Item.empire_polearm_1_t4" />
+			<equipment slot="Item1"           id="Item.cn_long_bow" />
+			<equipment slot="Item2"           id="Item.cn_arrows" />
+			<equipment slot="Item3"           id="Item.decorated_steppe_shield" />
+			<equipment slot="Head"            id="Item.cn_hood" />
+			<equipment slot="Body"            id="Item.eastern_studded_leather" />
+			<equipment slot="Leg"             id="Item.decorated_imperial_boots" />
+			<equipment slot="Gloves"          id="Item.northern_brass_bracers" />
+			<equipment slot="Cape"            id="Item.battania_shoulder_strap" />
+			<equipment slot="Horse"           id="Item.vlandia_horse" />
+			<equipment slot="HorseHarness"    id="Item.light_harness" />
+		</equipmentSet>
+	    <upgrade_targets>
+            <upgrade_target id="NPCCharacter.chael_nadra_lancer_t4_f" />
+        </upgrade_targets>
+    </NPCCharacter>
+
+	<!-- Cavalry T4 MAX Skill 220-->
+    <NPCCharacter id="chael_nadra_lancer_t4_f"
+                default_group="Cavalry"
+				is_female="true"
+                level="21"
+                civilianTemplate="NPCCharacter.vlandia_troop_civilian_template_t1"
+                name="{=0000012}Chael Nad'ra Glade Warden"
+				occupation="Soldier"
+                is_basic_troop="false"
+                culture="Culture.neutral_culture">
+	    <face>
+			<BodyProperties version="4" age="22.01" weight="0.3" build="0.01"  key="0000040000FC3001287644075661326233C387585545552284566C438364514302304724F35355650000000000000FFE00000000000000000000000050501000"  />
+			<BodyPropertiesMax version="4" age="33.01" weight="0.3" build="0.01"  key="0022840FC0FC3010A97B966BAAA6A79686E8889B96BAB8984BBBBF9D88DA774802704724F796C9A80000000000000FFE00000000000000000000000050E04000"  />
+        </face>
+		<skills>
+			<skill id="Athletics"  value="120" />
+			<skill id="Riding"     value="220" />
+			<skill id="OneHanded"  value="120" />
+			<skill id="TwoHanded"  value="120" />
+			<skill id="Polearm"    value="220" />
+			<skill id="Bow"        value="140" />
+			<skill id="Crossbow"   value="10" />
+			<skill id="Throwing"   value="5" />
+		</skills>
+	    <equipmentSet>
+            <equipment slot="Item0"         id="Item.empire_polearm_1_t4" />
+	        <equipment slot="Item1"         id="Item.cn_long_bow" />		
+            <equipment slot="Item2"         id="Item.cn_arrows" />
+            <equipment slot="Item3"         id="Item.noyans_shield" />	
+            <equipment slot="Head"          id="Item.cn_hood" />		 
+            <equipment slot="Body"          id="Item.imperial_lamellar_over_leather" />
+            <equipment slot="Leg"           id="Item.decorated_imperial_boots" />
+            <equipment slot="Gloves"        id="Item.decorated_imperial_gauntlets" />
+	        <equipment slot="Cape"          id="Item.battania_shoulder_strap" />	
+ 	        <equipment slot="Horse"         id="Item.vlandia_horse" />
+            <equipment slot="HorseHarness"  id="Item.light_harness" />			 
+        </equipmentSet>
+	    <equipmentSet>
+			<equipment slot="Item0"         id="Item.empire_polearm_1_t4" />
+			<equipment slot="Item1"         id="Item.cn_long_bow" />
+			<equipment slot="Item2"         id="Item.cn_arrows" />
+			<equipment slot="Item3"         id="Item.noyans_shield" />
+			<equipment slot="Head"          id="Item.cn_hood" />
+			<equipment slot="Body"          id="Item.imperial_lamellar_over_leather" />
+			<equipment slot="Leg"           id="Item.decorated_imperial_boots" />
+			<equipment slot="Gloves"        id="Item.decorated_imperial_gauntlets" />
+			<equipment slot="Cape"          id="Item.battania_shoulder_strap" />
+			<equipment slot="Horse"         id="Item.vlandia_horse" />
+			<equipment slot="HorseHarness"  id="Item.light_harness" />
+		</equipmentSet>
+	    <upgrade_targets>
+            <upgrade_target id="NPCCharacter.chael_nadra_lancer_t5_f" />
+        </upgrade_targets>
+    </NPCCharacter>
+
+	<!-- Cavalry T5 MAX Skill 280-->
+    <NPCCharacter id="chael_nadra_lancer_t5_f"
+                default_group="Cavalry"
+				is_female="true"
+                level="26"
+                civilianTemplate="NPCCharacter.vlandia_troop_civilian_template_t1"
+                name="{=0000013}Brianh'na Fain"
+				upgrade_requires="ItemCategory.war_horse"
+				occupation="Soldier"
+                is_basic_troop="false"
+                culture="Culture.neutral_culture">
+	    <face>
+			<BodyProperties version="4" age="22.01" weight="0.3" build="0.01"  key="0000040000FC3001287644075661326233C387585545552284566C438364514302304724F35355650000000000000FFE00000000000000000000000050501000"  />
+			<BodyPropertiesMax version="4" age="33.01" weight="0.3" build="0.01"  key="0022840FC0FC3010A97B966BAAA6A79686E8889B96BAB8984BBBBF9D88DA774802704724F796C9A80000000000000FFE00000000000000000000000050E04000"  />
+        </face>		
+	    <skills>
+		    <skill id="Athletics"  value="140" />
+		    <skill id="Riding"     value="280" />
+		    <skill id="OneHanded"  value="160" />
+		    <skill id="TwoHanded"  value="160" />
+		    <skill id="Polearm"    value="280" />
+		    <skill id="Bow"        value="180" />
+		    <skill id="Crossbow"   value="10" />
+		    <skill id="Throwing"   value="5" />
+        </skills>
+	    <equipmentSet>
+            <equipment slot="Item0"         id="Item.empire_polearm_2_t5" />
+	        <equipment slot="Item1"         id="Item.cn_long_bow" />		
+            <equipment slot="Item2"         id="Item.cn_arrows" />
+            <equipment slot="Item3"         id="Item.steel_round_shield" />	
+            <equipment slot="Head"          id="Item.cn_hood_t5" />			 
+            <equipment slot="Body"          id="Item.imperial_lamellar_over_leather" />
+		    <equipment slot="Gloves"        id="Item.decorated_imperial_gauntlets" />
+            <equipment slot="Leg"           id="Item.decorated_imperial_boots" />
+            <equipment slot="Cape"          id="Item.pauldron_cape_a" />	
+ 	        <equipment slot="Horse"         id="Item.t2_vlandia_horse" />
+            <equipment slot="HorseHarness"  id="Item.chain_barding" />			 
+        </equipmentSet>
+	    <equipmentSet>
+			<equipment slot="Item0"         id="Item.empire_polearm_2_t5" />
+			<equipment slot="Item1"         id="Item.cn_long_bow" />
+			<equipment slot="Item2"         id="Item.cn_arrows" />
+			<equipment slot="Item3"         id="Item.steel_round_shield" />
+			<equipment slot="Head"          id="Item.cn_hood_t5" />
+			<equipment slot="Body"          id="Item.imperial_lamellar_over_leather" />
+			<equipment slot="Gloves"        id="Item.decorated_imperial_gauntlets" />
+			<equipment slot="Leg"           id="Item.decorated_imperial_boots" />
+			<equipment slot="Cape"          id="Item.pauldron_cape_a" />
+			<equipment slot="Horse"         id="Item.t2_vlandia_horse" />
+			<equipment slot="HorseHarness"  id="Item.chain_barding" />
+		</equipmentSet>
+    </NPCCharacter>
+
+	
+
+	<!-- MALE CHAEL NADRA-->
+	<!-- Recruit T1 MAX Skill 60-->
+	<NPCCharacter id="chael_nadra_recruit_m"
+                default_group="Infantry"
+				is_female="false"
+                level="6"
+                civilianTemplate="NPCCharacter.vlandia_troop_civilian_template_t1"
+                name="{=0000020}Chael Nad'ra (m)"
+                occupation="Soldier"
+                is_basic_troop="false"
+                culture="Culture.neutral_culture">
+		<face>
+			<BodyProperties version="4" age="25.84" weight="0.5" build="0.5"  key="0000000017FC000143844854223274823063883428432723353747238535531701A776130A77353400000000000000000000000000000000000000003D4C3002"  />
+			<BodyPropertiesMax version="4" age="35.84" weight="0.5" build="0.5"  key="0028800FD7FC000AB888788A6566C48284A9886AA8CBB7978A98DD7C88BA47590197761309B7BB8800000000000000000000000000000000000000003D3C3002"  />
+		</face>
+		<skills>
+			<skill id="Athletics"   value="40" />
+			<skill id="Riding"      value="20" />
+			<skill id="OneHanded"   value="60" />
+			<skill id="TwoHanded"   value="60" />
+			<skill id="Polearm"     value="40" />
+			<skill id="Bow"         value="40" />
+			<skill id="Crossbow"    value="10" />
+			<skill id="Throwing"    value="5" />
+		</skills>
+		<equipmentSet>
+			<equipment slot="Item0"       id="Item.cn_sword_1_t1" />
+			<equipment slot="Head"        id="Item.cn_hood" />
+			<equipment slot="Body"        id="Item.empire_short_dress" />
+			<equipment slot="Gloves"      id="Item.northern_brass_bracers" />
+			<equipment slot="Leg"         id="Item.woven_leather_boots" />
+		</equipmentSet>
+		<equipmentSet>
+			<equipment slot="Item0"       id="Item.cn_sword_2_t1" />
+			<equipment slot="Head"        id="Item.cn_hood" />
+			<equipment slot="Body"        id="Item.empire_short_dress" />
+			<equipment slot="Gloves"      id="Item.northern_brass_bracers" />
+			<equipment slot="Leg"         id="Item.woven_leather_boots" />
+		</equipmentSet>
+		<upgrade_targets>
+			<upgrade_target id="NPCCharacter.chael_nadra_fighter_m" />
+			<upgrade_target id="NPCCharacter.chael_nadra_archer_m" />
+		</upgrade_targets>
+	</NPCCharacter>
+
+	<!-- INFANTRY -->
+	<!-- Infantry T2 MAX Skill 100-->
+	<NPCCharacter id="chael_nadra_fighter_m"
+                default_group="Infantry"
+				is_female="false"
+                level="11"
+                civilianTemplate="NPCCharacter.vlandia_troop_civilian_template_t1"
+                name="{=0000021}Chael Nad'ra Initiate (m)"
+                occupation="Soldier"
+                is_basic_troop="false"
+                culture="Culture.neutral_culture">
+		<face>
+			<BodyProperties version="4" age="25.84" weight="0.5" build="0.5"  key="0000000017FC000143844854223274823063883428432723353747238535531701A776130A77353400000000000000000000000000000000000000003D4C3002"  />
+			<BodyPropertiesMax version="4" age="35.84" weight="0.5" build="0.5"  key="0028800FD7FC000AB888788A6566C48284A9886AA8CBB7978A98DD7C88BA47590197761309B7BB8800000000000000000000000000000000000000003D3C3002"  />
+		</face>
+		<skills>
+			<skill id="Athletics" value="80" />
+			<skill id="Riding"    value="40" />
+			<skill id="OneHanded" value="100" />
+			<skill id="TwoHanded" value="100" />
+			<skill id="Polearm"   value="20" />
+			<skill id="Bow"       value="50" />
+			<skill id="Crossbow"  value="10" />
+			<skill id="Throwing"  value="5" />
+		</skills>
+		<equipmentSet>
+			<equipment slot="Item0"     id="Item.cn_sword_1_t2" />
+			<equipment slot="Item1"     id="Item.decorated_steppe_shield" />
+			<equipment slot="Head"      id="Item.cn_hood" />
+			<equipment slot="Body"      id="Item.belted_leather_cuirass" />
+			<equipment slot="Gloves"    id="Item.northern_brass_bracers" />
+			<equipment slot="Leg"       id="Item.leather_cavalier_boots" />
+		</equipmentSet>
+		<equipmentSet>
+			<equipment slot="Item0"     id="Item.cn_sword_2_t2" />
+			<equipment slot="Item1"     id="Item.decorated_steppe_shield" />
+			<equipment slot="Head"      id="Item.cn_hood" />
+			<equipment slot="Body"      id="Item.belted_leather_cuirass" />
+			<equipment slot="Gloves"    id="Item.northern_brass_bracers" />
+			<equipment slot="Leg"       id="Item.leather_cavalier_boots" />
+		</equipmentSet>
+		<upgrade_targets>
+			<upgrade_target id="NPCCharacter.chael_nadra_warrior_t3_m" />
+			<upgrade_target id="NPCCharacter.chael_nadra_lancer_t3_m" />
+		</upgrade_targets>
+	</NPCCharacter>
+
+	<!-- Infantry T3 MAX Skill 160-->
+	<NPCCharacter id="chael_nadra_warrior_t3_m"
+                default_group="Infantry"
+				is_female="false"
+                level="16"
+                civilianTemplate="NPCCharacter.vlandia_troop_civilian_template_t1"
+                name="{=0000022}Chael Nad'ra Chosen (m)"
+                occupation="Soldier"
+                is_basic_troop="false"
+                culture="Culture.neutral_culture">
+		<face>
+			<BodyProperties version="4" age="25.84" weight="0.5" build="0.5"  key="0000000017FC000143844854223274823063883428432723353747238535531701A776130A77353400000000000000000000000000000000000000003D4C3002"  />
+			<BodyPropertiesMax version="4" age="35.84" weight="0.5" build="0.5"  key="0028800FD7FC000AB888788A6566C48284A9886AA8CBB7978A98DD7C88BA47590197761309B7BB8800000000000000000000000000000000000000003D3C3002"  />
+		</face>
+		<skills>
+			<skill id="Athletics"   value="120" />
+			<skill id="Riding"      value="40" />
+			<skill id="OneHanded"   value="160" />
+			<skill id="TwoHanded"   value="160" />
+			<skill id="Polearm"     value="20" />
+			<skill id="Bow"         value="60" />
+			<skill id="Crossbow"    value="10" />
+			<skill id="Throwing"    value="5" />
+		</skills>
+		<equipmentSet>
+			<equipment slot="Item0"     id="Item.cn_sword_1_t3" />
+			<equipment slot="Item1"     id="Item.noyans_shield" />
+			<equipment slot="Head"      id="Item.cn_hood" />
+			<equipment slot="Body"      id="Item.eastern_studded_leather" />
+			<equipment slot="Gloves"    id="Item.northern_brass_bracers" />
+			<equipment slot="Leg"       id="Item.leather_cavalier_boots" />
+			<equipment slot="Cape"      id="Item.battania_shoulder_strap" />
+		</equipmentSet>
+		<equipmentSet>
+			<equipment slot="Item0"     id="Item.cn_sword_2_t3" />
+			<equipment slot="Item1"     id="Item.noyans_shield" />
+			<equipment slot="Head"      id="Item.cn_hood" />
+			<equipment slot="Body"      id="Item.eastern_studded_leather" />
+			<equipment slot="Gloves"    id="Item.northern_brass_bracers" />
+			<equipment slot="Leg"       id="Item.leather_cavalier_boots" />
+			<equipment slot="Cape"      id="Item.battania_shoulder_strap" />
+		</equipmentSet>
+		<upgrade_targets>
+			<upgrade_target id="NPCCharacter.chael_nadra_warrior_t4_m" />
+		</upgrade_targets>
+	</NPCCharacter>
+
+	<!-- Infantry T4 MAX Skill 220-->
+	<NPCCharacter id="chael_nadra_warrior_t4_m"
+                default_group="Infantry"
+				is_female="false"
+                level="21"
+                civilianTemplate="NPCCharacter.vlandia_troop_civilian_template_t1"
+                name="{=0000023}Chael Nad'ra Blade Brother"
+                occupation="Soldier"
+                is_basic_troop="false"
+                culture="Culture.neutral_culture">
+		<face>
+			<BodyProperties version="4" age="25.84" weight="0.5" build="0.5"  key="0000000017FC000143844854223274823063883428432723353747238535531701A776130A77353400000000000000000000000000000000000000003D4C3002"  />
+			<BodyPropertiesMax version="4" age="35.84" weight="0.5" build="0.5"  key="0028800FD7FC000AB888788A6566C48284A9886AA8CBB7978A98DD7C88BA47590197761309B7BB8800000000000000000000000000000000000000003D3C3002"  />
+		</face>
+		<skills>
+			<skill id="Athletics"   value="160" />
+			<skill id="Riding"      value="40" />
+			<skill id="OneHanded"   value="220" />
+			<skill id="TwoHanded"   value="220" />
+			<skill id="Polearm"     value="40" />
+			<skill id="Bow"         value="70" />
+			<skill id="Crossbow"    value="10" />
+			<skill id="Throwing"    value="5" />
+		</skills>
+		<equipmentSet>
+			<equipment slot="Item0"     id="Item.cn_sword_1_t3" />
+			<equipment slot="Item1"     id="Item.noyans_shield" />
+			<equipment slot="Head"      id="Item.cn_hood" />
+			<equipment slot="Body"      id="Item.imperial_lamellar_over_leather" />
+			<equipment slot="Gloves"    id="Item.decorated_imperial_gauntlets" />
+			<equipment slot="Leg"       id="Item.decorated_imperial_boots" />
+			<equipment slot="Cape"      id="Item.battania_shoulder_strap" />
+		</equipmentSet>
+		<equipmentSet>
+			<equipment slot="Item0"     id="Item.cn_sword_2_t3" />
+			<equipment slot="Item1"     id="Item.noyans_shield" />
+			<equipment slot="Head"      id="Item.cn_hood" />
+			<equipment slot="Body"      id="Item.imperial_lamellar_over_leather" />
+			<equipment slot="Gloves"    id="Item.decorated_imperial_gauntlets" />
+			<equipment slot="Leg"       id="Item.decorated_imperial_boots" />
+			<equipment slot="Cape"      id="Item.battania_shoulder_strap" />
+		</equipmentSet>
+		<upgrade_targets>
+			<upgrade_target id="NPCCharacter.chael_nadra_warrior_t5_m" />
+		</upgrade_targets>
+	</NPCCharacter>
+
+	<!-- Infantry T5 MAX Skill 280-->
+	<NPCCharacter id="chael_nadra_warrior_t5_m"
+                default_group="Infantry"
+				is_female="false"
+                level="26"
+                civilianTemplate="NPCCharacter.vlandia_troop_civilian_template_t1"
+                name="{=0000024}Shael'na Fain (m)"
+                occupation="Soldier"
+                is_basic_troop="false"
+                culture="Culture.neutral_culture">
+		<face>
+			<BodyProperties version="4" age="25.84" weight="0.5" build="0.5"  key="0000000017FC000143844854223274823063883428432723353747238535531701A776130A77353400000000000000000000000000000000000000003D4C3002"  />
+			<BodyPropertiesMax version="4" age="35.84" weight="0.5" build="0.5"  key="0028800FD7FC000AB888788A6566C48284A9886AA8CBB7978A98DD7C88BA47590197761309B7BB8800000000000000000000000000000000000000003D3C3002"  />
+		</face>
+		<skills>
+			<skill id="Athletics"   value="180" />
+			<skill id="Riding"      value="40" />
+			<skill id="OneHanded"   value="280" />
+			<skill id="TwoHanded"   value="280" />
+			<skill id="Polearm"     value="20" />
+			<skill id="Bow"         value="80" />
+			<skill id="Crossbow"    value="0" />
+			<skill id="Throwing"    value="5" />
+		</skills>
+		<equipmentSet>
+			<equipment slot="Item0"     id="Item.cn_sword_1_t3" />
+			<equipment slot="Item1"     id="Item.steel_round_shield" />
+			<equipment slot="Head"      id="Item.cn_hood_t5" />
+			<equipment slot="Body"      id="Item.lamellar_with_scale_skirt" />
+			<equipment slot="Gloves"    id="Item.decorated_imperial_gauntlets" />
+			<equipment slot="Leg"       id="Item.decorated_imperial_boots" />
+			<equipment slot="Cape"      id="Item.studded_imperial_neckguard" />
+		</equipmentSet>
+		<equipmentSet>
+			<equipment slot="Item0"     id="Item.cn_sword_2_t3" />
+			<equipment slot="Item1"     id="Item.steel_round_shield" />
+			<equipment slot="Head"      id="Item.cn_hood_t5" />
+			<equipment slot="Body"      id="Item.lamellar_with_scale_skirt" />
+			<equipment slot="Gloves"    id="Item.decorated_imperial_gauntlets" />
+			<equipment slot="Leg"       id="Item.decorated_imperial_boots" />
+			<equipment slot="Cape"      id="Item.studded_imperial_neckguard" />
+		</equipmentSet>
+	</NPCCharacter>
+
+
+
+	<!-- ARCHERS -->
+	<!-- Archer T2 MAX Skill 100 -->
+	<NPCCharacter id="chael_nadra_archer_m"
+                default_group="Ranged"
+				is_female="false"
+                level="11"
+                civilianTemplate="NPCCharacter.vlandia_troop_civilian_template_t1"
+                name="{=0000025}Chael Nad'ra Scout (m)"
+                occupation="Soldier"
+                is_basic_troop="false"
+                culture="Culture.neutral_culture">
+		<face>
+			<BodyProperties version="4" age="25.84" weight="0.5" build="0.5"  key="0000000017FC000143844854223274823063883428432723353747238535531701A776130A77353400000000000000000000000000000000000000003D4C3002"  />
+			<BodyPropertiesMax version="4" age="35.84" weight="0.5" build="0.5"  key="0028800FD7FC000AB888788A6566C48284A9886AA8CBB7978A98DD7C88BA47590197761309B7BB8800000000000000000000000000000000000000003D3C3002"  />
+		</face>
+		<skills>
+			<skill id="Athletics"   value="100" />
+			<skill id="Riding"      value="20" />
+			<skill id="OneHanded"   value="80" />
+			<skill id="TwoHanded"   value="80" />
+			<skill id="Polearm"     value="20" />
+			<skill id="Bow"         value="100" />
+			<skill id="Crossbow"    value="0" />
+			<skill id="Throwing"    value="5" />
+		</skills>
+		<equipmentSet>
+			<equipment slot="Item0"     id="Item.cn_sword_1_t2" />
+			<equipment slot="Item1"     id="Item.cn_long_bow" />
+			<equipment slot="Item2"     id="Item.cn_arrows" />
+			<equipment slot="Item3"     id="Item.cn_arrows" />
+			<equipment slot="Head"      id="Item.cn_hood" />
+			<equipment slot="Body"      id="Item.belted_leather_cuirass" />
+			<equipment slot="Gloves"    id="Item.northern_brass_bracers" />
+			<equipment slot="Leg"       id="Item.woven_leather_boots" />
+			<equipment slot="Cape"      id="Item.battania_civil_cape" />
+		</equipmentSet>
+		<equipmentSet>
+			<equipment slot="Item0"     id="Item.cn_sword_2_t2" />
+			<equipment slot="Item1"     id="Item.cn_long_bow" />
+			<equipment slot="Item2"     id="Item.cn_arrows" />
+			<equipment slot="Item3"     id="Item.cn_arrows" />
+			<equipment slot="Head"      id="Item.cn_hood" />
+			<equipment slot="Body"      id="Item.belted_leather_cuirass" />
+			<equipment slot="Gloves"    id="Item.northern_brass_bracers" />
+			<equipment slot="Leg"       id="Item.woven_leather_boots" />
+			<equipment slot="Cape"      id="Item.battania_civil_cape" />
+		</equipmentSet>
+		<upgrade_targets>
+			<upgrade_target id="NPCCharacter.chael_nadra_ranger_t3_m" />
+		</upgrade_targets>
+	</NPCCharacter>
+
+	<!-- Archer T3 MAX Skill 160 -->
+	<NPCCharacter id="chael_nadra_ranger_t3_m"
+                default_group="Ranged"
+			    is_female="false"
+                level="16"
+                civilianTemplate="NPCCharacter.vlandia_troop_civilian_template_t1"
+                name="{=0000026}Chael Nad'ra Ranger (m)"
+                occupation="Soldier"
+                is_basic_troop="false"
+                culture="Culture.neutral_culture">
+		<face>
+			<BodyProperties version="4" age="25.84" weight="0.5" build="0.5"  key="0000000017FC000143844854223274823063883428432723353747238535531701A776130A77353400000000000000000000000000000000000000003D4C3002"  />
+			<BodyPropertiesMax version="4" age="35.84" weight="0.5" build="0.5"  key="0028800FD7FC000AB888788A6566C48284A9886AA8CBB7978A98DD7C88BA47590197761309B7BB8800000000000000000000000000000000000000003D3C3002"  />
+		</face>
+		<skills>
+			<skill id="Athletics"   value="160" />
+			<skill id="Riding"      value="20" />
+			<skill id="OneHanded"   value="120" />
+			<skill id="TwoHanded"   value="120" />
+			<skill id="Polearm"     value="20" />
+			<skill id="Bow"         value="160" />
+			<skill id="Crossbow"    value="0" />
+			<skill id="Throwing"    value="5" />
+		</skills>
+		<equipmentSet>
+			<equipment slot="Item0"     id="Item.cn_sword_1_t3" />
+			<equipment slot="Item1"     id="Item.cn_long_bow" />
+			<equipment slot="Item2"     id="Item.cn_arrows" />
+			<equipment slot="Item3"     id="Item.cn_arrows" />
+			<equipment slot="Head"      id="Item.cn_hood" />
+			<equipment slot="Body"      id="Item.basic_imperial_leather_armor" />
+			<equipment slot="Gloves"    id="Item.northern_brass_bracers" />
+			<equipment slot="Leg"       id="Item.leather_cavalier_boots" />
+			<equipment slot="Cape"      id="Item.battania_civil_cape" />
+		</equipmentSet>
+		<equipmentSet>
+			<equipment slot="Item0"     id="Item.cn_sword_2_t3" />
+			<equipment slot="Item1"     id="Item.cn_long_bow" />
+			<equipment slot="Item2"     id="Item.cn_arrows" />
+			<equipment slot="Item3"     id="Item.cn_arrows" />
+			<equipment slot="Head"      id="Item.cn_hood" />
+			<equipment slot="Body"      id="Item.basic_imperial_leather_armor" />
+			<equipment slot="Gloves"    id="Item.northern_brass_bracers" />
+			<equipment slot="Leg"       id="Item.leather_cavalier_boots" />
+			<equipment slot="Cape"      id="Item.battania_civil_cape" />
+		</equipmentSet>
+		<upgrade_targets>
+			<upgrade_target id="NPCCharacter.chael_nadra_ranger_t4_m" />
+		</upgrade_targets>
+	</NPCCharacter>
+
+	<!-- Archer T4 MAX Skill 220-->
+	<NPCCharacter id="chael_nadra_ranger_t4_m"
+                default_group="Ranged"
+				is_female="false"
+                level="21"
+                civilianTemplate="NPCCharacter.vlandia_troop_civilian_template_t1"
+                name="{=0000027}Chael Nad'ra Warden (m)"
+                occupation="Soldier"
+                is_basic_troop="false"
+                culture="Culture.neutral_culture">
+		<face>
+			<BodyProperties version="4" age="25.84" weight="0.5" build="0.5"  key="0000000017FC000143844854223274823063883428432723353747238535531701A776130A77353400000000000000000000000000000000000000003D4C3002"  />
+			<BodyPropertiesMax version="4" age="35.84" weight="0.5" build="0.5"  key="0028800FD7FC000AB888788A6566C48284A9886AA8CBB7978A98DD7C88BA47590197761309B7BB8800000000000000000000000000000000000000003D3C3002"  />
+		</face>
+		<skills>
+			<skill id="Athletics" value="220" />
+			<skill id="Riding"    value="20" />
+			<skill id="OneHanded" value="160" />
+			<skill id="TwoHanded" value="160" />
+			<skill id="Polearm"   value="20" />
+			<skill id="Bow"       value="220" />
+			<skill id="Crossbow"  value="0" />
+			<skill id="Throwing"  value="5" />
+		</skills>
+		<equipmentSet>
+			<equipment slot="Item0"   id="Item.cn_sword_1_t3" />
+			<equipment slot="Item1"   id="Item.cn_long_bow" />
+			<equipment slot="Item2"   id="Item.cn_arrows" />
+			<equipment slot="Item3"   id="Item.cn_arrows" />
+			<equipment slot="Head"    id="Item.cn_hood" />
+			<equipment slot="Body"    id="Item.eastern_studded_leather" />
+			<equipment slot="Gloves"  id="Item.northern_brass_bracers" />
+			<equipment slot="Leg"     id="Item.battania_woodland_boots" />
+			<equipment slot="Cape"    id="Item.battania_civil_cape" />
+		</equipmentSet>
+		<equipmentSet>
+			<equipment slot="Item0"   id="Item.cn_sword_2_t3" />
+			<equipment slot="Item1"   id="Item.cn_long_bow" />
+			<equipment slot="Item2"   id="Item.cn_arrows" />
+			<equipment slot="Item3"   id="Item.cn_arrows" />
+			<equipment slot="Head"    id="Item.cn_hood" />
+			<equipment slot="Body"    id="Item.eastern_studded_leather" />
+			<equipment slot="Gloves"  id="Item.northern_brass_bracers" />
+			<equipment slot="Leg"     id="Item.battania_woodland_boots" />
+			<equipment slot="Cape"    id="Item.battania_civil_cape" />
+		</equipmentSet>
+		<upgrade_targets>
+			<upgrade_target id="NPCCharacter.chael_nadra_ranger_t5_m" />
+		</upgrade_targets>
+	</NPCCharacter>
+
+	<!-- Archer T5 MAX Skill 280 -->
+	<NPCCharacter id="chael_nadra_ranger_t5_m"
+                default_group="Ranged"
+				is_female="false"
+                level="26"
+                civilianTemplate="NPCCharacter.vlandia_troop_civilian_template_t1"
+                name="{=0000028}Aethil'na Fain (m)"
+                occupation="Soldier"
+                is_basic_troop="false"
+                culture="Culture.neutral_culture">
+		<face>
+			<BodyProperties version="4" age="25.84" weight="0.5" build="0.5"  key="0000000017FC000143844854223274823063883428432723353747238535531701A776130A77353400000000000000000000000000000000000000003D4C3002"  />
+			<BodyPropertiesMax version="4" age="35.84" weight="0.5" build="0.5"  key="0028800FD7FC000AB888788A6566C48284A9886AA8CBB7978A98DD7C88BA47590197761309B7BB8800000000000000000000000000000000000000003D3C3002"  />
+		</face>
+		<skills>
+			<skill id="Athletics" value="280" />
+			<skill id="Riding"    value="20" />
+			<skill id="OneHanded" value="200" />
+			<skill id="TwoHanded" value="200" />
+			<skill id="Polearm"   value="20" />
+			<skill id="Bow"       value="280" />
+			<skill id="Crossbow"  value="0" />
+			<skill id="Throwing"  value="5" />
+		</skills>
+		<equipmentSet>
+			<equipment slot="Item0"   id="Item.cn_sword_1_t3" />
+			<equipment slot="Item1"   id="Item.cn_long_bow" />
+			<equipment slot="Item2"   id="Item.cn_arrows" />
+			<equipment slot="Item3"   id="Item.cn_arrows" />
+			<equipment slot="Head"    id="Item.cn_hood" />
+			<equipment slot="Body"    id="Item.imperial_lamellar_over_leather" />
+			<equipment slot="Cape"    id="Item.battania_cloak_furr" />
+			<equipment slot="Gloves"  id="Item.decorated_imperial_gauntlets" />
+			<equipment slot="Leg"     id="Item.decorated_imperial_boots" />
+		</equipmentSet>
+		<equipmentSet>
+			<equipment slot="Item0"   id="Item.cn_sword_2_t3" />
+			<equipment slot="Item1"   id="Item.cn_long_bow" />
+			<equipment slot="Item2"   id="Item.cn_arrows" />
+			<equipment slot="Item3"   id="Item.cn_arrows" />
+			<equipment slot="Head"    id="Item.cn_hood" />
+			<equipment slot="Body"    id="Item.imperial_lamellar_over_leather" />
+			<equipment slot="Cape"    id="Item.battania_cloak_furr" />
+			<equipment slot="Gloves"  id="Item.decorated_imperial_gauntlets" />
+			<equipment slot="Leg"     id="Item.decorated_imperial_boots" />
+		</equipmentSet>
+	</NPCCharacter>
+
+
+	<!-- CAVALRY -->
+	<!-- Cavalry T3 MAX Skill 160-->
+	<NPCCharacter id="chael_nadra_lancer_t3_m"
+                default_group="Cavalry"
+				is_female="false"
+                level="16"
+                civilianTemplate="NPCCharacter.vlandia_troop_civilian_template_t1"
+                name="{=0000029}Chael Nad'ra Glade Watcher"
+				upgrade_requires="ItemCategory.horse"
+                occupation="Soldier"
+                is_basic_troop="false"
+                culture="Culture.neutral_culture">
+		<face>
+			<BodyProperties version="4" age="25.84" weight="0.5" build="0.5"  key="0000000017FC000143844854223274823063883428432723353747238535531701A776130A77353400000000000000000000000000000000000000003D4C3002"  />
+			<BodyPropertiesMax version="4" age="35.84" weight="0.5" build="0.5"  key="0028800FD7FC000AB888788A6566C48284A9886AA8CBB7978A98DD7C88BA47590197761309B7BB8800000000000000000000000000000000000000003D3C3002"  />
+		</face>
+		<skills>
+			<skill id="Athletics"  value="100" />
+			<skill id="Riding"     value="160" />
+			<skill id="OneHanded"  value="100" />
+			<skill id="TwoHanded"  value="100" />
+			<skill id="Polearm"    value="160" />
+			<skill id="Bow"        value="120" />
+			<skill id="Crossbow"   value="10" />
+			<skill id="Throwing"   value="5" />
+		</skills>
+		<equipmentSet>
+			<equipment slot="Item0"           id="Item.empire_polearm_1_t4" />
+			<equipment slot="Item1"           id="Item.cn_long_bow" />
+			<equipment slot="Item2"           id="Item.cn_arrows" />
+			<equipment slot="Item3"           id="Item.decorated_steppe_shield" />
+			<equipment slot="Head"            id="Item.cn_hood" />
+			<equipment slot="Body"            id="Item.eastern_studded_leather" />
+			<equipment slot="Leg"             id="Item.decorated_imperial_boots" />
+			<equipment slot="Gloves"          id="Item.northern_brass_bracers" />
+			<equipment slot="Cape"            id="Item.battania_shoulder_strap" />
+			<equipment slot="Horse"           id="Item.vlandia_horse" />
+			<equipment slot="HorseHarness"    id="Item.light_harness" />
+		</equipmentSet>
+		<equipmentSet>
+			<equipment slot="Item0"           id="Item.empire_polearm_1_t4" />
+			<equipment slot="Item1"           id="Item.cn_long_bow" />
+			<equipment slot="Item2"           id="Item.cn_arrows" />
+			<equipment slot="Item3"           id="Item.decorated_steppe_shield" />
+			<equipment slot="Head"            id="Item.cn_hood" />
+			<equipment slot="Body"            id="Item.eastern_studded_leather" />
+			<equipment slot="Leg"             id="Item.decorated_imperial_boots" />
+			<equipment slot="Gloves"          id="Item.northern_brass_bracers" />
+			<equipment slot="Cape"            id="Item.battania_shoulder_strap" />
+			<equipment slot="Horse"           id="Item.vlandia_horse" />
+			<equipment slot="HorseHarness"    id="Item.light_harness" />
+		</equipmentSet>
+		<upgrade_targets>
+			<upgrade_target id="NPCCharacter.chael_nadra_lancer_t4_m" />
+		</upgrade_targets>
+	</NPCCharacter>
+
+	<!-- Cavalry T4 MAX Skill 220-->
+	<NPCCharacter id="chael_nadra_lancer_t4_m"
+                default_group="Cavalry"
+				is_female="false"
+                level="21"
+                civilianTemplate="NPCCharacter.vlandia_troop_civilian_template_t1"
+                name="{=0000030}Chael Nad'ra Glade Guardian"
+				occupation="Soldier"
+                is_basic_troop="false"
+                culture="Culture.neutral_culture">
+		<face>
+			<BodyProperties version="4" age="25.84" weight="0.5" build="0.5"  key="0000000017FC000143844854223274823063883428432723353747238535531701A776130A77353400000000000000000000000000000000000000003D4C3002"  />
+			<BodyPropertiesMax version="4" age="35.84" weight="0.5" build="0.5"  key="0028800FD7FC000AB888788A6566C48284A9886AA8CBB7978A98DD7C88BA47590197761309B7BB8800000000000000000000000000000000000000003D3C3002"  />
+		</face>
+		<skills>
+			<skill id="Athletics"  value="120" />
+			<skill id="Riding"     value="220" />
+			<skill id="OneHanded"  value="120" />
+			<skill id="TwoHanded"  value="120" />
+			<skill id="Polearm"    value="220" />
+			<skill id="Bow"        value="140" />
+			<skill id="Crossbow"   value="10" />
+			<skill id="Throwing"   value="5" />
+		</skills>
+		<equipmentSet>
+			<equipment slot="Item0"         id="Item.empire_polearm_1_t4" />
+			<equipment slot="Item1"         id="Item.cn_long_bow" />
+			<equipment slot="Item2"         id="Item.cn_arrows" />
+			<equipment slot="Item3"         id="Item.noyans_shield" />
+			<equipment slot="Head"          id="Item.cn_hood" />
+			<equipment slot="Body"          id="Item.imperial_lamellar_over_leather" />
+			<equipment slot="Leg"           id="Item.decorated_imperial_boots" />
+			<equipment slot="Gloves"        id="Item.decorated_imperial_gauntlets" />
+			<equipment slot="Cape"          id="Item.battania_shoulder_strap" />
+			<equipment slot="Horse"         id="Item.vlandia_horse" />
+			<equipment slot="HorseHarness"  id="Item.light_harness" />
+		</equipmentSet>
+		<equipmentSet>
+			<equipment slot="Item0"         id="Item.empire_polearm_1_t4" />
+			<equipment slot="Item1"         id="Item.cn_long_bow" />
+			<equipment slot="Item2"         id="Item.cn_arrows" />
+			<equipment slot="Item3"         id="Item.noyans_shield" />
+			<equipment slot="Head"          id="Item.cn_hood" />
+			<equipment slot="Body"          id="Item.imperial_lamellar_over_leather" />
+			<equipment slot="Leg"           id="Item.decorated_imperial_boots" />
+			<equipment slot="Gloves"        id="Item.decorated_imperial_gauntlets" />
+			<equipment slot="Cape"          id="Item.battania_shoulder_strap" />
+			<equipment slot="Horse"         id="Item.vlandia_horse" />
+			<equipment slot="HorseHarness"  id="Item.light_harness" />
+		</equipmentSet>
+		<upgrade_targets>
+			<upgrade_target id="NPCCharacter.chael_nadra_lancer_t5_m" />
+		</upgrade_targets>
+	</NPCCharacter>
+
+	<!-- Cavalry T5 MAX Skill 280-->
+	<NPCCharacter id="chael_nadra_lancer_t5_m"
+                default_group="Cavalry"
+				is_female="false"
+                level="26"
+                civilianTemplate="NPCCharacter.vlandia_troop_civilian_template_t1"
+                name="{=0000031}Brianh'na Fain (m)"
+				upgrade_requires="ItemCategory.war_horse"
+				occupation="Soldier"
+                is_basic_troop="false"
+                culture="Culture.neutral_culture">
+		<face>
+			<BodyProperties version="4" age="25.84" weight="0.5" build="0.5"  key="0000000017FC000143844854223274823063883428432723353747238535531701A776130A77353400000000000000000000000000000000000000003D4C3002"  />
+			<BodyPropertiesMax version="4" age="35.84" weight="0.5" build="0.5"  key="0028800FD7FC000AB888788A6566C48284A9886AA8CBB7978A98DD7C88BA47590197761309B7BB8800000000000000000000000000000000000000003D3C3002"  />
+		</face>
+		<skills>
+			<skill id="Athletics"  value="140" />
+			<skill id="Riding"     value="280" />
+			<skill id="OneHanded"  value="160" />
+			<skill id="TwoHanded"  value="160" />
+			<skill id="Polearm"    value="280" />
+			<skill id="Bow"        value="180" />
+			<skill id="Crossbow"   value="10" />
+			<skill id="Throwing"   value="5" />
+		</skills>
+		<equipmentSet>
+			<equipment slot="Item0"         id="Item.empire_polearm_2_t5" />
+			<equipment slot="Item1"         id="Item.cn_long_bow" />
+			<equipment slot="Item2"         id="Item.cn_arrows" />
+			<equipment slot="Item3"         id="Item.steel_round_shield" />
+			<equipment slot="Head"          id="Item.cn_hood_t5" />
+			<equipment slot="Body"          id="Item.imperial_lamellar_over_leather" />
+			<equipment slot="Gloves"        id="Item.decorated_imperial_gauntlets" />
+			<equipment slot="Leg"           id="Item.decorated_imperial_boots" />
+			<equipment slot="Cape"          id="Item.pauldron_cape_a" />
+			<equipment slot="Horse"         id="Item.t2_vlandia_horse" />
+			<equipment slot="HorseHarness"  id="Item.chain_barding" />
+		</equipmentSet>
+		<equipmentSet>
+			<equipment slot="Item0"         id="Item.empire_polearm_2_t5" />
+			<equipment slot="Item1"         id="Item.cn_long_bow" />
+			<equipment slot="Item2"         id="Item.cn_arrows" />
+			<equipment slot="Item3"         id="Item.steel_round_shield" />
+			<equipment slot="Head"          id="Item.cn_hood_t5" />
+			<equipment slot="Body"          id="Item.imperial_lamellar_over_leather" />
+			<equipment slot="Gloves"        id="Item.decorated_imperial_gauntlets" />
+			<equipment slot="Leg"           id="Item.decorated_imperial_boots" />
+			<equipment slot="Cape"          id="Item.pauldron_cape_a" />
+			<equipment slot="Horse"         id="Item.t2_vlandia_horse" />
+			<equipment slot="HorseHarness"  id="Item.chain_barding" />
+		</equipmentSet>
+	</NPCCharacter>	
+		
+	
+</NPCCharacters>  

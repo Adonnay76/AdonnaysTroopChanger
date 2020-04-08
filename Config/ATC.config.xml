@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- DISCALIMER!
+	WHATEVER YOU DO HERE IS AT YOUR OWN RISK. I TAKE NO - NONE WHATSOEVER - RESPONSIBILITY FOR THE 
+	SAFETY OF YOUR SAVEGAME. YOUR SAVEGAME MAY BLOW UP... DISINTEGRATE... VANISH... AND TAKE YOUR 
+	WHOLE COMPUTER WITH IT. 
+	
+	YOU HAVE BEEN WARNED.
+
+	source_troops are all the native base_troop variants taken from spcultures.xml.
+     
+	 possible values are: 
+     imperial_recruit
+	 aserai_recruit
+	 sturgian_recruit
+	 vlandian_recruit
+	 battanian_volunteer
+	 khuzait_nomad
+	 
+	 Target_troop contains the IDs of the recruits from the troop tree you want to inject into the game. 
+	 The new troop tree can be of another mod or integrated into this mod but you have to make sure the
+	 troop tree is valid and works. The example uses my own female warrior troop tree.
+	 
+	 * The attributes percent="xy" and playeronly HAVE to be provided or the game will crash. 
+	 * If the percentages don't add up to 100% the rest of the percentage will be the chance that the
+	   source_troop recruits will remain
+	 * playeronly means that when AI tries to recruit the new target_troop recruits those recruits 
+	   will be changed back to the original source_troop recruits! This way you can make some super
+	   special troops that only you will command!
+	 * The random number generator is a bit wonky so some villages may have tons of new troops while others
+	   have none, unless of course you set the percentage to 100% for one target_troop recruit
+ 
+-->
+
+<ATCTroops>
+	<source_troop id="sturgian_recruit">
+		<target_troop id ="chael_nadra_recruit_f" percent="20" playeronly="true"/>  
+		<target_troop id ="chael_nadra_recruit_m" percent="20" playeronly="true"/>  
+	</source_troop>
+	<source_troop id="battanian_volunteer">
+		<target_troop id="chael_nadra_recruit_f" percent="30" playeronly="true"/>
+		<target_troop id="chael_nadra_recruit_m" percent="30" playeronly="true"/>
+	</source_troop>
+	<source_troop id="vlandian_recruit">
+		<target_troop id="chael_nadra_recruit_f" percent="10" playeronly="true"/>  
+		<target_troop id="chael_nadra_recruit_m" percent="10" playeronly="true"/>  
+	</source_troop>	
+</ATCTroops>
