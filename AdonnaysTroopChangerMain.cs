@@ -30,7 +30,18 @@ namespace AdonnaysTroopChanger
                 ATCconfig.Instance.LoadXML(configfile);
             }
 
+            base.OnSubModuleLoad();
+
         }
+
+        protected override void OnBeforeInitialModuleScreenSetAsRoot()
+        {
+            if (!ATCconfig.IsFileLoaded)
+                InformationManager.DisplayMessage(new InformationMessage("ATC.config.XML not found!", new Color(1, 0, 0)));
+            else
+                InformationManager.DisplayMessage(new InformationMessage("ATC config found!", new Color(0, 1, 0)));
+        }
+
 
     }
 }
@@ -50,15 +61,23 @@ namespace AdonnaysTroopChanger.Patches
                 {
                     rngvalue = AdonnaysTroopChangerMain.rng.Next(0, 100);
                     int prevPercent = 0;
+                    
+                    // Debug Message to show the actual RNG value
+                    if (ATCconfig.ShowRNGValue)
+                            InformationManager.DisplayMessage(new InformationMessage("RNG Value used: " + rngvalue));
+
                     foreach (TargetTroop tt in tc.targetTroops)
                     {
-                        if (rngvalue < (tt.TroopPercent + prevPercent))
+                        if (rngvalue <= (tt.TroopPercent + prevPercent))
                         {
                             CharacterObject newTroop = CharacterObject.Find(tt.TroopID);
                             if (newTroop != null) 
                             { 
                                 __result = newTroop;
-                                InformationManager.DisplayMessage(new InformationMessage("Volunteer Patched to: " + __result.StringId));
+
+                                //Debug Message to show the replaced troop
+                                if (ATCconfig.ShowReplacementMsg)
+                                    InformationManager.DisplayMessage(new InformationMessage(tc.SourceID + " changed to " + __result.StringId + "(" + rngvalue + ")"));
                                 break; //target troop found, we can exit
                             }
                             else
@@ -66,7 +85,7 @@ namespace AdonnaysTroopChanger.Patches
                                 InformationManager.DisplayMessage(new InformationMessage(tt.TroopID + " invalid!"));
                             }
                         }
-                        prevPercent = tt.TroopPercent;
+                        prevPercent += tt.TroopPercent;
                     }
 
                     break; //target troop found, we can exit
@@ -101,11 +120,12 @@ namespace AdonnaysTroopChanger.Patches
                         basicTroop = CharacterObject.Find(tc.SourceID);
                         if (basicTroop != null)
                         {
-                            InformationManager.DisplayMessage(new InformationMessage(basicTroop.StringId + " recruited instead of " + subject.StringId));
+                            if(ATCconfig.ShowPlayeronlyMsg)
+                                InformationManager.DisplayMessage(new InformationMessage(basicTroop.StringId + " recruited instead of " + subject.StringId));
 
                             individual.VolunteerTypes[bitCode] = subject = basicTroop;
                             break;
-                            }
+                        }
                         else
                         {
                             InformationManager.DisplayMessage(new InformationMessage(tt.TroopID + " invalid!"));

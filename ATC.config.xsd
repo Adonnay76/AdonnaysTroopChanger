@@ -3,6 +3,15 @@
   <xs:element name="ATCTroops" msdata:IsDataSet="true" msdata:Locale="en-US">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="debugInfo">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="troop_replacement" type="xs:string" minOccurs="0" />
+              <xs:element name="show_percentage" type="xs:string" minOccurs="0" />
+              <xs:element name="playeronly_flag" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
         <xs:element name="source_troop">
           <xs:complexType>
             <xs:sequence>

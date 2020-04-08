@@ -28,20 +28,28 @@
 	   special troops that only you will command!
 	 * The random number generator is a bit wonky so some villages may have tons of new troops while others
 	   have none, unless of course you set the percentage to 100% for one target_troop recruit
+	   
+	   The <debugInfo> values ONLY control the alert output, they do not have any kind of impact
+	   on the troop replacement.
  
 -->
 
 <ATCTroops>
+	<debugInfo>
+		<troop_replacement>true</troop_replacement>
+		<show_percentage>false</show_percentage>
+		<playeronly_flag>false</playeronly_flag>
+	</debugInfo>
 	<source_troop id="sturgian_recruit">
-		<target_troop id ="chael_nadra_recruit_f" percent="20" playeronly="true"/>  
-		<target_troop id ="chael_nadra_recruit_m" percent="20" playeronly="true"/>  
+		<target_troop id ="chael_nadra_recruit_f" percent="2" playeronly="true"/>  
+		<target_troop id ="chael_nadra_recruit_m" percent="2" playeronly="true"/>  
 	</source_troop>
 	<source_troop id="battanian_volunteer">
-		<target_troop id="chael_nadra_recruit_f" percent="30" playeronly="true"/>
-		<target_troop id="chael_nadra_recruit_m" percent="30" playeronly="true"/>
+		<target_troop id="chael_nadra_recruit_f" percent="2" playeronly="true"/>
+		<target_troop id="chael_nadra_recruit_m" percent="2" playeronly="true"/>
 	</source_troop>
 	<source_troop id="vlandian_recruit">
-		<target_troop id="chael_nadra_recruit_f" percent="10" playeronly="true"/>  
-		<target_troop id="chael_nadra_recruit_m" percent="10" playeronly="true"/>  
+		<target_troop id="chael_nadra_recruit_f" percent="2" playeronly="true"/>  
+		<target_troop id="chael_nadra_recruit_m" percent="2" playeronly="true"/>  
 	</source_troop>	
 </ATCTroops>

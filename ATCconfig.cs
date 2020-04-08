@@ -11,8 +11,16 @@ namespace AdonnaysTroopChanger.XMLReader
 {
     public class ATCconfig
     {
+        public static bool IsFileLoaded { get; set; }
+        public static bool ShowReplacementMsg { get; set; }
+        public static bool ShowRNGValue { get; set; }
+        public static bool ShowPlayeronlyMsg { get; set; }
+        
         private static ATCconfig _instance = null;
         public static List<TroopConfig> troopConfig = new List<TroopConfig>();
+
+
+
         public static ATCconfig Instance
         {
             get
@@ -33,14 +41,43 @@ namespace AdonnaysTroopChanger.XMLReader
             {
                 XmlDocument doc = new XmlDocument();
 
-                doc.Load(xmlpath);
-                //XmlNode xmlNodes = xmlDocument.SelectSingleNode("ATCTroops");
+                try
+                { 
+                    doc.Load(xmlpath);
+                    IsFileLoaded = true;
+                }                
+                catch (FileNotFoundException)
+                {
+                    IsFileLoaded = false;
+                }
+
                 XmlElement root = doc.DocumentElement;
 
                 foreach (XmlElement e in root.ChildNodes)
                 {
                     switch (e.Name)
                     {
+                        case "debugInfo":
+                            foreach (XmlElement di in e.ChildNodes)
+                            {
+                                switch (di.Name)
+                                {
+                                    case "troop_replacement":
+                                        ShowReplacementMsg = Convert.ToBoolean(di.FirstChild.Value);
+                                        break;
+
+                                    case "show_percentage":
+                                        ShowRNGValue = Convert.ToBoolean(di.FirstChild.Value);
+                                        break;
+
+                                    case "playeronly_flag":
+                                        ShowPlayeronlyMsg = Convert.ToBoolean(di.FirstChild.Value);
+                                        break;
+                                }
+                            }
+
+                            break;
+
                         case "source_troop":
 
                             TroopConfig sourceTroop = new TroopConfig
