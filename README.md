@@ -26,17 +26,17 @@ The new ATC.config.xml structure contains the <debugInfo> node with the 3 possib
 		<playeronly_flag>false</playeronly_flag>
 	</debugInfo>
 	<source_troop id="sturgian_recruit">
-		<target_troop id ="chael_nadra_recruit_f" percent="2" playeronly="true"/>  
-		<target_troop id ="chael_nadra_recruit_m" percent="2" playeronly="true"/>  
+		<target_troop id ="chael_nadra_recruit_f" percent="2" playeronly="true"/> 
+		<target_troop id ="chael_nadra_recruit_m" percent="2" playeronly="true"/>
 	</source_troop>
 	<source_troop id="battanian_volunteer">
 		<target_troop id="chael_nadra_recruit_f" percent="2" playeronly="true"/>
 		<target_troop id="chael_nadra_recruit_m" percent="2" playeronly="true"/>
 	</source_troop>
 	<source_troop id="vlandian_recruit">
-		<target_troop id="chael_nadra_recruit_f" percent="2" playeronly="true"/>  
-		<target_troop id="chael_nadra_recruit_m" percent="2" playeronly="true"/>  
-	</source_troop>	
+		<target_troop id="chael_nadra_recruit_f" percent="2" playeronly="true"/>
+		<target_troop id="chael_nadra_recruit_m" percent="2" playeronly="true"/>
+	</source_troop>
 </ATCTroops>
 
 
