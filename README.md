@@ -3,6 +3,12 @@ how many recruits will be changed to one of your confiured custom troops and whe
 recruit them or not.
 
 
+Version 1.0.8
+--------------------
+Changelog:
+- New flag "cultureonly" added to the ATC.config.xml - This allows to restrict custom troops to the culture of the replaced base recruit
+- Modified debug messages to show names instead of technical IDs
+
 Version 1.0.7b
 --------------------
 Changelog:
