@@ -90,7 +90,12 @@ namespace AdonnaysTroopChanger.XMLReader
 
                             foreach (XmlElement ec in e.ChildNodes)
                             {
-                                sourceTroop.targetTroops.Add(new TargetTroop() { TroopID = ec.GetAttribute("id"), TroopPercent = Convert.ToInt32(ec.GetAttribute("percent")), PlayerOnly = Convert.ToBoolean(ec.GetAttribute("playeronly")) });
+                                sourceTroop.targetTroops.Add(new TargetTroop() { 
+                                    TroopID = ec.GetAttribute("id"), 
+                                    TroopPercent = Convert.ToInt32(ec.GetAttribute("percent")), 
+                                    PlayerOnly = Convert.ToBoolean(ec.GetAttribute("playeronly")),
+                                    CultureOnly = Convert.ToBoolean(ec.GetAttribute("cultureonly"))
+                                });
                             }
                             break;
                     }
@@ -112,5 +117,6 @@ namespace AdonnaysTroopChanger.XMLReader
         public string TroopID { get; set; }
         public int TroopPercent { get; set; }
         public bool PlayerOnly { get; set; }
+        public bool CultureOnly { get; set; }
     }
 }

@@ -300,6 +300,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Config\ATC.config.xsd" />
     <None Include="packages.config" />
     <None Include="SubModule.xml" />
   </ItemGroup>
