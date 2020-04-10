@@ -3,6 +3,12 @@ how many recruits will be changed to one of your confiured custom troops and whe
 recruit them or not.
 
 
+Version 1.0.8
+--------------------
+Changelog:
+- New flag "cultureonly" added to the ATC.config.xml - This allows to restrict custom troops to the culture of the replaced base recruit
+- Modified debug messages to show names instead of technical IDs
+
 Version 1.0.7b
 --------------------
 Changelog:
@@ -20,17 +26,17 @@ The new ATC.config.xml structure contains the <debugInfo> node with the 3 possib
 		<playeronly_flag>false</playeronly_flag>
 	</debugInfo>
 	<source_troop id="sturgian_recruit">
-		<target_troop id ="chael_nadra_recruit_f" percent="2" playeronly="true"/>  
-		<target_troop id ="chael_nadra_recruit_m" percent="2" playeronly="true"/>  
+		<target_troop id ="chael_nadra_recruit_f" percent="2" playeronly="true"/> 
+		<target_troop id ="chael_nadra_recruit_m" percent="2" playeronly="true"/>
 	</source_troop>
 	<source_troop id="battanian_volunteer">
 		<target_troop id="chael_nadra_recruit_f" percent="2" playeronly="true"/>
 		<target_troop id="chael_nadra_recruit_m" percent="2" playeronly="true"/>
 	</source_troop>
 	<source_troop id="vlandian_recruit">
-		<target_troop id="chael_nadra_recruit_f" percent="2" playeronly="true"/>  
-		<target_troop id="chael_nadra_recruit_m" percent="2" playeronly="true"/>  
-	</source_troop>	
+		<target_troop id="chael_nadra_recruit_f" percent="2" playeronly="true"/>
+		<target_troop id="chael_nadra_recruit_m" percent="2" playeronly="true"/>
+	</source_troop>
 </ATCTroops>
 
 
