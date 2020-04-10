@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Xml;
 using System.IO;
 using TaleWorlds.Core;
+using TaleWorlds.Library;
 
 namespace AdonnaysTroopChanger.XMLReader
 {
@@ -15,10 +16,16 @@ namespace AdonnaysTroopChanger.XMLReader
         public static bool ShowReplacementMsg { get; set; }
         public static bool ShowRNGValue { get; set; }
         public static bool ShowPlayeronlyMsg { get; set; }
-        
+
         private static ATCconfig _instance = null;
         public static List<TroopConfig> troopConfig = new List<TroopConfig>();
 
+
+        private static int _percent = 100;
+        private static bool _playerOnly = false;
+        private static bool _aionly = false;
+        private static bool _cultureOnly = false;
+        private static bool _kingdomOnly = false;
 
 
         public static ATCconfig Instance
@@ -90,17 +97,45 @@ namespace AdonnaysTroopChanger.XMLReader
 
                             foreach (XmlElement ec in e.ChildNodes)
                             {
+
+                                try { _percent     = Convert.ToInt32(ec.GetAttribute("percent")); } catch { }
+                                try { _playerOnly  = Convert.ToBoolean(ec.GetAttribute("playeronly")); } catch { }
+                                try { _aionly      = Convert.ToBoolean(ec.GetAttribute("AIonly")); } catch { }
+                                try { _cultureOnly = Convert.ToBoolean(ec.GetAttribute("cultureonly")); } catch { }
+                                try { _kingdomOnly = Convert.ToBoolean(ec.GetAttribute("kingdomonly")); } catch { }
+                     
+
                                 sourceTroop.targetTroops.Add(new TargetTroop() { 
-                                    TroopID = ec.GetAttribute("id"), 
-                                    TroopPercent = Convert.ToInt32(ec.GetAttribute("percent")), 
-                                    PlayerOnly = Convert.ToBoolean(ec.GetAttribute("playeronly")),
-                                    CultureOnly = Convert.ToBoolean(ec.GetAttribute("cultureonly"))
+                                    TroopID         = ec.GetAttribute("id"), 
+                                    TroopPercent    = _percent, 
+                                    PlayerOnly      = _playerOnly,
+                                    AIOnly          = _aionly,
+                                    CultureOnly     = _cultureOnly,
+                                    KingdomOnly     = _kingdomOnly,
+
                                 });
+
                             }
                             break;
                     }
                 }
             }
+        }
+
+
+
+        public static void Parse()
+        {
+            for (int i = 0; i < troopConfig.Count; i++)
+            {
+                foreach(TargetTroop tt in troopConfig[i].targetTroops)
+                {
+                    if (tt.PlayerOnly && tt.CultureOnly)
+                        InformationManager.DisplayMessage(new InformationMessage(tt.TroopID + ": playeronly = true, cultureonly ignored!", new Color(1, 1, 0)));
+
+                }
+            }
+
         }
     }
 
@@ -117,6 +152,9 @@ namespace AdonnaysTroopChanger.XMLReader
         public string TroopID { get; set; }
         public int TroopPercent { get; set; }
         public bool PlayerOnly { get; set; }
+        public bool AIOnly { get; set; }
         public bool CultureOnly { get; set; }
+        public bool KingdomOnly { get; set; }
     }
+
 }

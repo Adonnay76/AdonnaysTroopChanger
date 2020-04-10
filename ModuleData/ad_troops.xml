@@ -9,7 +9,7 @@
                 civilianTemplate="NPCCharacter.vlandia_troop_civilian_template_t1"
                 name="{=0000001}Chael Nad'ra"
                 occupation="Soldier"
-                is_basic_troop="false"
+                is_basic_troop="true"
                 culture="Culture.neutral_culture">
 	    <face>
 			<BodyProperties version="4" age="22.01" weight="0.3" build="0.01"  key="0000040000FC3001287644075661326233C387585545552284566C438364514302304724F35355650000000000000FFE00000000000000000000000050501000"  />
@@ -259,7 +259,7 @@
         </skills>
 	    <equipmentSet>
             <equipment slot="Item0"     id="Item.cn_sword_1_t2" />
-	        <equipment slot="Item1"     id="Item.cn_long_bow" />	
+	        <equipment slot="Item1"     id="Item.cn_long_bow_t3" />	
             <equipment slot="Item2"     id="Item.cn_arrows" />
             <equipment slot="Item3"     id="Item.cn_arrows" />				 
             <equipment slot="Head"      id="Item.cn_hood" />
@@ -270,7 +270,7 @@
         </equipmentSet>
 	    <equipmentSet>
 			<equipment slot="Item0"     id="Item.cn_sword_2_t2" />
-			<equipment slot="Item1"     id="Item.cn_long_bow" />
+			<equipment slot="Item1"     id="Item.cn_long_bow_t3" />
 			<equipment slot="Item2"     id="Item.cn_arrows" />
 			<equipment slot="Item3"     id="Item.cn_arrows" />
 			<equipment slot="Head"      id="Item.cn_hood" />
@@ -310,7 +310,7 @@
         </skills>
         <equipmentSet>
             <equipment slot="Item0"     id="Item.cn_sword_1_t3" />
-	        <equipment slot="Item1"     id="Item.cn_long_bow" />	
+	        <equipment slot="Item1"     id="Item.cn_long_bow_t3" />	
             <equipment slot="Item2"     id="Item.cn_arrows" />
             <equipment slot="Item3"     id="Item.cn_arrows" />				 
             <equipment slot="Head"      id="Item.cn_hood" />			 
@@ -321,7 +321,7 @@
         </equipmentSet>
         <equipmentSet>
 			<equipment slot="Item0"     id="Item.cn_sword_2_t3" />
-			<equipment slot="Item1"     id="Item.cn_long_bow" />
+			<equipment slot="Item1"     id="Item.cn_long_bow_t3" />
 			<equipment slot="Item2"     id="Item.cn_arrows" />
 			<equipment slot="Item3"     id="Item.cn_arrows" />
 			<equipment slot="Head"      id="Item.cn_hood" />
@@ -361,24 +361,24 @@
         </skills>
 	    <equipmentSet>
             <equipment slot="Item0"   id="Item.cn_sword_1_t3" />
-	        <equipment slot="Item1"   id="Item.cn_long_bow" />	
+	        <equipment slot="Item1"   id="Item.cn_long_bow_t4" />	
             <equipment slot="Item2"   id="Item.cn_arrows" />
             <equipment slot="Item3"   id="Item.cn_arrows" />
             <equipment slot="Head"    id="Item.cn_hood" />						 
             <equipment slot="Body"    id="Item.eastern_studded_leather" />
             <equipment slot="Gloves"  id="Item.northern_brass_bracers" />
-            <equipment slot="Leg"     id="Item.battania_woodland_boots" />			 
+            <equipment slot="Leg"     id="Item.leather_cavalier_boots" />			 
             <equipment slot="Cape"    id="Item.battania_civil_cape" /> 				 
         </equipmentSet>
 	    <equipmentSet>
 		    <equipment slot="Item0"   id="Item.cn_sword_2_t3" />
-		    <equipment slot="Item1"   id="Item.cn_long_bow" />
+		    <equipment slot="Item1"   id="Item.cn_long_bow_t4" />
 		    <equipment slot="Item2"   id="Item.cn_arrows" />
 		    <equipment slot="Item3"   id="Item.cn_arrows" />
 		    <equipment slot="Head"    id="Item.cn_hood" />
 		    <equipment slot="Body"    id="Item.eastern_studded_leather" />
 		    <equipment slot="Gloves"  id="Item.northern_brass_bracers" />
-		    <equipment slot="Leg"     id="Item.battania_woodland_boots" />
+		    <equipment slot="Leg"     id="Item.leather_cavalier_boots" />
 		    <equipment slot="Cape"    id="Item.battania_civil_cape" />
 		</equipmentSet>
 	    <upgrade_targets>
@@ -412,7 +412,7 @@
         </skills>
 	    <equipmentSet>
             <equipment slot="Item0"   id="Item.cn_sword_1_t3" />
-	        <equipment slot="Item1"   id="Item.cn_long_bow" />	
+	        <equipment slot="Item1"   id="Item.cn_long_bow_t5" />	
             <equipment slot="Item2"   id="Item.cn_arrows" />
             <equipment slot="Item3"   id="Item.cn_arrows" />
             <equipment slot="Head"    id="Item.cn_hood" />	
@@ -423,7 +423,7 @@
         </equipmentSet>
 	    <equipmentSet>
 		    <equipment slot="Item0"   id="Item.cn_sword_2_t3" />
-		    <equipment slot="Item1"   id="Item.cn_long_bow" />
+		    <equipment slot="Item1"   id="Item.cn_long_bow_t5" />
 		    <equipment slot="Item2"   id="Item.cn_arrows" />
 		    <equipment slot="Item3"   id="Item.cn_arrows" />
 		    <equipment slot="Head"    id="Item.cn_hood" />
@@ -438,7 +438,7 @@
 	<!-- CAVALRY -->
 	<!-- Cavalry T3 MAX Skill 160-->
     <NPCCharacter id="chael_nadra_lancer_t3_f"
-                default_group="Cavalry"
+                default_group="HorseArcher"
 				is_female="true"
                 level="16"
                 civilianTemplate="NPCCharacter.vlandia_troop_civilian_template_t1"
@@ -463,7 +463,7 @@
 		</skills>
 	    <equipmentSet>
             <equipment slot="Item0"           id="Item.empire_polearm_1_t4" />
-	        <equipment slot="Item1"           id="Item.cn_long_bow" />		
+	        <equipment slot="Item1"           id="Item.cn_long_bow_t2" />		
             <equipment slot="Item2"           id="Item.cn_arrows" />
             <equipment slot="Item3"           id="Item.decorated_steppe_shield" />	
             <equipment slot="Head"            id="Item.cn_hood" />					 
@@ -476,7 +476,7 @@
         </equipmentSet>
 	    <equipmentSet>
 			<equipment slot="Item0"           id="Item.empire_polearm_1_t4" />
-			<equipment slot="Item1"           id="Item.cn_long_bow" />
+			<equipment slot="Item1"           id="Item.cn_long_bow_t2" />
 			<equipment slot="Item2"           id="Item.cn_arrows" />
 			<equipment slot="Item3"           id="Item.decorated_steppe_shield" />
 			<equipment slot="Head"            id="Item.cn_hood" />
@@ -494,7 +494,7 @@
 
 	<!-- Cavalry T4 MAX Skill 220-->
     <NPCCharacter id="chael_nadra_lancer_t4_f"
-                default_group="Cavalry"
+                default_group="HorseArcher"
 				is_female="true"
                 level="21"
                 civilianTemplate="NPCCharacter.vlandia_troop_civilian_template_t1"
@@ -518,7 +518,7 @@
 		</skills>
 	    <equipmentSet>
             <equipment slot="Item0"         id="Item.empire_polearm_1_t4" />
-	        <equipment slot="Item1"         id="Item.cn_long_bow" />		
+	        <equipment slot="Item1"         id="Item.cn_long_bow_t3" />		
             <equipment slot="Item2"         id="Item.cn_arrows" />
             <equipment slot="Item3"         id="Item.noyans_shield" />	
             <equipment slot="Head"          id="Item.cn_hood" />		 
@@ -531,7 +531,7 @@
         </equipmentSet>
 	    <equipmentSet>
 			<equipment slot="Item0"         id="Item.empire_polearm_1_t4" />
-			<equipment slot="Item1"         id="Item.cn_long_bow" />
+			<equipment slot="Item1"         id="Item.cn_long_bow_t3" />
 			<equipment slot="Item2"         id="Item.cn_arrows" />
 			<equipment slot="Item3"         id="Item.noyans_shield" />
 			<equipment slot="Head"          id="Item.cn_hood" />
@@ -549,7 +549,7 @@
 
 	<!-- Cavalry T5 MAX Skill 280-->
     <NPCCharacter id="chael_nadra_lancer_t5_f"
-                default_group="Cavalry"
+                default_group="HorseArcher"
 				is_female="true"
                 level="26"
                 civilianTemplate="NPCCharacter.vlandia_troop_civilian_template_t1"
@@ -574,7 +574,7 @@
         </skills>
 	    <equipmentSet>
             <equipment slot="Item0"         id="Item.empire_polearm_2_t5" />
-	        <equipment slot="Item1"         id="Item.cn_long_bow" />		
+	        <equipment slot="Item1"         id="Item.cn_long_bow_t4" />		
             <equipment slot="Item2"         id="Item.cn_arrows" />
             <equipment slot="Item3"         id="Item.steel_round_shield" />	
             <equipment slot="Head"          id="Item.cn_hood_t5" />			 
@@ -587,7 +587,7 @@
         </equipmentSet>
 	    <equipmentSet>
 			<equipment slot="Item0"         id="Item.empire_polearm_2_t5" />
-			<equipment slot="Item1"         id="Item.cn_long_bow" />
+			<equipment slot="Item1"         id="Item.cn_long_bow_t4" />
 			<equipment slot="Item2"         id="Item.cn_arrows" />
 			<equipment slot="Item3"         id="Item.steel_round_shield" />
 			<equipment slot="Head"          id="Item.cn_hood_t5" />
@@ -611,7 +611,7 @@
                 civilianTemplate="NPCCharacter.vlandia_troop_civilian_template_t1"
                 name="{=0000020}Chael Nad'ra (m)"
                 occupation="Soldier"
-                is_basic_troop="false"
+                is_basic_troop="true"
                 culture="Culture.neutral_culture">
 		<face>
 			<BodyProperties version="4" age="25.84" weight="0.5" build="0.5"  key="0000000017FC000143844854223274823063883428432723353747238535531701A776130A77353400000000000000000000000000000000000000003D4C3002"  />
@@ -861,7 +861,7 @@
 		</skills>
 		<equipmentSet>
 			<equipment slot="Item0"     id="Item.cn_sword_1_t2" />
-			<equipment slot="Item1"     id="Item.cn_long_bow" />
+			<equipment slot="Item1"     id="Item.cn_long_bow_t2" />
 			<equipment slot="Item2"     id="Item.cn_arrows" />
 			<equipment slot="Item3"     id="Item.cn_arrows" />
 			<equipment slot="Head"      id="Item.cn_hood" />
@@ -872,7 +872,7 @@
 		</equipmentSet>
 		<equipmentSet>
 			<equipment slot="Item0"     id="Item.cn_sword_2_t2" />
-			<equipment slot="Item1"     id="Item.cn_long_bow" />
+			<equipment slot="Item1"     id="Item.cn_long_bow_t2" />
 			<equipment slot="Item2"     id="Item.cn_arrows" />
 			<equipment slot="Item3"     id="Item.cn_arrows" />
 			<equipment slot="Head"      id="Item.cn_hood" />
@@ -912,7 +912,7 @@
 		</skills>
 		<equipmentSet>
 			<equipment slot="Item0"     id="Item.cn_sword_1_t3" />
-			<equipment slot="Item1"     id="Item.cn_long_bow" />
+			<equipment slot="Item1"     id="Item.cn_long_bow_t3" />
 			<equipment slot="Item2"     id="Item.cn_arrows" />
 			<equipment slot="Item3"     id="Item.cn_arrows" />
 			<equipment slot="Head"      id="Item.cn_hood" />
@@ -923,7 +923,7 @@
 		</equipmentSet>
 		<equipmentSet>
 			<equipment slot="Item0"     id="Item.cn_sword_2_t3" />
-			<equipment slot="Item1"     id="Item.cn_long_bow" />
+			<equipment slot="Item1"     id="Item.cn_long_bow_t3" />
 			<equipment slot="Item2"     id="Item.cn_arrows" />
 			<equipment slot="Item3"     id="Item.cn_arrows" />
 			<equipment slot="Head"      id="Item.cn_hood" />
@@ -963,24 +963,24 @@
 		</skills>
 		<equipmentSet>
 			<equipment slot="Item0"   id="Item.cn_sword_1_t3" />
-			<equipment slot="Item1"   id="Item.cn_long_bow" />
+			<equipment slot="Item1"   id="Item.cn_long_bow_t4" />
 			<equipment slot="Item2"   id="Item.cn_arrows" />
 			<equipment slot="Item3"   id="Item.cn_arrows" />
 			<equipment slot="Head"    id="Item.cn_hood" />
 			<equipment slot="Body"    id="Item.eastern_studded_leather" />
 			<equipment slot="Gloves"  id="Item.northern_brass_bracers" />
-			<equipment slot="Leg"     id="Item.battania_woodland_boots" />
+			<equipment slot="Leg"     id="Item.leather_cavalier_boots" />
 			<equipment slot="Cape"    id="Item.battania_civil_cape" />
 		</equipmentSet>
 		<equipmentSet>
 			<equipment slot="Item0"   id="Item.cn_sword_2_t3" />
-			<equipment slot="Item1"   id="Item.cn_long_bow" />
+			<equipment slot="Item1"   id="Item.cn_long_bow_t4" />
 			<equipment slot="Item2"   id="Item.cn_arrows" />
 			<equipment slot="Item3"   id="Item.cn_arrows" />
 			<equipment slot="Head"    id="Item.cn_hood" />
 			<equipment slot="Body"    id="Item.eastern_studded_leather" />
 			<equipment slot="Gloves"  id="Item.northern_brass_bracers" />
-			<equipment slot="Leg"     id="Item.battania_woodland_boots" />
+			<equipment slot="Leg"     id="Item.leather_cavalier_boots" />
 			<equipment slot="Cape"    id="Item.battania_civil_cape" />
 		</equipmentSet>
 		<upgrade_targets>
@@ -1014,7 +1014,7 @@
 		</skills>
 		<equipmentSet>
 			<equipment slot="Item0"   id="Item.cn_sword_1_t3" />
-			<equipment slot="Item1"   id="Item.cn_long_bow" />
+			<equipment slot="Item1"   id="Item.cn_long_bow_t5" />
 			<equipment slot="Item2"   id="Item.cn_arrows" />
 			<equipment slot="Item3"   id="Item.cn_arrows" />
 			<equipment slot="Head"    id="Item.cn_hood" />
@@ -1025,7 +1025,7 @@
 		</equipmentSet>
 		<equipmentSet>
 			<equipment slot="Item0"   id="Item.cn_sword_2_t3" />
-			<equipment slot="Item1"   id="Item.cn_long_bow" />
+			<equipment slot="Item1"   id="Item.cn_long_bow_t5" />
 			<equipment slot="Item2"   id="Item.cn_arrows" />
 			<equipment slot="Item3"   id="Item.cn_arrows" />
 			<equipment slot="Head"    id="Item.cn_hood" />
@@ -1040,7 +1040,7 @@
 	<!-- CAVALRY -->
 	<!-- Cavalry T3 MAX Skill 160-->
 	<NPCCharacter id="chael_nadra_lancer_t3_m"
-                default_group="Cavalry"
+                default_group="HorseArcher"
 				is_female="false"
                 level="16"
                 civilianTemplate="NPCCharacter.vlandia_troop_civilian_template_t1"
@@ -1065,7 +1065,7 @@
 		</skills>
 		<equipmentSet>
 			<equipment slot="Item0"           id="Item.empire_polearm_1_t4" />
-			<equipment slot="Item1"           id="Item.cn_long_bow" />
+			<equipment slot="Item1"           id="Item.cn_long_bow_t2" />
 			<equipment slot="Item2"           id="Item.cn_arrows" />
 			<equipment slot="Item3"           id="Item.decorated_steppe_shield" />
 			<equipment slot="Head"            id="Item.cn_hood" />
@@ -1078,7 +1078,7 @@
 		</equipmentSet>
 		<equipmentSet>
 			<equipment slot="Item0"           id="Item.empire_polearm_1_t4" />
-			<equipment slot="Item1"           id="Item.cn_long_bow" />
+			<equipment slot="Item1"           id="Item.cn_long_bow_t2" />
 			<equipment slot="Item2"           id="Item.cn_arrows" />
 			<equipment slot="Item3"           id="Item.decorated_steppe_shield" />
 			<equipment slot="Head"            id="Item.cn_hood" />
@@ -1096,7 +1096,7 @@
 
 	<!-- Cavalry T4 MAX Skill 220-->
 	<NPCCharacter id="chael_nadra_lancer_t4_m"
-                default_group="Cavalry"
+                default_group="HorseArcher"
 				is_female="false"
                 level="21"
                 civilianTemplate="NPCCharacter.vlandia_troop_civilian_template_t1"
@@ -1120,7 +1120,7 @@
 		</skills>
 		<equipmentSet>
 			<equipment slot="Item0"         id="Item.empire_polearm_1_t4" />
-			<equipment slot="Item1"         id="Item.cn_long_bow" />
+			<equipment slot="Item1"         id="Item.cn_long_bow_t3" />
 			<equipment slot="Item2"         id="Item.cn_arrows" />
 			<equipment slot="Item3"         id="Item.noyans_shield" />
 			<equipment slot="Head"          id="Item.cn_hood" />
@@ -1133,7 +1133,7 @@
 		</equipmentSet>
 		<equipmentSet>
 			<equipment slot="Item0"         id="Item.empire_polearm_1_t4" />
-			<equipment slot="Item1"         id="Item.cn_long_bow" />
+			<equipment slot="Item1"         id="Item.cn_long_bow_t3" />
 			<equipment slot="Item2"         id="Item.cn_arrows" />
 			<equipment slot="Item3"         id="Item.noyans_shield" />
 			<equipment slot="Head"          id="Item.cn_hood" />
@@ -1151,7 +1151,7 @@
 
 	<!-- Cavalry T5 MAX Skill 280-->
 	<NPCCharacter id="chael_nadra_lancer_t5_m"
-                default_group="Cavalry"
+                default_group="HorseArcher"
 				is_female="false"
                 level="26"
                 civilianTemplate="NPCCharacter.vlandia_troop_civilian_template_t1"
@@ -1176,7 +1176,7 @@
 		</skills>
 		<equipmentSet>
 			<equipment slot="Item0"         id="Item.empire_polearm_2_t5" />
-			<equipment slot="Item1"         id="Item.cn_long_bow" />
+			<equipment slot="Item1"         id="Item.cn_long_bow_t4" />
 			<equipment slot="Item2"         id="Item.cn_arrows" />
 			<equipment slot="Item3"         id="Item.steel_round_shield" />
 			<equipment slot="Head"          id="Item.cn_hood_t5" />
@@ -1189,7 +1189,7 @@
 		</equipmentSet>
 		<equipmentSet>
 			<equipment slot="Item0"         id="Item.empire_polearm_2_t5" />
-			<equipment slot="Item1"         id="Item.cn_long_bow" />
+			<equipment slot="Item1"         id="Item.cn_long_bow_t4" />
 			<equipment slot="Item2"         id="Item.cn_arrows" />
 			<equipment slot="Item3"         id="Item.steel_round_shield" />
 			<equipment slot="Head"          id="Item.cn_hood_t5" />

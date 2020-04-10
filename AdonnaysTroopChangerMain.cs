@@ -49,8 +49,12 @@ namespace AdonnaysTroopChanger
         {
             if (!ATCconfig.IsFileLoaded)
                 InformationManager.DisplayMessage(new InformationMessage("ATC.config.XML not found!", new Color(1, 0, 0)));
+
             else
+            { 
                 InformationManager.DisplayMessage(new InformationMessage("ATC config found!", new Color(0, 1, 0)));
+                ATCconfig.Parse();
+            }
         }
 
 
@@ -60,8 +64,69 @@ namespace AdonnaysTroopChanger
 
 namespace AdonnaysTroopChanger.Patches
 {
+    //**************************************************************************************************************************************
+    //
+    //  BASE TROOP REPLACEMENT 
+    //
+    //**************************************************************************************************************************************
     [HarmonyPatch(typeof(CultureObject), "BasicTroop", MethodType.Getter)]
     public class PatchBasicTroop
+    {
+        static void Postfix(ref CharacterObject __result)
+        {
+            if (AdonnaysTroopChangerMain.caller != "self")  // workaround to make sure we don't trip over our own feet
+            {
+                int rngvalue;
+                string _resultID = __result.StringId;
+                foreach (TroopConfig tc in ATCconfig.troopConfig.Where(tc => tc.SourceID == _resultID))
+                {
+
+                    rngvalue = AdonnaysTroopChangerMain.rng.Next(0, 100);
+                    int prevPercent = 0;
+
+                    // Debug Message to show the actual RNG value
+                    if (ATCconfig.ShowRNGValue)
+                        InformationManager.DisplayMessage(new InformationMessage("RNG Value used: " + rngvalue));
+
+                    foreach (TargetTroop tt in tc.targetTroops)
+                    {
+                        if (rngvalue <= (tt.TroopPercent + prevPercent))
+                        {
+                            CharacterObject newTroop = CharacterObject.Find(tt.TroopID);
+                            if (newTroop != null)
+                            {
+                                __result = newTroop;
+
+                                //Debug Message to show the replaced troop
+                                if (ATCconfig.ShowReplacementMsg)
+                                    InformationManager.DisplayMessage(new InformationMessage(tc.SourceID + " changed to " + __result.StringId + " (" + rngvalue + ")"));
+                                break; //target troop found, we can exit
+                            }
+                            else
+                            {
+                                InformationManager.DisplayMessage(new InformationMessage(tt.TroopID + " invalid!"));
+                            }
+                        }
+                        prevPercent += tt.TroopPercent;
+                    }
+
+                }
+            }
+            else
+            {
+                AdonnaysTroopChangerMain.caller = "";
+            }
+        }
+    }
+
+
+    //**************************************************************************************************************************************
+    //
+    //  ELITE TROOP REPLACEMENT 
+    //
+    //**************************************************************************************************************************************
+    [HarmonyPatch(typeof(CultureObject), "EliteBasicTroop", MethodType.Getter)]
+    public class PatchEliteBasicTroop
     {
         static void Postfix(ref CharacterObject __result)
         {
@@ -125,8 +190,15 @@ namespace AdonnaysTroopChanger.Patches
     {
         static void Prefix(ref MobileParty side1Party, ref CharacterObject subject, ref Hero individual, int bitCode)
         {
+            //get BaseTroop id
             string _subjectRoot = Helpers.CharacterHelper.FindUpgradeRootOf(subject).StringId;
+            
+            AdonnaysTroopChangerMain.caller = "self";
+            bool isEliteTroop = false;
+            if (subject.Culture.EliteBasicTroop.StringId == _subjectRoot)
+                isEliteTroop = true;
             bool _getout = false;
+            
             CharacterObject replacementTroop = null;
 
             foreach (TroopConfig tc in ATCconfig.troopConfig)
@@ -139,10 +211,15 @@ namespace AdonnaysTroopChanger.Patches
                     {
                         replacementTroop = new CharacterObject();
                         AdonnaysTroopChangerMain.caller = "self"; // workaround to make sure we call an unmodified BasicTroop method
-                        replacementTroop = CharacterObject.Find(individual.CurrentSettlement.Culture.BasicTroop.StringId); 
+                        if (isEliteTroop)
+                            replacementTroop = CharacterObject.Find(individual.CurrentSettlement.Culture.EliteBasicTroop.StringId);
+                        else
+                            replacementTroop = CharacterObject.Find(individual.CurrentSettlement.Culture.BasicTroop.StringId); 
                         if (replacementTroop == null)
                         {
+                            
                             InformationManager.DisplayMessage(new InformationMessage(tt.TroopID + " invalid!", new Color(1, 0, 0)));
+                            
                         }
                         _getout = true;
                         break;
@@ -164,13 +241,44 @@ namespace AdonnaysTroopChanger.Patches
                         {
                             replacementTroop = new CharacterObject();
                             AdonnaysTroopChangerMain.caller = "self";
-                            replacementTroop = CharacterObject.Find(individual.CurrentSettlement.Culture.BasicTroop.StringId);
+                            if (isEliteTroop)
+                                replacementTroop = CharacterObject.Find(individual.CurrentSettlement.Culture.EliteBasicTroop.StringId);
+                            else
+                                replacementTroop = CharacterObject.Find(individual.CurrentSettlement.Culture.BasicTroop.StringId);
                             if (replacementTroop == null)
                             {
                                 InformationManager.DisplayMessage(new InformationMessage(tt.TroopID + " invalid!"));
                             }
                         }
                     }
+
+                    //Only processe for troops with playeronly flag = FALSE
+                    else if (tt.KingdomOnly)
+                    {
+                        AdonnaysTroopChangerMain.caller = "self";
+                        if (side1Party.MapFaction.BasicTroop.StringId == tc.SourceID)   //basic_troop = <source_troop> bedeutet gleiche Kultur
+                        {
+                            //do nothing, the party is allowed to recruit the soldier due to matching culture
+                            InformationManager.DisplayMessage(new InformationMessage(side1Party.Leader.Name + " (" + side1Party.Leader.Culture.Name + ")" + " recruited a " + subject.Name, new Color(0, 1, 0)));
+                            replacementTroop = null;
+                            _getout = true;
+                            break;
+                        }
+                        else
+                        {
+                            replacementTroop = new CharacterObject();
+                            AdonnaysTroopChangerMain.caller = "self";
+                            if (isEliteTroop)
+                                replacementTroop = CharacterObject.Find(individual.CurrentSettlement.Culture.EliteBasicTroop.StringId);
+                            else
+                                replacementTroop = CharacterObject.Find(individual.CurrentSettlement.Culture.BasicTroop.StringId);
+                            if (replacementTroop == null)
+                            {
+                                InformationManager.DisplayMessage(new InformationMessage(tt.TroopID + " invalid!"));
+                            }
+                        }
+                    }
+
                 }
 
                 if (_getout)

@@ -67,8 +67,81 @@
   
     <!-- #region Used Bow -->
     <!-- #region Tier 2 -->
-    <Item id="cn_long_bow"
-        name="{=00000102}Chael Nad'ren Long Bow"
+	<Item id="cn_long_bow"
+        name="{=00000116}Chael Nad'ren Long Bow"
+        body_name="bo_composite_longbow_g"
+        mesh="longbow_j"
+	    culture="Culture.neutral_culture"
+        weight="0.8"
+        difficulty="50"
+        appearance="1"
+        Type="Bow"
+        item_holsters="bow_back:bow_back_2:bow_hip:bow_hip_2">
+		<ItemComponent>
+			<Weapon weapon_class="Bow"
+					ammo_class="Arrow"
+					ammo_limit="1"
+					thrust_speed="110"
+					speed_rating="100"
+					missile_speed="125"
+					weapon_length="118"
+					accuracy="99"
+					thrust_damage="90"
+					thrust_damage_type="Pierce"
+					item_usage="bow"
+					physics_material="wood_weapon"
+					center_of_mass="0.15,0,0">
+				<WeaponFlags RangedWeapon="true"
+								HasString="true"
+								StringHeldByHand="true"
+								NotUsableWithOneHand="true"
+								TwoHandIdleOnMount="true"
+								AutoReload="true"
+								UnloadWhenSheathed="true" />
+			</Weapon>
+		</ItemComponent>
+		<Flags ForceAttachOffHandPrimaryItemBone="true" />
+	</Item>	
+
+	<Item id="cn_long_bow_t2"
+        name="{=00000116}Chael Nad'ren Long Bow"
+        body_name="bo_composite_longbow_g"
+        mesh="longbow_j"
+	    culture="Culture.neutral_culture"
+        weight="0.8"
+        difficulty="50"
+        appearance="1"
+        Type="Bow"
+        item_holsters="bow_back:bow_back_2:bow_hip:bow_hip_2">
+		<ItemComponent>
+			<Weapon weapon_class="Bow"
+					ammo_class="Arrow"
+					ammo_limit="1"
+					thrust_speed="110"
+					speed_rating="100"
+					missile_speed="125"
+					weapon_length="118"
+					accuracy="99"
+					thrust_damage="90"
+					thrust_damage_type="Pierce"
+					item_usage="bow"
+					physics_material="wood_weapon"
+					center_of_mass="0.15,0,0">
+				<WeaponFlags RangedWeapon="true"
+								HasString="true"
+								StringHeldByHand="true"
+								NotUsableWithOneHand="true"
+								TwoHandIdleOnMount="true"
+								AutoReload="true"
+								UnloadWhenSheathed="true" />
+			</Weapon>
+		</ItemComponent>
+		<Flags ForceAttachOffHandPrimaryItemBone="true" />
+	</Item>
+
+
+	<Item id="cn_long_bow_t3"
+        name="{=00000102}Good Chael Nad'ren Long Bow"
         body_name="bo_composite_longbow_g"
         mesh="longbow_j"
 	    culture="Culture.neutral_culture"
@@ -103,7 +176,82 @@
         <Flags ForceAttachOffHandPrimaryItemBone="true" />
     </Item>
 
-    <Item id="cn_arrows"
+
+	<Item id="cn_long_bow_t4"
+        name="{=00000114}Fine Chael Nad'ren Long Bow"
+        body_name="bo_composite_longbow_g"
+        mesh="longbow_j"
+	    culture="Culture.neutral_culture"
+        weight="0.8"
+        difficulty="50"
+        appearance="1"
+        Type="Bow"
+        item_holsters="bow_back:bow_back_2:bow_hip:bow_hip_2">
+		<ItemComponent>
+			<Weapon weapon_class="Bow"
+					ammo_class="Arrow"
+					ammo_limit="1"
+					thrust_speed="110"
+					speed_rating="120"
+					missile_speed="125"
+					weapon_length="118"
+					accuracy="99"
+					thrust_damage="100"
+					thrust_damage_type="Pierce"
+					item_usage="bow"
+					physics_material="wood_weapon"
+					center_of_mass="0.15,0,0">
+				<WeaponFlags RangedWeapon="true"
+								HasString="true"
+								StringHeldByHand="true"
+								NotUsableWithOneHand="true"
+								TwoHandIdleOnMount="true"
+								AutoReload="true"
+								UnloadWhenSheathed="true" />
+			</Weapon>
+		</ItemComponent>
+		<Flags ForceAttachOffHandPrimaryItemBone="true" />
+	</Item>
+
+
+	<Item id="cn_long_bow_t5"
+		name="{=00000115}Strong Chael Nad'ren Long Bow"
+		body_name="bo_composite_longbow_g"
+		mesh="longbow_j"
+		culture="Culture.neutral_culture"
+		weight="0.8"
+		difficulty="50"
+		appearance="1"
+		Type="Bow"
+		item_holsters="bow_back:bow_back_2:bow_hip:bow_hip_2">
+		<ItemComponent>
+			<Weapon weapon_class="Bow"
+					ammo_class="Arrow"
+					ammo_limit="1"
+					thrust_speed="110"
+					speed_rating="130"
+					missile_speed="125"
+					weapon_length="118"
+					accuracy="99"
+					thrust_damage="110"
+					thrust_damage_type="Pierce"
+					item_usage="bow"
+					physics_material="wood_weapon"
+					center_of_mass="0.15,0,0">
+				<WeaponFlags RangedWeapon="true"
+								HasString="true"
+								StringHeldByHand="true"
+								NotUsableWithOneHand="true"
+								TwoHandIdleOnMount="true"
+								AutoReload="true"
+								UnloadWhenSheathed="true" />
+			</Weapon>
+		</ItemComponent>
+		<Flags ForceAttachOffHandPrimaryItemBone="true" />
+	</Item>
+
+
+	<Item id="cn_arrows"
 		  name="{=00000103}Chael Nad'ren Arrows"
 		  body_name="bo_capsule_arrow"
 		  holster_body_name="bo_axe_short"
@@ -145,7 +293,7 @@
 
 	<CraftedItem id="cn_sword_1_t1" name="{=00000103}Simple Sabre" crafting_template="OneHandedSword" culture="Culture.empire">
 		<Pieces>
-			<Piece id="khuzait_blade_3"     Type="Blade"    scale_factor="100" />
+			<Piece id="khuzait_blade_3"     Type="Blade"    scale_factor="90" />
 			<Piece id="khuzait_guard_8"     Type="Guard"    scale_factor="100" />
 			<Piece id="sturgian_grip_10"    Type="Handle"   scale_factor="100" />
 			<Piece id="khuzait_pommel_6"    Type="Pommel"   scale_factor="100" />
@@ -154,7 +302,7 @@
 
 	<CraftedItem id="cn_sword_2_t1" name="{=00000104}Simple Flyssa" crafting_template="OneHandedSword" culture="Culture.empire">
 		<Pieces>
-			<Piece id="aserai_blade_2"      Type="Blade"    scale_factor="100" />
+			<Piece id="aserai_blade_2"      Type="Blade"    scale_factor="90" />
 			<Piece id="khuzait_guard_2"     Type="Guard"    scale_factor="100" />
 			<Piece id="sturgian_grip_1"     Type="Handle"   scale_factor="100" />
 			<Piece id="khuzait_pommel_7"    Type="Pommel"   scale_factor="100" />
@@ -164,7 +312,7 @@
 	
 	<CraftedItem id="cn_sword_1_t2" name="{=00000105}Sabre" crafting_template="OneHandedSword" culture="Culture.empire">
 		<Pieces>
-			<Piece id="khuzait_blade_3"     Type="Blade"    scale_factor="110" />
+			<Piece id="khuzait_blade_3"     Type="Blade"    scale_factor="100" />
 			<Piece id="khuzait_guard_8"     Type="Guard"    scale_factor="100" />
 			<Piece id="vlandian_grip_21"    Type="Handle"   scale_factor="100" />
 			<Piece id="khuzait_pommel_7"    Type="Pommel"   scale_factor="100" />
@@ -173,7 +321,7 @@
 
 	<CraftedItem id="cn_sword_2_t2" name="{=00000106}Flyssa" crafting_template="OneHandedSword" culture="Culture.empire">
 		<Pieces>
-			<Piece id="aserai_blade_2"      Type="Blade"    scale_factor="110" />
+			<Piece id="aserai_blade_2"      Type="Blade"    scale_factor="100" />
 			<Piece id="sturgian_guard_2"    Type="Guard"    scale_factor="100" />
 			<Piece id="aserai_grip_3"       Type="Handle"   scale_factor="100" />
 			<Piece id="khuzait_pommel_7"    Type="Pommel"   scale_factor="100" />
@@ -183,7 +331,7 @@
 	
 	<CraftedItem id="cn_sword_1_t3" name="{=00000107}Long Sabre" crafting_template="TwoHandedSword" culture="Culture.empire">
 		<Pieces>
-			<Piece id="khuzait_blade_3"     Type="Blade"    scale_factor="120" />
+			<Piece id="khuzait_blade_3"     Type="Blade"    scale_factor="110" />
 			<Piece id="battania_guard_3"    Type="Guard"    scale_factor="100" />
 			<Piece id="aserai_grip_20"      Type="Handle"   scale_factor="90" />
 			<Piece id="battania_pommel_4"   Type="Pommel"   scale_factor="90" />
@@ -192,7 +340,7 @@
 
 	<CraftedItem id="cn_sword_2_t3" name="{=00000108}Long Flyssa" crafting_template="TwoHandedSword" culture="Culture.empire">
 		<Pieces>
-			<Piece id="aserai_blade_2"      Type="Blade"    scale_factor="120" />
+			<Piece id="aserai_blade_2"      Type="Blade"    scale_factor="110" />
 			<Piece id="aserai_guard_7"      Type="Guard"    scale_factor="80" />
 			<Piece id="empire_grip_10"      Type="Handle"   scale_factor="90" />
 			<Piece id="khuzait_pommel_7"    Type="Pommel"   scale_factor="100" />
