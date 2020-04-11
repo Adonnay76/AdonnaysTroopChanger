@@ -68,7 +68,7 @@
     <!-- #region Used Bow -->
     <!-- #region Tier 2 -->
 	<Item id="cn_long_bow"
-        name="{=00000116}Chael Nad'ren Long Bow"
+        name="{=00000117}Chael Nad'ren Long Bow"
         body_name="bo_composite_longbow_g"
         mesh="longbow_j"
 	    culture="Culture.neutral_culture"
@@ -347,41 +347,59 @@
 		</Pieces>
 	</CraftedItem>
 
-	<!--
-	<CraftedItem id="cn_sword_1_t4" name="{=00000109}Noble Long Sabre" crafting_template="TwoHandedSword" culture="Culture.empire">
+	
+	<CraftedItem id="cn_sword_1_t4" name="{=00000109}Noble Long Sabre" crafting_template="cn_template_1_t4" culture="Culture.empire">
 		<Pieces>
-			<Piece id="aserai_noble_blade_4"	Type="Blade"    scale_factor="120" />
-			<Piece id="battania_guard_3"		Type="Guard"    scale_factor="100" />
-			<Piece id="empire_noble_grip_4"		Type="Handle"   scale_factor="90" />
-			<Piece id="battania_pommel_4"		Type="Pommel"   scale_factor="90" />
+			<Piece id="cn_blade_1_t4"		Type="Blade"    scale_factor="120" />
+			<Piece id="cn_guard_1_t4"		Type="Guard"    scale_factor="100" />
+			<Piece id="cn_grip_1_t4"		Type="Handle"   scale_factor="90" />
+			<Piece id="cn_pommel_1_t4"		Type="Pommel"   scale_factor="90" />
 		</Pieces>
 	</CraftedItem>
 	
-	<CraftedItem id="cn_sword_2_t4" name="{=00000110}Noble Long Sabre" crafting_template="TwoHandedSword" culture="Culture.empire">
+	<CraftedItem id="cn_sword_2_t4" name="{=00000110}Noble Long Sabre" crafting_template="cn_template_2_t4" culture="Culture.empire">
 		<Pieces>
-			<Piece id="aserai_blade_2"			Type="Blade"    scale_factor="120" />
-			<Piece id="aserai_noble_guard_1"	Type="Guard"    scale_factor="80" />
-			<Piece id="aserai_grip_17"			Type="Handle"   scale_factor="100" />
-			<Piece id="aserai_noble_pommel_1"	Type="Pommel"   scale_factor="100" />
+			<Piece id="cn_blade_2_t4"		Type="Blade"    scale_factor="120" />
+			<Piece id="cn_guard_2_t4"		Type="Guard"    scale_factor="80" />
+			<Piece id="cn_grip_2_t4"		Type="Handle"   scale_factor="100" />
+			<Piece id="cn_pommel_2_t4"		Type="Pommel"   scale_factor="100" />
 		</Pieces>
 	</CraftedItem>
+
+	<CraftedItem id="cn_sword_3_t4" name="{=00000119}Noble Long Sabre" crafting_template="cn_template_1_t4" culture="Culture.empire">
+		<Pieces>
+			<Piece id="cn_blade_1_t4"		Type="Blade"    scale_factor="120" />
+			<Piece id="cn_guard_1_t4"		Type="Guard"    scale_factor="80" />
+			<Piece id="cn_grip_1_t4"		Type="Handle"   scale_factor="100" />
+			<Piece id="cn_pommel_1_t4"		Type="Pommel"   scale_factor="100" />
+		</Pieces>
+	</CraftedItem>	
 
 	
-	<CraftedItem id="cn_sword_1_t5" name="{=00000111}Noble Long Sabre" crafting_template="TwoHandedSword" culture="Culture.empire">
+	<CraftedItem id="cn_sword_1_t5" name="{=00000111}Sacred Aethil'na Fain Sabre" crafting_template="cn_template_1_t5" culture="Culture.empire">
 		<Pieces>
-			<Piece id="khuzait_noble_blade_1"	Type="Blade"    scale_factor="130" />
-			<Piece id="khuzait_guard_8"			Type="Guard"    scale_factor="100" />
-			<Piece id="empire_noble_grip_4"		Type="Handle"   scale_factor="90" />
-			<Piece id="aserai_noble_pommel_4"	Type="Pommel"   scale_factor="100" />
+			<Piece id="cn_blade_1_t5"		Type="Blade"    scale_factor="120" />
+			<Piece id="cn_guard_1_t5"		Type="Guard"    scale_factor="100" />
+			<Piece id="cn_grip_1_t5"		Type="Handle"   scale_factor="90" />
+			<Piece id="cn_pommel_1_t5"		Type="Pommel"   scale_factor="100" />
 		</Pieces>
 	</CraftedItem>
 
-	<CraftedItem id="cn_sword_2_t5" name="{=00000112}Noble Long Sabre" crafting_template="TwoHandedSword" culture="Culture.empire">
+	<CraftedItem id="cn_sword_2_t5" name="{=00000112}Sacred Shael'na Fain Sabre" crafting_template="cn_template_2_t5" culture="Culture.empire">
 		<Pieces>
-			<Piece id="khuzait_noble_blade_1"	Type="Blade"    scale_factor="130" />
-			<Piece id="sturgian_guard_5"		Type="Guard"    scale_factor="80" />
-			<Piece id="empire_noble_grip_4"		Type="Handle"   scale_factor="100" />
-			<Piece id="empire_pommel_6"			Type="Pommel"   scale_factor="100" />
+			<Piece id="cn_blade_2_t5"		Type="Blade"    scale_factor="110" />
+			<Piece id="cn_guard_2_t5"		Type="Guard"    scale_factor="80" />
+			<Piece id="cn_grip_2_t5"		Type="Handle"   scale_factor="100" />
+			<Piece id="cn_pommel_2_t5"		Type="Pommel"   scale_factor="100" />
 		</Pieces>
-	</CraftedItem>-->
+	</CraftedItem>
+
+	<CraftedItem id="cn_sword_3_t5" name="{=00000118}Sacred Brianh'na Fain Sabre" crafting_template="cn_template_1_t5" culture="Culture.empire">
+		<Pieces>
+			<Piece id="cn_blade_1_t5"		Type="Blade"    scale_factor="130" />
+			<Piece id="cn_guard_1_t5"		Type="Guard"    scale_factor="100" />
+			<Piece id="cn_grip_1_t5"		Type="Handle"   scale_factor="90" />
+			<Piece id="cn_pommel_1_t5"	Type="Pommel"   scale_factor="100" />
+		</Pieces>
+	</CraftedItem>
 </Items>

@@ -48,10 +48,21 @@ namespace AdonnaysTroopChanger
         protected override void OnBeforeInitialModuleScreenSetAsRoot()
         {
             if (!ATCconfig.IsFileLoaded)
+            {
                 InformationManager.DisplayMessage(new InformationMessage("ATC.config.XML not found!", new Color(1, 0, 0)));
 
+                string configfile = String.Concat(BasePath.Name, "Modules/AdonnaysTroopChanger/Config/EXAMPLE_ATC.config.xml");
+                if (File.Exists(configfile))
+                {
+                    InformationManager.DisplayMessage(new InformationMessage("...trying to load EXAMPLE_ATC.config.XML", new Color(1, 1, 0)));
+                    ATCconfig.Instance.LoadXML(configfile);
+
+                    if(ATCconfig.IsFileLoaded)
+                        InformationManager.DisplayMessage(new InformationMessage("...EXAMPLE ATC.config.xml found!", new Color(0, 1, 0)));
+                }
+            }
             else
-            { 
+            {
                 InformationManager.DisplayMessage(new InformationMessage("ATC config found!", new Color(0, 1, 0)));
                 ATCconfig.Parse();
             }
@@ -191,91 +202,92 @@ namespace AdonnaysTroopChanger.Patches
         static void Prefix(ref MobileParty side1Party, ref CharacterObject subject, ref Hero individual, int bitCode)
         {
             //get BaseTroop id
-            string _subjectRoot = Helpers.CharacterHelper.FindUpgradeRootOf(subject).StringId;
-            
+            string _subjectRootID = Helpers.CharacterHelper.FindUpgradeRootOf(subject).StringId;
             AdonnaysTroopChangerMain.caller = "self";
+            CharacterObject _settlementBaseTroop = individual.CurrentSettlement.Culture.BasicTroop;
+            AdonnaysTroopChangerMain.caller = "self";
+            CharacterObject _settlementEliteTroop = individual.CurrentSettlement.Culture.EliteBasicTroop;
+
+
             bool isEliteTroop = false;
-            if (subject.Culture.EliteBasicTroop.StringId == _subjectRoot)
+            if (_settlementEliteTroop.StringId == _subjectRootID)
                 isEliteTroop = true;
             bool _getout = false;
             
             CharacterObject replacementTroop = null;
 
-            foreach (TroopConfig tc in ATCconfig.troopConfig)
+            foreach (TroopConfig tc in ATCconfig.troopConfig.Where(tc => (tc.SourceID == _settlementBaseTroop.StringId) || (tc.SourceID ==_settlementEliteTroop.StringId)))
             {
                 //foreach (TargetTroop tt in tc.targetTroops.Where(tt => tt.PlayerOnly == true))                
-                foreach (TargetTroop tt in tc.targetTroops.Where(tt => tt.TroopID == _subjectRoot)) 
+                foreach (TargetTroop tt in tc.targetTroops.Where(tt => tt.TroopID == _subjectRootID)) 
                 {
                     //Only processe for troops with playeronly flag = TRUE
-                    if (tt.PlayerOnly)
+                    if (tt.PlayerOnly) 
                     {
-                        replacementTroop = new CharacterObject();
-                        AdonnaysTroopChangerMain.caller = "self"; // workaround to make sure we call an unmodified BasicTroop method
+                        
+                        if (tt.KingdomOnly && (side1Party.MapFaction == Hero.MainHero.MapFaction))
+                            break; //allow recruitment
+
                         if (isEliteTroop)
-                            replacementTroop = CharacterObject.Find(individual.CurrentSettlement.Culture.EliteBasicTroop.StringId);
+                            replacementTroop = _settlementEliteTroop;
                         else
-                            replacementTroop = CharacterObject.Find(individual.CurrentSettlement.Culture.BasicTroop.StringId); 
+                            replacementTroop = _settlementBaseTroop; 
+                        
                         if (replacementTroop == null)
-                        {
-                            
                             InformationManager.DisplayMessage(new InformationMessage(tt.TroopID + " invalid!", new Color(1, 0, 0)));
-                            
-                        }
+                         
                         _getout = true;
                         break;
                     }
 
-                    //Only processe for troops with playeronly flag = FALSE
+                    //Only processe for troops with cultureonly flag = FALSE
                     else if (tt.CultureOnly)
                     {
                         AdonnaysTroopChangerMain.caller = "self";
                         if (side1Party.Leader.Culture.BasicTroop.StringId == tc.SourceID)   //basic_troop = <source_troop> bedeutet gleiche Kultur
                         {
                             //do nothing, the party is allowed to recruit the soldier due to matching culture
-                            InformationManager.DisplayMessage(new InformationMessage(side1Party.Leader.Name + " (" + side1Party.Leader.Culture.Name + ")" + " recruited a " + subject.Name, new Color(0, 1, 0)));
+                            if (ATCconfig.ShowPlayeronlyMsg)
+                                InformationManager.DisplayMessage(new InformationMessage(side1Party.Leader.Name + " (" + side1Party.Leader.Culture.Name + ")" + " recruited a " + subject.Name, new Color(0, 1, 0)));
                             replacementTroop = null;
                             _getout = true;
                             break;
                         }
                         else
                         {
-                            replacementTroop = new CharacterObject();
-                            AdonnaysTroopChangerMain.caller = "self";
                             if (isEliteTroop)
-                                replacementTroop = CharacterObject.Find(individual.CurrentSettlement.Culture.EliteBasicTroop.StringId);
+                                replacementTroop = _settlementEliteTroop;
                             else
-                                replacementTroop = CharacterObject.Find(individual.CurrentSettlement.Culture.BasicTroop.StringId);
+                                replacementTroop = _settlementBaseTroop;
+
                             if (replacementTroop == null)
-                            {
                                 InformationManager.DisplayMessage(new InformationMessage(tt.TroopID + " invalid!"));
-                            }
                         }
                     }
 
-                    //Only processe for troops with playeronly flag = FALSE
+                    //Only processe for troops with kingdomonly flag = FALSE
                     else if (tt.KingdomOnly)
                     {
                         AdonnaysTroopChangerMain.caller = "self";
                         if (side1Party.MapFaction.BasicTroop.StringId == tc.SourceID)   //basic_troop = <source_troop> bedeutet gleiche Kultur
                         {
                             //do nothing, the party is allowed to recruit the soldier due to matching culture
-                            InformationManager.DisplayMessage(new InformationMessage(side1Party.Leader.Name + " (" + side1Party.Leader.Culture.Name + ")" + " recruited a " + subject.Name, new Color(0, 1, 0)));
+                            if (ATCconfig.ShowPlayeronlyMsg)
+                                InformationManager.DisplayMessage(new InformationMessage(side1Party.Leader.Name + " (" + side1Party.MapFaction.Name + ")" + " recruited a " + subject.Name, new Color(0, 1, 0)));
                             replacementTroop = null;
                             _getout = true;
                             break;
                         }
                         else
                         {
-                            replacementTroop = new CharacterObject();
-                            AdonnaysTroopChangerMain.caller = "self";
                             if (isEliteTroop)
-                                replacementTroop = CharacterObject.Find(individual.CurrentSettlement.Culture.EliteBasicTroop.StringId);
+                                replacementTroop = _settlementEliteTroop;
                             else
-                                replacementTroop = CharacterObject.Find(individual.CurrentSettlement.Culture.BasicTroop.StringId);
+                                replacementTroop = _settlementBaseTroop;
+
                             if (replacementTroop == null)
-                            {
                                 InformationManager.DisplayMessage(new InformationMessage(tt.TroopID + " invalid!"));
-                            }
+
                         }
                     }
 
@@ -292,6 +304,10 @@ namespace AdonnaysTroopChanger.Patches
 
                 individual.VolunteerTypes[bitCode] = subject = replacementTroop;
             }
+
+
+            _settlementBaseTroop = null;
+            _settlementEliteTroop = null;
         }
 
         //static void Postfix(ref MobileParty side1Party, ref CharacterObject subject, ref Hero individual, int bitCode)
