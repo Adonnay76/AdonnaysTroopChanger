@@ -16,7 +16,7 @@
 		</Materials>
 	</CraftingPiece>
 
-	<CraftingPiece id="cn_guard_1_t4" name="{=*}Noble Chael Nad'ra Guard" tier="4" piece_type="Guard" mesh="battania_guard_3" culture="Culture.battania" length="2.8" weight="0.112">
+	<CraftingPiece id="cn_guard_1_t4" name="{=*}Noble Chael Nad'ra Guard" tier="4" piece_type="Guard" mesh="battania_guard_3" culture="Culture.battania" length="2.8" weight="0.2">
 		<PieceUsages unavailable_usages="" />
 		<BuildData top_diff="1" />
 		<StatContributions armor_bonus="5" />
@@ -25,7 +25,7 @@
 		</Materials>
 	</CraftingPiece>
 
-	<CraftingPiece id="cn_grip_1_t4" name="{=*}Noble Chael Nad'ra Grip" tier="4" piece_type="Handle" mesh="empire_noble_grip_4" culture="Culture.empire" length="25" weight="0.10">
+	<CraftingPiece id="cn_grip_1_t4" name="{=*}Noble Chael Nad'ra Grip" tier="4" piece_type="Handle" mesh="empire_noble_grip_3" culture="Culture.empire" length="25" weight="0.4">
 		<PieceUsages unavailable_usages="" />
 		<BuildData move_diff="-7.04" top_diff="0.1" bottom_diff="0.3" />
 		<Materials>
@@ -33,7 +33,7 @@
 		</Materials>
 	</CraftingPiece>
 
-	<CraftingPiece id="cn_pommel_1_t4" name="{=*}Noble Chael Nad'ra Pommel" tier="4" piece_type="Pommel" mesh="battania_pommel_4" culture="Culture.battania" length="6.6" weight="0.181">
+	<CraftingPiece id="cn_pommel_1_t4" name="{=*}Noble Chael Nad'ra Pommel" tier="4" piece_type="Pommel" mesh="battania_pommel_4" culture="Culture.battania" length="6.6" weight="0.28">
 		<PieceUsages unavailable_usages="ThrowingKnife" />
 		<Materials>
 			<Material id="Iron5" count="1" />
@@ -42,7 +42,7 @@
 
 	
 	<!-- T4 2  Chael Nad'ra -->
-	<CraftingPiece id="cn_blade_2_t4" name="{=*}Noble Chael Nad'ra Blade" tier="4" piece_type="Blade" mesh="aserai_blade_2" culture="Culture.aserai" length="105.6" weight="1.08">
+	<CraftingPiece id="cn_blade_2_t4" name="{=*}Noble Chael Nad'ra Blade" tier="4" piece_type="Blade" mesh="aserai_blade_2" culture="Culture.aserai" length="105.6" weight="0.55">
 		<PieceUsages unavailable_usages="" />
 		<BladeData sharpness="7" physics_material="metal_weapon" body_name="bo_sword_one_handed" holster_mesh="aserai_blade_2_scabbard_2">
 			<Thrust damage_type="Pierce" damage_factor="4" />
@@ -56,7 +56,7 @@
 		</Materials>
 	</CraftingPiece>
 
-	<CraftingPiece id="cn_guard_2_t4" name="{=*}Noble Chael Nad'ra Guardd" tier="4" piece_type="Guard" mesh="aserai_noble_guard_1" culture="Culture.aserai" length="4.56" weight="0.129">
+	<CraftingPiece id="cn_guard_2_t4" name="{=*}Noble Chael Nad'ra Guardd" tier="4" piece_type="Guard" mesh="aserai_noble_guard_1" culture="Culture.aserai" length="4.56" weight="0.25">
 		<PieceUsages unavailable_usages="" />
 		<BuildData top_diff="0.2" />
 		<StatContributions armor_bonus="5" />
@@ -65,7 +65,7 @@
 		</Materials>
 	</CraftingPiece>
 
-	<CraftingPiece id="cn_grip_2_t4" name="{=*}Noble Chael Nad'ra Grip" tier="4" piece_type="Handle" mesh="aserai_grip_17" culture="Culture.aserai" length="25" weight="0.135">
+	<CraftingPiece id="cn_grip_2_t4" name="{=*}Noble Chael Nad'ra Grip" tier="4" piece_type="Handle" mesh="aserai_grip_17" culture="Culture.aserai" length="25" weight="0.3">
 		<PieceUsages unavailable_usages="" />
 		<BuildData move_diff="-0.41" bottom_diff="0.8" top_diff="0.2" />
 		<Materials>
@@ -73,7 +73,7 @@
 		</Materials>
 	</CraftingPiece>
 
-	<CraftingPiece id="cn_pommel_2_t4" name="{=*}Noble Chael Nad'ra Pommel" tier="4" piece_type="Pommel" mesh="aserai_noble_pommel_1" culture="Culture.aserai" length="5.1" weight="0.184">
+	<CraftingPiece id="cn_pommel_2_t4" name="{=*}Noble Chael Nad'ra Pommel" tier="4" piece_type="Pommel" mesh="aserai_noble_pommel_1" culture="Culture.aserai" length="5.1" weight="0.23">
 		<PieceUsages unavailable_usages="" />
 		<Materials>
 			<Material id="Iron5" count="1" />
@@ -82,12 +82,12 @@
 	
 	
 	<!-- T5 1  Chael Nad'ra -->
-	<CraftingPiece id="cn_blade_1_t5" name="{=*}Sacred Chael Nad'ra Blade" tier="5" piece_type="Blade" mesh="khuzait_noble_blade_1" culture="Culture.khuzait" length="89.5" weight="0.05">
+	<CraftingPiece id="cn_blade_1_t5" name="{=*}Sacred Chael Nad'ra Blade" tier="5" piece_type="Blade" mesh="khuzait_noble_blade_1" culture="Culture.khuzait" length="89.5" weight="0.3">
 		<PieceUsages unavailable_usages="" />
 		<BuildData bottom_diff="-0.25" />
 		<BladeData sharpness="8" physics_material="metal_weapon" body_name="bo_sword_one_handed" holster_mesh="khuzait_noble_blade_1_scabbard_1">
-			<Thrust damage_type="Pierce" damage_factor="5" />
-			<Swing damage_type="Cut" damage_factor="7" />
+			<Thrust damage_type="Pierce" damage_factor="6" />
+			<Swing damage_type="Cut" damage_factor="8" />
 		</BladeData>
 		<Flags>
 			<Flag name="Civilian" type="ItemFlags" />
@@ -97,7 +97,7 @@
 		</Materials>
 	</CraftingPiece>
 	
-	<CraftingPiece id="cn_guard_1_t5" name="{=*}Sacred Chael Nad'ra Guard" tier="5" piece_type="Guard" mesh="khuzait_guard_8" culture="Culture.khuzait" length="1.64" weight="0.28">
+	<CraftingPiece id="cn_guard_1_t5" name="{=*}Sacred Chael Nad'ra Guard" tier="5" piece_type="Guard" mesh="khuzait_guard_8" culture="Culture.khuzait" length="1.64" weight="0.19">
 		<PieceUsages unavailable_usages="" />
 		<BuildData top_diff="1.6" />
 		<StatContributions armor_bonus="6" />
@@ -106,7 +106,7 @@
 		</Materials>
 	</CraftingPiece>
 	
-	<CraftingPiece id="cn_grip_1_t5" name="{=*}Sacred Chael Nad'ra Grip" tier="5" piece_type="Handle" mesh="empire_noble_grip_4" culture="Culture.empire" length="25" weight="0.10">
+	<CraftingPiece id="cn_grip_1_t5" name="{=*}Sacred Chael Nad'ra Grip" tier="5" piece_type="Handle" mesh="empire_noble_grip_4" culture="Culture.empire" length="25" weight="0.35">
 		<PieceUsages unavailable_usages="" />
 		<BuildData move_diff="-7.04" top_diff="0.1" bottom_diff="0.3" />
 		<Materials>
@@ -114,7 +114,7 @@
 		</Materials>
 	</CraftingPiece>
 
-	<CraftingPiece id="cn_pommel_1_t5" name="{=*}Sacred Chael Nad'ra Pommel" tier="5" piece_type="Pommel" mesh="aserai_noble_pommel_4" culture="Culture.aserai" length="6.4" weight="0.284">
+	<CraftingPiece id="cn_pommel_1_t5" name="{=*}Sacred Chael Nad'ra Pommel" tier="5" piece_type="Pommel" mesh="aserai_noble_pommel_4" culture="Culture.aserai" length="6.4" weight="0.2">
 		<PieceUsages unavailable_usages="" />
 		<BuildData top_diff="0" />
 		<Materials>
@@ -124,12 +124,12 @@
 
 
 	<!-- T5 2  Chael Nad'ra -->
-	<CraftingPiece id="cn_blade_2_t5" name="{=*}Sacred Chael Nad'ra Blade" tier="5" piece_type="Blade" mesh="khuzait_noble_blade_1" culture="Culture.khuzait" length="89.5" weight="0.05">
+	<CraftingPiece id="cn_blade_2_t5" name="{=*}Sacred Chael Nad'ra Blade" tier="5" piece_type="Blade" mesh="khuzait_noble_blade_1" culture="Culture.khuzait" length="89.5" weight="0.3">
 		<PieceUsages unavailable_usages="" />
 		<BuildData bottom_diff="-0.25" />
 		<BladeData sharpness="8" physics_material="metal_weapon" body_name="bo_sword_one_handed" holster_mesh="khuzait_noble_blade_1_scabbard_1">
-			<Thrust damage_type="Pierce" damage_factor="5" />
-			<Swing damage_type="Cut" damage_factor="7" />
+			<Thrust damage_type="Pierce" damage_factor="6" />
+			<Swing damage_type="Cut" damage_factor="8" />
 		</BladeData>
 		<Flags>
 			<Flag name="Civilian" type="ItemFlags" />
@@ -139,7 +139,7 @@
 		</Materials>
 	</CraftingPiece>
 
-	<CraftingPiece id="cn_guard_2_t5" name="{=*}Sacred Chael Nad'ra Guard" tier="5" piece_type="Guard" mesh="sturgian_guard_5" culture="Culture.sturgia" length="1.2" weight="0.15">
+	<CraftingPiece id="cn_guard_2_t5" name="{=*}Sacred Chael Nad'ra Guard" tier="5" piece_type="Guard" mesh="sturgian_guard_5" culture="Culture.sturgia" length="1.2" weight="0.23">
 		<PieceUsages unavailable_usages="" />
 		<BuildData top_diff="0.5" />
 		<StatContributions armor_bonus="6" />
@@ -148,7 +148,7 @@
 		</Materials>
 	</CraftingPiece>
 
-	<CraftingPiece id="cn_grip_2_t5" name="{=*}Sacred Chael Nad'ra Grip" tier="5" piece_type="Handle" mesh="empire_noble_grip_4" culture="Culture.empire" length="25" weight="0.10">
+	<CraftingPiece id="cn_grip_2_t5" name="{=*}Sacred Chael Nad'ra Grip" tier="5" piece_type="Handle" mesh="empire_noble_grip_4" culture="Culture.empire" length="25" weight="0.35">
 		<PieceUsages unavailable_usages="" />
 		<BuildData move_diff="-7.04" top_diff="0.1" bottom_diff="0.3" />
 		<Materials>
@@ -156,7 +156,45 @@
 		</Materials>
 	</CraftingPiece>
 
-	<CraftingPiece id="cn_pommel_2_t5" name="{=*}Sacred Chael Nad'ra Pommel" tier="5" piece_type="Pommel" mesh="empire_pommel_6" culture="Culture.empire" length="5.4" weight="0.2" appearance="0.9">
+	<CraftingPiece id="cn_pommel_2_t5" name="{=*}Sacred Chael Nad'ra Pommel" tier="5" piece_type="Pommel" mesh="empire_pommel_6" culture="Culture.empire" length="5.4" weight="0.2" appearance="0.21">
+		<PieceUsages unavailable_usages="ThrowingKnife" />
+		<Materials>
+			<Material id="Iron6" count="1" />
+		</Materials>
+	</CraftingPiece>
+
+
+	<!-- T5 3  Chael Nad'ra -->
+	<CraftingPiece id="cn_blade_3_t5" name="{=*}Sacred Chael Nad'ra Blade" tier="5" piece_type="Blade" mesh="khuzait_noble_blade_2" culture="Culture.khuzait" length="72.5" weight="0.3">
+		<PieceUsages unavailable_usages="" />
+		<BuildData bottom_diff="-0.25" />
+		<BladeData sharpness="8" physics_material="metal_weapon" body_name="bo_sword_one_handed" holster_mesh="khuzait_noble_blade_2_scabbard_2">
+			<Thrust damage_type="Pierce" damage_factor="7.5" />
+			<Swing damage_type="Cut" damage_factor="7" />
+		</BladeData>
+		<Materials>
+			<Material id="Iron6" count="2" />
+		</Materials>
+	</CraftingPiece>
+
+	<CraftingPiece id="cn_guard_3_t5" name="{=*}Sacred Chael Nad'ra Guard" tier="5" piece_type="Guard" mesh="khuzait_guard_3" culture="Culture.khuzait" length="1.207" weight="0.19">
+		<PieceUsages unavailable_usages="" />
+		<BuildData top_diff="0.4" />
+		<StatContributions armor_bonus="6" />
+		<Materials>
+			<Material id="Iron6" count="1" />
+		</Materials>
+	</CraftingPiece>
+
+	<CraftingPiece id="cn_grip_3_t5" name="{=*}Sacred Chael Nad'ra Grip" tier="5" piece_type="Handle" mesh="aserai_grip_17" culture="Culture.aserai" length="25" weight="0.26">
+		<PieceUsages unavailable_usages="" />
+		<BuildData move_diff="-0.41" bottom_diff="1.2" top_diff="0.2" />
+		<Materials>
+			<Material id="Iron6" count="2" />
+		</Materials>
+	</CraftingPiece>
+
+	<CraftingPiece id="cn_pommel_3_t5" name="{=*}Sacred Chael Nad'ra Pommel" tier="5" piece_type="Pommel" mesh="khuzait_pommel_5" culture="Culture.khuzait" length="7.268" weight="0.23">
 		<PieceUsages unavailable_usages="ThrowingKnife" />
 		<Materials>
 			<Material id="Iron6" count="1" />

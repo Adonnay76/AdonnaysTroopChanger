@@ -348,27 +348,27 @@
 	</CraftedItem>
 
 	
-	<CraftedItem id="cn_sword_1_t4" name="{=00000109}Noble Long Sabre" crafting_template="cn_template_1_t4" culture="Culture.empire">
+	<CraftedItem id="cn_sword_1_t4" name="{=00000109}Noble Long Sabre" crafting_template="cn_sword_2h" culture="Culture.empire">
 		<Pieces>
-			<Piece id="cn_blade_1_t4"		Type="Blade"    scale_factor="120" />
+			<Piece id="cn_blade_1_t4"		Type="Blade"    scale_factor="100" />
 			<Piece id="cn_guard_1_t4"		Type="Guard"    scale_factor="100" />
 			<Piece id="cn_grip_1_t4"		Type="Handle"   scale_factor="90" />
 			<Piece id="cn_pommel_1_t4"		Type="Pommel"   scale_factor="90" />
 		</Pieces>
 	</CraftedItem>
 	
-	<CraftedItem id="cn_sword_2_t4" name="{=00000110}Noble Long Sabre" crafting_template="cn_template_2_t4" culture="Culture.empire">
+	<CraftedItem id="cn_sword_2_t4" name="{=00000110}Noble Long Sabre" crafting_template="cn_sword_2h" culture="Culture.empire">
 		<Pieces>
-			<Piece id="cn_blade_2_t4"		Type="Blade"    scale_factor="120" />
+			<Piece id="cn_blade_2_t4"		Type="Blade"    scale_factor="100" />
 			<Piece id="cn_guard_2_t4"		Type="Guard"    scale_factor="80" />
 			<Piece id="cn_grip_2_t4"		Type="Handle"   scale_factor="100" />
 			<Piece id="cn_pommel_2_t4"		Type="Pommel"   scale_factor="100" />
 		</Pieces>
 	</CraftedItem>
 
-	<CraftedItem id="cn_sword_3_t4" name="{=00000119}Noble Long Sabre" crafting_template="cn_template_1_t4" culture="Culture.empire">
+	<CraftedItem id="cn_sword_3_t4" name="{=00000119}Noble Long Sabre" crafting_template="cn_sword_2h" culture="Culture.empire">
 		<Pieces>
-			<Piece id="cn_blade_1_t4"		Type="Blade"    scale_factor="120" />
+			<Piece id="cn_blade_1_t4"		Type="Blade"    scale_factor="110" />
 			<Piece id="cn_guard_1_t4"		Type="Guard"    scale_factor="80" />
 			<Piece id="cn_grip_1_t4"		Type="Handle"   scale_factor="100" />
 			<Piece id="cn_pommel_1_t4"		Type="Pommel"   scale_factor="100" />
@@ -376,30 +376,30 @@
 	</CraftedItem>	
 
 	
-	<CraftedItem id="cn_sword_1_t5" name="{=00000111}Sacred Aethil'na Fain Sabre" crafting_template="cn_template_1_t5" culture="Culture.empire">
+	<CraftedItem id="cn_sword_1_t5" name="{=00000111}Sacred Aethil'na Fain Sabre" crafting_template="cn_sword_2h" culture="Culture.empire">
 		<Pieces>
-			<Piece id="cn_blade_1_t5"		Type="Blade"    scale_factor="120" />
+			<Piece id="cn_blade_1_t5"		Type="Blade"    scale_factor="110" />
 			<Piece id="cn_guard_1_t5"		Type="Guard"    scale_factor="100" />
 			<Piece id="cn_grip_1_t5"		Type="Handle"   scale_factor="90" />
 			<Piece id="cn_pommel_1_t5"		Type="Pommel"   scale_factor="100" />
 		</Pieces>
 	</CraftedItem>
 
-	<CraftedItem id="cn_sword_2_t5" name="{=00000112}Sacred Shael'na Fain Sabre" crafting_template="cn_template_2_t5" culture="Culture.empire">
+	<CraftedItem id="cn_sword_2_t5" name="{=00000112}Sacred Shael'na Fain Sabre" crafting_template="cn_sword_2h" culture="Culture.empire">
 		<Pieces>
-			<Piece id="cn_blade_2_t5"		Type="Blade"    scale_factor="110" />
+			<Piece id="cn_blade_2_t5"		Type="Blade"    scale_factor="105" />
 			<Piece id="cn_guard_2_t5"		Type="Guard"    scale_factor="80" />
 			<Piece id="cn_grip_2_t5"		Type="Handle"   scale_factor="100" />
 			<Piece id="cn_pommel_2_t5"		Type="Pommel"   scale_factor="100" />
 		</Pieces>
 	</CraftedItem>
 
-	<CraftedItem id="cn_sword_3_t5" name="{=00000118}Sacred Brianh'na Fain Sabre" crafting_template="cn_template_1_t5" culture="Culture.empire">
+	<CraftedItem id="cn_sword_3_t5" name="{=00000118}Sacred Brianh'na Fain Sabre" crafting_template="cn_sword_2h" culture="Culture.empire">
 		<Pieces>
-			<Piece id="cn_blade_1_t5"		Type="Blade"    scale_factor="130" />
-			<Piece id="cn_guard_1_t5"		Type="Guard"    scale_factor="100" />
-			<Piece id="cn_grip_1_t5"		Type="Handle"   scale_factor="90" />
-			<Piece id="cn_pommel_1_t5"	Type="Pommel"   scale_factor="100" />
+			<Piece id="cn_blade_3_t5"		Type="Blade"    scale_factor="130" />
+			<Piece id="cn_guard_3_t5"		Type="Guard"    scale_factor="100" />
+			<Piece id="cn_grip_3_t5"		Type="Handle"   scale_factor="90" />
+			<Piece id="cn_pommel_3_t5"		Type="Pommel"   scale_factor="100" />
 		</Pieces>
 	</CraftedItem>
 </Items>

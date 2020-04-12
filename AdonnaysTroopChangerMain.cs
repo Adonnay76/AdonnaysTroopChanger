@@ -57,8 +57,18 @@ namespace AdonnaysTroopChanger
                     InformationManager.DisplayMessage(new InformationMessage("...trying to load EXAMPLE_ATC.config.XML", new Color(1, 1, 0)));
                     ATCconfig.Instance.LoadXML(configfile);
 
-                    if(ATCconfig.IsFileLoaded)
-                        InformationManager.DisplayMessage(new InformationMessage("...EXAMPLE ATC.config.xml found!", new Color(0, 1, 0)));
+                    if (ATCconfig.IsFileLoaded)
+                    {
+                        InformationManager.DisplayMessage(new InformationMessage("...EXAMPLE_ATC.config.xml found!", new Color(0, 1, 0)));
+                    }
+                    else
+                    {
+                        InformationManager.DisplayMessage(new InformationMessage("...EXAMPLE_ATC.config.XML not found!", new Color(1, 0, 0)));
+                    }
+                }
+                else
+                {
+                    InformationManager.DisplayMessage(new InformationMessage("...EXAMPLE_ATC.config.XML not found!", new Color(1, 0, 0)));
                 }
             }
             else

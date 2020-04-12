@@ -28,14 +28,14 @@
 	    <equipmentSet>
             <equipment slot="Item0"       id="Item.cn_sword_1_t1" />
             <equipment slot="Head"        id="Item.cn_hood" />
-            <equipment slot="Body"        id="Item.empire_short_dress" />
+            <equipment slot="Body"        id="Item.fine_town_tunic" />
 			<equipment slot="Gloves"      id="Item.northern_brass_bracers" />
 			<equipment slot="Leg"         id="Item.woven_leather_boots" />
         </equipmentSet>
 	    <equipmentSet>
 			<equipment slot="Item0"       id="Item.cn_sword_2_t1" />
 			<equipment slot="Head"        id="Item.cn_hood" />
-			<equipment slot="Body"        id="Item.empire_short_dress" />
+			<equipment slot="Body"        id="Item.fine_town_tunic" />
 			<equipment slot="Gloves"      id="Item.northern_brass_bracers" />
 			<equipment slot="Leg"         id="Item.woven_leather_boots" />
         </equipmentSet>
@@ -74,7 +74,7 @@
             <equipment slot="Item0"     id="Item.cn_sword_1_t2" />
 	        <equipment slot="Item1"     id="Item.decorated_steppe_shield" />			 
             <equipment slot="Head"      id="Item.cn_hood" />
-            <equipment slot="Body"      id="Item.belted_leather_cuirass" />
+            <equipment slot="Body"      id="Item.northern_leather_tabard" />
 			<equipment slot="Gloves"    id="Item.northern_brass_bracers" />
             <equipment slot="Leg"       id="Item.leather_cavalier_boots" />
         </equipmentSet>
@@ -82,7 +82,7 @@
 			<equipment slot="Item0"     id="Item.cn_sword_2_t2" />
 			<equipment slot="Item1"     id="Item.decorated_steppe_shield" />
 			<equipment slot="Head"      id="Item.cn_hood" />
-			<equipment slot="Body"      id="Item.belted_leather_cuirass" />
+			<equipment slot="Body"      id="Item.northern_leather_tabard" />
 			<equipment slot="Gloves"    id="Item.northern_brass_bracers" />
 			<equipment slot="Leg"       id="Item.leather_cavalier_boots" />
         </equipmentSet>
@@ -263,7 +263,7 @@
             <equipment slot="Item2"     id="Item.cn_arrows" />
             <equipment slot="Item3"     id="Item.cn_arrows" />				 
             <equipment slot="Head"      id="Item.cn_hood" />
-            <equipment slot="Body"      id="Item.belted_leather_cuirass" />
+            <equipment slot="Body"      id="Item.northern_leather_tabard" />
 			<equipment slot="Gloves"    id="Item.northern_brass_bracers" />
             <equipment slot="Leg"       id="Item.woven_leather_boots" />
 	        <equipment slot="Cape"      id="Item.battania_civil_cape" />					 
@@ -274,7 +274,7 @@
 			<equipment slot="Item2"     id="Item.cn_arrows" />
 			<equipment slot="Item3"     id="Item.cn_arrows" />
 			<equipment slot="Head"      id="Item.cn_hood" />
-			<equipment slot="Body"      id="Item.belted_leather_cuirass" />
+			<equipment slot="Body"      id="Item.northern_leather_tabard" />
 			<equipment slot="Gloves"    id="Item.northern_brass_bracers" />
 			<equipment slot="Leg"       id="Item.woven_leather_boots" />
 			<equipment slot="Cape"      id="Item.battania_civil_cape" />
@@ -583,7 +583,7 @@
             <equipment slot="Leg"           id="Item.decorated_imperial_boots" />
             <equipment slot="Cape"          id="Item.pauldron_cape_a" />	
  	        <equipment slot="Horse"         id="Item.t2_vlandia_horse" />
-            <equipment slot="HorseHarness"  id="Item.chain_barding" />			 
+            <equipment slot="HorseHarness"  id="Item.steppe_half_barding" />			 
         </equipmentSet>
 	    <equipmentSet>
 			<equipment slot="Item0"         id="Item.cn_sword_3_t5" />
@@ -596,7 +596,7 @@
 			<equipment slot="Leg"           id="Item.decorated_imperial_boots" />
 			<equipment slot="Cape"          id="Item.pauldron_cape_a" />
 			<equipment slot="Horse"         id="Item.t2_vlandia_horse" />
-			<equipment slot="HorseHarness"  id="Item.chain_barding" />
+			<equipment slot="HorseHarness"  id="Item.steppe_half_barding" />
 		</equipmentSet>
     </NPCCharacter>
 
@@ -630,14 +630,14 @@
 		<equipmentSet>
 			<equipment slot="Item0"       id="Item.cn_sword_1_t1" />
 			<equipment slot="Head"        id="Item.cn_hood" />
-			<equipment slot="Body"        id="Item.empire_short_dress" />
+			<equipment slot="Body"        id="Item.fine_town_tunic" />
 			<equipment slot="Gloves"      id="Item.northern_brass_bracers" />
 			<equipment slot="Leg"         id="Item.woven_leather_boots" />
 		</equipmentSet>
 		<equipmentSet>
 			<equipment slot="Item0"       id="Item.cn_sword_2_t1" />
 			<equipment slot="Head"        id="Item.cn_hood" />
-			<equipment slot="Body"        id="Item.empire_short_dress" />
+			<equipment slot="Body"        id="Item.fine_town_tunic" />
 			<equipment slot="Gloves"      id="Item.northern_brass_bracers" />
 			<equipment slot="Leg"         id="Item.woven_leather_boots" />
 		</equipmentSet>
@@ -676,7 +676,7 @@
 			<equipment slot="Item0"     id="Item.cn_sword_1_t2" />
 			<equipment slot="Item1"     id="Item.decorated_steppe_shield" />
 			<equipment slot="Head"      id="Item.cn_hood" />
-			<equipment slot="Body"      id="Item.belted_leather_cuirass" />
+			<equipment slot="Body"      id="Item.northern_leather_tabard" />
 			<equipment slot="Gloves"    id="Item.northern_brass_bracers" />
 			<equipment slot="Leg"       id="Item.leather_cavalier_boots" />
 		</equipmentSet>
@@ -684,7 +684,7 @@
 			<equipment slot="Item0"     id="Item.cn_sword_2_t2" />
 			<equipment slot="Item1"     id="Item.decorated_steppe_shield" />
 			<equipment slot="Head"      id="Item.cn_hood" />
-			<equipment slot="Body"      id="Item.belted_leather_cuirass" />
+			<equipment slot="Body"      id="Item.northern_leather_tabard" />
 			<equipment slot="Gloves"    id="Item.northern_brass_bracers" />
 			<equipment slot="Leg"       id="Item.leather_cavalier_boots" />
 		</equipmentSet>
@@ -865,7 +865,7 @@
 			<equipment slot="Item2"     id="Item.cn_arrows" />
 			<equipment slot="Item3"     id="Item.cn_arrows" />
 			<equipment slot="Head"      id="Item.cn_hood" />
-			<equipment slot="Body"      id="Item.belted_leather_cuirass" />
+			<equipment slot="Body"      id="Item.northern_leather_tabard" />
 			<equipment slot="Gloves"    id="Item.northern_brass_bracers" />
 			<equipment slot="Leg"       id="Item.woven_leather_boots" />
 			<equipment slot="Cape"      id="Item.battania_civil_cape" />
@@ -876,7 +876,7 @@
 			<equipment slot="Item2"     id="Item.cn_arrows" />
 			<equipment slot="Item3"     id="Item.cn_arrows" />
 			<equipment slot="Head"      id="Item.cn_hood" />
-			<equipment slot="Body"      id="Item.belted_leather_cuirass" />
+			<equipment slot="Body"      id="Item.northern_leather_tabard" />
 			<equipment slot="Gloves"    id="Item.northern_brass_bracers" />
 			<equipment slot="Leg"       id="Item.woven_leather_boots" />
 			<equipment slot="Cape"      id="Item.battania_civil_cape" />
@@ -1013,7 +1013,7 @@
 			<skill id="Throwing"  value="5" />
 		</skills>
 		<equipmentSet>
-			<equipment slot="Item0"   id="Item.cn_sword_1_t5" />
+			<equipment slot="Item0"   id="Item.cn_sword_3_t5" />
 			<equipment slot="Item1"   id="Item.cn_long_bow_t5" />
 			<equipment slot="Item2"   id="Item.cn_arrows" />
 			<equipment slot="Item3"   id="Item.cn_arrows" />
@@ -1024,7 +1024,7 @@
 			<equipment slot="Leg"     id="Item.decorated_imperial_boots" />
 		</equipmentSet>
 		<equipmentSet>
-			<equipment slot="Item0"   id="Item.cn_sword_1_t5" />
+			<equipment slot="Item0"   id="Item.cn_sword_3_t5" />
 			<equipment slot="Item1"   id="Item.cn_long_bow_t5" />
 			<equipment slot="Item2"   id="Item.cn_arrows" />
 			<equipment slot="Item3"   id="Item.cn_arrows" />
@@ -1185,7 +1185,7 @@
 			<equipment slot="Leg"           id="Item.decorated_imperial_boots" />
 			<equipment slot="Cape"          id="Item.pauldron_cape_a" />
 			<equipment slot="Horse"         id="Item.t2_vlandia_horse" />
-			<equipment slot="HorseHarness"  id="Item.chain_barding" />
+			<equipment slot="HorseHarness"  id="Item.steppe_half_barding" />
 		</equipmentSet>
 		<equipmentSet>
 			<equipment slot="Item0"         id="Item.cn_sword_3_t5" />
@@ -1198,7 +1198,7 @@
 			<equipment slot="Leg"           id="Item.decorated_imperial_boots" />
 			<equipment slot="Cape"          id="Item.pauldron_cape_a" />
 			<equipment slot="Horse"         id="Item.t2_vlandia_horse" />
-			<equipment slot="HorseHarness"  id="Item.chain_barding" />
+			<equipment slot="HorseHarness"  id="Item.steppe_half_barding" />
 		</equipmentSet>
 	</NPCCharacter>	
 		
