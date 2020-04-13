@@ -2,7 +2,7 @@
 <Module>
 	<Name value="Adonnays Troop Changer"/>
 	<Id value="AdonnaysTroopChanger"/>
-	<Version value="v1.1.1"/>
+	<Version value="v1.1.4"/>
 	<SingleplayerModule value="true"/>
 	<MultiplayerModule value="false"/>
 	<DependedModules>
@@ -16,7 +16,7 @@
 		<SubModule>
 			<Name value="AdonnaysTroopChanger"/>
 			<DLLName value="AdonnaysTroopChanger.dll"/>
-			<SubModuleClassType value="AdonnaysTroopChanger.AdonnaysTroopChangerMain"/>
+			<SubModuleClassType value="AdonnaysTroopChanger.SubModule"/>
 			<Tags>
 			<Tag key="DedicatedServerType" value="none" />
 			<Tag key="IsNoRenderModeElement" value="false" />

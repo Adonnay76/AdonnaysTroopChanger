@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using TaleWorlds.CampaignSystem;
 using System.Xml;
 using System.IO;
 using TaleWorlds.Core;
@@ -87,13 +85,19 @@ namespace AdonnaysTroopChanger.XMLReader
 
                         case "source_troop":
 
-                            TroopConfig sourceTroop = new TroopConfig
-                            {
-                                SourceID = e.GetAttribute("id"),
-                                targetTroops = new List<TargetTroop>()
-                            };
+                            TroopConfig sourceTroop = GetTroopConfig(e.GetAttribute("id"));
 
-                            troopConfig.Add(sourceTroop);
+                            if (sourceTroop == null) //TroopConfig not found
+                            {
+                                sourceTroop = new TroopConfig
+                                {
+                                    SourceID = e.GetAttribute("id"),
+                                    targetTroops = new List<TargetTroop>()
+                                };
+
+                                troopConfig.Add(sourceTroop);
+                            }
+                                                      
 
                             foreach (XmlElement ec in e.ChildNodes)
                             {
@@ -123,16 +127,35 @@ namespace AdonnaysTroopChanger.XMLReader
         }
 
 
+        public static TroopConfig GetTroopConfig(string stringID)
+        {
+            return troopConfig.Find(x => x.SourceID == stringID);
+        }
+
+        public static CharacterObject GetReplacement(CharacterObject troop)
+        {
+            CharacterObject _replacement = troop;
+
+            if (GetTroopConfig(troop.StringId) != null)
+            {
+                _replacement = GetTroopConfig(troop.StringId).GetReplacement(troop);
+            }
+            
+
+            return _replacement;
+            
+        }
 
         public static void Parse()
         {
             for (int i = 0; i < troopConfig.Count; i++)
             {
-                foreach(TargetTroop tt in troopConfig[i].targetTroops)
+                foreach (TargetTroop tt in troopConfig[i].targetTroops)
                 {
                     if (tt.PlayerOnly && tt.CultureOnly)
-                        InformationManager.DisplayMessage(new InformationMessage(tt.TroopID + ": playeronly = true, cultureonly ignored!", new Color(1, 1, 0)));
+                        SubModule.log.Add("Parse -> " + tt.TroopID + ": playeronly = true, cultureonly = true has no effect!");
 
+                            //InformationManager.DisplayMessage(new InformationMessage(tt.TroopID + ": playeronly = true, cultureonly ignored!", new Color(1, 1, 0)));
                 }
             }
 
@@ -145,6 +168,45 @@ namespace AdonnaysTroopChanger.XMLReader
     {
         public string SourceID { get; internal set; }
         public List<TargetTroop> targetTroops;
+
+        public CharacterObject GetReplacement(CharacterObject sourceTroop)
+        {
+            int _rng = SubModule.rng.Next(0, 100);
+            int _prevPercent = 0;
+            CharacterObject replacementTroop = null;
+
+            foreach (TargetTroop tt in targetTroops)
+            {
+                if (_rng <= (tt.TroopPercent + _prevPercent))
+                {
+                    try
+                    {
+                        replacementTroop = CharacterObject.Find(tt.TroopID);
+                    }
+                    catch
+                    {
+                        SubModule.log.Add("GetReplacement -> " + tt.TroopID + " is no valid <target_troop> ID!");
+                        //InformationManager.DisplayMessage(new InformationMessage(tt.TroopID + " invalid!"));
+                    }
+
+                    if (replacementTroop != sourceTroop)
+                    {
+                        //Debug Message to show the replaced troop
+                        //if (ATCconfig.ShowReplacementMsg)
+                        //    SubModule.log.Add("GetReplacement -> " + SourceID + " changed to " + replacementTroop.StringId + " (" + _rng + ")");
+                        //InformationManager.DisplayMessage(new InformationMessage(SourceID + " changed to " + replacementTroop.StringId + " (" + _rng + ")"));
+                        break; //target troop found, we can exit
+                    }
+                }
+                _prevPercent += tt.TroopPercent;
+            }
+
+            if (replacementTroop != null)
+                return replacementTroop;
+            else
+                return sourceTroop;
+
+        }
     }
 
     public class TargetTroop

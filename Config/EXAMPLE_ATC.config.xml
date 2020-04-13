@@ -7,7 +7,7 @@
 	 YOU HAVE BEEN WARNED.
 	 
 	 
-	 VERSION 1.1.0
+	 VERSION 1.1.2
 	 
 	 Description:
 	 <source_troops> are all the native BasicTroop variants taken from spcultures.xml.
@@ -51,6 +51,9 @@
 	 * kingdomonly (true/false) - (requires 1.1.0 or higher): Similar to cultureonly but in this case the culture 
 	     of the Lords Kingdom will be checked instead of the Lords culture. 
 		 Example: An Aserai Lord who is a vassal of the Empire will be able to recruit custom empire troops.
+		 
+		 NEW (1.1.2): If playeronly AND kingdomonly are set to true you and the lords of your kingdom can 
+		              recruit the <target_troops>
 	 
 	   
 	   The <debugInfo> values ONLY control the alert output, they do not have any kind of impact
@@ -74,8 +77,8 @@
 		<target_troop id="chael_nadra_recruit_m" percent="20" playeronly="true" cultureonly="false" kingdomonly="false"/>
 	</source_troop>
 	<source_troop id="imperial_vigla_recruit">
-		<target_troop id="chael_nadra_recruit_f" percent="20" playeronly="true" cultureonly="false" kingdomonly="false"/>
-		<target_troop id="chael_nadra_recruit_m" percent="20" playeronly="true" cultureonly="false" kingdomonly="false"/>
+		<target_troop id="chael_nadra_recruit_f" percent="20" playeronly="true" cultureonly="false" kingdomonly="true"/>
+		<target_troop id="chael_nadra_recruit_m" percent="20" playeronly="true" cultureonly="false" kingdomonly="true"/>
 	</source_troop>
 	<source_troop id="vlandian_recruit">
 		<target_troop id="chael_nadra_recruit_f" percent="20" playeronly="true" cultureonly="false" kingdomonly="false"/>  

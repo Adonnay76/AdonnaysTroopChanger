@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
 <CraftingPieces>
-	<!-- T4 1  Chael Nad'ra -->
+	<!-- T4 1  Sabre -->
 	<CraftingPiece id="cn_blade_1_t4" name="{=*}Noble Chael Nad'ra Blade" tier="4" piece_type="Blade" mesh="aserai_noble_blade_4" culture="Culture.aserai" length="87.4" weight="0.5">
 		<PieceUsages unavailable_usages="" />
 		<BladeData sharpness="7" physics_material="metal_weapon" body_name="bo_sword_one_handed" holster_mesh="aserai_noble_blade_4_scabbard_4">
@@ -41,7 +41,7 @@
 	</CraftingPiece>
 
 	
-	<!-- T4 2  Chael Nad'ra -->
+	<!-- T4 2  Sabre -->
 	<CraftingPiece id="cn_blade_2_t4" name="{=*}Noble Chael Nad'ra Blade" tier="4" piece_type="Blade" mesh="aserai_blade_2" culture="Culture.aserai" length="105.6" weight="0.55">
 		<PieceUsages unavailable_usages="" />
 		<BladeData sharpness="7" physics_material="metal_weapon" body_name="bo_sword_one_handed" holster_mesh="aserai_blade_2_scabbard_2">
@@ -81,7 +81,7 @@
 	</CraftingPiece>
 	
 	
-	<!-- T5 1  Chael Nad'ra -->
+	<!-- T5 1  Sabre -->
 	<CraftingPiece id="cn_blade_1_t5" name="{=*}Sacred Chael Nad'ra Blade" tier="5" piece_type="Blade" mesh="khuzait_noble_blade_1" culture="Culture.khuzait" length="89.5" weight="0.3">
 		<PieceUsages unavailable_usages="" />
 		<BuildData bottom_diff="-0.25" />
@@ -122,8 +122,8 @@
 		</Materials>
 	</CraftingPiece>
 
-
-	<!-- T5 2  Chael Nad'ra -->
+ 
+	<!-- T5 2  Sabre -->
 	<CraftingPiece id="cn_blade_2_t5" name="{=*}Sacred Chael Nad'ra Blade" tier="5" piece_type="Blade" mesh="khuzait_noble_blade_1" culture="Culture.khuzait" length="89.5" weight="0.3">
 		<PieceUsages unavailable_usages="" />
 		<BuildData bottom_diff="-0.25" />
@@ -164,7 +164,7 @@
 	</CraftingPiece>
 
 
-	<!-- T5 3  Chael Nad'ra -->
+	<!-- T5 3  Sabre -->
 	<CraftingPiece id="cn_blade_3_t5" name="{=*}Sacred Chael Nad'ra Blade" tier="5" piece_type="Blade" mesh="khuzait_noble_blade_2" culture="Culture.khuzait" length="72.5" weight="0.3">
 		<PieceUsages unavailable_usages="" />
 		<BuildData bottom_diff="-0.25" />
@@ -196,6 +196,42 @@
 
 	<CraftingPiece id="cn_pommel_3_t5" name="{=*}Sacred Chael Nad'ra Pommel" tier="5" piece_type="Pommel" mesh="khuzait_pommel_5" culture="Culture.khuzait" length="7.268" weight="0.23">
 		<PieceUsages unavailable_usages="ThrowingKnife" />
+		<Materials>
+			<Material id="Iron6" count="1" />
+		</Materials>
+	</CraftingPiece>
+
+
+
+	<!-- T5 1  Glaive -->
+	<CraftingPiece id="cn_glaive_blade_1" name="{=*}Chael Nad'ra Glaive Blade" tier="5" piece_type="Blade" mesh="spear_blade_22" length="89" weight="0.4">
+		<PieceUsages unavailable_usages="" />
+		<BladeData sharpness="7" physics_material="wood_weapon" body_name="bo_spear_b">
+			<Thrust damage_type="Pierce" damage_factor="3" />
+			<Swing damage_type="Cut" damage_factor="5" />
+		</BladeData>
+		<Materials>
+			<Material id="Iron6" count="2" />
+		</Materials>
+	</CraftingPiece>
+
+	<CraftingPiece id="cn_glaive_guard_1" name="{=*}Chael Nad'ra Glaive Guard" tier="5" piece_type="Guard" mesh="spear_guard_11" culture="Culture.empire" length="8.8" weight="0">
+		<PieceUsages unavailable_usages="" />
+		<Materials>
+			<Material id="Iron6" count="1" />
+		</Materials>
+	</CraftingPiece>
+
+	<CraftingPiece id="cn_glaive_handle_1" name="{=*}Chael Nad'ra Glaive Shaft" tier="5" piece_type="Handle" mesh="spear_handle_26" length="280" weight="0.6">
+		<PieceUsages unavailable_usages="" />
+		<BuildData move_diff="22.9" />
+		<Materials>
+			<Material id="Wood" count="3" />
+		</Materials>
+	</CraftingPiece>
+
+	<CraftingPiece id="cn_glaive_pommel_1" name="{=*}Chael Nad'ra Glaive Pommel" tier="5" piece_type="Pommel" mesh="spear_pommel_7" culture="Culture.empire" length="19.8" weight="0">
+		<PieceUsages unavailable_usages="" />
 		<Materials>
 			<Material id="Iron6" count="1" />
 		</Materials>

@@ -69,8 +69,8 @@
     <!-- #region Tier 2 -->
 	<Item id="cn_long_bow"
         name="{=00000117}Chael Nad'ren Long Bow"
-        body_name="bo_composite_longbow_g"
-        mesh="longbow_j"
+        body_name="bo_composite_longbow_a"
+        mesh="longbow_d"
 	    culture="Culture.neutral_culture"
         weight="0.8"
         difficulty="50"
@@ -105,8 +105,8 @@
 
 	<Item id="cn_long_bow_t2"
         name="{=00000116}Chael Nad'ren Long Bow"
-        body_name="bo_composite_longbow_g"
-        mesh="longbow_j"
+        body_name="bo_composite_longbow_a"
+        mesh="longbow_d"
 	    culture="Culture.neutral_culture"
         weight="0.8"
         difficulty="50"
@@ -142,8 +142,8 @@
 
 	<Item id="cn_long_bow_t3"
         name="{=00000102}Good Chael Nad'ren Long Bow"
-        body_name="bo_composite_longbow_g"
-        mesh="longbow_j"
+        body_name="bo_composite_longbow_a"
+        mesh="longbow_c"
 	    culture="Culture.neutral_culture"
         weight="0.8"
         difficulty="50"
@@ -179,8 +179,8 @@
 
 	<Item id="cn_long_bow_t4"
         name="{=00000114}Fine Chael Nad'ren Long Bow"
-        body_name="bo_composite_longbow_g"
-        mesh="longbow_j"
+        body_name="bo_composite_longbow_a"
+        mesh="longbow_b"
 	    culture="Culture.neutral_culture"
         weight="0.8"
         difficulty="50"
@@ -216,8 +216,8 @@
 
 	<Item id="cn_long_bow_t5"
 		name="{=00000115}Strong Chael Nad'ren Long Bow"
-		body_name="bo_composite_longbow_g"
-		mesh="longbow_j"
+		body_name="bo_composite_longbow_a"
+		mesh="longbow_a"
 		culture="Culture.neutral_culture"
 		weight="0.8"
 		difficulty="50"
@@ -255,10 +255,10 @@
 		  name="{=00000103}Chael Nad'ren Arrows"
 		  body_name="bo_capsule_arrow"
 		  holster_body_name="bo_axe_short"
-		  mesh="arrow_bl_b"
-		  holster_mesh="arrow_bl_b_quiver"
-		  holster_mesh_with_weapon="arrow_bl_b_quiver"
-		  weight="0.048"
+		  mesh="arrow_bl_a"
+		  holster_mesh="arrow_bl_a_quiver"
+		  holster_mesh_with_weapon="arrow_bl_a_quiver"
+		  weight="0.035"
 		  flying_mesh="arrow_bl_flying"
 		  appearance="1"
 		  Type="Arrows"
@@ -291,6 +291,7 @@
     <!-- #endregion -->
 
 
+	<!-- T1 Sabres -->
 	<CraftedItem id="cn_sword_1_t1" name="{=00000103}Simple Sabre" crafting_template="OneHandedSword" culture="Culture.empire">
 		<Pieces>
 			<Piece id="khuzait_blade_3"     Type="Blade"    scale_factor="90" />
@@ -310,6 +311,7 @@
 	</CraftedItem>
 
 	
+	<!-- T2 Sabres -->
 	<CraftedItem id="cn_sword_1_t2" name="{=00000105}Sabre" crafting_template="OneHandedSword" culture="Culture.empire">
 		<Pieces>
 			<Piece id="khuzait_blade_3"     Type="Blade"    scale_factor="100" />
@@ -329,6 +331,7 @@
 	</CraftedItem>
 
 	
+	<!-- T3 Sabres -->
 	<CraftedItem id="cn_sword_1_t3" name="{=00000107}Long Sabre" crafting_template="TwoHandedSword" culture="Culture.empire">
 		<Pieces>
 			<Piece id="khuzait_blade_3"     Type="Blade"    scale_factor="110" />
@@ -348,6 +351,7 @@
 	</CraftedItem>
 
 	
+	<!-- T4 Sabres -->
 	<CraftedItem id="cn_sword_1_t4" name="{=00000109}Noble Long Sabre" crafting_template="cn_sword_2h" culture="Culture.empire">
 		<Pieces>
 			<Piece id="cn_blade_1_t4"		Type="Blade"    scale_factor="100" />
@@ -373,9 +377,10 @@
 			<Piece id="cn_grip_1_t4"		Type="Handle"   scale_factor="100" />
 			<Piece id="cn_pommel_1_t4"		Type="Pommel"   scale_factor="100" />
 		</Pieces>
-	</CraftedItem>	
+	</CraftedItem>
 
-	
+
+	<!-- T5 Sabres -->
 	<CraftedItem id="cn_sword_1_t5" name="{=00000111}Sacred Aethil'na Fain Sabre" crafting_template="cn_sword_2h" culture="Culture.empire">
 		<Pieces>
 			<Piece id="cn_blade_1_t5"		Type="Blade"    scale_factor="110" />
@@ -400,6 +405,17 @@
 			<Piece id="cn_guard_3_t5"		Type="Guard"    scale_factor="100" />
 			<Piece id="cn_grip_3_t5"		Type="Handle"   scale_factor="90" />
 			<Piece id="cn_pommel_3_t5"		Type="Pommel"   scale_factor="100" />
+		</Pieces>
+	</CraftedItem>
+
+
+	<!-- T5 Glaives -->
+	<CraftedItem id="cn_glaive_3_t5" name="{=00000120}Sacred Brianh'na Fain Glaive" crafting_template="cn_glaive_2h" culture="Culture.empire">
+		<Pieces>
+			<Piece id="cn_glaive_blade_1"		Type="Blade"    scale_factor="140" />
+			<Piece id="cn_glaive_guard_1"		Type="Guard"    scale_factor="100" />
+			<Piece id="cn_glaive_handle_1"		Type="Handle"   scale_factor="50" />
+			<Piece id="cn_glaive_pommel_1"		Type="Pommel"   scale_factor="100" />
 		</Pieces>
 	</CraftedItem>
 </Items>

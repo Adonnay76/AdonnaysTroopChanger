@@ -462,7 +462,7 @@
 			<skill id="Throwing"   value="5" />
 		</skills>
 	    <equipmentSet>
-            <equipment slot="Item0"           id="Item.cn_sword_2_t3" />
+            <equipment slot="Item0"           id="Item.cn_glaive_3_t5" />
 	        <equipment slot="Item1"           id="Item.cn_long_bow_t2" />		
             <equipment slot="Item2"           id="Item.cn_arrows" />
             <equipment slot="Item3"           id="Item.decorated_steppe_shield" />	
@@ -475,7 +475,7 @@
             <equipment slot="HorseHarness"    id="Item.light_harness" />			 
         </equipmentSet>
 	    <equipmentSet>
-			<equipment slot="Item0"           id="Item.cn_sword_2_t3" />
+			<equipment slot="Item0"           id="Item.cn_glaive_3_t5" />
 			<equipment slot="Item1"           id="Item.cn_long_bow_t2" />
 			<equipment slot="Item2"           id="Item.cn_arrows" />
 			<equipment slot="Item3"           id="Item.decorated_steppe_shield" />
@@ -517,7 +517,7 @@
 			<skill id="Throwing"   value="5" />
 		</skills>
 	    <equipmentSet>
-            <equipment slot="Item0"         id="Item.cn_sword_3_t4" />
+            <equipment slot="Item0"         id="Item.cn_glaive_3_t5" />
 	        <equipment slot="Item1"         id="Item.cn_long_bow_t3" />		
             <equipment slot="Item2"         id="Item.cn_arrows" />
             <equipment slot="Item3"         id="Item.noyans_shield" />	
@@ -530,7 +530,7 @@
             <equipment slot="HorseHarness"  id="Item.light_harness" />			 
         </equipmentSet>
 	    <equipmentSet>
-			<equipment slot="Item0"         id="Item.cn_sword_3_t4" />
+			<equipment slot="Item0"         id="Item.cn_glaive_3_t5" />
 			<equipment slot="Item1"         id="Item.cn_long_bow_t3" />
 			<equipment slot="Item2"         id="Item.cn_arrows" />
 			<equipment slot="Item3"         id="Item.noyans_shield" />
@@ -573,7 +573,7 @@
 		    <skill id="Throwing"   value="5" />
         </skills>
 	    <equipmentSet>
-            <equipment slot="Item0"         id="Item.cn_sword_3_t5" />
+            <equipment slot="Item0"         id="Item.cn_glaive_3_t5" />
 	        <equipment slot="Item1"         id="Item.cn_long_bow_t4" />		
             <equipment slot="Item2"         id="Item.cn_arrows" />
             <equipment slot="Item3"         id="Item.steel_round_shield" />	
@@ -586,7 +586,7 @@
             <equipment slot="HorseHarness"  id="Item.steppe_half_barding" />			 
         </equipmentSet>
 	    <equipmentSet>
-			<equipment slot="Item0"         id="Item.cn_sword_3_t5" />
+			<equipment slot="Item0"         id="Item.cn_glaive_3_t5" />
 			<equipment slot="Item1"         id="Item.cn_long_bow_t4" />
 			<equipment slot="Item2"         id="Item.cn_arrows" />
 			<equipment slot="Item3"         id="Item.steel_round_shield" />
@@ -1064,7 +1064,7 @@
 			<skill id="Throwing"   value="5" />
 		</skills>
 		<equipmentSet>
-			<equipment slot="Item0"           id="Item.cn_sword_2_t3" />
+			<equipment slot="Item0"           id="Item.cn_glaive_3_t5" />
 			<equipment slot="Item1"           id="Item.cn_long_bow_t2" />
 			<equipment slot="Item2"           id="Item.cn_arrows" />
 			<equipment slot="Item3"           id="Item.decorated_steppe_shield" />
@@ -1077,7 +1077,7 @@
 			<equipment slot="HorseHarness"    id="Item.light_harness" />
 		</equipmentSet>
 		<equipmentSet>
-			<equipment slot="Item0"           id="Item.cn_sword_2_t3" />
+			<equipment slot="Item0"           id="Item.cn_glaive_3_t5" />
 			<equipment slot="Item1"           id="Item.cn_long_bow_t2" />
 			<equipment slot="Item2"           id="Item.cn_arrows" />
 			<equipment slot="Item3"           id="Item.decorated_steppe_shield" />
@@ -1119,7 +1119,7 @@
 			<skill id="Throwing"   value="5" />
 		</skills>
 		<equipmentSet>
-			<equipment slot="Item0"         id="Item.cn_sword_3_t4" />
+			<equipment slot="Item0"         id="Item.cn_glaive_3_t5" />
 			<equipment slot="Item1"         id="Item.cn_long_bow_t3" />
 			<equipment slot="Item2"         id="Item.cn_arrows" />
 			<equipment slot="Item3"         id="Item.noyans_shield" />
@@ -1132,7 +1132,7 @@
 			<equipment slot="HorseHarness"  id="Item.light_harness" />
 		</equipmentSet>
 		<equipmentSet>
-			<equipment slot="Item0"         id="Item.cn_sword_3_t4" />
+			<equipment slot="Item0"         id="Item.cn_glaive_3_t5" />
 			<equipment slot="Item1"         id="Item.cn_long_bow_t3" />
 			<equipment slot="Item2"         id="Item.cn_arrows" />
 			<equipment slot="Item3"         id="Item.noyans_shield" />
@@ -1175,7 +1175,7 @@
 			<skill id="Throwing"   value="5" />
 		</skills>
 		<equipmentSet>
-			<equipment slot="Item0"         id="Item.cn_sword_3_t5" />
+			<equipment slot="Item0"         id="Item.cn_glaive_3_t5" />
 			<equipment slot="Item1"         id="Item.cn_long_bow_t4" />
 			<equipment slot="Item2"         id="Item.cn_arrows" />
 			<equipment slot="Item3"         id="Item.steel_round_shield" />
@@ -1188,7 +1188,7 @@
 			<equipment slot="HorseHarness"  id="Item.steppe_half_barding" />
 		</equipmentSet>
 		<equipmentSet>
-			<equipment slot="Item0"         id="Item.cn_sword_3_t5" />
+			<equipment slot="Item0"         id="Item.cn_glaive_3_t5" />
 			<equipment slot="Item1"         id="Item.cn_long_bow_t4" />
 			<equipment slot="Item2"         id="Item.cn_arrows" />
 			<equipment slot="Item3"         id="Item.steel_round_shield" />
