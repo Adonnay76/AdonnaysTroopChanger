@@ -4,7 +4,7 @@ recruit them or not.
 
 Version 1.1.5 BETA
 --------------------
-- Added 
+- Minor changes 
 
 
 Version 1.1.4 BETA
