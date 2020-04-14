@@ -7,10 +7,32 @@
 	 YOU HAVE BEEN WARNED.
 	 
 	 
-	 VERSION 1.1.2
+	 Version infromation for ATC.config.xml
+	 The 2nd digit in the ATC version indicates a structural change to the ATC.config.xml. If that 
+	 number gets raised you need to check the provided EXAMPLE_ATC.config.xml for changes!
+	 Example: ATC version 1.1.5   needs ATC.config.xml version 1.1.x 
+	          ATC version 1.1.432 needs ATC.config.xml version 1.1.x 
+			  ATC version 1.2.3   needs ATC.config.xml version 1.2.x
+	 
+	 
+	 VERSION 1.1.4, compatible with ATC versions 1.1.x
+	 Changes to 1.1.0:
+	 * No structural changes, no adaptations needed
+	 * Debuginformation <show_percentage> for RNG Value used has been removed as the RNG seems to work 
+	   fine now. The tags are still in the file but have no effect anymore.
+	 
 	 
 	 Description:
-	 <source_troops> are all the native BasicTroop variants taken from spcultures.xml.
+	 <debugInfo>
+	 <troop_replacement> Puts a log dump into ATC.debug.log when a <source_troop> has been replaced
+	                     by a <target_troop>
+	 <show_percentage>   Obsolet as of 1.1.4
+	 <playeronly_flag>   Puts a log entry into /Config/ATC.debug.log when a <target_troop> has been
+	                     reverted back to <source_troop> to prevent the AI from recruiting it
+						 
+	 
+	 <source_troops> 
+	 Source troops are all the native BasicTroop variants taken from spcultures.xml.
      
 	 possible values are: 
      imperial_recruit
@@ -19,7 +41,7 @@
 	 vlandian_recruit
 	 battanian_volunteer
 	 khuzait_nomad
-	 
+	
 	 As of 1.1.0 EliteBasicTroop variants can also be replaced. Here are the values from spcultures.xml
 	 imperial_vigla_recruit
 	 aserai_youth
@@ -29,7 +51,8 @@
 	 khuzait_noble_son
 	 
 	 
-	 <target_troop> contains the IDs of the recruits from the troop tree you want to inject into the game. 
+	 <target_troop> 
+	 Target troops contains the IDs of the recruits from the troop tree you want to inject into the game. 
 	 The new troop tree can be of another mod or integrated into this mod but you have to make sure the
 	 troop tree is valid and works. The example uses my own Chael Nad'ra troop trees. 
 	 HINT: You do NOT need to replace every single tier of units, only the base recruit! That recruit has 
@@ -51,10 +74,10 @@
 	 * kingdomonly (true/false) - (requires 1.1.0 or higher): Similar to cultureonly but in this case the culture 
 	     of the Lords Kingdom will be checked instead of the Lords culture. 
 		 Example: An Aserai Lord who is a vassal of the Empire will be able to recruit custom empire troops.
-		 
+
 		 NEW (1.1.2): If playeronly AND kingdomonly are set to true you and the lords of your kingdom can 
 		              recruit the <target_troops>
-	 
+					  
 	   
 	   The <debugInfo> values ONLY control the alert output, they do not have any kind of impact
 	   on the troop replacement.
@@ -64,7 +87,7 @@
 
 <ATCTroops>
 	<debugInfo>
-		<troop_replacement>false</troop_replacement>
+		<troop_replacement>true</troop_replacement>
 		<show_percentage>false</show_percentage>
 		<playeronly_flag>false</playeronly_flag>
 	</debugInfo>
