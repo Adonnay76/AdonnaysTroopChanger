@@ -114,7 +114,7 @@ namespace AdonnaysTroopChanger
                 }
             }
 
-            return false; 
+            return false;
         }
 
     }
@@ -154,7 +154,7 @@ namespace AdonnaysTroopChanger
             foreach (TroopConfig tc in ATCconfig.troopConfig.Where(tc => (tc.SourceID == _settlementBaseTroop.StringId) || (tc.SourceID == _settlementEliteTroop.StringId)))
             {
                 //foreach (TargetTroop tt in tc.targetTroops.Where(tt => tt.PlayerOnly == true))                
-                foreach (TargetTroop tt in tc.targetTroops.Where(tt => tt.TroopID == _subjectRootID))
+                foreach (TargetTroop tt in tc.TargetTroops.Where(tt => tt.TroopID == _subjectRootID))
                 {
                     //Only processe for troops with playeronly flag = TRUE
                     if (tt.PlayerOnly)
@@ -179,7 +179,7 @@ namespace AdonnaysTroopChanger
                     //Only processe for troops with cultureonly flag = FALSE
                     else if (tt.CultureOnly)
                     {
-                        SubModule.caller = "self";
+                        //SubModule.caller = "self"; - OBSOLETE
                         if (side1Party.Leader.Culture.BasicTroop.StringId == tc.SourceID)   //basic_troop = <source_troop> bedeutet gleiche Kultur
                         {
                             //do nothing, the party is allowed to recruit the soldier due to matching culture
@@ -206,7 +206,7 @@ namespace AdonnaysTroopChanger
                     //Only processe for troops with kingdomonly flag = FALSE
                     else if (tt.KingdomOnly)
                     {
-                        SubModule.caller = "self";
+                        //SubModule.caller = "self"; - OBSOLETE
                         if (side1Party.MapFaction.BasicTroop.StringId == tc.SourceID)   //basic_troop = <source_troop> bedeutet gleiche Kultur
                         {
                             //do nothing, the party is allowed to recruit the soldier due to matching culture

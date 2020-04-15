@@ -5,6 +5,7 @@ using TaleWorlds.Core;
 using TaleWorlds.Library;
 using TaleWorlds.MountAndBlade;
 using AdonnaysTroopChanger.XMLReader;
+using System.Collections.Generic;
 
 
 
@@ -16,8 +17,16 @@ namespace AdonnaysTroopChanger
     {
         public static readonly string ModuleFolderName = "AdonnaysTroopChanger";
         public static Random rng = new Random();
-        public static string caller;
+        //public static string caller;
+        private static bool modsFound = false;
         public static Logfile log;
+        private string[] foreignConfigs;
+
+
+        private readonly string modulePath = String.Concat(BasePath.Name, "Modules/");
+
+        private readonly string configFile = String.Concat(BasePath.Name, "Modules/AdonnaysTroopChanger/Config/ATC.config.xml");
+        private readonly string mergedFile = String.Concat(BasePath.Name, "Modules/AdonnaysTroopChanger/Config/ATC.config.merged.xml");
 
         protected override void OnSubModuleLoad()
         {
@@ -26,47 +35,36 @@ namespace AdonnaysTroopChanger
 
             log = new Logfile();
 
-            string configfile = String.Concat(BasePath.Name, "Modules/AdonnaysTroopChanger/Config/ATC.config.xml");
 
-            if (File.Exists(configfile))
+            //if (File.Exists(mergedFile))
+            //{
+            //    ATCconfig.Instance.LoadXML(mergedFile);
+            //}
+            //else 
+            if (File.Exists(configFile))
             {
-                ATCconfig.Instance.LoadXML(configfile);
+                ATCconfig.Instance.LoadXML(configFile);
+
+                foreignConfigs = Directory.GetFiles(modulePath, "*ATC.modconfig.xml", SearchOption.AllDirectories);
+                foreach (string file in foreignConfigs)
+                {
+                    ATCconfig.Instance.LoadXML(file);
+                    modsFound = true;
+                }
+
             }
-           
+
             Harmony h = new Harmony("mod.bannerlord.adonnay");
             h.PatchAll();
         }
 
+
         protected override void OnBeforeInitialModuleScreenSetAsRoot()
         {
+
             if (!ATCconfig.IsFileLoaded)
             {
-                //InformationManager.DisplayMessage(new InformationMessage("ATC.config.XML not found!", new Color(1, 0, 0)));
-                log.Add("ATC.config.XML not found!");
-
-                string configfile = String.Concat(BasePath.Name, "Modules/AdonnaysTroopChanger/Config/EXAMPLE_ATC.config.xml");
-                if (File.Exists(configfile))
-                {
-                    //InformationManager.DisplayMessage(new InformationMessage("...trying to load EXAMPLE_ATC.config.XML", new Color(1, 1, 0)));
-                    log.Add("...trying to load EXAMPLE_ATC.config.XML");
-                    ATCconfig.Instance.LoadXML(configfile);
-
-                    if (ATCconfig.IsFileLoaded)
-                    {
-                        //InformationManager.DisplayMessage(new InformationMessage("...EXAMPLE_ATC.config.xml found!", new Color(0, 1, 0)));
-                        log.Add("...EXAMPLE_ATC.config.xml found!");
-                    }
-                    else
-                    {
-                        //InformationManager.DisplayMessage(new InformationMessage("...EXAMPLE_ATC.config.XML not found!", new Color(1, 0, 0)));
-                        log.Add("...EXAMPLE_ATC.config.XML not found!");
-                    }
-                }
-                else
-                {
-                    InformationManager.DisplayMessage(new InformationMessage("...EXAMPLE_ATC.config.XML not found!", new Color(1, 0, 0)));
-                    log.Add("...EXAMPLE_ATC.config.XML not found!");
-                }
+                InformationManager.DisplayMessage(new InformationMessage("ATC config not found! Please check /Config/ATC.debug.log!", new Color(1, 0, 0)));
             }
             else
             {
@@ -75,6 +73,15 @@ namespace AdonnaysTroopChanger
                 ATCconfig.Parse();
             }
         }
+
+        public override void OnGameLoaded(Game game, object initializerObject)
+        {
+            ATCconfig.ValidateTroops();
+
+            if (modsFound)
+                ATCconfig.Instance.SaveMergedXML(mergedFile);
+        }
+
     }
 }
 

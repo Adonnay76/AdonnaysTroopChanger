@@ -313,10 +313,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Config\ATC.config.xml" />
-    <Content Include="ModuleData\ad_crafting_pieces.xml" />
-    <Content Include="ModuleData\ad_items.xml" />
-    <Content Include="ModuleData\ad_troops.xml" />
-    <Content Include="ModuleData\ad_crafting_templates.xml" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

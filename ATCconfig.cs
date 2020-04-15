@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TaleWorlds.CampaignSystem;
 using System.Xml;
 using System.IO;
+using System.Xml.Linq;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
 
@@ -11,8 +12,8 @@ namespace AdonnaysTroopChanger.XMLReader
     public class ATCconfig
     {
         public static bool IsFileLoaded { get; set; }
+        public static bool EnableModScan { get; set; }
         public static bool ShowReplacementMsg { get; set; }
-        public static bool ShowRNGValue { get; set; }
         public static bool ShowPlayeronlyMsg { get; set; }
 
         private static ATCconfig _instance = null;
@@ -40,19 +41,21 @@ namespace AdonnaysTroopChanger.XMLReader
             }
         }
 
-        public void LoadXML(string xmlpath = "")
+        public void LoadXML(string xmlpath)
         {
             if (xmlpath != "")
             {
                 XmlDocument doc = new XmlDocument();
 
                 try
-                { 
+                {
+                    SubModule.log.Add("Loading " + xmlpath);
                     doc.Load(xmlpath);
                     IsFileLoaded = true;
                 }                
-                catch (FileNotFoundException)
+                catch 
                 {
+                    SubModule.log.Add("Loading Failed!");
                     IsFileLoaded = false;
                 }
 
@@ -62,21 +65,39 @@ namespace AdonnaysTroopChanger.XMLReader
                 {
                     switch (e.Name)
                     {
+                        case "EnableModScan":
+
+                            if (!xmlpath.Contains("ATC.config.xml"))
+                            {
+                                SubModule.log.Add("WARNING: <EnableModScan> must only be used ATC.config.xml!");
+                                break;
+                            }
+                            else
+                            {
+                                EnableModScan = Convert.ToBoolean(e.FirstChild.Value);
+                                SubModule.log.Add("MOD Parameter <EnableModScan> set to " + EnableModScan.ToString());
+                            }
+                            
+                            break;
+
                         case "debugInfo":
-                            foreach (XmlElement di in e.ChildNodes)
+                            if (!xmlpath.Contains("ATC.config.xml"))
+                            {
+                                SubModule.log.Add("WARNING: <debug_info> must only be used ATC.config.xml!");
+                                break;
+                            }
+                                foreach (XmlElement di in e.ChildNodes)
                             {
                                 switch (di.Name)
                                 {
                                     case "troop_replacement":
                                         ShowReplacementMsg = Convert.ToBoolean(di.FirstChild.Value);
-                                        break;
-
-                                    case "show_percentage":
-                                        ShowRNGValue = Convert.ToBoolean(di.FirstChild.Value);
+                                        SubModule.log.Add("Debug Parameter <troop_replacement> set to " + ShowPlayeronlyMsg.ToString());
                                         break;
 
                                     case "playeronly_flag":
                                         ShowPlayeronlyMsg = Convert.ToBoolean(di.FirstChild.Value);
+                                        SubModule.log.Add("Debug Parameter <playeronly_flag> set to " + ShowPlayeronlyMsg.ToString());
                                         break;
                                 }
                             }
@@ -92,10 +113,15 @@ namespace AdonnaysTroopChanger.XMLReader
                                 sourceTroop = new TroopConfig
                                 {
                                     SourceID = e.GetAttribute("id"),
-                                    targetTroops = new List<TargetTroop>()
+                                    TargetTroops = new List<TargetTroop>()
                                 };
 
                                 troopConfig.Add(sourceTroop);
+                                SubModule.log.Add("New <source_troop> " + sourceTroop.SourceID + " added.");
+                            }
+                            else
+                            {
+                                SubModule.log.Add("<source_troop> " + sourceTroop.SourceID + " already exists.");
                             }
                                                       
 
@@ -107,17 +133,27 @@ namespace AdonnaysTroopChanger.XMLReader
                                 try { _aionly      = Convert.ToBoolean(ec.GetAttribute("AIonly")); } catch { }
                                 try { _cultureOnly = Convert.ToBoolean(ec.GetAttribute("cultureonly")); } catch { }
                                 try { _kingdomOnly = Convert.ToBoolean(ec.GetAttribute("kingdomonly")); } catch { }
-                     
 
-                                sourceTroop.targetTroops.Add(new TargetTroop() { 
-                                    TroopID         = ec.GetAttribute("id"), 
-                                    TroopPercent    = _percent, 
-                                    PlayerOnly      = _playerOnly,
-                                    AIOnly          = _aionly,
-                                    CultureOnly     = _cultureOnly,
-                                    KingdomOnly     = _kingdomOnly,
+                                TargetTroop targetTroop = sourceTroop.GetTargetTroopByID(ec.GetAttribute("id"));
 
-                                });
+                                if (targetTroop == null)
+                                {
+                                    targetTroop = new TargetTroop() 
+                                    {
+                                        TroopID = ec.GetAttribute("id"),
+                                        TroopPercent = _percent,
+                                        PlayerOnly = _playerOnly,
+                                        AIOnly = _aionly,
+                                        CultureOnly = _cultureOnly,
+                                        KingdomOnly = _kingdomOnly,
+                                    };
+                                    sourceTroop.TargetTroops.Add(targetTroop);
+                                    SubModule.log.Add("New <target_troop> " + targetTroop.TroopID + " added.");
+                                }
+                                else
+                                {
+                                    SubModule.log.Add("<target_troop> " + targetTroop.TroopID + " already exists, skipping.");
+                                }
 
                             }
                             break;
@@ -127,10 +163,40 @@ namespace AdonnaysTroopChanger.XMLReader
         }
 
 
+        public void SaveMergedXML(string xmlpath)
+        {
+            SubModule.log.Add("Multiple Configurations found! Writing ATC.config.merged.xml");
+
+            XElement root = new XElement("ATCTroops");           
+
+            foreach (TroopConfig tc in troopConfig)
+            {
+                XElement sourceTroopElement = new XElement("source_troop", new XAttribute("id", tc.SourceID));
+                
+                for (int i = 0; i < tc.TargetTroops.Count; i++)
+                {
+                    XElement targetTroopElement = new XElement("target_troop", new XAttribute("id", tc.TargetTroops[i].TroopID));
+                    targetTroopElement.Add(new XAttribute("percent", tc.TargetTroops[i].TroopPercent));
+                    targetTroopElement.Add(new XAttribute("playeronly", tc.TargetTroops[i].PlayerOnly));
+                    targetTroopElement.Add(new XAttribute("AIonly", tc.TargetTroops[i].AIOnly));
+                    targetTroopElement.Add(new XAttribute("cultureonly", tc.TargetTroops[i].CultureOnly));
+                    targetTroopElement.Add(new XAttribute("kingdomonly", tc.TargetTroops[i].KingdomOnly));
+                    sourceTroopElement.Add(targetTroopElement);
+                }
+                root.Add(sourceTroopElement);
+                
+            }
+
+            File.WriteAllText(xmlpath, "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n");
+            File.AppendAllText(xmlpath, Convert.ToString(root));
+        }
+
+
         public static TroopConfig GetTroopConfig(string stringID)
         {
             return troopConfig.Find(x => x.SourceID == stringID);
         }
+
 
         public static CharacterObject GetReplacement(CharacterObject troop)
         {
@@ -150,7 +216,7 @@ namespace AdonnaysTroopChanger.XMLReader
         {
             for (int i = 0; i < troopConfig.Count; i++)
             {
-                foreach (TargetTroop tt in troopConfig[i].targetTroops)
+                foreach (TargetTroop tt in troopConfig[i].TargetTroops)
                 {
                     if (tt.PlayerOnly && tt.CultureOnly)
                         SubModule.log.Add("Parse -> " + tt.TroopID + ": playeronly = true, cultureonly = true has no effect!");
@@ -160,6 +226,43 @@ namespace AdonnaysTroopChanger.XMLReader
             }
 
         }
+
+        public static void ValidateTroops()
+        {
+            // Clean Up Source Troops
+            foreach (TroopConfig tc in troopConfig.ToArray())
+            {
+                if(CharacterObject.Find(tc.SourceID) == null)
+                { 
+                    SubModule.log.Add("ERROR: " + tc.SourceID + " is no valid <source_troop>! Removing that element to prevent the game from crashing!");
+                    troopConfig.Remove(tc);
+                }
+            }
+
+            //Clean Up Target Troops
+            foreach (TroopConfig tc in troopConfig)
+            {
+                int _percent = 0;
+                foreach (TargetTroop tt in tc.TargetTroops.ToArray())
+                {
+                    if(CharacterObject.Find(tt.TroopID) == null)
+                    {
+                        SubModule.log.Add("ERROR: " + tt.TroopID + " is no valid <target_troop> (or mod is disabled)! Removing that element to prevent the game from crashing!");
+                        tc.TargetTroops.Remove(tt);
+                    }
+                    _percent += tt.TroopPercent;
+                }
+                if(_percent > 100)
+                {
+                    SubModule.log.Add("WARNING: Percentages of all <target_troops> for " + tc.SourceID + " combind is > 100%; Normalizing distribution.");
+                    foreach(TargetTroop tt in tc.TargetTroops)
+                    {
+                        //tt.TroopPercent = tt.TroopPercent * 100 / _percent; //weighted on current percent
+                        tt.TroopPercent = 100 / tc.TargetTroops.Count;
+                    }
+                }
+            }
+        }
     }
 
 
@@ -167,7 +270,13 @@ namespace AdonnaysTroopChanger.XMLReader
     public class TroopConfig
     {
         public string SourceID { get; internal set; }
-        public List<TargetTroop> targetTroops;
+        public List<TargetTroop> TargetTroops { get; set; }
+
+
+        public TargetTroop GetTargetTroopByID(string stringID)
+        {
+            return TargetTroops.Find(x => x.TroopID == stringID);
+        }
 
         public CharacterObject GetReplacement(CharacterObject sourceTroop)
         {
@@ -175,7 +284,7 @@ namespace AdonnaysTroopChanger.XMLReader
             int _prevPercent = 0;
             CharacterObject replacementTroop = null;
 
-            foreach (TargetTroop tt in targetTroops)
+            foreach (TargetTroop tt in TargetTroops)
             {
                 if (_rng <= (tt.TroopPercent + _prevPercent))
                 {
