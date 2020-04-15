@@ -2,6 +2,22 @@ ATC or Adonnays Troop Changer lets you add (not replace) multiple custom troop t
 how many recruits will be changed to one of your confiured custom troops and whether the AI lords are allowed to
 recruit them or not.
 
+Version 1.1.5 BETA
+--------------------
+- Minor changes 
+
+
+Version 1.1.4 BETA
+--------------------
+- accidentally still had the prefix for the EliteBasicTroop getter in there which caused some crashes
+- Added a debug log file (ATC.debug.log) in the /Config subfolder so gather information if the <debug> flags are set. No more alert messages.
+- Added faction recruits to conquered settlements based on their loyalty (capped at 50% max for now)
+
+	
+Version 1.1.3 BETA
+--------------------
+- moved from the two prefixes for BasicTroop (get) and EliteBasicTroop (get) to a central prefix of UpdateVolunteersofNotables which gives much more freedom on how to populate the notable's recruit rosters with fresh volunteers
+
 
 Version 1.0.8
 --------------------
@@ -18,29 +34,7 @@ Changelog:
 
 IF YOU HAVE AN OLDER ATC.config.xml (version 1.0.7). Please download the new config sample and either overwrite the existing one if you have not altered it or modify your custom ATC.config.xml according to the new structure.
 
-The new ATC.config.xml structure contains the <debugInfo> node with the 3 possible fields shown below. The rest of the config file is unchanged.
-<ATCTroops>
-	<debugInfo>
-		<troop_replacement>true</troop_replacement>
-		<show_percentage>false</show_percentage>
-		<playeronly_flag>false</playeronly_flag>
-	</debugInfo>
-	<source_troop id="sturgian_recruit">
-		<target_troop id ="chael_nadra_recruit_f" percent="2" playeronly="true"/> 
-		<target_troop id ="chael_nadra_recruit_m" percent="2" playeronly="true"/>
-	</source_troop>
-	<source_troop id="battanian_volunteer">
-		<target_troop id="chael_nadra_recruit_f" percent="2" playeronly="true"/>
-		<target_troop id="chael_nadra_recruit_m" percent="2" playeronly="true"/>
-	</source_troop>
-	<source_troop id="vlandian_recruit">
-		<target_troop id="chael_nadra_recruit_f" percent="2" playeronly="true"/>
-		<target_troop id="chael_nadra_recruit_m" percent="2" playeronly="true"/>
-	</source_troop>
-</ATCTroops>
-
-
-
+The new ATC.config.xml structure contains the <debugInfo> node.
 
 
 Version 1.0.7
