@@ -10,7 +10,7 @@ namespace AdonnaysTroopChanger
 
         public Logfile()
         {
-            File.WriteAllText(filename, "Log Start");
+            File.WriteAllText(filename, "Log Start - ATC version used " + SubModule.version);
         }
 
         public void Add(string log)

@@ -5,7 +5,7 @@ using TaleWorlds.Core;
 using TaleWorlds.Library;
 using TaleWorlds.MountAndBlade;
 using AdonnaysTroopChanger.XMLReader;
-using System.Collections.Generic;
+using ModLib;
 
 
 
@@ -15,16 +15,20 @@ namespace AdonnaysTroopChanger
 
     public class SubModule : MBSubModuleBase
     {
+
+        public static readonly string version = "1.2.0";
+
         public static readonly string ModuleFolderName = "AdonnaysTroopChanger";
         public static Random rng = new Random();
-        //public static string caller;
-        private static bool modsFound = false;
         public static Logfile log;
-        private string[] foreignConfigs;
+        public static bool disableATC = false;
 
+        private string[] foreignConfigs;
+        private string[] localATConfigs;
+        private static bool mergeConfigs = false;
 
         private readonly string modulePath = String.Concat(BasePath.Name, "Modules/");
-
+        private readonly string modATCPath = String.Concat(BasePath.Name, "Modules/AdonnaysTroopChanger/");
         private readonly string configFile = String.Concat(BasePath.Name, "Modules/AdonnaysTroopChanger/Config/ATC.config.xml");
         private readonly string mergedFile = String.Concat(BasePath.Name, "Modules/AdonnaysTroopChanger/Config/ATC.config.merged.xml");
 
@@ -35,54 +39,98 @@ namespace AdonnaysTroopChanger
 
             log = new Logfile();
 
+            FileDatabase.Initialise(ModuleFolderName);
+            Settings settings = FileDatabase.Get<Settings>(Settings.InstanceID);
+            if (settings == null) settings = new Settings();
+            SettingsDatabase.RegisterSettings(settings);
 
-            //if (File.Exists(mergedFile))
-            //{
-            //    ATCconfig.Instance.LoadXML(mergedFile);
-            //}
-            //else 
-            if (File.Exists(configFile))
+            if (!Settings.Instance.EnableModScan)
             {
-                ATCconfig.Instance.LoadXML(configFile);
+                localATConfigs = Directory.GetFiles(modATCPath, "*ATC.modconfig.xml", SearchOption.TopDirectoryOnly);
 
-                foreignConfigs = Directory.GetFiles(modulePath, "*ATC.modconfig.xml", SearchOption.AllDirectories);
-                foreach (string file in foreignConfigs)
+                if(localATConfigs.Length != 0)
                 {
-                    ATCconfig.Instance.LoadXML(file);
-                    modsFound = true;
+                    foreach(string file in localATConfigs)
+                    {
+                        ATCconfig.Instance.LoadXML(file);
+                        mergeConfigs = true;
+                    }
                 }
+                else
+                {
+                    log.Add("ERROR: Mod Scan disabled and no *ATC.modconfig.xml found in /AdonnaysTroopChanger/Config!");
+                    log.Add("ERROR: Either allow ATC to scan for mods in Mod Options -> Enable Mod Scan (recommended for beginners!) or create your own ATC.modconfig.xml (recommended for advanced users).");
+                    log.Add("FATAL ERROR: ATC Disabled!");
+                    disableATC = true;
+                }
+            }
+            else
+            {
+                foreignConfigs = Directory.GetFiles(modulePath, "*ATC.modconfig.xml", SearchOption.AllDirectories);
 
+                if (foreignConfigs.Length != 0)
+                {
+                    foreach (string file in foreignConfigs)
+                    {
+                        ATCconfig.Instance.LoadXML(file);
+                        mergeConfigs = true;
+                    }
+                }
+                else
+                {
+                    log.Add("ERROR: Mod Scan enabled but no *ATC.modconfig.xml found in any of the /Modules subfolders!");
+                    log.Add("ERROR: Please check if your troop mods are ATC 1.2.x compatible or create your own *ATC.modconfig.xml.");
+                    log.Add("ERROR: Workaround: If the troop mod came with an 1.1.x ATC.config.xml, just rename that to ATC.modconfig.xml.");
+                    log.Add("FATAL ERROR: ATC Disabled!");
+                    disableATC = true;
+                }
             }
 
-            Harmony h = new Harmony("mod.bannerlord.adonnay");
-            h.PatchAll();
+            if (!disableATC)
+            {
+                Harmony h = new Harmony("mod.bannerlord.adonnay");
+                h.PatchAll();
+            }
         }
 
 
         protected override void OnBeforeInitialModuleScreenSetAsRoot()
         {
+            if (SubModule.disableATC)
+                return;
 
             if (!ATCconfig.IsFileLoaded)
             {
-                InformationManager.DisplayMessage(new InformationMessage("ATC config not found! Please check /Config/ATC.debug.log!", new Color(1, 0, 0)));
+                InformationManager.DisplayMessage(new InformationMessage("No configuration found! Please check /Config/ATC.debug.log!", new Color(1, 0, 0)));
             }
             else
             {
-                InformationManager.DisplayMessage(new InformationMessage("ATC config found!", new Color(0, 1, 0)));
-                log.Add("ATC config found!");
+                InformationManager.DisplayMessage(new InformationMessage("ATC configuration(s) found!", new Color(0, 1, 0)));
+                log.Add("ATC configuration(s) found!");
                 ATCconfig.Parse();
             }
         }
 
         public override void OnGameLoaded(Game game, object initializerObject)
         {
+            if (SubModule.disableATC)
+                return;
+
             ATCconfig.ValidateTroops();
 
-            if (modsFound)
+            if (mergeConfigs)
+            {
                 ATCconfig.Instance.SaveMergedXML(mergedFile);
+            }
+            
         }
 
     }
+
+
+
+
+
 }
 
 

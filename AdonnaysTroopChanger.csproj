@@ -39,8 +39,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="ModLib">
-      <HintPath>..\zzBannerlordTweaks\bin\Win64_Shipping_Client\ModLib.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\ModLib\bin\Win64_Shipping_Client\ModLib.dll</HintPath>
     </Reference>
     <Reference Include="SandBox">
       <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\Modules\SandBox\bin\Win64_Shipping_Client\SandBox.dll</HintPath>
@@ -300,6 +299,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Settings.cs" />
     <Compile Include="SubModule.cs" />
     <Compile Include="ATCconfig.cs" />
     <Compile Include="Logfile.cs" />
@@ -307,6 +307,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="ATC - Chael Nadra.csproj" />
     <None Include="Config\ATC.config.xsd" />
     <None Include="packages.config" />
     <None Include="SubModule.xml" />

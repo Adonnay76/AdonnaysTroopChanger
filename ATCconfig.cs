@@ -12,9 +12,9 @@ namespace AdonnaysTroopChanger.XMLReader
     public class ATCconfig
     {
         public static bool IsFileLoaded { get; set; }
-        public static bool EnableModScan { get; set; }
-        public static bool ShowReplacementMsg { get; set; }
-        public static bool ShowPlayeronlyMsg { get; set; }
+        //public static bool EnableModScan { get; set; }
+        //public static bool ShowReplacementMsg { get; set; }
+        //public static bool ShowPlayeronlyMsg { get; set; }
 
         private static ATCconfig _instance = null;
         public static List<TroopConfig> troopConfig = new List<TroopConfig>();
@@ -26,7 +26,7 @@ namespace AdonnaysTroopChanger.XMLReader
         private static bool _cultureOnly = false;
         private static bool _kingdomOnly = false;
 
-
+        
         public static ATCconfig Instance
         {
             get
@@ -67,42 +67,42 @@ namespace AdonnaysTroopChanger.XMLReader
                     {
                         case "EnableModScan":
 
-                            if (!xmlpath.Contains("ATC.config.xml"))
-                            {
-                                SubModule.log.Add("WARNING: <EnableModScan> must only be used ATC.config.xml!");
-                                break;
-                            }
-                            else
-                            {
-                                EnableModScan = Convert.ToBoolean(e.FirstChild.Value);
-                                SubModule.log.Add("MOD Parameter <EnableModScan> set to " + EnableModScan.ToString());
-                            }
-                            
+                            //if (!xmlpath.Contains("ATC.config.xml"))
+                            //{
+                            SubModule.log.Add("WARNING: <EnableModScan> has been moved to the ingame Mod Options!");
                             break;
+                            //}
+                            //    else
+                            //    {
+                            //        EnableModScan = Convert.ToBoolean(e.FirstChild.Value);
+                            //        SubModule.log.Add("MOD Parameter <EnableModScan> set to " + EnableModScan.ToString());
+                            //    }
+
+                            //break;
 
                         case "debugInfo":
-                            if (!xmlpath.Contains("ATC.config.xml"))
-                            {
-                                SubModule.log.Add("WARNING: <debug_info> must only be used ATC.config.xml!");
-                                break;
-                            }
-                                foreach (XmlElement di in e.ChildNodes)
-                            {
-                                switch (di.Name)
-                                {
-                                    case "troop_replacement":
-                                        ShowReplacementMsg = Convert.ToBoolean(di.FirstChild.Value);
-                                        SubModule.log.Add("Debug Parameter <troop_replacement> set to " + ShowPlayeronlyMsg.ToString());
-                                        break;
-
-                                    case "playeronly_flag":
-                                        ShowPlayeronlyMsg = Convert.ToBoolean(di.FirstChild.Value);
-                                        SubModule.log.Add("Debug Parameter <playeronly_flag> set to " + ShowPlayeronlyMsg.ToString());
-                                        break;
-                                }
-                            }
-
+                            //    if (!xmlpath.Contains("ATC.config.xml"))
+                            //    {
+                            SubModule.log.Add("WARNING: All <debug_info> flags have been moved to the ingame Mod Options!");
                             break;
+                        //    }
+                        //        foreach (XmlElement di in e.ChildNodes)
+                        //    {
+                        //        switch (di.Name)
+                        //        {
+                        //            case "troop_replacement":
+                        //                ShowReplacementMsg = Convert.ToBoolean(di.FirstChild.Value);
+                        //                SubModule.log.Add("Debug Parameter <troop_replacement> set to " + ShowPlayeronlyMsg.ToString());
+                        //                break;
+
+                        //            case "playeronly_flag":
+                        //                ShowPlayeronlyMsg = Convert.ToBoolean(di.FirstChild.Value);
+                        //                SubModule.log.Add("Debug Parameter <playeronly_flag> set to " + ShowPlayeronlyMsg.ToString());
+                        //                break;
+                        //        }
+                        //    }
+
+                        //    break;
 
                         case "source_troop":
 
@@ -240,7 +240,7 @@ namespace AdonnaysTroopChanger.XMLReader
             }
 
             //Clean Up Target Troops
-            foreach (TroopConfig tc in troopConfig)
+            foreach (TroopConfig tc in troopConfig.ToArray())
             {
                 int _percent = 0;
                 foreach (TargetTroop tt in tc.TargetTroops.ToArray())
@@ -250,8 +250,23 @@ namespace AdonnaysTroopChanger.XMLReader
                         SubModule.log.Add("ERROR: " + tt.TroopID + " is no valid <target_troop> (or mod is disabled)! Removing that element to prevent the game from crashing!");
                         tc.TargetTroops.Remove(tt);
                     }
+                    else
+                    {
+                        if (!CharacterObject.Find(tt.TroopID).IsBasicTroop)
+                        {
+                            SubModule.log.Add("WARNING: " + tt.TroopID + " is not configured as base troop (is_basic_troop = true)!");
+                        }
+                    }
                     _percent += tt.TroopPercent;
                 }
+
+
+                //Remove Target Troop when no Source Troops remain
+                if(tc.TargetTroops.Count == 0)
+                {
+                    troopConfig.Remove(tc);
+                }
+
                 if(_percent > 100)
                 {
                     SubModule.log.Add("WARNING: Percentages of all <target_troops> for " + tc.SourceID + " combind is > 100%; Normalizing distribution.");

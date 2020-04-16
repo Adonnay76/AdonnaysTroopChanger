@@ -16,9 +16,4 @@
     <target_troop id="chael_nadra_recruit_f" percent="20" playeronly="true" AIonly="false" cultureonly="false" kingdomonly="false" />
     <target_troop id="chael_nadra_recruit_m" percent="20" playeronly="true" AIonly="false" cultureonly="false" kingdomonly="false" />
   </source_troop>
-  <source_troop id="imperial_recruit">
-    <target_troop id="ere_recruit" percent="33" playeronly="true" AIonly="false" cultureonly="false" kingdomonly="false" />
-    <target_troop id="chael_nadra_recruit_f" percent="33" playeronly="true" AIonly="false" cultureonly="false" kingdomonly="false" />
-    <target_troop id="chael_nadra_recruit_m" percent="33" playeronly="true" AIonly="false" cultureonly="false" kingdomonly="false" />
-  </source_troop>
 </ATCTroops>
