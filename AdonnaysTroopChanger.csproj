@@ -38,8 +38,9 @@
       <HintPath>packages\Lib.Harmony.2.0.0.9\lib\net472\0Harmony.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="ModLib">
-      <HintPath>..\ModLib\bin\Win64_Shipping_Client\ModLib.dll</HintPath>
+    <Reference Include="MBOptionScreen, Version=1.1.7.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\Bannerlord.MBOptionScreen.1.1.7\lib\net472\MBOptionScreen.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="SandBox">
       <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\Modules\SandBox\bin\Win64_Shipping_Client\SandBox.dll</HintPath>
@@ -299,11 +300,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Settings.cs" />
+    <Compile Include="Settings\ATCSettings.cs" />
     <Compile Include="SubModule.cs" />
-    <Compile Include="ATCconfig.cs" />
-    <Compile Include="Logfile.cs" />
-    <Compile Include="Patches.cs" />
+    <Compile Include="Config\ATCconfig.cs" />
+    <Compile Include="Log\Logfile.cs" />
+    <Compile Include="Patches\Patches.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

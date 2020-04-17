@@ -32,19 +32,19 @@ namespace AdonnaysTroopChanger
                             CultureObject cultureObject = (hero.CurrentSettlement != null) ? hero.CurrentSettlement.Culture : hero.Clan.Culture;
 
                             // Change cultureObject based on town's loyalty
-                            if (Settings.Instance.EnableCCC)
+                            if (ATCSettings.Instance.EnableCCC)
                             {
 
                                 if (settlement.IsTown)
                                 {
-                                    if (MBRandom.RandomInt(0, 100) <= (Settings.Instance.CCCAmount * hero.CurrentSettlement.Town.Loyalty / 100))
+                                    if (MBRandom.RandomInt(0, 100) <= (ATCSettings.Instance.CCCAmount * hero.CurrentSettlement.Town.Loyalty / 100))
                                     {
                                         cultureObject = (hero.CurrentSettlement != null) ? hero.CurrentSettlement.MapFaction.Culture : hero.Clan.Culture;
                                     }
                                 }
                                 else if (settlement.IsVillage)
                                 {
-                                    if (MBRandom.RandomInt(0, 100) <= (Settings.Instance.CCCAmount * hero.CurrentSettlement.Village.Bound.Town.Loyalty / 100))
+                                    if (MBRandom.RandomInt(0, 100) <= (ATCSettings.Instance.CCCAmount * hero.CurrentSettlement.Village.Bound.Town.Loyalty / 100))
                                     {
                                         cultureObject = (hero.CurrentSettlement != null) ? hero.CurrentSettlement.MapFaction.Culture : hero.Clan.Culture;
                                     }
@@ -61,7 +61,7 @@ namespace AdonnaysTroopChanger
                                     if (hero.VolunteerTypes[i] == null)
                                     {
                                         hero.VolunteerTypes[i] = ATCconfig.GetReplacement(basicTroop);
-                                        if (Settings.Instance.DebugReplacementMsg && hero.CurrentSettlement.Culture.Name != hero.CurrentSettlement.MapFaction.Culture.Name)
+                                        if (ATCSettings.Instance.DebugReplacementMsg && hero.CurrentSettlement.Culture.Name != hero.CurrentSettlement.MapFaction.Culture.Name)
                                             SubModule.log.Add("UpdateVolunteersOfNotables -> Settlement " + hero.CurrentSettlement.Name + "(Culture: " + hero.CurrentSettlement.Culture.Name + ", Owner: " + hero.CurrentSettlement.MapFaction.Name + ") received new recruit: " + hero.VolunteerTypes[i].Name);
                                         flag = true;
                                     }
@@ -204,7 +204,7 @@ namespace AdonnaysTroopChanger
                             if (side1Party.Leader.Culture.BasicTroop.StringId == tc.SourceID)   //basic_troop = <source_troop> bedeutet gleiche Kultur
                             {
                                 //do nothing, the party is allowed to recruit the soldier due to matching culture
-                                if (Settings.Instance.DebugPlayerOnlyFlag)
+                                if (ATCSettings.Instance.DebugPlayerOnlyFlag)
                                     SubModule.log.Add("GetRecruitVolunteerFromIndividual -> " + side1Party.Leader.Name + "(" + side1Party.Leader.Culture.Name + ")" + " recruited a " + subject.Name);
                                 //InformationManager.DisplayMessage(new InformationMessage(side1Party.Leader.Name + " (" + side1Party.Leader.Culture.Name + ")" + " recruited a " + subject.Name, new Color(0, 1, 0)));
                                 replacementTroop = null;
@@ -231,7 +231,7 @@ namespace AdonnaysTroopChanger
                             if (side1Party.MapFaction.BasicTroop.StringId == tc.SourceID)   //basic_troop = <source_troop> bedeutet gleiche Kultur
                             {
                                 //do nothing, the party is allowed to recruit the soldier due to matching culture
-                                if (Settings.Instance.DebugPlayerOnlyFlag)
+                                if (ATCSettings.Instance.DebugPlayerOnlyFlag)
                                     SubModule.log.Add("GetRecruitVolunteerFromIndividual -> " + side1Party.Leader.Name + " (" + side1Party.MapFaction.Name + ")" + " recruited a " + subject.Name);
                                 //InformationManager.DisplayMessage(new InformationMessage(side1Party.Leader.Name + " (" + side1Party.MapFaction.Name + ")" + " recruited a " + subject.Name, new Color(0, 1, 0)));
                                 replacementTroop = null;
@@ -260,7 +260,7 @@ namespace AdonnaysTroopChanger
 
                 if (replacementTroop != null)
                 {
-                    if (Settings.Instance.DebugPlayerOnlyFlag)
+                    if (ATCSettings.Instance.DebugPlayerOnlyFlag)
                         SubModule.log.Add("GetRecruitVolunteerFromIndividual -> A " + subject.Name + " refused to join " + side1Party.Leader.Culture.Name);
                     //InformationManager.DisplayMessage(new InformationMessage("A " + subject.Name + " refused to join " + side1Party.Leader.Culture.Name, new Color(1, 1, 0)));
 

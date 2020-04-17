@@ -5,7 +5,6 @@ using TaleWorlds.Core;
 using TaleWorlds.Library;
 using TaleWorlds.MountAndBlade;
 using AdonnaysTroopChanger.XMLReader;
-using ModLib;
 
 
 
@@ -16,7 +15,7 @@ namespace AdonnaysTroopChanger
     public class SubModule : MBSubModuleBase
     {
 
-        public static readonly string version = "1.2.0";
+        public static readonly string version = "1.3.0";
 
         public static readonly string ModuleFolderName = "AdonnaysTroopChanger";
         public static Random rng = new Random();
@@ -39,12 +38,12 @@ namespace AdonnaysTroopChanger
 
             log = new Logfile();
 
-            FileDatabase.Initialise(ModuleFolderName);
-            Settings settings = FileDatabase.Get<Settings>(Settings.InstanceID);
-            if (settings == null) settings = new Settings();
-            SettingsDatabase.RegisterSettings(settings);
+            //FileDatabase.Initialise(ModuleFolderName);
+            //ATCSettings settings = FileDatabase.Get<ATCSettings>(ATCSettings.InstanceID);
+            //if (settings == null) settings = new ATCSettings();
+            //SettingsDatabase.RegisterSettings(settings);
 
-            if (!Settings.Instance.EnableModScan)
+            if (!ATCSettings.Instance.EnableModScan)
             {
                 localATConfigs = Directory.GetFiles(modATCPath, "*ATC.modconfig.xml", SearchOption.TopDirectoryOnly);
 

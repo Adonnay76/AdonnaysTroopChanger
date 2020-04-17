@@ -2,7 +2,7 @@
 <Module>
 	<Name value="Adonnays Troop Changer"/>
 	<Id value="AdonnaysTroopChanger"/>
-	<Version value="v1.2.0"/>
+	<Version value="v1.3.0"/>
 	<SingleplayerModule value="true"/>
 	<MultiplayerModule value="false"/>
 	<DependedModules>
@@ -11,7 +11,6 @@
 		<DependedModule Id="Sandbox"/>
 		<DependedModule Id="CustomBattle"/>
 		<DependedModule Id="StoryMode" />
-		<DependedModule Id="ModLib" />
 	</DependedModules>
 	<SubModules>
 		<SubModule>
@@ -21,6 +20,15 @@
 			<Tags>
 			<Tag key="DedicatedServerType" value="none" />
 			<Tag key="IsNoRenderModeElement" value="false" />
+			</Tags>
+		</SubModule>
+		<SubModule>
+			<Name value="Bannerlord.MBOptionScreen" />
+			<DLLName value="MBOptionScreen.dll" />
+			<SubModuleClassType value="MBOptionScreen.MBOptionScreenSubModule" />
+			<Tags>
+				<Tag key="DedicatedServerType" value="none" />
+				<Tag key="IsNoRenderModeElement" value="false" />
 			</Tags>
 		</SubModule>
 	</SubModules>
