@@ -23,7 +23,7 @@
 			</Tags>
 		</SubModule>
 		<SubModule>
-			<Name value="Bannerlord.MBOptionScreen" />
+			<Name value="MBOptionScreen" />
 			<DLLName value="MBOptionScreen.dll" />
 			<SubModuleClassType value="MBOptionScreen.MBOptionScreenSubModule" />
 			<Tags>

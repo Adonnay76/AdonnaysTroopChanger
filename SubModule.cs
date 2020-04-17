@@ -15,7 +15,7 @@ namespace AdonnaysTroopChanger
     public class SubModule : MBSubModuleBase
     {
 
-        public static readonly string version = "1.3.0";
+        public static readonly string version = "1.3.1";
 
         public static readonly string ModuleFolderName = "AdonnaysTroopChanger";
         public static Random rng = new Random();
@@ -28,7 +28,7 @@ namespace AdonnaysTroopChanger
 
         private readonly string modulePath = String.Concat(BasePath.Name, "Modules/");
         private readonly string modATCPath = String.Concat(BasePath.Name, "Modules/AdonnaysTroopChanger/");
-        private readonly string configFile = String.Concat(BasePath.Name, "Modules/AdonnaysTroopChanger/Config/ATC.config.xml");
+        //private readonly string configFile = String.Concat(BasePath.Name, "Modules/AdonnaysTroopChanger/Config/ATC.config.xml");
         private readonly string mergedFile = String.Concat(BasePath.Name, "Modules/AdonnaysTroopChanger/Config/ATC.config.merged.xml");
 
         protected override void OnSubModuleLoad()
