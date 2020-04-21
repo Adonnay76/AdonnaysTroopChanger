@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- DISCALIMER!
+	 WHATEVER YOU DO HERE IS AT YOUR OWN RISK. I TAKE NO - NONE WHATSOEVER - RESPONSIBILITY FOR THE 
+	 SAFETY OF YOUR SAVEGAME. YOUR SAVEGAME MAY BLOW UP... DISINTEGRATE... VANISH... AND TAKE YOUR 
+	 WHOLE COMPUTER WITH IT. 
+	
+	 YOU HAVE BEEN WARNED.
+	 
+	 
+	 GENERAL INFORMATION
+	 Version infromation for ATC.config.xml
+	 The 2nd digit in the ATC version indicates a structural change to the ATC.config.xml. If that 
+	 number gets raised you need to check the provided EXAMPLE_ATC.config.xml for changes!
+	 Example: ATC version 1.1.5   needs ATC.config.xml version 1.1.x 
+	          ATC version 1.1.432 needs ATC.config.xml version 1.1.x 
+			  ATC version 1.2.3   needs ATC.config.xml version 1.2.x
+	 
+	 
+	 VERSION 1.3.6
+	 * Uses MBOptionScreen (derived from ModLib by Aragas) to implement an ingame menu für ATCs central 
+	   configuration aspects:
+		- Debug information
+		- Mod Scan enabling
+		- Ability and frequency of faction spawns in conquered cities
+		- NEW: Overall Spawnrate of Recruits (might not have the desired effects since AI is supposedly
+		       cheating its recrutis, but needs long term testing)
+	    - NEW: Player Clan and Player Kingdom can now be configured
+	 
+	 * Automatic configuration merging from different sources
+	    1. Mod Scan ENABLED: Looks for *ATC.modconfig.xml files in ALL /Modules/.. subfolders, including
+		   the ATC folder. Merges all found configuration files into one. Check ATC.debug.log for 
+		   potential problems and ATC.config.merged.xml for the final merged configuration (INFO: The
+		   ATC.config.merged.xml is created when you load a game or start a new campaing, NOT when
+		   reaching the main menu!).
+		   This option is meant for beginners who don't really want to mess with xml files. However
+		   this is not the optimal solution since the player is dependant on the troop configurations 
+		   from the mod authors (percentages, playeronly, kingdomonly etc.)
+		
+		OR
+		
+		2. Mod Scan DISABLED: Looks for ATC.modconfig.xml files in the ATC /Config subfolder
+		   /Modules/AdonnaysTroopChanger/Config. You can manually store multiple configuration files there. 
+		   Just like with Mod Scan enabled, ATC will merge all found *ATC.modconfig.xml files into one.
+		   This option is meant for people who want more control over what ATC loads by enabling them
+		   to have one (or more) manually configured xml files, similar to versions 1.1.x and 1.2.x.
+		   REMOVE config files from disabled/unused troop mods to prevent potential crashes!
+		   
+		   HINT: If you have a working ATC.config.xml for your current game you can just rename that 
+		         to ATC.modconfig.xml and it should work just fine.
+		   
+	 
+	 
+	 NEW: MOD OPTIONS!
+	 From version 1.3.x on the game makes use of a Mod Options menu to implement an ingame options menu under 
+	 'Mod Options' in the start menu. In there you can enable or disable the Mod Scan option, debug 
+	 information or you can customize the way spawning in conquered settlements is handled.
+
+
+	 <source_troops> 
+	 Possible entries for source troops are the BASIC or NOBLE recruits listed below. With 1.3.5 players can
+	 also use the tokens player_clan_basic and player_clan_elite to modify the recruits for settlements owned
+	 by the player clan. Similar to that you can use player_kingdom_basic and player_kingdom_elite to define
+	 troops that spawn in settlements that belong to the player kingdom. For the latter the player has to 
+	 be king!
+     
+	 BASIC RECRUITS:
+	 possible values are: 
+     imperial_recruit
+	 aserai_recruit
+	 sturgian_recruit
+	 vlandian_recruit
+	 battanian_volunteer
+	 khuzait_nomad
+	 NEW: player_clan_basic
+	 NEW: player_kingdom_basic
+	
+	 NOBLE RECRUITS:
+	 imperial_vigla_recruit
+	 aserai_youth
+	 sturgian_warrior_son
+	 vlandian_squire
+	 battanian_highborn_youth
+	 khuzait_noble_son
+	 NEW: player_clan_elite
+	 NEW: player_kingdom_elite
+	 
+	 
+	 <target_troop> 
+	 Target troops contains the IDs of the recruits from the troop tree you want to inject into the game. 
+	 The new troop tree can be of another mod or integrated into this mod but you have to make sure the
+	 troop tree is valid and works. The example uses my own Chael Nad'ra troop trees. 
+	 HINT: You do NOT need to replace every single tier of units, only the base recruit! That recruit has 
+	 to be set to is_base_troop="true" in the troop's XML file so the code can find the root of the troop tree.
+	 
+	 Target Troop Properties:
+	 * percent (0-100): Defines the percentage with which the <target_troop> will replace the <source_troop>
+	     If the percentages don't add up to 100% the rest of the percentage will be the chance that the
+	     <source_troop> recruits will remain
+	 * playeronly (true/false): Means that when AI tries to recruit the new target_troop recruits those recruits 
+	     will be changed back to the original <source_troop> recruits! This way you can make some super
+	     special troops that only you will command!
+	 * aionly (true/false): Currently not implemented yet.
+	 * cultureonly (true/false) - (requires 1.0.8 or higher): Means that only lords with the same culture as the 
+	     <source_troop> will be able to recruit the custom units. If playeronly is set to TRUE cultureonly will 
+		 be ignored! 
+		 Example: Only a Lord with the Empire culture (<> Kingdom) will be able to recruit custom empire troops. 
+		          But that means when the Lord becomes a vassal of the Aserai he will still be able to recruit
+				  custom Empire troops because his own culture is still the Empire.
+	 * kingdomonly (true/false) - (requires 1.1.0 or higher): Similar to cultureonly but in this case the culture 
+	     of the Lords Kingdom will be checked instead of the Lords culture. 
+		 Example: An Aserai Lord who is a vassal of the Empire will be able to recruit custom empire troops.
+         HINT: If playeronly AND kingdomonly are set to true you and the lords of your kingdom can 
+		       recruit the <target_troops>
+
+-->
+
+<ATCTroops>
+	<!-- <source_troop id="player_clan_basic">
+			<target_troop id="chael_nadra_recruit_f" percent="50" playeronly="true" aionly="false" cultureonly="false" kingdomonly="true" />
+			<target_troop id="chael_nadra_recruit_m" percent="50" playeronly="true" aionly="false" cultureonly="false" kingdomonly="true" />
+		 </source_troop>
+		 <source_troop id="player_kingdom_basic">
+			<target_troop id="chael_nadra_recruit_f" percent="30" playeronly="true" aionly="false" cultureonly="false" kingdomonly="true" />
+			<target_troop id="chael_nadra_recruit_m" percent="30" playeronly="true" aionly="false" cultureonly="false" kingdomonly="true" />
+		 </source_troop>
+		 <source_troop id="sturgian_recruit">
+			<target_troop id="chael_nadra_recruit_f" percent="10" playeronly="true" aionly="false" cultureonly="false" kingdomonly="false" />
+			<target_troop id="chael_nadra_recruit_m" percent="10" playeronly="true" aionly="false" cultureonly="false" kingdomonly="false" />
+		 </source_troop> -->
+</ATCTroops>

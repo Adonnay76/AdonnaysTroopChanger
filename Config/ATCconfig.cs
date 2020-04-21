@@ -61,7 +61,7 @@ namespace AdonnaysTroopChanger.XMLReader
 
                 XmlElement root = doc.DocumentElement;
 
-                foreach (XmlElement e in root.ChildNodes)
+                foreach (XmlElement e in root.SelectNodes("*"))
                 {
                     switch (e.Name)
                     {
@@ -165,7 +165,7 @@ namespace AdonnaysTroopChanger.XMLReader
 
         public void SaveMergedXML(string xmlpath)
         {
-            SubModule.log.Add("Multiple Configurations found! Writing ATC.config.merged.xml");
+            SubModule.log.Add("Configuration(s) found! Writing ATC.config.merged.xml");
 
             XElement root = new XElement("ATCTroops");           
 
@@ -212,6 +212,21 @@ namespace AdonnaysTroopChanger.XMLReader
             
         }
 
+        public static CharacterObject GetReplacement(string sourceTroopID, CharacterObject basicTroop)
+        {
+
+            CharacterObject _replacement = basicTroop;
+
+            if (GetTroopConfig(sourceTroopID) != null)
+            {
+                _replacement = GetTroopConfig(sourceTroopID).GetReplacement(basicTroop);
+            }
+
+
+            return _replacement;
+
+        }
+
         public static void Parse()
         {
             for (int i = 0; i < troopConfig.Count; i++)
@@ -232,6 +247,13 @@ namespace AdonnaysTroopChanger.XMLReader
             // Clean Up Source Troops
             foreach (TroopConfig tc in troopConfig.ToArray())
             {
+                //ignore special tokens that are NOT troops
+                if (tc.SourceID == "player_clan_basic" || tc.SourceID == "player_clan_elite" ||
+                    tc.SourceID == "player_kingdom_basic" || tc.SourceID == "player_kingdom_elite")
+                {
+                    return;
+                }
+
                 if(CharacterObject.Find(tc.SourceID) == null)
                 { 
                     SubModule.log.Add("ERROR: " + tc.SourceID + " is no valid <source_troop>! Removing that element to prevent the game from crashing!");
@@ -313,12 +335,13 @@ namespace AdonnaysTroopChanger.XMLReader
                         //InformationManager.DisplayMessage(new InformationMessage(tt.TroopID + " invalid!"));
                     }
 
-                    if (replacementTroop != sourceTroop)
+                    if (replacementTroop != null && replacementTroop != sourceTroop)
                     {
                         //Debug Message to show the replaced troop
-                        //if (ATCconfig.ShowReplacementMsg)
-                        //    SubModule.log.Add("GetReplacement -> " + SourceID + " changed to " + replacementTroop.StringId + " (" + _rng + ")");
-                        //InformationManager.DisplayMessage(new InformationMessage(SourceID + " changed to " + replacementTroop.StringId + " (" + _rng + ")"));
+                        if (ATCSettings.Instance.DebugReplacementMsg)
+                        {
+                            SubModule.log.Add(sourceTroop.Name + " has been replaced with " + replacementTroop.Name);
+                        }
                         break; //target troop found, we can exit
                     }
                 }
