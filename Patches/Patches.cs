@@ -335,6 +335,8 @@ namespace AdonnaysTroopChanger
 
             bool sameClan = false;
 
+            SubModule.log.Add(side1Party.Name + "(" + side1Party.MapFaction.Name + ") recruits " + subject.Name + " from " + individual.CurrentSettlement.Name + "(Faction: " + individual.CurrentSettlement.MapFaction.Name + ", Culture: " + individual.CurrentSettlement.Culture.Name + ")");
+
             if (!SubModule.disableATC)
             {
 
@@ -475,6 +477,17 @@ namespace AdonnaysTroopChanger
         }
     }
 
+
+    //[HarmonyPatch(typeof(RecruitVolunteerVM), "OnRecruitMoveToCart")]
+    //public class PatchOnRecruitMoveToCart
+    //{
+    //    static bool Prefix(ref RecruitVolunteerVM __instance, RecruitVolunteerTroopVM troop)
+    //    {
+    //        InformationManager.DisplayMessage(new InformationMessage(" refuses to join!"));
+    //        __instance.ExecuteRemoveFromCart(troop);
+    //        return false;
+    //    }
+    //}
 
     //[HarmonyPatch(typeof(RecruitVolunteerVM))]
     //[HarmonyPatch("RecruitVolunteerVM", MethodType.StaticConstructor)]

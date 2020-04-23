@@ -90,7 +90,8 @@ namespace AdonnaysTroopChanger
 
             log.Initialize();
 
-            
+            if (Campaign.Current == null)
+                return;
 
             string[] modNames = Campaign.Current.SandBoxManager.ModuleManager.ModuleNames;
 
