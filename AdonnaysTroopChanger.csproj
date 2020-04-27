@@ -38,8 +38,8 @@
       <HintPath>packages\Lib.Harmony.2.0.0.9\lib\net472\0Harmony.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="MBOptionScreen, Version=1.1.15.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\Bannerlord.MBOptionScreen.1.1.15\lib\net472\MBOptionScreen.dll</HintPath>
+    <Reference Include="MBOptionScreen.v2.0.6, Version=2.0.6.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\Bannerlord.MBOptionScreen.2.0.6\lib\net472\MBOptionScreen.v2.0.6.dll</HintPath>
     </Reference>
     <Reference Include="SandBox">
       <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\Modules\SandBox\bin\Win64_Shipping_Client\SandBox.dll</HintPath>
@@ -247,6 +247,11 @@
       <HintPath>..\..\bin\Win64_Shipping_Client\TaleWorlds.Network.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="TaleWorlds.ObjectSystem, Version=1.0.0.0, Culture=neutral, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\bin\Win64_Shipping_Client\TaleWorlds.ObjectSystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="TaleWorlds.PlatformService, Version=1.0.0.0, Culture=neutral, processorArchitecture=AMD64">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\bin\Win64_Shipping_Client\TaleWorlds.PlatformService.dll</HintPath>
@@ -301,7 +306,7 @@
   <ItemGroup>
     <Compile Include="Settings\ATCSettings.cs" />
     <Compile Include="SubModule.cs" />
-    <Compile Include="Config\ATCconfig.cs" />
+    <Compile Include="Config\ATCConfig.cs" />
     <Compile Include="Log\Logfile.cs" />
     <Compile Include="Patches\Patches.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

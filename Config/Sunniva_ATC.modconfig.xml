@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ATCTroops>
+	<source_troop id="player_clan_basic">
+		<target_troop id ="sunniva_recruit_f" percent="50" playeronly="true" cultureonly="false" kingdomonly="true"/>
+	</source_troop>
+	<source_troop id="player_clan_elite">
+		<target_troop id ="sunniva_recruit_f" percent="50" playeronly="true" cultureonly="false" kingdomonly="true"/>
+	</source_troop>
+	<source_troop id="player_kingdom_basic">
+		<target_troop id ="sunniva_recruit_f" percent="50" playeronly="true" cultureonly="false" kingdomonly="true"/>
+	</source_troop>
+	<source_troop id="player_kingdom_elite">
+		<target_troop id ="sunniva_recruit_f" percent="50" playeronly="true" cultureonly="false" kingdomonly="true"/>
+	</source_troop>
+	<source_troop id="aserai_recruit">
+		<target_troop id ="sunniva_recruit_f" percent="50" playeronly="true" cultureonly="false" kingdomonly="false"/>
+	</source_troop>
+	<source_troop id="aserai_youth">
+		<target_troop id ="sunniva_recruit_f" percent="50" playeronly="true" cultureonly="false" kingdomonly="false"/>
+	</source_troop>
+</ATCTroops>

@@ -16,7 +16,7 @@ namespace AdonnaysTroopChanger
         public void Add(string log)
         {
             File.AppendAllText(filename, "\r\n" + $"{DateTime.Now.ToString("MM/dd/yyyy HH:mm")} : " + log);
-        }
+        }  
 
         public void Initialize()
         {
@@ -26,7 +26,7 @@ namespace AdonnaysTroopChanger
             File.AppendAllText(filename, "\r\n----------------------");
             File.AppendAllText(filename, "\r\nScan Mode:            " + ATCSettings.Instance.EnableModScan);
             File.AppendAllText(filename, "\r\nDebug Recruit Spawn:  " + ATCSettings.Instance.DebugRecruitSpawn);
-            File.AppendAllText(filename, "\r\nDebug Configuration:  " + ATCSettings.Instance.DebugConfig);
+            File.AppendAllText(filename, "\r\nDebug Configuration:  " + ATCSettings.Instance.DebugConfigRead);
             File.AppendAllText(filename, "\r\n");
             File.AppendAllText(filename, "\r\nCulture Change:       " + ATCSettings.Instance.EnableCCC);
             File.AppendAllText(filename, "\r\nCulture Change Amt:   " + ATCSettings.Instance.CCCAmount);

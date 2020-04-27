@@ -2,7 +2,7 @@
 <Module>
 	<Name value="Adonnays Troop Changer"/>
 	<Id value="AdonnaysTroopChanger"/>
-	<Version value="v1.3.6"/>
+	<Version value="v1.4.0"/>
 	<SingleplayerModule value="true"/>
 	<MultiplayerModule value="false"/>
 	<DependedModules>
@@ -24,7 +24,7 @@
 		</SubModule>
 		<SubModule>
 			<Name value="MBOptionScreen" />
-			<DLLName value="MBOptionScreen.dll" />
+			<DLLName value="MBOptionScreen.v2.0.6.dll" />
 			<SubModuleClassType value="MBOptionScreen.MBOptionScreenSubModule" />
 			<Tags>
 				<Tag key="DedicatedServerType" value="none" />

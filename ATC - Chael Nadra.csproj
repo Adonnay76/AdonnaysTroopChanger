@@ -12,6 +12,9 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+	<MnB2BannerlordDir>C:\Program Files (x86)\Steam\steamapps\common\Mount &amp; Blade II Bannerlord</MnB2BannerlordDir>
+	<MnB2BannerlordBinDir>$(MnB2BannerlordDir)\bin\Win64_Shipping_Client</MnB2BannerlordBinDir>
+	<OutputPath>$(MnB2BannerlordDir)\Modules\$(RootNamespace)\bin\Win64_Shipping_Client</OutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -34,6 +37,10 @@
   </PropertyGroup>
   <ItemGroup>
     <None Include="App.config" />
+	  <Reference Include="$(MnB2BannerlordBinDir)\TaleWorlds.*.dll">
+		  <HintPath>%(Identity)</HintPath>
+		  <Private>False</Private>
+	  </Reference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Config\" />

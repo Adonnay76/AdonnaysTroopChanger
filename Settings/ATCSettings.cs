@@ -1,5 +1,6 @@
 ﻿using MBOptionScreen.Settings;
 using MBOptionScreen.Attributes;
+using MBOptionScreen.Attributes.v2;
 
 namespace AdonnaysTroopChanger
 {
@@ -14,34 +15,38 @@ namespace AdonnaysTroopChanger
 
 
 
-        [SettingProperty("Enable Mod Scan Functionality", false, "Enables ATC to scan for files following the required naming pattern *ATC.modconfig.xml.")]
+        [SettingPropertyBool(displayName: "Enable Mod Scan Functionality", Order = 0, RequireRestart = false, HintText = "Enables ATC to scan for files following the required naming pattern *ATC.modconfig.xml.")]
         [SettingPropertyGroup("Basic ATC settings")]
         public bool EnableModScan { get; set; } = false;
-        
-        [SettingProperty("Debuginfo: Playeronly Flag", false, "Logs detailed information in the ATC.debug.log about the behavior of the playeronly flag.")]
+
+        [SettingPropertyBool(displayName: "Debuginfo: Recruit Spawning", Order = 1,  RequireRestart = false, HintText = "Logs detailed information in the ATC.debug.log about the spawning of recruits (settlement/culture/faction/recruit).")]
         [SettingPropertyGroup("Basic ATC settings")]
-        public bool DebugPlayerOnlyFlag { get; set; } = false;
+        public bool DebugRecruitSpawn { get; set; } = false;
 
-        [SettingProperty("Debuginfo: Show Replacements", false, "Logs detailed information in the ATC.debug.log which basic troop has been replaced with a custom troop.")]
+        [SettingPropertyBool(displayName: "Debuginfo: Configuration", Order = 2, RequireRestart = false, HintText = "Logs detailed information in the ATC.debug.log related to the configuration and how it is read.")]
         [SettingPropertyGroup("Basic ATC settings")]
-        public bool DebugReplacementMsg { get; set; } = false;
-    
+        public bool DebugConfigRead { get; set; } = false;
+
+        [SettingPropertyBool(displayName: "Debuginfo: AI Recruiting", Order = 3, RequireRestart = false, HintText = "Logs detailed information in the ATC.debug.log about AI Lords aquiring new troops from settlements.")]
+        [SettingPropertyGroup("Basic ATC settings")]
+        public bool DebugAIRecruiting { get; set; } = false;
 
 
-        [SettingProperty("Enable Faction Troops in Conquered Settlements", false, "Allows to spawn faction troops (and their replacements) in conquered settlements.")]
-        [SettingPropertyGroup("Faction Troops in Conquered Settlements", true)]
+
+        [SettingPropertyBool(displayName: "Enable Faction Troops in Conquered Settlements", RequireRestart = false, HintText = "Allows to spawn faction troops (and their replacements) in conquered settlements.")]
+        [SettingPropertyGroup("Faction Troops in Conquered Settlements", 1, true)]
         public bool EnableCCC { get; set; } = true;
 
   
-        [SettingProperty("Max Amount of Faction Troops", 1, 100, false, "Maximum amount of faction troops spawned in conquered settlements (in % - calculated with 100% Loyalty).")]
+        [SettingPropertyInteger(displayName: "Max Amount of Faction Troops", minValue: 1, maxValue: 100, RequireRestart = false, HintText = "Maximum amount of faction troops spawned in conquered settlements (in % - calculated with 100% Loyalty).")]
         [SettingPropertyGroup("Faction Troops in Conquered Settlements")]
         public int CCCAmount { get; set; } = 50;
 
-        [SettingProperty("Clanmates Can Recruit Custom Troops", 1, 100, false, "Allow clan mates (companions) to recruit <target_troops>. This overrules all other options like playeronly or kingdomonly!")]
+        [SettingPropertyBool(displayName: "Clanmates Can Recruit Custom Troops", RequireRestart = false, HintText = "Allow clan mates (companions) to recruit <target_troops>. This overrules all other options like playeronly or kingdomonly!")]
         [SettingPropertyGroup("Custom Unit Recruiting Options")]
         public bool ClanCanRecruit { get; set; } = true;
 
-        [SettingProperty("TEST: Reduce Volunteer Spawning", 0.1f, 1f, false, "EXPERIMENTAL! Reduces the chance to spawn new recruits. That might help against waves and waves of enemies and make victories finally mean something!")]
+        [SettingPropertyFloatingInteger(displayName: "TEST: Reduce Volunteer Spawning", minValue: 0.1f, maxValue: 1f, RequireRestart = false, HintText = "EXPERIMENTAL! Reduces the chance to spawn new recruits. That might help against waves and waves of enemies and make victories finally mean something!")]
         [SettingPropertyGroup("Custom Unit Recruiting Options")]
         public float RecruitSpawnFactor { get; set; } = 0.5f;
     }
