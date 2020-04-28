@@ -1,130 +1,219 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- DISCALIMER!
-	 WHATEVER YOU DO HERE IS AT YOUR OWN RISK. I TAKE NO - NONE WHATSOEVER - RESPONSIBILITY FOR THE 
-	 SAFETY OF YOUR SAVEGAME. YOUR SAVEGAME MAY BLOW UP... DISINTEGRATE... VANISH... AND TAKE YOUR 
-	 WHOLE COMPUTER WITH IT. 
-	
-	 YOU HAVE BEEN WARNED.
-	 
-	 
-	 GENERAL INFORMATION
-	 Version infromation for ATC.config.xml
-	 The 2nd digit in the ATC version indicates a structural change to the ATC.config.xml. If that 
-	 number gets raised you need to check the provided EXAMPLE_ATC.config.xml for changes!
-	 Example: ATC version 1.1.5   needs ATC.config.xml version 1.1.x 
-	          ATC version 1.1.432 needs ATC.config.xml version 1.1.x 
-			  ATC version 1.2.3   needs ATC.config.xml version 1.2.x
-	 
-	 
-	 VERSION 1.3.6
-	 * Uses MBOptionScreen (derived from ModLib by Aragas) to implement an ingame menu für ATCs central 
-	   configuration aspects:
-		- Debug information
-		- Mod Scan enabling
-		- Ability and frequency of faction spawns in conquered cities
-		- NEW: Overall Spawnrate of Recruits (might not have the desired effects since AI is supposedly
-		       cheating its recrutis, but needs long term testing)
-	    - NEW: Player Clan and Player Kingdom can now be configured
-	 
-	 * Automatic configuration merging from different sources
-	    1. Mod Scan ENABLED: Looks for *ATC.modconfig.xml files in ALL /Modules/.. subfolders, including
-		   the ATC folder. Merges all found configuration files into one. Check ATC.debug.log for 
-		   potential problems and ATC.config.merged.xml for the final merged configuration (INFO: The
-		   ATC.config.merged.xml is created when you load a game or start a new campaing, NOT when
-		   reaching the main menu!).
-		   This option is meant for beginners who don't really want to mess with xml files. However
-		   this is not the optimal solution since the player is dependant on the troop configurations 
-		   from the mod authors (percentages, playeronly, kingdomonly etc.)
-		
-		OR
-		
-		2. Mod Scan DISABLED: Looks for ATC.modconfig.xml files in the ATC /Config subfolder
-		   /Modules/AdonnaysTroopChanger/Config. You can manually store multiple configuration files there. 
-		   Just like with Mod Scan enabled, ATC will merge all found *ATC.modconfig.xml files into one.
-		   This option is meant for people who want more control over what ATC loads by enabling them
-		   to have one (or more) manually configured xml files, similar to versions 1.1.x and 1.2.x.
-		   REMOVE config files from disabled/unused troop mods to prevent potential crashes!
-		   
-		   HINT: If you have a working ATC.config.xml for your current game you can just rename that 
-		         to ATC.modconfig.xml and it should work just fine.
-		   
-	 
-	 
-	 NEW: MOD OPTIONS!
-	 From version 1.3.x on the game makes use of a Mod Options menu to implement an ingame options menu under 
-	 'Mod Options' in the start menu. In there you can enable or disable the Mod Scan option, debug 
-	 information or you can customize the way spawning in conquered settlements is handled.
+<!-- *****************************************************************************************************
+	DISCALIMER! DISCALIMER! DISCALIMER! DISCALIMER! DISCALIMER!
+	USE AT YOUR OWN RISK - I AM NOT RESPONSIBLE FOR YOUR SAVEGAMES!
+	******************************************************************************************************
+
+	GENERAL INFORMATION
+	***************************
+	Version of ATC.modconfig.xml: v1.4.0
+	Required ATC version:         v1.4.x
 
 
-	 <source_troops> 
-	 Possible entries for source troops are the BASIC or NOBLE recruits listed below. With 1.3.5 players can
-	 also use the tokens player_clan_basic and player_clan_elite to modify the recruits for settlements owned
-	 by the player clan. Similar to that you can use player_kingdom_basic and player_kingdom_elite to define
-	 troops that spawn in settlements that belong to the player kingdom. For the latter the player has to 
-	 be king!
-     
-	 BASIC RECRUITS:
-	 possible values are: 
-     imperial_recruit
-	 aserai_recruit
-	 sturgian_recruit
-	 vlandian_recruit
-	 battanian_volunteer
-	 khuzait_nomad
-	 NEW: player_clan_basic
-	 NEW: player_kingdom_basic
+	 
+	VERSION 1.4.0
+	***************************
+	NEW: Faction based configuration
+	From ATC.modconfig.xml version 1.4.0 on ATC allows you to configure you troops based on the ingame 
+	faction a settlement belongs to. Previously it was the culture which resulted in all empires sharing
+	the same troops
+
+	NEW: Possible to configure Faction/Culture combinations
+	You can configure separate basic and elite troop trees for each faction/culture combination. What this
+	means is that if the Empire captured an Aserai settlement you can configure special troop trees that
+	only spawn in those Empire/Aserai settlements.
+
+
+
+	XML STRUCTURE EXPLAINED
+	***************************
+	<ATCConfig>
+	This is the main tag enclosing the whole configuration
 	
-	 NOBLE RECRUITS:
-	 imperial_vigla_recruit
-	 aserai_youth
-	 sturgian_warrior_son
-	 vlandian_squire
-	 battanian_highborn_youth
-	 khuzait_noble_son
-	 NEW: player_clan_elite
-	 NEW: player_kingdom_elite
-	 
-	 
-	 <target_troop> 
-	 Target troops contains the IDs of the recruits from the troop tree you want to inject into the game. 
-	 The new troop tree can be of another mod or integrated into this mod but you have to make sure the
-	 troop tree is valid and works. The example uses my own Chael Nad'ra troop trees. 
-	 HINT: You do NOT need to replace every single tier of units, only the base recruit! That recruit has 
-	 to be set to is_base_troop="true" in the troop's XML file so the code can find the root of the troop tree.
-	 
-	 Target Troop Properties:
-	 * percent (0-100): Defines the percentage with which the <target_troop> will replace the <source_troop>
-	     If the percentages don't add up to 100% the rest of the percentage will be the chance that the
-	     <source_troop> recruits will remain
-	 * playeronly (true/false): Means that when AI tries to recruit the new target_troop recruits those recruits 
-	     will be changed back to the original <source_troop> recruits! This way you can make some super
-	     special troops that only you will command!
-	 * aionly (true/false): Currently not implemented yet.
-	 * cultureonly (true/false) - (requires 1.0.8 or higher): Means that only lords with the same culture as the 
-	     <source_troop> will be able to recruit the custom units. If playeronly is set to TRUE cultureonly will 
-		 be ignored! 
-		 Example: Only a Lord with the Empire culture (<> Kingdom) will be able to recruit custom empire troops. 
-		          But that means when the Lord becomes a vassal of the Aserai he will still be able to recruit
-				  custom Empire troops because his own culture is still the Empire.
-	 * kingdomonly (true/false) - (requires 1.1.0 or higher): Similar to cultureonly but in this case the culture 
-	     of the Lords Kingdom will be checked instead of the Lords culture. 
-		 Example: An Aserai Lord who is a vassal of the Empire will be able to recruit custom empire troops.
-         HINT: If playeronly AND kingdomonly are set to true you and the lords of your kingdom can 
-		       recruit the <target_troops>
+	<MapFaction></MapFaction>
+	Denotes a configuration section for a given faction. There must be only one <MapFaction></MapFaction>
+	segment for each faction! 
+	Attributes:
+	id				- faction id taken from spkingdoms.xml (Sandbox/ModuleData)
+	
+	Special Tokens:
+	player_faction 	- Used to configure the player faction if the player is leading his own kingdom
+	player_clan 	- Used to configure the recruits for settlements owned by the player's clan. Not a faction 
+					  per se but a nice feature to allow the player to command his own troops early on without 
+					  using the "playeronly" flag (see below)
+	
+	
+	<Culture></Culture>
+	Denotes a subsection of <MapFaction> and is used to configure settlements that have a different culture
+	than the owner faction. This enables you to define mixed culture troop trees for captured settlements.
+	Attributes:
+	id 				- culture id taken from spcultures.xml (SandboxCore/ModuleData)
+	
+	Special Tokens:
+	default 		- used to configure the faction's default/fallback configuration.
+	
+	
+	<basicTroops></basicTroops>
+	Denotes a subsection of <Culture> and is used to configure a set of basic recruits. Has no own attributes.
+	
+	
+	<eliteTroops></eliteTroops>
+	Denotes a subsection of <Culture> and is used to configure a set of elite recruits. Has no own attributes.
+	
+	
+	<volunteer />
+	Configures the actual recruit for the given faction and culture, separated by <basicTroops> and <eliteTroops>.
+	Attributes:
+	id				- id of the recruit spnpccharacters.xml for standard recruits or troop mod files for custom 
+	                  recruits. This is where you configure the actual troops to be spawned!
+	percent			- chance to spawn the troop. The percentages should add up to 100% or two things may happen:
+	                  a) if above 100% the percentages will be automatically redistributed
+					  b) if below 100% the remaining percent will be spawning the culture's base recruit
+					     (NOT the one's configured under <Culture id="default">!)
+	playeronly      - Used to designate a troop to be recruitable only by the player. See also replacewith!
+	replacewith     - The troop ID that should be given to AI Lords if they attempt to recruit a recruit marked as
+	                  playeronly. Only usabele in conjunction with playeronly! If not provided ATC will spawn the
+					  culture's base recruits instead (NOT the one's configured under <Culture id="default">!)
+	AIonly			- sadly still has no function yet as I have trouble with the recruiting UI
+					
+	
 
 -->
 
-<ATCTroops>
-	<!-- <source_troop id="player_clan_basic">
-			<target_troop id="chael_nadra_recruit_f" percent="50" playeronly="true" aionly="false" cultureonly="false" kingdomonly="true" />
-			<target_troop id="chael_nadra_recruit_m" percent="50" playeronly="true" aionly="false" cultureonly="false" kingdomonly="true" />
-		 </source_troop>
-		 <source_troop id="player_kingdom_basic">
-			<target_troop id="chael_nadra_recruit_f" percent="30" playeronly="true" aionly="false" cultureonly="false" kingdomonly="true" />
-			<target_troop id="chael_nadra_recruit_m" percent="30" playeronly="true" aionly="false" cultureonly="false" kingdomonly="true" />
-		 </source_troop>
-		 <source_troop id="sturgian_recruit">
-			<target_troop id="chael_nadra_recruit_f" percent="10" playeronly="true" aionly="false" cultureonly="false" kingdomonly="false" />
-			<target_troop id="chael_nadra_recruit_m" percent="10" playeronly="true" aionly="false" cultureonly="false" kingdomonly="false" />
-		 </source_troop> -->
-</ATCTroops>
+
+<!-- STANDARD CONFIGURATION FOR ALL MAJOR FACTIONS WITH SOME EXAMPLES FOR SUBCULTURES  -->
+<ATCConfig>
+	<MapFaction id="player_faction">
+		<Culture id="default">
+			<basicTroops>
+				<volunteer id="chael_nadra_recruit_f" percent="50" />   <!-- requires the separate Chael Nad'ra troop tree! -->
+				<volunteer id="chael_nadra_recruit_m" percent="50" />   <!-- requires the separate Chael Nad'ra troop tree! -->
+			</basicTroops> 
+			<eliteTroops>
+				<volunteer id="chael_nadra_recruit_f" percent="50" />   <!-- requires the separate Chael Nad'ra troop tree! -->
+				<volunteer id="chael_nadra_recruit_m" percent="50" />   <!-- requires the separate Chael Nad'ra troop tree! -->
+			</eliteTroops>
+		</Culture>
+	</MapFaction>
+	<MapFaction id="player_clan">
+		<Culture id="default">
+			<basicTroops>
+				<volunteer id="chael_nadra_recruit_f" percent="50" />   <!-- requires the separate Chael Nad'ra troop tree! -->
+				<volunteer id="chael_nadra_recruit_m" percent="50" />   <!-- requires the separate Chael Nad'ra troop tree! -->
+			</basicTroops>
+			<eliteTroops>
+				<volunteer id="chael_nadra_recruit_f" percent="50" />   <!-- requires the separate Chael Nad'ra troop tree! -->
+				<volunteer id="chael_nadra_recruit_m" percent="50" />   <!-- requires the separate Chael Nad'ra troop tree! -->
+			</eliteTroops>
+		</Culture>
+	</MapFaction>
+	<MapFaction id="empire"> <!-- Northern Empire configuration with subcultures -->
+		<Culture id="default">
+			<basicTroops>
+				<volunteer id="imperial_recruit" />
+			</basicTroops>
+			<eliteTroops>
+				<volunteer id="imperial_vigla_recruit" />
+			</eliteTroops>
+		</Culture>
+		<Culture id="vlandia">  <!-- Northern Empire for captured Vlandian settlements -->
+			<basicTroops>
+				<volunteer id="imperial_recruit" percent="80" />
+				<volunteer id="imperial_vlandian_recruit" percent="20"/>   <!-- EXAMPLE! TROOP DOES NOT EXIST! -->
+			</basicTroops>
+			<eliteTroops>
+				<volunteer id="imperial_vigla_recruit" />
+			</eliteTroops>
+		</Culture>
+		<Culture id="battania">  <!-- Northern Empire for captured Battanian settlements -->
+			<basicTroops>
+				<volunteer id="imperial_recruit" percent="80" />
+				<volunteer id="imperial_battanian_recruit" percent="20"/>   <!-- EXAMPLE! TROOP DOES NOT EXIST! -->
+			</basicTroops>
+			<eliteTroops>
+				<volunteer id="imperial_vigla_recruit" />
+			</eliteTroops>
+		</Culture>
+		<Culture id="khuzait">  <!-- Northern Empire for captured Khuzait settlements -->
+			<basicTroops>
+				<volunteer id="imperial_recruit" percent="80" />
+				<volunteer id="imperial_khuzait_recruit" percent="20"/>   <!-- EXAMPLE! TROOP DOES NOT EXIST! -->
+			</basicTroops>
+			<eliteTroops>
+				<volunteer id="imperial_vigla_recruit" />
+			</eliteTroops>
+		</Culture>
+	</MapFaction>
+	<mapfaction id="empire_w"> <!-- Standard Western Empire configuration -->
+		<culture id="default">
+			<basictroops>
+				<volunteer id="imperial_recruit" />
+			</basictroops>
+			<elitetroops>
+				<volunteer id="imperial_vigla_recruit" />
+			</elitetroops>
+		</culture>
+	</mapfaction>
+	<MapFaction id="empire_s"> <!-- Standard Southern Empire configuration -->
+		<Culture id="default">
+			<basicTroops>
+				<volunteer id="imperial_recruit" />
+			</basicTroops>
+			<eliteTroops>
+				<volunteer id="imperial_vigla_recruit" />
+			</eliteTroops>
+		</Culture>
+	</MapFaction>	
+	<MapFaction id="sturgia">   <!-- Standard Sturgia configuration -->
+		<Culture id="default">
+			<basicTroops>
+				<volunteer id="sturgian_recruit" />
+			</basicTroops>
+			<eliteTroops>
+				<volunteer id="sturgian_warrior_son" />
+			</eliteTroops>
+		</Culture>
+	</MapFaction>
+	<MapFaction id="aserai">   <!-- Standard Aserai configuration -->
+		<Culture id="default">
+			<basicTroops>
+				<volunteer id="aserai_recruit" />
+			</basicTroops>
+			<eliteTroops>
+				<volunteer id="aserai_youth" />
+			</eliteTroops>
+		</Culture>
+	</MapFaction>
+	<MapFaction id="vlandia">  <!-- Standard Vlandia configuration -->
+		<Culture id="default">
+			<basicTroops>
+				<volunteer id="vlandian_recruit" />
+			</basicTroops>
+			<eliteTroops>
+				<volunteer id="vlandian_squire" />
+			</eliteTroops>
+		</Culture>
+	</MapFaction>
+	<MapFaction id="battania"> <!-- Chael Nad'ra Battania configuration -->
+		<Culture id="default">
+			<basicTroops>
+				<volunteer id="battanian_volunteer" percent="40" />
+				<volunteer id="chael_nadra_recruit_f" percent="30" playeronly="true" replacewith="battanian_volunteer" />   <!-- requires the separate Chael Nad'ra troop tree! -->
+				<volunteer id="chael_nadra_recruit_m" percent="30" playeronly="true" replacewith="battanian_volunteer" />   <!-- requires the separate Chael Nad'ra troop tree! -->
+			</basicTroops>
+			<eliteTroops>
+				<volunteer id="battanian_highborn_youth" />
+			</eliteTroops>
+		</Culture>
+	</MapFaction>
+	<MapFaction id="khuzait">   <!-- Standard Khuzait configuration -->
+		<Culture id="default">
+			<basicTroops>
+				<volunteer id="khuzait_nomad" />
+			</basicTroops>
+			<eliteTroops>
+				<volunteer id="khuzait_noble_son" />
+			</eliteTroops>
+		</Culture>
+	</MapFaction>
+</ATCConfig> 
