@@ -34,6 +34,30 @@
         <volunteer id="imperial_vigla_recruit" percent="100" playeronly="false" replacewith="" AIonly="false" />
       </EliteTroops>
     </Culture>
+    <Culture id="vlandia">
+      <basicTroops>
+        <volunteer id="imperial_recruit" percent="100" playeronly="false" replacewith="" AIonly="false" />
+      </basicTroops>
+      <EliteTroops>
+        <volunteer id="imperial_vigla_recruit" percent="100" playeronly="false" replacewith="" AIonly="false" />
+      </EliteTroops>
+    </Culture>
+    <Culture id="battania">
+      <basicTroops>
+        <volunteer id="imperial_recruit" percent="100" playeronly="false" replacewith="" AIonly="false" />
+      </basicTroops>
+      <EliteTroops>
+        <volunteer id="imperial_vigla_recruit" percent="100" playeronly="false" replacewith="" AIonly="false" />
+      </EliteTroops>
+    </Culture>
+    <Culture id="khuzait">
+      <basicTroops>
+        <volunteer id="imperial_recruit" percent="100" playeronly="false" replacewith="" AIonly="false" />
+      </basicTroops>
+      <EliteTroops>
+        <volunteer id="imperial_vigla_recruit" percent="100" playeronly="false" replacewith="" AIonly="false" />
+      </EliteTroops>
+    </Culture>
     <Culture id="empire">
       <basicTroops>
         <volunteer id="imperial_recruit" percent="50" playeronly="false" replacewith="" AIonly="false" />

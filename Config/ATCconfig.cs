@@ -83,7 +83,7 @@ namespace AdonnaysTroopChanger.XMLReader
                             }
                                                       
 
-                            foreach (XmlElement c in f.ChildNodes)    //Cultures
+                            foreach (XmlElement c in f.SelectNodes("*")) //ChildNodes)    //Cultures
                             {
                                 ATCCulture culture = faction.GetCulture(c.GetAttribute("id"));  //check if culture alraedy exists
 
@@ -105,7 +105,7 @@ namespace AdonnaysTroopChanger.XMLReader
                                 }
 
 
-                                foreach (XmlElement t in c.ChildNodes)
+                                foreach (XmlElement t in c.SelectNodes("*")) //ChildNodes)
                                 {
                                     ATCTroops troops;
 
@@ -127,7 +127,7 @@ namespace AdonnaysTroopChanger.XMLReader
                                     //}
 
 
-                                    foreach (XmlElement v in t.ChildNodes)
+                                    foreach (XmlElement v in t.SelectNodes("*")) //ChildNodes)
                                     { 
                                         try { _percent = Convert.ToInt32(v.GetAttribute("percent")); } catch { _percent = 100; }
                                         try { _playerOnly = Convert.ToBoolean(v.GetAttribute("playeronly")); } catch { _playerOnly = false; }
