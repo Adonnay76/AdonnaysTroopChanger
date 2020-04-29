@@ -114,7 +114,7 @@ namespace AdonnaysTroopChanger
                 if (!mergeConfigs)
                 {
                     log.Add("ERROR: Mod Scan enabled but no *ATC.modconfig.xml found in any of the /Modules subfolders!");
-                    log.Add("ERROR: Please check if your troop mods are ATC 1.2.x compatible or create your own *ATC.modconfig.xml.");
+                    log.Add("ERROR: Please check if your troop mods are ATC 1.3.x compatible or create your own *ATC.modconfig.xml.");
                     log.Add("ERROR: Workaround: If the troop mod came with an 1.1.x ATC.config.xml, just rename that to ATC.modconfig.xml.");
                     log.Add("FATAL ERROR: ATC Disabled!");
                     disableATC = true;
