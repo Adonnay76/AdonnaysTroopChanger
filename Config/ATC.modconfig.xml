@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ATCConfig>
+	<MapFaction id="player_faction">
+		<Culture id="default">
+			<basicTroops>
+				<volunteer id="chael_nadra_recruit_f" percent="50" playeronly="true" clanonly="true" replacewith="imperial_recruit" />  
+				<volunteer id="chael_nadra_recruit_m" percent="50" aionly="true" playeronly="true" clanonly="true" replacewith="imperial_recruit" />   
+			</basicTroops> 
+			<eliteTroops>
+				<volunteer id="chael_nadra_recruit_f" percent="50" playeronly="true" clanonly="true" replacewith="imperial_recruit" />   
+				<volunteer id="chael_nadra_recruit_m" percent="50" aionly="true" playeronly="true" clanonly="true" replacewith="imperial_recruit" />   
+			</eliteTroops>
+		</Culture>
+		<Culture id="default">
+			<basicTroops>
+				<volunteer id="chael_nadra_recruit_f" percent="50" aionly="true" clanonly="true" replacewith="imperial_recruit" />  
+				<volunteer id="chael_nadra_recruit_m" percent="50" aionly="true" playeronly="true" clanonly="true" replacewith="imperial_recruit" />   
+			</basicTroops> 
+			<eliteTroops>
+				<volunteer id="chael_nadra_recruit_f" percent="50" aionly="true" clanonly="true" replacewith="imperial_recruit" />   
+				<volunteer id="chael_nadra_recruit_m" percent="50" aionly="true" playeronly="true" clanonly="true" replacewith="imperial_recruit" />   
+			</eliteTroops>
+		</Culture>
+		<Culture id="default">
+			<basicTroops>
+				<volunteer id="chael_nadra_recruit_f"  />
+				<volunteer id="chael_nadra_recruit_m"  />
+			</basicTroops>
+			<eliteTroops>
+				<volunteer id="chael_nadra_recruit_f"   />
+				<volunteer id="chael_nadra_recruit_m"   />
+			</eliteTroops>
+		</Culture>
+	</MapFaction>
+	<MapFaction id="player_clan">
+		<Culture id="default">
+			<basicTroops>
+				<volunteer id="chael_nadra_recruit_f" percent="50" aionly="true" playeronly="true" replacewith="imperial_recruit" />   
+				<volunteer id="chael_nadra_recruit_m" percent="50" aionly="true" playeronly="true" clanonly="true" replacewith="imperial_recruit" />   
+			</basicTroops>
+			<eliteTroops>
+				<volunteer id="chael_nadra_recruit_f" percent="50" aionly="true" playeronly="true" replacewith="imperial_recruit" />   
+				<volunteer id="chael_nadra_recruit_m" percent="50" aionly="true" playeronly="true" clanonly="true" replacewith="imperial_recruit" />  
+			</eliteTroops>
+		</Culture>
+	</MapFaction>
+</ATCConfig> 

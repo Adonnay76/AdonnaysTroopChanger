@@ -17,10 +17,11 @@ namespace AdonnaysTroopChanger.XMLReader
         private static ATCConfig _instance = null;
         public static List<ATCMapFaction> factionList = new List<ATCMapFaction>();
 
-        private static int _percent = 100;
-        private static bool _playerOnly = false;
-        private static bool _aionly = false;
-        private static string _replacewith = null;
+        private static int _percent         = 100;
+        private static bool _playerOnly     = false;
+        private static bool _clanOnly       = false;
+        private static bool _aiOnly         = false;
+        private static string _replaceWith  = null;
 
         
         public static ATCConfig Instance
@@ -121,8 +122,9 @@ namespace AdonnaysTroopChanger.XMLReader
                                 { 
                                     try { _percent = Convert.ToInt32(v.GetAttribute("percent")); } catch { _percent = 100; }
                                     try { _playerOnly = Convert.ToBoolean(v.GetAttribute("playeronly")); } catch { _playerOnly = false; }
-                                    try { _aionly = Convert.ToBoolean(v.GetAttribute("AIonly")); } catch { _aionly = false; }
-                                    try { _replacewith = v.GetAttribute("replacewith"); } catch { _replacewith = null; }
+                                    try { _clanOnly = Convert.ToBoolean(v.GetAttribute("clanonly")); } catch { _clanOnly = false; }
+                                    try { _aiOnly = Convert.ToBoolean(v.GetAttribute("AIonly")); } catch { _aiOnly = false; }
+                                    try { _replaceWith = v.GetAttribute("replacewith"); } catch { _replaceWith = null; }
 
                                     ATCVolunteer volunteer = troops.GetVolunteerByID(v.GetAttribute("id"));
 
@@ -130,18 +132,25 @@ namespace AdonnaysTroopChanger.XMLReader
                                     {
                                         volunteer = new ATCVolunteer()
                                         {
-                                            VolunteerID = v.GetAttribute("id"),
-                                            TroopPercent = _percent,
-                                            PlayerOnly = _playerOnly,
-                                            ReplaceWith = _replacewith,
-                                            AIOnly = _aionly,
+                                            VolunteerID     = v.GetAttribute("id"),
+                                            TroopPercent    = _percent,
+                                            PlayerOnly      = _playerOnly,
+                                            ClanOnly        = _clanOnly,
+                                            AIOnly          = _aiOnly,
+                                            ReplaceWith     = _replaceWith
                                         };
                                         troops.Volunteers.Add(volunteer);
-                                        SubModule.log.Add("NEW Configuration for     <volunteer> " + volunteer.VolunteerID + " added.");
+                                        if (!troops.IsEliteTree)
+                                            SubModule.log.Add("NEW Configuration for     <volunteer> (basic) " + volunteer.VolunteerID + " added with " + volunteer.TroopPercent + "%.");
+                                        else
+                                            SubModule.log.Add("NEW Configuration for     <volunteer> (elite) " + volunteer.VolunteerID + " added with " + volunteer.TroopPercent + "%.");
                                     }
                                     else
                                     {
-                                        SubModule.log.Add("... Configuration for     <volunteer> " + volunteer.VolunteerID + " already exists, skipping.");
+                                        if (!troops.IsEliteTree)
+                                            SubModule.log.Add("... Configuration for     <volunteer> (basic)" + volunteer.VolunteerID + " already exists, skipping.");
+                                        else
+                                            SubModule.log.Add("... Configuration for     <volunteer> (elite)" + volunteer.VolunteerID + " already exists, skipping.");
                                     }
                                 }
                             }
@@ -373,15 +382,22 @@ namespace AdonnaysTroopChanger.XMLReader
                                         VolunteerID     = t.VolunteerID,
                                         TroopPercent    = t.TroopPercent,
                                         PlayerOnly      = t.PlayerOnly,
-                                        ReplaceWith     = t.ReplaceWith,
+                                        ClanOnly        = t.ClanOnly,
                                         AIOnly          = t.AIOnly,
+                                        ReplaceWith     = t.ReplaceWith
                                     };
                                     troops.Volunteers.Add(volunteer);
-                                    SubModule.log.Add("NEW Configuration for     <volunteer> " + volunteer.VolunteerID + " added.");
+                                    if (!troops.IsEliteTree)
+                                        SubModule.log.Add("NEW Configuration for     <volunteer> (basic) " + volunteer.VolunteerID + " added with " + volunteer.TroopPercent + "%.");
+                                    else
+                                        SubModule.log.Add("NEW Configuration for     <volunteer> (elite) " + volunteer.VolunteerID + " added with " + volunteer.TroopPercent + "%.");
                                 }
                                 else
                                 {
-                                    SubModule.log.Add("... Configuration for     <volunteer> " + volunteer.VolunteerID + " already exists, skipping.");
+                                    if (!troops.IsEliteTree)
+                                        SubModule.log.Add("... Configuration for     <volunteer> (basic)" + volunteer.VolunteerID + " already exists, skipping.");
+                                    else
+                                        SubModule.log.Add("... Configuration for     <volunteer> (elite)" + volunteer.VolunteerID + " already exists, skipping.");
                                 }
                             } 
                         }
@@ -446,7 +462,7 @@ namespace AdonnaysTroopChanger.XMLReader
 
 
 
-        public static CharacterObject GetBasicRecruit(string factionID, CultureObject culture, bool recruitAction = false)
+        public static CharacterObject GetBasicRecruit(string factionID, CultureObject culture, string recruitType = null)
         {
             CharacterObject basicRecruit = null;
             
@@ -454,7 +470,7 @@ namespace AdonnaysTroopChanger.XMLReader
             {
                 foreach (ATCCulture c in f.Cultures.Where(c => c.CultureID == culture.StringId))
                 {
-                    basicRecruit = c.BasicTroops.GetRandomVolunteer(culture.BasicTroop.StringId, recruitAction);
+                    basicRecruit = c.BasicTroops.GetRandomVolunteer(culture.BasicTroop.StringId, recruitType);
                     if (ATCSettings.Instance.DebugConfigRead)
                     {
                         SubModule.log.Add(String.Concat("DEBUG: GetBasicRecruit called with ", factionID, "|", culture.StringId, " --> ", c.CultureID ," configuration found! Returning \"", basicRecruit.StringId, "\"."));
@@ -464,7 +480,7 @@ namespace AdonnaysTroopChanger.XMLReader
                 {
                     foreach (ATCCulture c in f.Cultures.Where(c => c.CultureID == "default"))
                     {
-                        basicRecruit = c.BasicTroops.GetRandomVolunteer(culture.BasicTroop.StringId, recruitAction);
+                        basicRecruit = c.BasicTroops.GetRandomVolunteer(culture.BasicTroop.StringId, recruitType);
                         if (ATCSettings.Instance.DebugConfigRead)
                         {
                             SubModule.log.Add(String.Concat("DEBUG: GetBasicRecruit called with ", factionID, "|", culture.StringId, " --> \"default\" configuration found! Returning \"", basicRecruit.StringId, "\"."));
@@ -486,7 +502,7 @@ namespace AdonnaysTroopChanger.XMLReader
         }
 
 
-        public static CharacterObject GetEliteRecruit(string factionID, CultureObject culture, bool recruitAction = false)
+        public static CharacterObject GetEliteRecruit(string factionID, CultureObject culture, string recruitType = null)
         {
             CharacterObject eliteRecruit = null;
 
@@ -494,7 +510,7 @@ namespace AdonnaysTroopChanger.XMLReader
             {
                 foreach (ATCCulture c in f.Cultures.Where(c => c.CultureID == culture.StringId))
                 {
-                    eliteRecruit = c.EliteTroops.GetRandomVolunteer(culture.EliteBasicTroop.StringId, recruitAction);
+                    eliteRecruit = c.EliteTroops.GetRandomVolunteer(culture.EliteBasicTroop.StringId, recruitType);
                     if (ATCSettings.Instance.DebugConfigRead)
                     {
                         SubModule.log.Add(String.Concat("DEBUG: GetEliteRecruit called with ", factionID, "|", culture.StringId, " --> ", c.CultureID, " configuration found! Returning \"", eliteRecruit.StringId, "\"."));
@@ -504,7 +520,7 @@ namespace AdonnaysTroopChanger.XMLReader
                 {
                     foreach (ATCCulture c in f.Cultures.Where(c => c.CultureID == "default"))
                     {
-                        eliteRecruit = c.EliteTroops.GetRandomVolunteer(culture.EliteBasicTroop.StringId, recruitAction);
+                        eliteRecruit = c.EliteTroops.GetRandomVolunteer(culture.EliteBasicTroop.StringId, recruitType);
                         if (ATCSettings.Instance.DebugConfigRead)
                         {
                             SubModule.log.Add(String.Concat("DEBUG: GetEliteRecruit called with ", factionID, "|", culture.StringId, " --> \"default\" configuration found! Returning \"", eliteRecruit.StringId, "\"."));
@@ -529,30 +545,13 @@ namespace AdonnaysTroopChanger.XMLReader
 
         public static void ValidateTroops()
         {
-            // Clean Up Source Troops
-            //foreach (ATCMapFaction f in factionList.ToArray())
-            //{
-            //    //ignore special tokens that are NOT troops
-            //    if (f.FactionID == "player_clan_basic" || f.FactionID == "player_clan_elite" ||
-            //        f.FactionID == "player_kingdom_basic" || f.FactionID == "player_kingdom_elite")
-            //    {
-            //        return;
-            //    }
-
-            //    if (MBObjectManager.Instance.GetObject( .Find(f.FactionID) == null)
-            //    {
-            //        SubModule.log.Add("ERROR: " + f.FactionID + " is no valid <source_troop>! Removing that element to prevent the game from crashing!");
-            //        factionList.Remove(f);
-            //    }
-            //}
-
             //Clean Up Target Troops
             foreach (ATCMapFaction f in factionList.ToArray())
             {
-                int _percentBasic = 0;
-                int _percentElite = 0;
                 foreach (ATCCulture c in f.Cultures.ToArray())
                 {
+                    int _percentBasic = 0;
+                    int _percentElite = 0;
                     foreach (ATCVolunteer v in c.BasicTroops.Volunteers.ToArray())
                     {
                     
@@ -571,13 +570,13 @@ namespace AdonnaysTroopChanger.XMLReader
                         _percentBasic += v.TroopPercent;
                     }
 
-                    foreach (ATCVolunteer v in c.EliteTroops.Volunteers)
+                    foreach (ATCVolunteer v in c.EliteTroops.Volunteers.ToArray())
                     {
 
                         if (CharacterObject.Find(v.VolunteerID) == null)
                         {
                             SubModule.log.Add(String.Concat("ERROR: ", v.VolunteerID, " is no valid troop ID (or mod is disabled)! Removing that element to prevent the game from crashing!"));
-                            c.BasicTroops.Volunteers.Remove(v);
+                            c.EliteTroops.Volunteers.Remove(v);
                         }
                         else
                         {
@@ -585,15 +584,41 @@ namespace AdonnaysTroopChanger.XMLReader
                             {
                                 SubModule.log.Add(String.Concat("WARNING: ", v.VolunteerID, " is not configured as base troop (is_basic_troop = true)!"));
                             }
+                            
+
+                            // Check for flag combinations
+                            if (v.AIOnly && v.PlayerOnly)
+                            {
+                                SubModule.log.Add("WARNING: playeronly and aionly are mutually exclusive, you cannot set both to \"true\"! Setting AIOnly to \"false\"!");
+                                v.AIOnly = false;
+                            }
+                            if (v.AIOnly && v.ClanOnly)
+                            {
+                                SubModule.log.Add("WARNING: clanonly and aionly are mutually exclusive, you cannot set both to \"true\"! Setting ClanOnly to \"false\"!");
+                                v.ClanOnly = false;
+                            }
+                            if (v.ClanOnly && v.PlayerOnly)
+                            {
+                                SubModule.log.Add("WARNING: playeronly and clanonly are mutually exclusive, you cannot set both to \"true\"! Setting PlayerOnly to \"false\"!");
+                                v.PlayerOnly = false;
+                            }
+
+
+                            // Check for missing replacewith string
+                            if ((v.PlayerOnly || v.ClanOnly) && v.ReplaceWith == null)
+                            {
+                                SubModule.log.Add("WARNING: playeronly or clanonly are \"true\" but no replacewith is set! This may spawn unwanted basic, non-custom troops!");
+                            }
+
                         }
                         _percentElite += v.TroopPercent;
                     }
 
-                    //Remove Target Troop when no Source Troops remain
-                    if (c.BasicTroops.Volunteers.Count == 0 && c.EliteTroops.Volunteers.Count == 0)
-                    {
-                        f.Cultures.Remove(c);
-                    }
+                    // removed because no <..Troops> tag must be left out!
+                    //if (c.BasicTroops.Volunteers.Count == 0 && c.EliteTroops.Volunteers.Count == 0)
+                    //{
+                    //    f.Cultures.Remove(c);
+                    //}
 
                     if (_percentBasic > 100)
                     {
@@ -628,21 +653,24 @@ namespace AdonnaysTroopChanger.XMLReader
 
         public ATCVolunteer GetATCVolunteerFromLegacyFile(XmlElement t)
         { 
-            int _percent;
+            int  _percent;
             bool _playerOnly;
-            bool _aionly;
+            bool _clanOnly;
+            bool _aiOnly;
 
             try { _percent = Convert.ToInt32(t.GetAttribute("percent")); } catch { _percent = 100; }
             try { _playerOnly = Convert.ToBoolean(t.GetAttribute("playeronly")); } catch { _playerOnly = false; }
-            try { _aionly = Convert.ToBoolean(t.GetAttribute("AIonly")); } catch { _aionly = false; }
+            try { _clanOnly = Convert.ToBoolean(t.GetAttribute("clanonly")); } catch { _clanOnly = false; }
+            try { _aiOnly = Convert.ToBoolean(t.GetAttribute("AIonly")); } catch { _aiOnly = false; }
             
             ATCVolunteer volunteer = new ATCVolunteer()
             {
-                VolunteerID = t.GetAttribute("id"),
-                TroopPercent = _percent,
-                PlayerOnly = _playerOnly,
-                ReplaceWith = "",
-                AIOnly = _aionly,
+                VolunteerID     = t.GetAttribute("id"),
+                TroopPercent    = _percent,
+                PlayerOnly      = _playerOnly,
+                ClanOnly        = _clanOnly,
+                AIOnly          = _aiOnly,
+                ReplaceWith     = null
             };
 
         return volunteer;
@@ -698,27 +726,43 @@ namespace AdonnaysTroopChanger.XMLReader
             return Volunteers.Find(x => x.VolunteerID == stringID);
         }
 
-        public CharacterObject GetRandomVolunteer(string basicRecruitID, bool recruitAction)
+        public CharacterObject GetRandomVolunteer(string basicRecruitID, string recruitType)
         {
             int _rng = SubModule.rng.Next(0, 100);
             int _prevPercent = 0;
-            string replaceID;
+            string replaceID = basicRecruitID; //fallback
             CharacterObject replacementTroop = null;
 
             foreach (ATCVolunteer v in Volunteers)
             {
                 if (_rng <= (v.TroopPercent + _prevPercent))
                 {
-                    if (recruitAction && v.PlayerOnly == true)
+                    //recruitType != null means we have a recruit action, not a spawning action and we only replace units
+                    //on recruiting, NOT on spawning
+                    if (recruitType == "default") 
                     {
-                        if (v.ReplaceWith != null)
+                        if (v.PlayerOnly || v.ClanOnly)
                         {
-                            replaceID = v.ReplaceWith;
+                            if (v.ReplaceWith != null)
+                                replaceID = v.ReplaceWith;
                         }
                         else
                         {
-                            replaceID = basicRecruitID;
+                            replaceID = v.VolunteerID;
                         }
+                    }
+                    else if (recruitType == "player_clan")
+                    {
+                        if (v.PlayerOnly)
+                        {
+                            if (v.ReplaceWith != null)
+                                replaceID = v.ReplaceWith;
+                        }
+                        else
+                        {
+                            replaceID = v.VolunteerID;
+                        }
+
                     }
                     else
                     {
@@ -756,8 +800,9 @@ namespace AdonnaysTroopChanger.XMLReader
         public string VolunteerID { get; set; }
         public int TroopPercent { get; set; }
         public bool PlayerOnly { get; set; }
-        public string ReplaceWith { get; set; }
+        public bool ClanOnly { get; set; }
         public bool AIOnly { get; set; }
+        public string ReplaceWith { get; set; }
 
     }
 

@@ -1,81 +1,141 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ATCConfig>
-  <MapFaction id="player_clan">
-    <Culture id="default">
-      <basicTroops>
-        <volunteer id="chael_nadra_recruit_f" percent="50" playeronly="true" replacewith="" AIonly="false" />
-        <volunteer id="chael_nadra_recruit_m" percent="50" playeronly="true" replacewith="" AIonly="false" />
-      </basicTroops>
-      <EliteTroops>
-        <volunteer id="chael_nadra_recruit_f" percent="50" playeronly="true" replacewith="" AIonly="false" />
-        <volunteer id="chael_nadra_recruit_m" percent="50" playeronly="true" replacewith="" AIonly="false" />
-      </EliteTroops>
-    </Culture>
-  </MapFaction>
   <MapFaction id="player_faction">
     <Culture id="default">
       <basicTroops>
-        <volunteer id="chael_nadra_recruit_f" percent="30" playeronly="true" replacewith="" AIonly="false" />
-        <volunteer id="chael_nadra_recruit_m" percent="30" playeronly="true" replacewith="" AIonly="false" />
+        <volunteer id="chael_nadra_recruit_f" percent="50" playeronly="false" replacewith="" AIonly="false" />
+        <volunteer id="chael_nadra_recruit_m" percent="50" playeronly="false" replacewith="" AIonly="false" />
       </basicTroops>
       <EliteTroops>
-        <volunteer id="chael_nadra_recruit_f" percent="20" playeronly="true" replacewith="" AIonly="false" />
-        <volunteer id="chael_nadra_recruit_m" percent="30" playeronly="true" replacewith="" AIonly="false" />
+        <volunteer id="chael_nadra_recruit_f" percent="50" playeronly="false" replacewith="" AIonly="false" />
+        <volunteer id="chael_nadra_recruit_m" percent="50" playeronly="false" replacewith="" AIonly="false" />
+      </EliteTroops>
+    </Culture>
+  </MapFaction>
+  <MapFaction id="player_clan">
+    <Culture id="default">
+      <basicTroops>
+        <volunteer id="chael_nadra_recruit_f" percent="50" playeronly="false" replacewith="" AIonly="false" />
+        <volunteer id="chael_nadra_recruit_m" percent="50" playeronly="false" replacewith="" AIonly="false" />
+      </basicTroops>
+      <EliteTroops>
+        <volunteer id="chael_nadra_recruit_f" percent="50" playeronly="false" replacewith="" AIonly="false" />
+        <volunteer id="chael_nadra_recruit_m" percent="50" playeronly="false" replacewith="" AIonly="false" />
+      </EliteTroops>
+    </Culture>
+  </MapFaction>
+  <MapFaction id="empire">
+    <Culture id="default">
+      <basicTroops>
+        <volunteer id="imperial_recruit" percent="100" playeronly="false" replacewith="" AIonly="false" />
+      </basicTroops>
+      <EliteTroops>
+        <volunteer id="imperial_vigla_recruit" percent="100" playeronly="false" replacewith="" AIonly="false" />
+      </EliteTroops>
+    </Culture>
+  </MapFaction>
+  <MapFaction id="empire_w">
+    <Culture id="default">
+      <basicTroops>
+        <volunteer id="imperial_recruit" percent="100" playeronly="false" replacewith="" AIonly="false" />
+      </basicTroops>
+      <EliteTroops>
+        <volunteer id="imperial_vigla_recruit" percent="100" playeronly="false" replacewith="" AIonly="false" />
+      </EliteTroops>
+    </Culture>
+    <Culture id="aserai">
+      <basicTroops>
+        <volunteer id="imperial_recruit" percent="100" playeronly="false" replacewith="" AIonly="false" />
+      </basicTroops>
+      <EliteTroops>
+        <volunteer id="imperial_vigla_recruit" percent="100" playeronly="false" replacewith="" AIonly="false" />
+      </EliteTroops>
+    </Culture>
+  </MapFaction>
+  <MapFaction id="empire_s">
+    <Culture id="default">
+      <basicTroops>
+        <volunteer id="imperial_recruit" percent="100" playeronly="false" replacewith="" AIonly="false" />
+      </basicTroops>
+      <EliteTroops>
+        <volunteer id="imperial_vigla_recruit" percent="100" playeronly="false" replacewith="" AIonly="false" />
+      </EliteTroops>
+    </Culture>
+    <Culture id="vlandia">
+      <basicTroops>
+        <volunteer id="imperial_recruit" percent="100" playeronly="false" replacewith="" AIonly="false" />
+      </basicTroops>
+      <EliteTroops>
+        <volunteer id="imperial_vigla_recruit" percent="100" playeronly="false" replacewith="" AIonly="false" />
+      </EliteTroops>
+    </Culture>
+    <Culture id="battania">
+      <basicTroops>
+        <volunteer id="imperial_recruit" percent="100" playeronly="false" replacewith="" AIonly="false" />
+      </basicTroops>
+      <EliteTroops>
+        <volunteer id="imperial_vigla_recruit" percent="100" playeronly="false" replacewith="" AIonly="false" />
+      </EliteTroops>
+    </Culture>
+    <Culture id="khuzait">
+      <basicTroops>
+        <volunteer id="imperial_recruit" percent="100" playeronly="false" replacewith="" AIonly="false" />
+      </basicTroops>
+      <EliteTroops>
+        <volunteer id="imperial_vigla_recruit" percent="100" playeronly="false" replacewith="" AIonly="false" />
       </EliteTroops>
     </Culture>
   </MapFaction>
   <MapFaction id="sturgia">
     <Culture id="default">
       <basicTroops>
-        <volunteer id="chael_nadra_recruit_f" percent="10" playeronly="true" replacewith="" AIonly="false" />
-        <volunteer id="chael_nadra_recruit_m" percent="10" playeronly="true" replacewith="" AIonly="false" />
+        <volunteer id="sturgian_recruit" percent="100" playeronly="false" replacewith="" AIonly="false" />
       </basicTroops>
-      <EliteTroops />
+      <EliteTroops>
+        <volunteer id="sturgian_warrior_son" percent="100" playeronly="false" replacewith="" AIonly="false" />
+      </EliteTroops>
     </Culture>
   </MapFaction>
-  <MapFaction id="battania">
+  <MapFaction id="aserai">
     <Culture id="default">
       <basicTroops>
-        <volunteer id="chael_nadra_recruit_f" percent="10" playeronly="true" replacewith="" AIonly="false" />
-        <volunteer id="chael_nadra_recruit_m" percent="10" playeronly="true" replacewith="" AIonly="false" />
+        <volunteer id="aserai_recruit" percent="100" playeronly="false" replacewith="" AIonly="false" />
       </basicTroops>
-      <EliteTroops />
+      <EliteTroops>
+        <volunteer id="aserai_youth" percent="100" playeronly="false" replacewith="" AIonly="false" />
+      </EliteTroops>
     </Culture>
   </MapFaction>
   <MapFaction id="vlandia">
     <Culture id="default">
       <basicTroops>
-        <volunteer id="chael_nadra_recruit_f" percent="10" playeronly="true" replacewith="" AIonly="false" />
-        <volunteer id="chael_nadra_recruit_m" percent="10" playeronly="true" replacewith="" AIonly="false" />
+        <volunteer id="vlandian_recruit" percent="100" playeronly="false" replacewith="" AIonly="false" />
       </basicTroops>
-      <EliteTroops />
+      <EliteTroops>
+        <volunteer id="vlandian_squire" percent="100" playeronly="false" replacewith="" AIonly="false" />
+      </EliteTroops>
     </Culture>
   </MapFaction>
-  <MapFaction id="empire">
+  <MapFaction id="battania">
     <Culture id="default">
       <basicTroops>
-        <volunteer id="chael_nadra_recruit_f" percent="10" playeronly="true" replacewith="" AIonly="false" />
-        <volunteer id="chael_nadra_recruit_m" percent="10" playeronly="true" replacewith="" AIonly="false" />
+        <volunteer id="battanian_volunteer" percent="40" playeronly="false" replacewith="" AIonly="false" />
+        <volunteer id="chael_nadra_recruit_f" percent="30" playeronly="true" replacewith="battanian_volunteer" AIonly="false" />
+        <volunteer id="chael_nadra_recruit_m" percent="30" playeronly="true" replacewith="battanian_volunteer" AIonly="false" />
       </basicTroops>
-      <EliteTroops />
+      <EliteTroops>
+        <volunteer id="battanian_highborn_youth" percent="100" playeronly="false" replacewith="" AIonly="false" />
+      </EliteTroops>
     </Culture>
   </MapFaction>
-  <MapFaction id="empire_w">
+  <MapFaction id="khuzait">
     <Culture id="default">
       <basicTroops>
-        <volunteer id="chael_nadra_recruit_f" percent="10" playeronly="true" replacewith="" AIonly="false" />
-        <volunteer id="chael_nadra_recruit_m" percent="10" playeronly="true" replacewith="" AIonly="false" />
+        <volunteer id="khuzait_nomad" percent="100" playeronly="false" replacewith="" AIonly="false" />
       </basicTroops>
-      <EliteTroops />
-    </Culture>
-  </MapFaction>
-  <MapFaction id="empire_s">
-    <Culture id="default">
-      <basicTroops>
-        <volunteer id="chael_nadra_recruit_f" percent="10" playeronly="true" replacewith="" AIonly="false" />
-        <volunteer id="chael_nadra_recruit_m" percent="10" playeronly="true" replacewith="" AIonly="false" />
-      </basicTroops>
-      <EliteTroops />
+      <EliteTroops>
+        <volunteer id="khuzait_noble_son" percent="100" playeronly="false" replacewith="" AIonly="false" />
+      </EliteTroops>
     </Culture>
   </MapFaction>
 </ATCConfig>

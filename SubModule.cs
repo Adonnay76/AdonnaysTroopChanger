@@ -17,7 +17,7 @@ namespace AdonnaysTroopChanger
     public class SubModule : MBSubModuleBase
     {
 
-        public static readonly string version = "1.4.0.4";
+        public static readonly string version = "1.4.0.5";
 
         public static readonly string ModuleFolderName = "AdonnaysTroopChanger";
         public static Random rng = new Random();

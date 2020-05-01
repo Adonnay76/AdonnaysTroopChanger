@@ -35,19 +35,19 @@ namespace AdonnaysTroopChanger
 
         [SettingPropertyBool(displayName: "Enable Faction Troops in Conquered Settlements", RequireRestart = false, HintText = "Allows to spawn faction troops (and their replacements) in conquered settlements.")]
         [SettingPropertyGroup("Faction Troops in Conquered Settlements", 1, true)]
-        public bool EnableCCC { get; set; } = true;
+        public bool EnableCCC { get; set; } = false;
 
   
-        [SettingPropertyInteger(displayName: "Max Amount of Faction Troops", minValue: 1, maxValue: 100, RequireRestart = false, HintText = "Maximum amount of faction troops spawned in conquered settlements (in % - calculated with 100% Loyalty).")]
+        [SettingPropertyInteger(displayName: "Amount of Faction Troops", minValue: 1, maxValue: 100, RequireRestart = false, HintText = "Maximum amount of faction troops spawned in conquered settlements (in % - calculated with 100% Loyalty).")]
         [SettingPropertyGroup("Faction Troops in Conquered Settlements")]
         public int CCCAmount { get; set; } = 50;
 
-        [SettingPropertyBool(displayName: "Clanmates Can Recruit Custom Troops", RequireRestart = false, HintText = "Allow clan mates (companions) to recruit <target_troops>. This overrules all other options like playeronly or kingdomonly!")]
+        [SettingPropertyBool(displayName: "Clanmates Can Recruit Custom Troops", RequireRestart = false, HintText = "Allow clan mates (companions) to recruit everything the player can. This overrules the playeronly configuration!")]
         [SettingPropertyGroup("Custom Unit Recruiting Options")]
         public bool ClanCanRecruit { get; set; } = true;
 
-        [SettingPropertyFloatingInteger(displayName: "TEST: Reduce Volunteer Spawning", minValue: 0.1f, maxValue: 1f, RequireRestart = false, HintText = "EXPERIMENTAL! Reduces the chance to spawn new recruits. That might help against waves and waves of enemies and make victories finally mean something!")]
+        [SettingPropertyFloatingInteger(displayName: "TEST: Change Volunteer Spawning", minValue: 0.1f, maxValue: 2f, RequireRestart = false, HintText = "Reduce or increase the chance to spawn new recruits, applies to every settlement. Default (vanilla) spawn rate = 1.0!")]
         [SettingPropertyGroup("Custom Unit Recruiting Options")]
-        public float RecruitSpawnFactor { get; set; } = 0.5f;
+        public float RecruitSpawnFactor { get; set; } = 1.0f;
     }
 }

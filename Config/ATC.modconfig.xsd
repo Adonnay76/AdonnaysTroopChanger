@@ -3,84 +3,52 @@
 	<xs:element name="ATCConfig">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice maxOccurs="unbounded">
-					<xs:element maxOccurs="unbounded" name="MapFaction">
-						<xs:complexType>
-							<xs:sequence>
-								<xs:element maxOccurs="unbounded" name="Culture">
-									<xs:complexType>
-										<xs:sequence>
-											<xs:element name="basicTroops">
-												<xs:complexType>
-													<xs:sequence>
-														<xs:element maxOccurs="unbounded" name="volunteer">
-															<xs:complexType>
-																<xs:attribute name="id" type="xs:string" use="required" />
-																<xs:attribute name="percent" type="xs:unsignedByte" use="optional" />
-																<xs:attribute name="playeronly" type="xs:boolean" use="optional" />
-																<xs:attribute name="replacewith" type="xs:string" use="optional" />
-															</xs:complexType>
-														</xs:element>
-													</xs:sequence>
-												</xs:complexType>
-											</xs:element>
-											<xs:element name="eliteTroops">
-												<xs:complexType>
-													<xs:sequence>
-														<xs:element maxOccurs="unbounded" name="volunteer">
-															<xs:complexType>
-																<xs:attribute name="id" type="xs:string" use="required" />
-																<xs:attribute name="percent" type="xs:unsignedByte" use="optional" />
-															</xs:complexType>
-														</xs:element>
-													</xs:sequence>
-												</xs:complexType>
-											</xs:element>
-										</xs:sequence>
-										<xs:attribute name="id" type="xs:string" use="required" />
-									</xs:complexType>
-								</xs:element>
-							</xs:sequence>
-							<xs:attribute name="id" type="xs:string" use="required" />
-						</xs:complexType>
-					</xs:element>
-					<xs:element name="mapfaction">
-						<xs:complexType>
-							<xs:sequence>
-								<xs:element name="culture">
-									<xs:complexType>
-										<xs:sequence>
-											<xs:element name="basictroops">
-												<xs:complexType>
-													<xs:sequence>
-														<xs:element name="volunteer">
-															<xs:complexType>
-																<xs:attribute name="id" type="xs:string" use="required" />
-															</xs:complexType>
-														</xs:element>
-													</xs:sequence>
-												</xs:complexType>
-											</xs:element>
-											<xs:element name="elitetroops">
-												<xs:complexType>
-													<xs:sequence>
-														<xs:element name="volunteer">
-															<xs:complexType>
-																<xs:attribute name="id" type="xs:string" use="required" />
-															</xs:complexType>
-														</xs:element>
-													</xs:sequence>
-												</xs:complexType>
-											</xs:element>
-										</xs:sequence>
-										<xs:attribute name="id" type="xs:string" use="required" />
-									</xs:complexType>
-								</xs:element>
-							</xs:sequence>
-							<xs:attribute name="id" type="xs:string" use="required" />
-						</xs:complexType>
-					</xs:element>
-				</xs:choice>
+				<xs:element maxOccurs="unbounded" name="MapFaction">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element maxOccurs="unbounded" name="Culture">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="basicTroops">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element maxOccurs="unbounded" name="volunteer">
+														<xs:complexType>
+															<xs:attribute name="id" type="xs:string" use="required" />
+															<xs:attribute name="percent" type="xs:unsignedByte" use="optional" default="100"/>
+															<xs:attribute name="playeronly" type="xs:boolean" use="optional" default="false"/>
+															<xs:attribute name="clanonly" type="xs:boolean" use="optional" default="false"/>
+															<xs:attribute name="aionly" type="xs:boolean" use="optional" default="false" />
+															<xs:attribute name="replacewith" type="xs:string" use="optional" />
+														</xs:complexType>
+													</xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="eliteTroops">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element maxOccurs="unbounded" name="volunteer">
+														<xs:complexType>
+															<xs:attribute name="id" type="xs:string" use="required" />
+															<xs:attribute name="percent" type="xs:unsignedByte" use="optional" default="100" />
+															<xs:attribute name="playeronly" type="xs:boolean" use="optional" default="false"/>
+															<xs:attribute name="clanonly" type="xs:boolean" use="optional" default="false"/>
+															<xs:attribute name="aionly" type="xs:boolean" use="optional" default="false" />
+															<xs:attribute name="replacewith" type="xs:string" use="optional" />
+														</xs:complexType>
+													</xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+									<xs:attribute name="id" type="xs:string" use="required" />
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+						<xs:attribute name="id" type="xs:string" use="required" />
+					</xs:complexType>
+				</xs:element>
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>

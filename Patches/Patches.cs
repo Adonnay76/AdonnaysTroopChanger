@@ -190,6 +190,7 @@ namespace AdonnaysTroopChanger
     {
         static void Prefix(ref MobileParty side1Party, ref CharacterObject subject, ref Hero individual, int bitCode)
         {
+            string _recruitType;
 
             //SubModule.log.Add(side1Party.Name + "(" + side1Party.MapFaction.Name + ") recruits " + subject.Name + " from " + individual.CurrentSettlement.Name + "(Faction: " + individual.CurrentSettlement.MapFaction.Name + ", Culture: " + individual.CurrentSettlement.Culture.Name + ")");
 
@@ -213,6 +214,15 @@ namespace AdonnaysTroopChanger
                 {
                     factionID = individual.CurrentSettlement.MapFaction.StringId;
                 }
+
+                if (side1Party.Leader.HeroObject.Clan == Hero.MainHero.Clan)
+                {
+                    _recruitType = "player_clan";
+                }
+                else
+                {
+                    _recruitType = "default"; //for all other AI Lords
+                }
                 
 
                 if (HeroHelper.HeroShouldGiveEliteTroop(individual))
@@ -221,7 +231,7 @@ namespace AdonnaysTroopChanger
                     {
                         SubModule.log.Add(String.Concat("DEBUG: GetRecruitVolunteerFromIndividual called for ", side1Party.Leader.HeroObject.Name, "(", factionID, ")", " trying to recruit ", subject.StringId, " in ", individual.CurrentSettlement.Name, "(", individual.CurrentSettlement.Culture.StringId, ")."));
                     }
-                    individual.VolunteerTypes[bitCode] = subject = ATCConfig.GetEliteRecruit(factionID, individual.CurrentSettlement.Culture, true);
+                    individual.VolunteerTypes[bitCode] = subject = ATCConfig.GetEliteRecruit(factionID, individual.CurrentSettlement.Culture, _recruitType);
                 }
                 else
                 {
@@ -229,7 +239,7 @@ namespace AdonnaysTroopChanger
                     {
                         SubModule.log.Add(String.Concat("DEBUG: GetRecruitVolunteerFromIndividual called for ", side1Party.Leader.HeroObject.Name, " (", factionID, ")", " trying to recruit ", subject.StringId, " in ", individual.CurrentSettlement.Name, "(", individual.CurrentSettlement.Culture.StringId, ")."));
                     }
-                    individual.VolunteerTypes[bitCode] = subject = ATCConfig.GetBasicRecruit(factionID, individual.CurrentSettlement.Culture, true);
+                    individual.VolunteerTypes[bitCode] = subject = ATCConfig.GetBasicRecruit(factionID, individual.CurrentSettlement.Culture, _recruitType);
                 }
 
 
