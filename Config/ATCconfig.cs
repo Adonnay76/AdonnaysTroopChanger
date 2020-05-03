@@ -120,11 +120,11 @@ namespace AdonnaysTroopChanger.XMLReader
 
                                 foreach (XmlElement v in t.SelectNodes("*")) //ChildNodes)
                                 { 
-                                    try { _percent = Convert.ToInt32(v.GetAttribute("percent")); } catch { _percent = 100; }
-                                    try { _playerOnly = Convert.ToBoolean(v.GetAttribute("playeronly")); } catch { _playerOnly = false; }
-                                    try { _clanOnly = Convert.ToBoolean(v.GetAttribute("clanonly")); } catch { _clanOnly = false; }
-                                    try { _aiOnly = Convert.ToBoolean(v.GetAttribute("AIonly")); } catch { _aiOnly = false; }
-                                    try { _replaceWith = v.GetAttribute("replacewith"); } catch { _replaceWith = null; }
+                                    try { _percent      = v.GetAttribute("percent") != null ? Convert.ToInt32(v.GetAttribute("percent")) : _percent = 100; } catch { _percent = 100; }
+                                    try { _playerOnly   = v.GetAttribute("playeronly") != null ? Convert.ToBoolean(v.GetAttribute("playeronly")): _playerOnly = false; } catch { _playerOnly = false; }
+                                    try { _clanOnly     = v.GetAttribute("clanonly") != null ? Convert.ToBoolean(v.GetAttribute("clanonly")) : _clanOnly = false; } catch { _clanOnly = false; }
+                                    try { _aiOnly       = v.GetAttribute("AIonly") != null ? Convert.ToBoolean(v.GetAttribute("AIonly")) : _aiOnly =false; } catch { _aiOnly = false; }
+                                    try { _replaceWith  = v.GetAttribute("replacewith"); } catch { _replaceWith = null; }
 
                                     ATCVolunteer volunteer = troops.GetVolunteerByID(v.GetAttribute("id"));
 
@@ -426,9 +426,18 @@ namespace AdonnaysTroopChanger.XMLReader
                     {
                         XElement volunteerElement = new XElement("volunteer", new XAttribute("id", c.BasicTroops.Volunteers[i].VolunteerID));
                         volunteerElement.Add(new XAttribute("percent", c.BasicTroops.Volunteers[i].TroopPercent));
-                        volunteerElement.Add(new XAttribute("playeronly", c.BasicTroops.Volunteers[i].PlayerOnly));
-                        volunteerElement.Add(new XAttribute("replacewith", c.BasicTroops.Volunteers[i].ReplaceWith));
-                        volunteerElement.Add(new XAttribute("AIonly", c.BasicTroops.Volunteers[i].AIOnly));
+                        
+                        if (c.BasicTroops.Volunteers[i].PlayerOnly)
+                            volunteerElement.Add(new XAttribute("playeronly", c.BasicTroops.Volunteers[i].PlayerOnly));
+
+                        if (c.BasicTroops.Volunteers[i].ClanOnly)
+                            volunteerElement.Add(new XAttribute("clanonly", c.BasicTroops.Volunteers[i].ClanOnly));
+
+                        if (c.BasicTroops.Volunteers[i].AIOnly) 
+                            volunteerElement.Add(new XAttribute("AIonly", c.BasicTroops.Volunteers[i].AIOnly));
+
+                        if (c.BasicTroops.Volunteers[i].ReplaceWith != null && c.BasicTroops.Volunteers[i].ReplaceWith != "")
+                            volunteerElement.Add(new XAttribute("replacewith", c.BasicTroops.Volunteers[i].ReplaceWith));
                         basicTroopsElement.Add(volunteerElement);
                     }
                     cultureElement.Add(basicTroopsElement);
@@ -438,9 +447,18 @@ namespace AdonnaysTroopChanger.XMLReader
                     {
                         XElement volunteerElement = new XElement("volunteer", new XAttribute("id", c.EliteTroops.Volunteers[i].VolunteerID));
                         volunteerElement.Add(new XAttribute("percent", c.EliteTroops.Volunteers[i].TroopPercent));
-                        volunteerElement.Add(new XAttribute("playeronly", c.EliteTroops.Volunteers[i].PlayerOnly));
-                        volunteerElement.Add(new XAttribute("replacewith", c.EliteTroops.Volunteers[i].ReplaceWith));
-                        volunteerElement.Add(new XAttribute("AIonly", c.EliteTroops.Volunteers[i].AIOnly));
+                        
+                        if (c.EliteTroops.Volunteers[i].PlayerOnly)
+                            volunteerElement.Add(new XAttribute("playeronly", c.EliteTroops.Volunteers[i].PlayerOnly));
+
+                        if (c.EliteTroops.Volunteers[i].ClanOnly)
+                            volunteerElement.Add(new XAttribute("clanonly", c.EliteTroops.Volunteers[i].ClanOnly));
+
+                        if (c.EliteTroops.Volunteers[i].AIOnly)
+                            volunteerElement.Add(new XAttribute("AIonly", c.EliteTroops.Volunteers[i].AIOnly));
+
+                        if (c.EliteTroops.Volunteers[i].ReplaceWith != null && c.EliteTroops.Volunteers[i].ReplaceWith != "")
+                            volunteerElement.Add(new XAttribute("replacewith", c.EliteTroops.Volunteers[i].ReplaceWith));
                         eliteTroopsElement.Add(volunteerElement);
                     }
                     cultureElement.Add(eliteTroopsElement);
@@ -589,17 +607,17 @@ namespace AdonnaysTroopChanger.XMLReader
                             // Check for flag combinations
                             if (v.AIOnly && v.PlayerOnly)
                             {
-                                SubModule.log.Add("WARNING: playeronly and aionly are mutually exclusive, you cannot set both to \"true\"! Setting AIOnly to \"false\"!");
+                                SubModule.log.Add("WARNING: " + f.FactionID + "|" + c.CultureID + " --> playeronly and aionly are mutually exclusive, you cannot set both to \"true\"! Setting AIOnly to \"false\"!");
                                 v.AIOnly = false;
                             }
                             if (v.AIOnly && v.ClanOnly)
                             {
-                                SubModule.log.Add("WARNING: clanonly and aionly are mutually exclusive, you cannot set both to \"true\"! Setting ClanOnly to \"false\"!");
+                                SubModule.log.Add("WARNING: " + f.FactionID + "|" + c.CultureID + " --> clanonly and aionly are mutually exclusive, you cannot set both to \"true\"! Setting ClanOnly to \"false\"!");
                                 v.ClanOnly = false;
                             }
                             if (v.ClanOnly && v.PlayerOnly)
                             {
-                                SubModule.log.Add("WARNING: playeronly and clanonly are mutually exclusive, you cannot set both to \"true\"! Setting PlayerOnly to \"false\"!");
+                                SubModule.log.Add("WARNING: " + f.FactionID + "|" + c.CultureID + " --> playeronly and clanonly are mutually exclusive, you cannot set both to \"true\"! Setting PlayerOnly to \"false\"!");
                                 v.PlayerOnly = false;
                             }
 

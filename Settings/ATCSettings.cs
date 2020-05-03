@@ -42,9 +42,9 @@ namespace AdonnaysTroopChanger
         [SettingPropertyGroup("Faction Troops in Conquered Settlements")]
         public int CCCAmount { get; set; } = 50;
 
-        [SettingPropertyBool(displayName: "Clanmates Can Recruit Custom Troops", RequireRestart = false, HintText = "Allow clan mates (companions) to recruit everything the player can. This overrules the playeronly configuration!")]
-        [SettingPropertyGroup("Custom Unit Recruiting Options")]
-        public bool ClanCanRecruit { get; set; } = true;
+        //[SettingPropertyBool(displayName: "Clanmates Can Recruit Custom Troops", RequireRestart = false, HintText = "Allow clan mates (companions) to recruit everything the player can. This overrules the playeronly configuration!")]
+        //[SettingPropertyGroup("Custom Unit Recruiting Options")]
+        //public bool ClanCanRecruit { get; set; } = true;
 
         [SettingPropertyFloatingInteger(displayName: "TEST: Change Volunteer Spawning", minValue: 0.1f, maxValue: 2f, RequireRestart = false, HintText = "Reduce or increase the chance to spawn new recruits, applies to every settlement. Default (vanilla) spawn rate = 1.0!")]
         [SettingPropertyGroup("Custom Unit Recruiting Options")]

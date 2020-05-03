@@ -30,7 +30,7 @@ namespace AdonnaysTroopChanger
             File.AppendAllText(filename, "\r\n");
             File.AppendAllText(filename, "\r\nCulture Change:       " + ATCSettings.Instance.EnableCCC);
             File.AppendAllText(filename, "\r\nCulture Change Amt:   " + ATCSettings.Instance.CCCAmount);
-            File.AppendAllText(filename, "\r\nClan Recruit:         " + ATCSettings.Instance.ClanCanRecruit);
+            //File.AppendAllText(filename, "\r\nClan Recruit:         " + ATCSettings.Instance.ClanCanRecruit);
             File.AppendAllText(filename, "\r\nRecruit Spawn Factor: " + ATCSettings.Instance.RecruitSpawnFactor);
             File.AppendAllText(filename, "\r\n");
 

@@ -303,6 +303,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bahaviors\AdRecruitingBehavior.cs" />
     <Compile Include="Settings\ATCSettings.cs" />
     <Compile Include="SubModule.cs" />
     <Compile Include="Config\ATCConfig.cs" />
@@ -317,7 +318,6 @@
     <None Include="SubModule.xml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Config\ATC.config.xml" />
     <Content Include="Config\empty_ATC.modconfig.xml" />
   </ItemGroup>
   <ItemGroup />

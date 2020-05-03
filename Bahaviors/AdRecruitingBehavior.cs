@@ -1,30 +1,38 @@
 ﻿using System;
-using HarmonyLib;
-using AdonnaysTroopChanger.XMLReader;
 using TaleWorlds.CampaignSystem;
-using TaleWorlds.Localization;
-using TaleWorlds.Core;
-using TaleWorlds.CampaignSystem.SandBox.CampaignBehaviors;
-using TaleWorlds.CampaignSystem.Actions;
 using Helpers;
+using AdonnaysTroopChanger.XMLReader;
+using TaleWorlds.Core;
 
-namespace AdonnaysTroopChanger
+
+namespace AdonnaysTroopChanger.Bahaviors
 {
-
-    [HarmonyPatch(typeof(RecruitCampaignBehavior), "UpdateVolunteersOfNotables")]
-    public class PatchNotableRecruits
+    public class AdRecruitingBehavior : CampaignBehaviorBase
     {
-        static bool Prefix()
+        //private CharacterObject _selectedTroop;
+        public override void RegisterEvents()
         {
-            if (SubModule.disableATC)
-                return true;
+            CampaignEvents.DailyTickEvent.AddNonSerializedListener(this, new Action(this.DailyTick));
+        }
 
+        public void DailyTick()
+        {
+            this.UpdateVolunteersOfNotables();
+            this.GiveDailyXpToNpcLords();
+        }
 
-            string factionID;
+        public override void SyncData(IDataStore dataStore)
+        {
+            //dataStore.SyncData<CharacterObject>("_selectedTroop", ref this._selectedTroop);
+        }
+
+        public void UpdateVolunteersOfNotables()
+        {
 
             foreach (Settlement settlement in Campaign.Current.Settlements)
             {
-
+                
+                string factionID;
                 if (settlement.OwnerClan == Hero.MainHero.Clan && IsPlayerClanConfigured())
                 {
                     factionID = "player_clan";
@@ -109,32 +117,28 @@ namespace AdonnaysTroopChanger
                             {
                                 SortVolunteers(notable.VolunteerTypes);
                             }
-                                
+
 
                         }
                     }
                 }
 
             }
-
-            return false;  //skips original method
         }
 
 
 
-        private static bool IsPlayerClanConfigured()
+        private bool IsPlayerClanConfigured()
         {
             return ATCConfig.GetFaction("player_clan") != null;
         }
-
-
-        private static bool IsPlayerKingdomConfigured()
+        
+        private bool IsPlayerKingdomConfigured()
         {
             return ATCConfig.GetFaction("player_faction") != null;
         }
-
-
-        private static void SortVolunteers(CharacterObject[] volunteers)
+        
+        private void SortVolunteers(CharacterObject[] volunteers)
         {
             for (int j = 0; j < 6; j++)
             {
@@ -166,123 +170,27 @@ namespace AdonnaysTroopChanger
             }
         }
 
-    }
 
 
-    //public class ATCRecruitAction : RecruitAction
-    //{
-
-    //    public static new void GetRecruitVolunteerFromIndividual(MobileParty side1Party, CharacterObject subject, Hero individual, int bitCode)
-    //    {
-
-    //    }
-
-    //}
-
-
-
-    [HarmonyPatch(typeof(RecruitAction), "GetRecruitVolunteerFromIndividual")]
-    public class PatchRecruitActionFromIndividual
-    {
-        static void Prefix(ref MobileParty side1Party, ref CharacterObject subject, ref Hero individual, int bitCode)
+        private void GiveDailyXpToNpcLords()
         {
-            string _recruitType;
-
-            //SubModule.log.Add(side1Party.Name + "(" + side1Party.MapFaction.Name + ") recruits " + subject.Name + " from " + individual.CurrentSettlement.Name + "(Faction: " + individual.CurrentSettlement.MapFaction.Name + ", Culture: " + individual.CurrentSettlement.Culture.Name + ")");
-
-             if (!SubModule.disableATC)
-            {
-                if (individual.CurrentSettlement == null)  //don't know if this can happen, but it was checked in the oringial code so better to be safe than sorry
-                    return;
-
-                //Special Check for "Improved Garrisons" as their recruiting parties do not have Heros attached to them
-                if (side1Party.Party.Owner == null)
-                {
-                    SubModule.log.Add("WARNING: GetRecruitVolunteerFromIndividual skipped because recruiting party does not have a Clan!");
-                    return;
-                }
-
-
-                Clan _recruitingClan;
-                TextObject _recruiterName;
-                //if (side1Party.Leader.HeroObject != null)
-                //{
-                //    _recruitingClan = side1Party.Leader.HeroObject.Clan;
-                //    _recruiterName = side1Party.Leader.HeroObject.Name;
-                //}
-                //else
-                //{
-                _recruitingClan = side1Party.Party.Owner.Clan;
-                _recruiterName = side1Party.Party.Owner.Name;
-                //}
-
-
-
-                string _factionID;
-                if (_recruitingClan == Hero.MainHero.Clan)
-                {
-                    _factionID = "player_clan";
-                    _recruitType = "player_clan";  //for clanonly flag
-                }
-                else if (side1Party.MapFaction == Hero.MainHero.MapFaction)
-                {
-                    _factionID = "player_faction";
-                    _recruitType = "default"; //for all other AI Lords
-                }
-                else
-                {
-                    _factionID = individual.CurrentSettlement.MapFaction.StringId;
-                    _recruitType = "default"; //for all other AI Lords
-                }
-
-                
-
-                if (HeroHelper.HeroShouldGiveEliteTroop(individual))
-                { 
-                    if (ATCSettings.Instance.DebugAIRecruiting)
-                    {
-                        SubModule.log.Add(String.Concat("DEBUG: GetRecruitVolunteerFromIndividual called for ", _recruiterName, "(", _factionID, ")", " trying to recruit ", subject.StringId, " in ", individual.CurrentSettlement.Name, "(", individual.CurrentSettlement.Culture.StringId, ")."));
-                    }
-                    individual.VolunteerTypes[bitCode] = subject = ATCConfig.GetEliteRecruit(_factionID, individual.CurrentSettlement.Culture, _recruitType);
-                }
-                else
-                {
-                    if (ATCSettings.Instance.DebugAIRecruiting)
-                    {
-                        SubModule.log.Add(String.Concat("DEBUG: GetRecruitVolunteerFromIndividual called for ", _recruiterName, " (", _factionID, ")", " trying to recruit ", subject.StringId, " in ", individual.CurrentSettlement.Name, "(", individual.CurrentSettlement.Culture.StringId, ")."));
-                    }
-                    individual.VolunteerTypes[bitCode] = subject = ATCConfig.GetBasicRecruit(_factionID, individual.CurrentSettlement.Culture, _recruitType);
-                }
-            }
+            //foreach (MobileParty mobileParty in MobileParty.All)
+            //{
+            //    if (mobileParty.IsLordParty && (mobileParty.Army == null || mobileParty.Army.LeaderParty != MobileParty.MainParty) && mobileParty.MapEvent == null && (mobileParty.Party.Owner == null || mobileParty.Party.Owner.Clan != Clan.PlayerClan))
+            //    {
+            //        for (int i = 0; i < mobileParty.MemberRoster.Count; i++)
+            //        {
+            //            TroopRosterElement troopRosterElement = mobileParty.MemberRoster.data[i];
+            //            if (!troopRosterElement.Character.IsHero)
+            //            {
+            //                int xp = troopRosterElement.Xp;
+            //                mobileParty.MemberRoster.SetElementXp(i, xp + troopRosterElement.Number * (5 + troopRosterElement.Character.Level));
+            //            }
+            //        }
+            //    }
+            //}
         }
+
+
     }
-
-
-    //[HarmonyPatch(typeof(RecruitVolunteerVM), "OnRecruitMoveToCart")]
-    //public class PatchOnRecruitMoveToCart
-    //{
-    //    static bool Prefix(ref RecruitVolunteerVM __instance, ref RecruitVolunteerTroopVM troop)
-    //    {
-    //        InformationManager.DisplayMessage(new InformationMessage(" refuses to join!"));
-    //        __instance.ExecuteRemoveFromCart(troop);
-    //        return false;
-    //    }
-    //}
-
-    //[HarmonyPatch(typeof(RecruitVolunteerVM))]
-    //[HarmonyPatch("RecruitVolunteerVM", MethodType.StaticConstructor)]
-    //public class PatchPlayerRecruit
-    //{
-    //    static void Prefix(Hero owner, List<CharacterObject> troops, Action<RecruitVolunteerVM, RecruitVolunteerTroopVM> onRecruit, Action<RecruitVolunteerVM, RecruitVolunteerTroopVM> onRemoveFromCart)
-    //    {
-    //        foreach (CharacterObject troop in troops)
-    //        {
-    //            InformationManager.DisplayMessage(new InformationMessage(troop.StringId));
-    //        }
-
-    //    }
-    //}
-
-
 }
-

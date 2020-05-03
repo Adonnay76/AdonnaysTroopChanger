@@ -3,11 +3,12 @@ using System;
 using System.IO;
 using TaleWorlds.Core;
 using TaleWorlds.CampaignSystem;
+using TaleWorlds.CampaignSystem.SandBox.CampaignBehaviors;
 using TaleWorlds.Library;
 using TaleWorlds.MountAndBlade;
 using AdonnaysTroopChanger.XMLReader;
+using AdonnaysTroopChanger.Bahaviors;
 using System.Windows.Forms;
-
 
 
 
@@ -17,7 +18,7 @@ namespace AdonnaysTroopChanger
     public class SubModule : MBSubModuleBase
     {
 
-        public static readonly string version = "1.4.0.5";
+        public static readonly string version = "1.4.0.8";
 
         public static readonly string ModuleFolderName = "AdonnaysTroopChanger";
         public static Random rng = new Random();
@@ -59,11 +60,28 @@ namespace AdonnaysTroopChanger
         }
 
 
-        protected override void OnBeforeInitialModuleScreenSetAsRoot()
-        {
+        //public override bool DoLoading(Game game)
+        //{
+        //    //Action originalDailyTick = null;
+        //    AdRecruitingBehavior adRecruitBehavior = new AdRecruitingBehavior();
+        //    if (Campaign.Current != null)
+        //    {
+        //        RecruitCampaignBehavior RecruitBehavior = Campaign.Current.GetCampaignBehavior<RecruitCampaignBehavior>();
+        //        if (RecruitBehavior != null)
+        //        {
+        //            //originalDailyTick = new Action(RecruitBehavior.DailyTick);
+        //            if (CampaignEvents.DailyTickEvent != null)
+        //            {
+        //                CampaignEvents.DailyTickEvent.ClearListeners(RecruitBehavior);
+        //                adRecruitBehavior.RegisterEvents();
+        //                //CampaignEvents.DailyTickEvent.AddNonSerializedListener(RecruitBehavior, );
+        //            }
+        //        }
+        //    }
 
-     
-        }
+        //    return base.DoLoading(game);
+        //}
+
 
         public override void OnGameInitializationFinished(Game game)
         {
@@ -133,11 +151,6 @@ namespace AdonnaysTroopChanger
             }
         }
     }
-
-
-
-
-
 }
 
 
