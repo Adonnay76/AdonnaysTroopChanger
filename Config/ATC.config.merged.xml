@@ -1,34 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ATCConfig>
+  <MapFaction id="player_faction">
+    <Culture id="default">
+      <basicTroops>
+        <volunteer id="chael_nadra_recruit_f" percent="50" />
+        <volunteer id="chael_nadra_recruit_m" percent="50" />
+      </basicTroops>
+      <EliteTroops>
+        <volunteer id="chael_nadra_elite_f" percent="30" />
+        <volunteer id="chael_nadra_elite_m" percent="30" />
+      </EliteTroops>
+    </Culture>
+  </MapFaction>
+  <MapFaction id="player_clan">
+    <Culture id="default">
+      <basicTroops>
+        <volunteer id="chael_nadra_recruit_f" percent="50" />
+        <volunteer id="chael_nadra_recruit_m" percent="50" />
+      </basicTroops>
+      <EliteTroops>
+        <volunteer id="chael_nadra_elite_f" percent="20" />
+        <volunteer id="chael_nadra_elite_m" percent="20" />
+      </EliteTroops>
+    </Culture>
+  </MapFaction>
   <MapFaction id="empire">
     <Culture id="default">
       <basicTroops>
-        <volunteer id="myr_recruit" percent="50" playeronly="true" />
-        <volunteer id="imperial_recruit" percent="50" />
-      </basicTroops>
-      <EliteTroops>
-        <volunteer id="imperial_vigla_recruit" percent="100" />
-      </EliteTroops>
-    </Culture>
-    <Culture id="vlandia">
-      <basicTroops>
-        <volunteer id="imperial_recruit" percent="80" />
-      </basicTroops>
-      <EliteTroops>
-        <volunteer id="imperial_vigla_recruit" percent="100" />
-      </EliteTroops>
-    </Culture>
-    <Culture id="battania">
-      <basicTroops>
-        <volunteer id="imperial_recruit" percent="80" />
-      </basicTroops>
-      <EliteTroops>
-        <volunteer id="imperial_vigla_recruit" percent="100" />
-      </EliteTroops>
-    </Culture>
-    <Culture id="khuzait">
-      <basicTroops>
-        <volunteer id="imperial_recruit" percent="80" />
+        <volunteer id="imperial_recruit" percent="100" />
       </basicTroops>
       <EliteTroops>
         <volunteer id="imperial_vigla_recruit" percent="100" />
@@ -38,8 +37,7 @@
   <MapFaction id="empire_w">
     <Culture id="default">
       <basicTroops>
-        <volunteer id="myr_recruit" percent="50" playeronly="true" />
-        <volunteer id="imperial_recruit" percent="50" />
+        <volunteer id="imperial_recruit" percent="100" />
       </basicTroops>
       <EliteTroops>
         <volunteer id="imperial_vigla_recruit" percent="100" />
@@ -57,8 +55,7 @@
   <MapFaction id="empire_s">
     <Culture id="default">
       <basicTroops>
-        <volunteer id="myr_recruit" percent="50" playeronly="true" />
-        <volunteer id="imperial_recruit" percent="50" />
+        <volunteer id="imperial_recruit" percent="100" />
       </basicTroops>
       <EliteTroops>
         <volunteer id="imperial_vigla_recruit" percent="100" />
@@ -86,34 +83,6 @@
       </basicTroops>
       <EliteTroops>
         <volunteer id="imperial_vigla_recruit" percent="100" />
-      </EliteTroops>
-    </Culture>
-  </MapFaction>
-  <MapFaction id="player_faction">
-    <Culture id="default">
-      <basicTroops>
-        <volunteer id="chael_nadra_recruit_f" percent="50" />
-        <volunteer id="chael_nadra_recruit_m" percent="50" />
-      </basicTroops>
-      <EliteTroops>
-        <volunteer id="chael_nadra_elite_f" percent="25" />
-        <volunteer id="chael_nadra_elite_m" percent="25" />
-        <volunteer id="chael_nadra_recruit_f" percent="25" />
-        <volunteer id="chael_nadra_recruit_m" percent="25" />
-      </EliteTroops>
-    </Culture>
-  </MapFaction>
-  <MapFaction id="player_clan">
-    <Culture id="default">
-      <basicTroops>
-        <volunteer id="chael_nadra_recruit_f" percent="50" />
-        <volunteer id="chael_nadra_recruit_m" percent="50" />
-      </basicTroops>
-      <EliteTroops>
-        <volunteer id="chael_nadra_elite_f" percent="25" />
-        <volunteer id="chael_nadra_elite_m" percent="25" />
-        <volunteer id="chael_nadra_recruit_f" percent="25" />
-        <volunteer id="chael_nadra_recruit_m" percent="25" />
       </EliteTroops>
     </Culture>
   </MapFaction>

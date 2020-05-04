@@ -40,7 +40,7 @@ namespace AdonnaysTroopChanger.XMLReader
 
         public void LoadXML(string xmlpath)
         {
-            if (xmlpath != "")
+            if (xmlpath != "" && xmlpath != null)
             {
                 XmlDocument doc = new XmlDocument();
 
@@ -54,6 +54,7 @@ namespace AdonnaysTroopChanger.XMLReader
                 {
                     SubModule.log.Add("Loading Failed!");
                     IsFileLoaded = false;
+                    return;
                 }
 
                 XmlElement root = doc.DocumentElement;
@@ -572,7 +573,7 @@ namespace AdonnaysTroopChanger.XMLReader
                     int _percentElite = 0;
                     foreach (ATCVolunteer v in c.BasicTroops.Volunteers.ToArray())
                     {
-                    
+
                         if (CharacterObject.Find(v.VolunteerID) == null)
                         {
                             SubModule.log.Add(String.Concat("ERROR: ", v.VolunteerID, " is no valid troop ID (or mod is disabled)! Removing that element to prevent the game from crashing!"));
@@ -584,8 +585,35 @@ namespace AdonnaysTroopChanger.XMLReader
                             {
                                 SubModule.log.Add(String.Concat("WARNING: ", v.VolunteerID, " is not configured as base troop (is_basic_troop = true)!"));
                             }
+
+
+                            // Check for flag combinations
+                            if (v.AIOnly && v.PlayerOnly)
+                            {
+                                SubModule.log.Add("WARNING: " + f.FactionID + "|" + c.CultureID + " --> playeronly and aionly are mutually exclusive, you cannot set both to \"true\"! Setting AIOnly to \"false\"!");
+                                v.AIOnly = false;
+                            }
+                            if (v.AIOnly && v.ClanOnly)
+                            {
+                                SubModule.log.Add("WARNING: " + f.FactionID + "|" + c.CultureID + " --> clanonly and aionly are mutually exclusive, you cannot set both to \"true\"! Setting ClanOnly to \"false\"!");
+                                v.ClanOnly = false;
+                            }
+                            if (v.ClanOnly && v.PlayerOnly)
+                            {
+                                SubModule.log.Add("WARNING: " + f.FactionID + "|" + c.CultureID + " --> playeronly and clanonly are mutually exclusive, you cannot set both to \"true\"! Setting PlayerOnly to \"false\"!");
+                                v.PlayerOnly = false;
+                            }
+
+
+                            // Check for missing replacewith string
+                            if ((v.PlayerOnly || v.ClanOnly) && v.ReplaceWith == null)
+                            {
+                                SubModule.log.Add("WARNING: playeronly or clanonly are \"true\" but no replacewith is set! This may spawn unwanted basic, non-custom troops!");
+                            }
+
+                            _percentBasic += v.TroopPercent;
                         }
-                        _percentBasic += v.TroopPercent;
+                            
                     }
 
                     foreach (ATCVolunteer v in c.EliteTroops.Volunteers.ToArray())
@@ -676,10 +704,10 @@ namespace AdonnaysTroopChanger.XMLReader
             bool _clanOnly;
             bool _aiOnly;
 
-            try { _percent = Convert.ToInt32(t.GetAttribute("percent")); } catch { _percent = 100; }
-            try { _playerOnly = Convert.ToBoolean(t.GetAttribute("playeronly")); } catch { _playerOnly = false; }
-            try { _clanOnly = Convert.ToBoolean(t.GetAttribute("clanonly")); } catch { _clanOnly = false; }
-            try { _aiOnly = Convert.ToBoolean(t.GetAttribute("AIonly")); } catch { _aiOnly = false; }
+            try { _percent      = t.GetAttribute("percent") != null ? Convert.ToInt32(t.GetAttribute("percent")) : _percent = 100; } catch { _percent = 100; }
+            try { _playerOnly   = t.GetAttribute("playeronly") != null ? Convert.ToBoolean(t.GetAttribute("playeronly")) : _playerOnly = false ; } catch { _playerOnly = false; }
+            try { _clanOnly     = t.GetAttribute("clanonly") != null ? Convert.ToBoolean(t.GetAttribute("clanonly")) : _clanOnly = false; } catch { _clanOnly = false; }
+            try { _aiOnly       = t.GetAttribute("AIonly") != null ? Convert.ToBoolean(t.GetAttribute("AIonly")) : _aiOnly = false; } catch { _aiOnly = false; }
             
             ATCVolunteer volunteer = new ATCVolunteer()
             {
