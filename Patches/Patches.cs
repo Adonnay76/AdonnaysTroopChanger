@@ -88,7 +88,7 @@ namespace AdonnaysTroopChanger
                                         int level = notable.VolunteerTypes[i].Level;
                                         if (MBRandom.RandomInt((int)Math.Max(2.0, (double)((float)level * num3) * num * 1.5)) == 0 && notable.VolunteerTypes[i].UpgradeTargets != null && notable.VolunteerTypes[i].Level < 20)
                                         {
-                                            if (notable.VolunteerTypes[i] == basicTroop && HeroHelper.HeroShouldGiveEliteTroop(notable))
+                                            if (HeroHelper.HeroShouldGiveEliteTroop(notable))
                                             {
                                                 notable.VolunteerTypes[i] = ATCConfig.GetEliteRecruit(factionID, cultureObject);
                                                 if (ATCSettings.Instance.DebugRecruitSpawn)

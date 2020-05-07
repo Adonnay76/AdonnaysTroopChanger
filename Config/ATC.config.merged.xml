@@ -7,8 +7,8 @@
         <volunteer id="chael_nadra_recruit_m" percent="50" />
       </basicTroops>
       <EliteTroops>
-        <volunteer id="chael_nadra_elite_f" percent="30" />
-        <volunteer id="chael_nadra_elite_m" percent="30" />
+        <volunteer id="chael_nadra_elite_f" percent="50" />
+        <volunteer id="chael_nadra_elite_m" percent="50" />
       </EliteTroops>
     </Culture>
   </MapFaction>
@@ -19,8 +19,8 @@
         <volunteer id="chael_nadra_recruit_m" percent="50" />
       </basicTroops>
       <EliteTroops>
-        <volunteer id="chael_nadra_elite_f" percent="20" />
-        <volunteer id="chael_nadra_elite_m" percent="20" />
+        <volunteer id="chael_nadra_elite_f" percent="50" />
+        <volunteer id="chael_nadra_elite_m" percent="50" />
       </EliteTroops>
     </Culture>
   </MapFaction>
