@@ -224,7 +224,7 @@ namespace AdonnaysTroopChanger
                     _factionID = "player_clan";
                     _recruitType = "player_clan";  //for clanonly flag
                 }
-                else if (side1Party.MapFaction == Hero.MainHero.MapFaction)
+                else if (side1Party.MapFaction == Hero.MainHero.MapFaction && Hero.MainHero.IsFactionLeader)
                 {
                     _factionID = "player_faction";
                     _recruitType = "default"; //for all other AI Lords

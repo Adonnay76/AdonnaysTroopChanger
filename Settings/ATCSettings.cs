@@ -1,16 +1,16 @@
-﻿using MBOptionScreen.Settings;
-using MBOptionScreen.Attributes;
-using MBOptionScreen.Attributes.v2;
+﻿using MCM.Abstractions.Attributes;
+using MCM.Abstractions.Attributes.v2;
+using MCM.Abstractions.Settings.Base.Global;
 
 namespace AdonnaysTroopChanger
 {
-    public class ATCSettings : AttributeSettings<ATCSettings>
+    public class ATCSettings : AttributeGlobalSettings<ATCSettings>
     {
 
         //public const string InstanceID = "AdonnaysTroopChanger";
-        public override string ModName => ("Adonnay\'s Troop Changer " + SubModule.version);
-        public override string ModuleFolderName => SubModule.ModuleFolderName;
-        public override string Id { get; set; } = "Adonnay.AdonnaysTroopChanger_v1";
+        public override string DisplayName => ("Adonnay\'s Troop Changer " + SubModule.version);
+        public override string FolderName => SubModule.ModuleFolderName;
+        public override string Id { get; } = "Adonnay.AdonnaysTroopChanger_v3";
 
 
 
@@ -34,7 +34,7 @@ namespace AdonnaysTroopChanger
 
 
         [SettingPropertyBool(displayName: "Enable Faction Troops in Conquered Settlements", RequireRestart = false, HintText = "Allows to spawn faction troops (and their replacements) in conquered settlements.")]
-        [SettingPropertyGroup("Faction Troops in Conquered Settlements", 1, true)]
+        [SettingPropertyGroup("Faction Troops in Conquered Settlements", IsMainToggle = true)]
         public bool EnableCCC { get; set; } = false;
 
   
