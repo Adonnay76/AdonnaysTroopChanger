@@ -3,11 +3,12 @@ using System;
 using System.IO;
 using TaleWorlds.Core;
 using TaleWorlds.CampaignSystem;
-using TaleWorlds.CampaignSystem.SandBox.CampaignBehaviors;
 using TaleWorlds.Library;
 using TaleWorlds.MountAndBlade;
+using TaleWorlds.ModuleManager;
 using AdonnaysTroopChanger.XMLReader;
-using AdonnaysTroopChanger.Bahaviors;
+using AdonnaysTroopChanger.Settings;
+using AdonnaysTroopChanger.Models;
 using System.Windows.Forms;
 
 
@@ -18,9 +19,10 @@ namespace AdonnaysTroopChanger
     public class SubModule : MBSubModuleBase
     {
 
-        public static readonly string version = "1.4.2";
+        public static readonly string version = "1.8.0";
 
         public static readonly string ModuleFolderName = "AdonnaysTroopChanger";
+
         public static Random rng = new Random();
         public static Logfile log;
         public static bool disableATC = false;
@@ -29,14 +31,26 @@ namespace AdonnaysTroopChanger
         private string[] localATConfigs;
         private static bool mergeConfigs = false;
 
-        private readonly string modulePath = String.Concat(BasePath.Name, "Modules/");
-        private readonly string modATCPath = String.Concat(BasePath.Name, "Modules/AdonnaysTroopChanger/");
-        private readonly string configPath = String.Concat(BasePath.Name, "Modules/AdonnaysTroopChanger/Config/");
-        private readonly string mergedFile = String.Concat(BasePath.Name, "Modules/AdonnaysTroopChanger/Config/ATC.config.merged.xml");
+
+        //private readonly string configPath = String.Concat(BasePath.Name, "Modules/AdonnaysTroopChanger/Config/");
+        //private readonly string mergedFile = String.Concat(BasePath.Name, "Modules/AdonnaysTroopChanger/Config/ATC.config.merged.xml");
+        //private readonly string configFile = String.Concat(BasePath.Name, "Modules/AdonnaysTroopChanger/Config/ATC.settings.xml");
+
+        private string configPath;
+        public static string configFile;
+        public static string mergedFile;
+        private string logFile;
+
+        public SubModule()
+        {
+            configPath = String.Concat(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), "\\Mount and Blade II Bannerlord\\ATC\\");
+            configFile = String.Concat(configPath, "ATC.settings.xml");
+            mergedFile = String.Concat(configPath, "ATC.config.merged.xml");
+            logFile = String.Concat(configPath, "ATC.debug.log");
+        }
 
         protected override void OnSubModuleLoad()
         {
-
             base.OnSubModuleLoad();
 
             if (!Directory.Exists(configPath))
@@ -50,37 +64,12 @@ namespace AdonnaysTroopChanger
                     MessageBox.Show(ex.Message);
                 }
             }
-                
 
-            log = new Logfile();
+            log = new Logfile(logFile);
 
             Harmony h = new Harmony("mod.bannerlord.adonnay");
             h.PatchAll();
-
         }
-
-
-        //public override bool DoLoading(Game game)
-        //{
-        //    //Action originalDailyTick = null;
-        //    AdRecruitingBehavior adRecruitBehavior = new AdRecruitingBehavior();
-        //    if (Campaign.Current != null)
-        //    {
-        //        RecruitCampaignBehavior RecruitBehavior = Campaign.Current.GetCampaignBehavior<RecruitCampaignBehavior>();
-        //        if (RecruitBehavior != null)
-        //        {
-        //            //originalDailyTick = new Action(RecruitBehavior.DailyTick);
-        //            if (CampaignEvents.DailyTickEvent != null)
-        //            {
-        //                CampaignEvents.DailyTickEvent.ClearListeners(RecruitBehavior);
-        //                adRecruitBehavior.RegisterEvents();
-        //                //CampaignEvents.DailyTickEvent.AddNonSerializedListener(RecruitBehavior, );
-        //            }
-        //        }
-        //    }
-
-        //    return base.DoLoading(game);
-        //}
 
 
         public override void OnGameInitializationFinished(Game game)
@@ -88,16 +77,22 @@ namespace AdonnaysTroopChanger
 
             base.OnGameInitializationFinished(game);
 
+            ATCSettings.Initialize(configFile);
             log.Initialize();
+
+
+        
 
             if (Campaign.Current == null)
                 return;
 
             string[] modNames = Campaign.Current.SandBoxManager.ModuleManager.ModuleNames;
 
-            if (!ATCSettings.Instance.EnableModScan)
+            
+            //if (!ATCSettings.Instance.EnableModScan)
+            if (!ATCSettings.EnableModScan)
             {
-                localATConfigs = Directory.GetFiles(modATCPath, "*ATC.modconfig.xml", SearchOption.AllDirectories);
+                localATConfigs = Directory.GetFiles(configPath, "*ATC.modconfig.xml", SearchOption.AllDirectories);
 
                 if (localATConfigs.Length != 0)
                 {
@@ -119,21 +114,30 @@ namespace AdonnaysTroopChanger
             {
                 foreach(string modName in modNames)
                 {
-                    string modPath = String.Concat(modulePath, modName, "/");
-                    foreignConfigs = Directory.GetFiles(modPath, "*ATC.modconfig.xml", SearchOption.AllDirectories);
-                
-                    foreach (string file in foreignConfigs)
+
+                    //string modPath = String.Concat(modulePath, modName, "/");
+                    string modPath = ModuleHelper.GetModuleFullPath(modName);
+                    try
                     {
-                        ATCConfig.Instance.LoadXML(file);
-                        mergeConfigs = true;
+                        foreignConfigs = Directory.GetFiles(modPath, "*ATC.modconfig.xml", SearchOption.AllDirectories);
+                    
+                
+                        foreach (string file in foreignConfigs)
+                        {
+                            ATCConfig.Instance.LoadXML(file);
+                            mergeConfigs = true;
+                        }
+                    }
+                    catch
+                    {
+                        continue;
                     }
                 }
 
                 if (!mergeConfigs)
                 {
                     log.Add("ERROR: Mod Scan enabled but no *ATC.modconfig.xml found in any of the /Modules subfolders!");
-                    log.Add("ERROR: Please check if your troop mods are ATC 1.3.x compatible or create your own *ATC.modconfig.xml.");
-                    log.Add("ERROR: Workaround: If the troop mod came with an 1.1.x ATC.config.xml, just rename that to ATC.modconfig.xml.");
+                    log.Add("ERROR: Please check if your troop mods are ATC 1.5.x compatible or create your own *ATC.modconfig.xml.");
                     log.Add("FATAL ERROR: ATC Disabled!");
                     disableATC = true;
                 }
@@ -149,7 +153,29 @@ namespace AdonnaysTroopChanger
             {
                 ATCConfig.Instance.SaveMergedXML(mergedFile);
             }
+
+            InformationManager.DisplayMessage(new InformationMessage("ATC " + version + " loaded successfully!", Colors.Green));
         }
+
+        protected override void OnGameStart(Game game, IGameStarter gameStarter)
+        {
+            base.OnGameStart(game, gameStarter);
+
+            if (!(game.GameType is Campaign))
+                return;
+
+            if(!disableATC)
+                AddModels(gameStarter as CampaignGameStarter);
+        }
+
+        private void AddModels(CampaignGameStarter gameStarter)
+        {
+            if (gameStarter != null)
+            {
+                gameStarter.AddModel(new ATCVolunteerProductionModel());
+            }
+        }
+
     }
 }
 

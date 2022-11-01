@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using TaleWorlds.CampaignSystem;
-using TaleWorlds.ObjectSystem;
+using TaleWorlds.CampaignSystem.Party;
+using TaleWorlds.Core;
 using System.Xml;
 using System.IO;
 using System.Xml.Linq;
 using System.Linq;
-using TaleWorlds.Library;
+using AdonnaysTroopChanger.Settings;
 
 namespace AdonnaysTroopChanger.XMLReader
 {
@@ -16,14 +17,18 @@ namespace AdonnaysTroopChanger.XMLReader
 
         private static ATCConfig _instance = null;
         public static List<ATCMapFaction> factionList = new List<ATCMapFaction>();
+        public static List<ATCClan> clanList = new List<ATCClan>();
 
-        private static int _percent         = 100;
-        private static bool _playerOnly     = false;
-        private static bool _clanOnly       = false;
-        private static bool _aiOnly         = false;
-        private static string _replaceWith  = null;
+        private static int _percent = 100;
+        private static int _spawnChance = 5;
+        private static int _atPower = 200;
+        private static int _spawnChanceCap = 20;
+        private static bool _playerOnly = false;
+        private static bool _clanOnly = false;
+        private static bool _aiOnly = false;
+        private static string _replaceWith = null;
 
-        
+
         public static ATCConfig Instance
         {
             get
@@ -32,7 +37,7 @@ namespace AdonnaysTroopChanger.XMLReader
                 {
                     _instance = new ATCConfig();
                     if (_instance == null)
-                        throw new Exception("Unable to find settings in Loader");
+                        throw new Exception("Unable to find ATCConfig instance in Loader!");
                 }
                 return _instance;
             }
@@ -49,8 +54,8 @@ namespace AdonnaysTroopChanger.XMLReader
                     SubModule.log.Add("Loading " + xmlpath);
                     doc.Load(xmlpath);
                     IsFileLoaded = true;
-                }                
-                catch 
+                }
+                catch
                 {
                     SubModule.log.Add("Loading Failed!");
                     IsFileLoaded = false;
@@ -59,11 +64,11 @@ namespace AdonnaysTroopChanger.XMLReader
 
                 XmlElement root = doc.DocumentElement;
 
-                if(root.Name == "ATCConfig")
+                if (root.Name == "ATCConfig")
                 {
-                    foreach (XmlElement f in root.SelectNodes("MapFaction")) 
+                    foreach (XmlElement f in root.SelectNodes("MapFaction"))
                     {
-                   
+
                         ATCMapFaction faction = GetFaction(f.GetAttribute("id"));
 
                         if (faction == null) //TroopConfig not found
@@ -71,7 +76,7 @@ namespace AdonnaysTroopChanger.XMLReader
                             faction = new ATCMapFaction
                             {
                                 FactionID = f.GetAttribute("id"),
-                                Cultures = new List<ATCCulture>() 
+                                Cultures = new List<ATCCulture>()
                             };
 
                             factionList.Add(faction);
@@ -81,9 +86,9 @@ namespace AdonnaysTroopChanger.XMLReader
                         {
                             SubModule.log.Add("... Configuration for <MapFaction> " + faction.FactionID + " already exists.");
                         }
-                                                      
 
-                        foreach (XmlElement c in f.SelectNodes("Culture")) 
+
+                        foreach (XmlElement c in f.SelectNodes("Culture"))
                         {
                             ATCCulture culture = faction.GetCulture(c.GetAttribute("id"));  //check if culture alraedy exists
 
@@ -109,36 +114,145 @@ namespace AdonnaysTroopChanger.XMLReader
                             {
                                 ATCTroops troops;
 
-                                if(t.Name == "basicTroops")
+                                if (t.Name == "basicTroops")
                                 {
                                     troops = culture.GetBasicTroops();
                                 }
                                 else
                                 {
                                     troops = culture.GetEliteTroops();
+                                    try { _spawnChance = t.GetAttribute("spawnChance") != null ? Convert.ToInt32(t.GetAttribute("spawnChance")) : _spawnChance = 5; } catch { _spawnChance = 5; }
+                                    try { _atPower = t.GetAttribute("atPower") != null ? Convert.ToInt32(t.GetAttribute("atPower")) : _atPower = 200; } catch { _atPower = 200; }
+                                    try { _spawnChanceCap = t.GetAttribute("spawnChanceCap") != null ? Convert.ToInt32(t.GetAttribute("spawnChanceCap")) : _spawnChanceCap = 20; } catch { _spawnChanceCap = 20; }
+                                    troops.SpawnChance = _spawnChance;
+                                    troops.SpawnChanceCap = _spawnChanceCap;
+                                    troops.atPower = _atPower;
                                 }
 
 
                                 foreach (XmlElement v in t.SelectNodes("*")) //ChildNodes)
-                                { 
-                                    try { _percent      = v.GetAttribute("percent") != null ? Convert.ToInt32(v.GetAttribute("percent")) : _percent = 100; } catch { _percent = 100; }
-                                    try { _playerOnly   = v.GetAttribute("playeronly") != null ? Convert.ToBoolean(v.GetAttribute("playeronly")): _playerOnly = false; } catch { _playerOnly = false; }
-                                    try { _clanOnly     = v.GetAttribute("clanonly") != null ? Convert.ToBoolean(v.GetAttribute("clanonly")) : _clanOnly = false; } catch { _clanOnly = false; }
-                                    try { _aiOnly       = v.GetAttribute("AIonly") != null ? Convert.ToBoolean(v.GetAttribute("AIonly")) : _aiOnly =false; } catch { _aiOnly = false; }
-                                    try { _replaceWith  = v.GetAttribute("replacewith"); } catch { _replaceWith = null; }
+                                {
+                                    try { _percent = v.GetAttribute("percent") != null ? Convert.ToInt32(v.GetAttribute("percent")) : _percent = 100; } catch { _percent = 100; }
+                                    try { _playerOnly = v.GetAttribute("playeronly") != null ? Convert.ToBoolean(v.GetAttribute("playeronly")) : _playerOnly = false; } catch { _playerOnly = false; }
+                                    try { _clanOnly = v.GetAttribute("clanonly") != null ? Convert.ToBoolean(v.GetAttribute("clanonly")) : _clanOnly = false; } catch { _clanOnly = false; }
+                                    try { _aiOnly = v.GetAttribute("AIonly") != null ? Convert.ToBoolean(v.GetAttribute("AIonly")) : _aiOnly = false; } catch { _aiOnly = false; }
+                                    try { _replaceWith = v.GetAttribute("replacewith"); } catch { _replaceWith = null; }
 
                                     ATCVolunteer volunteer = troops.GetVolunteerByID(v.GetAttribute("id"));
 
-                                    if (volunteer == null)
+                                    if ((volunteer == null) || (volunteer.ReplaceWith != _replaceWith))
                                     {
                                         volunteer = new ATCVolunteer()
                                         {
-                                            VolunteerID     = v.GetAttribute("id"),
-                                            TroopPercent    = _percent,
-                                            PlayerOnly      = _playerOnly,
-                                            ClanOnly        = _clanOnly,
-                                            AIOnly          = _aiOnly,
-                                            ReplaceWith     = _replaceWith
+                                            VolunteerID = v.GetAttribute("id"),
+                                            TroopPercent = _percent,
+                                            PlayerOnly = _playerOnly,
+                                            ClanOnly = _clanOnly,
+                                            AIOnly = _aiOnly,
+                                            ReplaceWith = _replaceWith
+                                        };
+                                        troops.Volunteers.Add(volunteer);
+                                        if (!troops.IsEliteTree)
+                                            SubModule.log.Add("NEW Configuration for     <volunteer> (basic) " + volunteer.VolunteerID + " added with " + volunteer.TroopPercent + "%.");
+                                        else
+                                            SubModule.log.Add("NEW Configuration for     <volunteer> (elite) " + volunteer.VolunteerID + " added with " + volunteer.TroopPercent + "%.");
+                                    }
+                                    else
+                                    {
+                                        if (!troops.IsEliteTree)
+                                            SubModule.log.Add("... Configuration for     <volunteer> (basic)" + volunteer.VolunteerID + " already exists, skipping.");
+                                        else
+                                            SubModule.log.Add("... Configuration for     <volunteer> (elite)" + volunteer.VolunteerID + " already exists, skipping.");
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    foreach (XmlElement f in root.SelectNodes("Clan"))
+                    {
+
+                        ATCClan clan = GetClan(f.GetAttribute("id"));
+
+                        if (clan == null) //TroopConfig not found
+                        {
+                            clan = new ATCClan
+                            {
+                                ClanID = f.GetAttribute("id"),
+                                Cultures = new List<ATCCulture>()
+                            };
+
+                            clanList.Add(clan);
+                            SubModule.log.Add("NEW Configuration for <Clan> " + clan.ClanID + " added.");
+                        }
+                        else
+                        {
+                            SubModule.log.Add("... Configuration for <Clan> " + clan.ClanID + " already exists.");
+                        }
+
+
+                        foreach (XmlElement c in f.SelectNodes("Culture"))
+                        {
+                            ATCCulture culture = clan.GetCulture(c.GetAttribute("id"));  //check if culture alraedy exists
+
+                            if (culture == null)
+                            {
+                                culture = new ATCCulture
+                                {
+                                    CultureID = c.GetAttribute("id"),
+                                    BasicTroops = new ATCTroops { Volunteers = new List<ATCVolunteer>(), IsEliteTree = false },
+                                    EliteTroops = new ATCTroops { Volunteers = new List<ATCVolunteer>(), IsEliteTree = true }
+                                    //Volunteers = new List<ATCVolunteer>()
+                                };
+                                clan.Cultures.Add(culture);
+                                SubModule.log.Add("NEW Configuration for   <Culture> " + culture.CultureID + " added.");
+                            }
+                            else
+                            {
+                                SubModule.log.Add("... Configuration for   <Culture> " + culture.CultureID + " already exists.");
+                            }
+
+
+                            foreach (XmlElement t in c.SelectNodes("*")) //basic and eliteTroops
+                            {
+                                ATCTroops troops;
+
+                                if (t.Name == "basicTroops")
+                                {
+                                    troops = culture.GetBasicTroops();
+                                }
+                                else
+                                {
+                                    troops = culture.GetEliteTroops();
+                                    try { _spawnChance = t.GetAttribute("spawnChance") != null ? Convert.ToInt32(t.GetAttribute("spawnChance")) : _spawnChance = 5; } catch { _spawnChance = 5; }
+                                    try { _atPower = t.GetAttribute("atPower") != null ? Convert.ToInt32(t.GetAttribute("atPower")) : _atPower = 200; } catch { _atPower = 200; }
+                                    try { _spawnChanceCap = t.GetAttribute("spawnChanceCap") != null ? Convert.ToInt32(t.GetAttribute("spawnChanceCap")) : _spawnChanceCap = 20; } catch { _spawnChanceCap = 20; }
+                                    troops.SpawnChance = _spawnChance;
+                                    troops.SpawnChanceCap = _spawnChanceCap;
+                                    troops.atPower = _atPower;
+                                }
+
+
+                                foreach (XmlElement v in t.SelectNodes("*")) //ChildNodes)
+                                {
+                                    try { _percent = v.GetAttribute("percent") != null ? Convert.ToInt32(v.GetAttribute("percent")) : _percent = 100; } catch { _percent = 100; }
+                                    try { _playerOnly = v.GetAttribute("playeronly") != null ? Convert.ToBoolean(v.GetAttribute("playeronly")) : _playerOnly = false; } catch { _playerOnly = false; }
+                                    try { _clanOnly = v.GetAttribute("clanonly") != null ? Convert.ToBoolean(v.GetAttribute("clanonly")) : _clanOnly = false; } catch { _clanOnly = false; }
+                                    try { _aiOnly = v.GetAttribute("AIonly") != null ? Convert.ToBoolean(v.GetAttribute("AIonly")) : _aiOnly = false; } catch { _aiOnly = false; }
+                                    try { _replaceWith = v.GetAttribute("replacewith"); } catch { _replaceWith = null; }
+
+                                    ATCVolunteer volunteer = troops.GetVolunteerByID(v.GetAttribute("id"));
+
+                                    if ((volunteer == null) || (volunteer.ReplaceWith != _replaceWith))
+                                    {
+                                        volunteer = new ATCVolunteer()
+                                        {
+                                            VolunteerID = v.GetAttribute("id"),
+                                            TroopPercent = _percent,
+                                            PlayerOnly = _playerOnly,
+                                            ClanOnly = _clanOnly,
+                                            AIOnly = _aiOnly,
+                                            ReplaceWith = _replaceWith
                                         };
                                         troops.Volunteers.Add(volunteer);
                                         if (!troops.IsEliteTree)
@@ -158,251 +272,10 @@ namespace AdonnaysTroopChanger.XMLReader
                         }
                     }
                 }
-                else if(root.Name == "ATCTroops")
+                else
                 {
                     //Load legacy config files and convert
-                    SubModule.log.Add("WARNING: Legacy file structure detected! It is advised to move the configuration to the new 1.4.x structure!");
-
-                    foreach(XmlElement s in root.SelectNodes("source_troop"))
-                    {
-                        ATCLegacyConfig legacyConfig = new ATCLegacyConfig() { FactionIDs = new List<string>(), TargetTroops = new List<ATCVolunteer>() };
-                        string sourceTroop = s.GetAttribute("id");
-
-                        // Yes, I hardcoded this... sue me
-                        switch (sourceTroop)
-                        {
-                            case "player_clan_basic":
-                                legacyConfig.FactionIDs.Add("player_clan");
-                                foreach (XmlElement t in s.SelectNodes("target_troop"))
-                                {
-                                    legacyConfig.TargetTroops.Add(legacyConfig.GetATCVolunteerFromLegacyFile(t));
-                                }
-                                break;
-
-                            case "player_clan_elite":
-                                legacyConfig.FactionIDs.Add("player_clan");
-                                legacyConfig.IsElite = true;
-                                foreach (XmlElement t in s.SelectNodes("target_troop"))
-                                {
-                                    legacyConfig.TargetTroops.Add(legacyConfig.GetATCVolunteerFromLegacyFile(t));
-                                }
-                                break;
-
-
-                            case "player_kingdom_basic":
-                                legacyConfig.FactionIDs.Add("player_faction");
-                                foreach (XmlElement t in s.SelectNodes("target_troop"))
-                                {
-                                    legacyConfig.TargetTroops.Add(legacyConfig.GetATCVolunteerFromLegacyFile(t));
-                                }
-                                break;
-
-                            case "player_kingdom_elite":
-                                legacyConfig.FactionIDs.Add("player_faction");
-                                legacyConfig.IsElite = true;
-                                foreach (XmlElement t in s.SelectNodes("target_troop"))
-                                {
-                                    legacyConfig.TargetTroops.Add(legacyConfig.GetATCVolunteerFromLegacyFile(t));
-                                }
-                                break;
-
-
-                            case "imperial_recruit":
-                                legacyConfig.FactionIDs.Add("empire");
-                                legacyConfig.FactionIDs.Add("empire_w");
-                                legacyConfig.FactionIDs.Add("empire_s");
-                                foreach(XmlElement t in s.SelectNodes("target_troop"))
-                                {
-                                    legacyConfig.TargetTroops.Add(legacyConfig.GetATCVolunteerFromLegacyFile(t));
-                                }
-                                break;
-
-                            case "imperial_vigla_recruit":
-                                legacyConfig.FactionIDs.Add("empire");
-                                legacyConfig.FactionIDs.Add("empire_w");
-                                legacyConfig.FactionIDs.Add("empire_s");
-                                legacyConfig.IsElite = true;
-                                foreach (XmlElement t in s.SelectNodes("target_troop"))
-                                {
-                                    legacyConfig.TargetTroops.Add(legacyConfig.GetATCVolunteerFromLegacyFile(t));
-                                }
-                                break;
-
-
-                            case "sturgian_recruit":
-                                legacyConfig.FactionIDs.Add("sturgia");
-                                foreach (XmlElement t in s.SelectNodes("target_troop"))
-                                {
-                                    legacyConfig.TargetTroops.Add(legacyConfig.GetATCVolunteerFromLegacyFile(t));
-                                }
-                                break;
-
-                            case "sturgian_warrior_son":
-                                legacyConfig.FactionIDs.Add("sturgia");
-                                legacyConfig.IsElite = true;
-                                foreach (XmlElement t in s.SelectNodes("target_troop"))
-                                {
-                                    legacyConfig.TargetTroops.Add(legacyConfig.GetATCVolunteerFromLegacyFile(t));
-                                }
-                                break;
-
-
-                            case "aserai_recruit":
-                                legacyConfig.FactionIDs.Add("aserai");
-                                foreach (XmlElement t in s.SelectNodes("target_troop"))
-                                {
-                                    legacyConfig.TargetTroops.Add(legacyConfig.GetATCVolunteerFromLegacyFile(t));
-                                }
-                                break;
-
-                            case "aserai_youth":
-                                legacyConfig.FactionIDs.Add("aserai");
-                                legacyConfig.IsElite = true;
-                                foreach (XmlElement t in s.SelectNodes("target_troop"))
-                                {
-                                    legacyConfig.TargetTroops.Add(legacyConfig.GetATCVolunteerFromLegacyFile(t));
-                                }
-                                break;
-
-                            case "vlandian_recruit":
-                                legacyConfig.FactionIDs.Add("vlandia");
-                                foreach (XmlElement t in s.SelectNodes("target_troop"))
-                                {
-                                    legacyConfig.TargetTroops.Add(legacyConfig.GetATCVolunteerFromLegacyFile(t));
-                                }
-                                break;
-
-                            case "vlandian_squire":
-                                legacyConfig.FactionIDs.Add("vlandia");
-                                legacyConfig.IsElite = true;
-                                foreach (XmlElement t in s.SelectNodes("target_troop"))
-                                {
-                                    legacyConfig.TargetTroops.Add(legacyConfig.GetATCVolunteerFromLegacyFile(t));
-                                }
-                                break;
-
-
-                            case "battanian_volunteer":
-                                legacyConfig.FactionIDs.Add("battania");
-                                foreach (XmlElement t in s.SelectNodes("target_troop"))
-                                {
-                                    legacyConfig.TargetTroops.Add(legacyConfig.GetATCVolunteerFromLegacyFile(t));
-                                }
-                                break;
-
-                            case "battanian_highborn_youth":
-                                legacyConfig.FactionIDs.Add("battania");
-                                legacyConfig.IsElite = true;
-                                foreach (XmlElement t in s.SelectNodes("target_troop"))
-                                {
-                                    legacyConfig.TargetTroops.Add(legacyConfig.GetATCVolunteerFromLegacyFile(t));
-                                }
-                                break;
-
-
-                            case "khuzait_nomad":
-                                legacyConfig.FactionIDs.Add("khuzait");
-                                foreach (XmlElement t in s.SelectNodes("target_troop"))
-                                {
-                                    legacyConfig.TargetTroops.Add(legacyConfig.GetATCVolunteerFromLegacyFile(t));
-                                }
-                                break;
-
-                            case "khuzait_noble_son":
-                                legacyConfig.FactionIDs.Add("khuzait");
-                                legacyConfig.IsElite = true;
-                                foreach (XmlElement t in s.SelectNodes("target_troop"))
-                                {
-                                    legacyConfig.TargetTroops.Add(legacyConfig.GetATCVolunteerFromLegacyFile(t));
-                                }
-                                break;
-
-                        }
-
-                        foreach (string f in legacyConfig.FactionIDs)
-                        {
-                            ATCMapFaction faction = GetFaction(f);
-
-                            if (faction == null) //TroopConfig not found
-                            {
-                                faction = new ATCMapFaction
-                                {
-                                    FactionID = f,
-                                    Cultures = new List<ATCCulture>() 
-                                };
-
-                                factionList.Add(faction);
-                                SubModule.log.Add("NEW Configuration for <MapFaction> " + f + " added.");
-                            }
-                            else
-                            {
-                                SubModule.log.Add("... Configuration for <MapFaction> " + f + " already exists.");
-                            }
-
-                            
-                            ATCCulture culture = faction.GetCulture(legacyConfig.Culture);  //check if culture alraedy exists
-
-                            if (culture == null)
-                            {
-                                culture = new ATCCulture
-                                {
-                                    CultureID = legacyConfig.Culture,
-                                    BasicTroops = new ATCTroops { Volunteers = new List<ATCVolunteer>(), IsEliteTree = false },
-                                    EliteTroops = new ATCTroops { Volunteers = new List<ATCVolunteer>(), IsEliteTree = true }
-                                    //Volunteers = new List<ATCVolunteer>()
-                                };
-                                faction.Cultures.Add(culture);
-                                SubModule.log.Add("NEW Configuration for   <Culture> " + culture.CultureID + " added.");
-                            }
-                            else
-                            {
-                                SubModule.log.Add("... Configuration for   <Culture> " + culture.CultureID + " already exists.");
-                            }
-
-
-                            foreach (ATCVolunteer t in legacyConfig.TargetTroops) //basic and eliteTroops
-                            {
-                                ATCTroops troops;
-
-                                if (!legacyConfig.IsElite)
-                                {
-                                    troops = culture.GetBasicTroops();
-                                }
-                                else
-                                {
-                                    troops = culture.GetEliteTroops();
-                                }
-
-
-                                ATCVolunteer volunteer = troops.GetVolunteerByID(t.VolunteerID);
-
-                                if (volunteer == null)
-                                {
-                                    volunteer = new ATCVolunteer()
-                                    {
-                                        VolunteerID     = t.VolunteerID,
-                                        TroopPercent    = t.TroopPercent,
-                                        PlayerOnly      = t.PlayerOnly,
-                                        ClanOnly        = t.ClanOnly,
-                                        AIOnly          = t.AIOnly,
-                                        ReplaceWith     = t.ReplaceWith
-                                    };
-                                    troops.Volunteers.Add(volunteer);
-                                    if (!troops.IsEliteTree)
-                                        SubModule.log.Add("NEW Configuration for     <volunteer> (basic) " + volunteer.VolunteerID + " added with " + volunteer.TroopPercent + "%.");
-                                    else
-                                        SubModule.log.Add("NEW Configuration for     <volunteer> (elite) " + volunteer.VolunteerID + " added with " + volunteer.TroopPercent + "%.");
-                                }
-                                else
-                                {
-                                    if (!troops.IsEliteTree)
-                                        SubModule.log.Add("... Configuration for     <volunteer> (basic)" + volunteer.VolunteerID + " already exists, skipping.");
-                                    else
-                                        SubModule.log.Add("... Configuration for     <volunteer> (elite)" + volunteer.VolunteerID + " already exists, skipping.");
-                                }
-                            } 
-                        }
-                    }
+                    SubModule.log.Add("ERROR: No valid <ATCConfig> found!");
                 }
             }
         }
@@ -412,7 +285,7 @@ namespace AdonnaysTroopChanger.XMLReader
         {
             SubModule.log.Add("Configuration(s) found! Writing ATC.config.merged.xml");
 
-            XElement root = new XElement("ATCConfig");           
+            XElement root = new XElement("ATCConfig");
 
             foreach (ATCMapFaction f in factionList)
             {
@@ -427,14 +300,14 @@ namespace AdonnaysTroopChanger.XMLReader
                     {
                         XElement volunteerElement = new XElement("volunteer", new XAttribute("id", c.BasicTroops.Volunteers[i].VolunteerID));
                         volunteerElement.Add(new XAttribute("percent", c.BasicTroops.Volunteers[i].TroopPercent));
-                        
+
                         if (c.BasicTroops.Volunteers[i].PlayerOnly)
                             volunteerElement.Add(new XAttribute("playeronly", c.BasicTroops.Volunteers[i].PlayerOnly));
 
                         if (c.BasicTroops.Volunteers[i].ClanOnly)
                             volunteerElement.Add(new XAttribute("clanonly", c.BasicTroops.Volunteers[i].ClanOnly));
 
-                        if (c.BasicTroops.Volunteers[i].AIOnly) 
+                        if (c.BasicTroops.Volunteers[i].AIOnly)
                             volunteerElement.Add(new XAttribute("AIonly", c.BasicTroops.Volunteers[i].AIOnly));
 
                         if (c.BasicTroops.Volunteers[i].ReplaceWith != null && c.BasicTroops.Volunteers[i].ReplaceWith != "")
@@ -443,12 +316,16 @@ namespace AdonnaysTroopChanger.XMLReader
                     }
                     cultureElement.Add(basicTroopsElement);
 
-                    XElement eliteTroopsElement = new XElement("EliteTroops");
+                    XElement eliteTroopsElement = new XElement("eliteTroops");
+                    eliteTroopsElement.Add(new XAttribute("spawnChance", c.EliteTroops.SpawnChance));
+                    eliteTroopsElement.Add(new XAttribute("atPower", c.EliteTroops.atPower));
+                    eliteTroopsElement.Add(new XAttribute("spawnChanceCap", c.EliteTroops.SpawnChanceCap));
+
                     for (int i = 0; i < c.EliteTroops.Volunteers.Count; i++)
                     {
                         XElement volunteerElement = new XElement("volunteer", new XAttribute("id", c.EliteTroops.Volunteers[i].VolunteerID));
                         volunteerElement.Add(new XAttribute("percent", c.EliteTroops.Volunteers[i].TroopPercent));
-                        
+
                         if (c.EliteTroops.Volunteers[i].PlayerOnly)
                             volunteerElement.Add(new XAttribute("playeronly", c.EliteTroops.Volunteers[i].PlayerOnly));
 
@@ -466,7 +343,65 @@ namespace AdonnaysTroopChanger.XMLReader
                     factionElement.Add(cultureElement);
                 }
                 root.Add(factionElement);
-                
+
+            }
+
+            foreach (ATCClan cl in clanList)
+            {
+                XElement clanElement = new XElement("Clan", new XAttribute("id", cl.ClanID));
+
+                foreach (ATCCulture c in cl.Cultures)
+                {
+                    XElement cultureElement = new XElement("Culture", new XAttribute("id", c.CultureID));
+
+                    XElement basicTroopsElement = new XElement("basicTroops");
+                    for (int i = 0; i < c.BasicTroops.Volunteers.Count; i++)
+                    {
+                        XElement volunteerElement = new XElement("volunteer", new XAttribute("id", c.BasicTroops.Volunteers[i].VolunteerID));
+                        volunteerElement.Add(new XAttribute("percent", c.BasicTroops.Volunteers[i].TroopPercent));
+
+                        if (c.BasicTroops.Volunteers[i].PlayerOnly)
+                            volunteerElement.Add(new XAttribute("playeronly", c.BasicTroops.Volunteers[i].PlayerOnly));
+
+                        if (c.BasicTroops.Volunteers[i].ClanOnly)
+                            volunteerElement.Add(new XAttribute("clanonly", c.BasicTroops.Volunteers[i].ClanOnly));
+
+                        if (c.BasicTroops.Volunteers[i].AIOnly)
+                            volunteerElement.Add(new XAttribute("AIonly", c.BasicTroops.Volunteers[i].AIOnly));
+
+                        if (c.BasicTroops.Volunteers[i].ReplaceWith != null && c.BasicTroops.Volunteers[i].ReplaceWith != "")
+                            volunteerElement.Add(new XAttribute("replacewith", c.BasicTroops.Volunteers[i].ReplaceWith));
+                        basicTroopsElement.Add(volunteerElement);
+                    }
+                    cultureElement.Add(basicTroopsElement);
+
+                    XElement eliteTroopsElement = new XElement("eliteTroops");
+                    eliteTroopsElement.Add(new XAttribute("spawnChance", c.EliteTroops.SpawnChance));
+                    eliteTroopsElement.Add(new XAttribute("atPower", c.EliteTroops.atPower));
+                    eliteTroopsElement.Add(new XAttribute("spawnChanceCap", c.EliteTroops.SpawnChanceCap));
+
+                    for (int i = 0; i < c.EliteTroops.Volunteers.Count; i++)
+                    {
+                        XElement volunteerElement = new XElement("volunteer", new XAttribute("id", c.EliteTroops.Volunteers[i].VolunteerID));
+                        volunteerElement.Add(new XAttribute("percent", c.EliteTroops.Volunteers[i].TroopPercent));
+
+                        if (c.EliteTroops.Volunteers[i].PlayerOnly)
+                            volunteerElement.Add(new XAttribute("playeronly", c.EliteTroops.Volunteers[i].PlayerOnly));
+
+                        if (c.EliteTroops.Volunteers[i].ClanOnly)
+                            volunteerElement.Add(new XAttribute("clanonly", c.EliteTroops.Volunteers[i].ClanOnly));
+
+                        if (c.EliteTroops.Volunteers[i].AIOnly)
+                            volunteerElement.Add(new XAttribute("AIonly", c.EliteTroops.Volunteers[i].AIOnly));
+
+                        if (c.EliteTroops.Volunteers[i].ReplaceWith != null && c.EliteTroops.Volunteers[i].ReplaceWith != "")
+                            volunteerElement.Add(new XAttribute("replacewith", c.EliteTroops.Volunteers[i].ReplaceWith));
+                        eliteTroopsElement.Add(volunteerElement);
+                    }
+                    cultureElement.Add(eliteTroopsElement);
+                    clanElement.Add(cultureElement);
+                }
+                root.Add(clanElement);
             }
 
             File.WriteAllText(xmlpath, "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n");
@@ -479,41 +414,207 @@ namespace AdonnaysTroopChanger.XMLReader
             return factionList.Find(x => x.FactionID == factionID);
         }
 
-
-
-        public static CharacterObject GetBasicRecruit(string factionID, CultureObject culture, string recruitType = null)
+        public static ATCClan GetClan(string clanID)
         {
+            return clanList.Find(x => x.ClanID == clanID);
+        }
+
+
+
+        public static CharacterObject GetFactionRecruit(Hero notable, MobileParty recruitingParty = null)
+        {
+            string recruitType = null;
             CharacterObject basicRecruit = null;
-            
-            foreach(ATCMapFaction f in ATCConfig.factionList.Where(f => f.FactionID == factionID))
+            CultureObject culture;
+
+            if (recruitingParty != null)
+                recruitType = "default";
+
+            // We need a culture as fallback scenario 
+            if (notable.CurrentSettlement != null)
+            { culture = notable.CurrentSettlement.Culture; }
+            else
+            { culture = notable.MapFaction.Culture; }
+
+
+            if (basicRecruit == null)
             {
-                foreach (ATCCulture c in f.Cultures.Where(c => c.CultureID == culture.StringId))
+                string clanID;
+
+                if (recruitingParty != null)
                 {
-                    basicRecruit = c.BasicTroops.GetRandomVolunteer(culture.BasicTroop.StringId, recruitType);
-                    if (ATCSettings.Instance.DebugConfigRead)
+                    if (recruitingParty.Party.Owner?.Clan == Hero.MainHero.Clan)
                     {
-                        SubModule.log.Add(String.Concat("DEBUG: GetBasicRecruit called with ", factionID, "|", culture.StringId, " --> ", c.CultureID ," configuration found! Returning \"", basicRecruit.StringId, "\"."));
+                        clanID = "player_clan";
+                        recruitType = "player_clan";
+                    }
+                    else
+                    {
+                        clanID = recruitingParty.Party.Owner?.Clan.StringId;
                     }
                 }
-                if (basicRecruit == null)  //no specific entry found, try default
+                else
                 {
-                    foreach (ATCCulture c in f.Cultures.Where(c => c.CultureID == "default"))
+                    if (notable.CurrentSettlement?.OwnerClan == Hero.MainHero.Clan)
+                    { clanID = "player_clan"; }
+                    else
+                    { clanID = notable.CurrentSettlement?.OwnerClan?.StringId; }
+                }
+
+                if (IsClanConfigured(clanID))
+                {
+
+                    foreach (ATCClan cl in ATCConfig.clanList.Where(f => f.ClanID == clanID))
                     {
-                        basicRecruit = c.BasicTroops.GetRandomVolunteer(culture.BasicTroop.StringId, recruitType);
-                        if (ATCSettings.Instance.DebugConfigRead)
+                        foreach (ATCCulture c in cl.Cultures.Where(c => c.CultureID == culture.StringId))
                         {
-                            SubModule.log.Add(String.Concat("DEBUG: GetBasicRecruit called with ", factionID, "|", culture.StringId, " --> \"default\" configuration found! Returning \"", basicRecruit.StringId, "\"."));
+
+                            if (NotableShouldGiveEliteTroop(notable, c))
+                            {
+                                basicRecruit = c.EliteTroops.GetRandomVolunteer(culture.EliteBasicTroop.StringId, recruitType);
+                                if (ATCSettings.DebugConfigRead)
+                                    SubModule.log.Add(String.Concat("DEBUG: GetFactionRecruit called with ", clanID, "|", culture.StringId, " --> configuration found! Returning \"", basicRecruit.StringId, "\"."));
+                            }
+                            else
+                            {
+                                basicRecruit = c.BasicTroops.GetRandomVolunteer(culture.BasicTroop.StringId, recruitType);
+                                if (ATCSettings.DebugConfigRead)
+                                    SubModule.log.Add(String.Concat("DEBUG: GetFactionRecruit called with ", clanID, "|", culture.StringId, " --> configuration found found! Returning \"", basicRecruit.StringId, "\"."));
+                            }
+                        }
+                        if (basicRecruit == null)  //no specific entry found, try default
+                        {
+                            foreach (ATCCulture c in cl.Cultures.Where(c => c.CultureID == "default"))
+                            {
+                                if (NotableShouldGiveEliteTroop(notable, c))
+                                {
+                                    basicRecruit = c.EliteTroops.GetRandomVolunteer(culture.EliteBasicTroop.StringId, recruitType);
+                                    if (ATCSettings.DebugConfigRead)
+                                        SubModule.log.Add(String.Concat("DEBUG: GetFactionRecruit called with ", clanID, "|", culture.StringId, " --> configuration NOT found, but ", clanID, "|default", " configuration found! Returning \"", basicRecruit.StringId, "\"."));
+                                }
+                                else
+                                {
+                                    basicRecruit = c.BasicTroops.GetRandomVolunteer(culture.BasicTroop.StringId, recruitType);
+                                    if (ATCSettings.DebugConfigRead)
+                                        SubModule.log.Add(String.Concat("DEBUG: GetFactionRecruit called with ", clanID, "|", culture.StringId, " --> configuration NOT found, but ", clanID, "|default", " configuration found! Returning \"", basicRecruit.StringId, "\"."));
+
+                                }
+                            }
                         }
                     }
                 }
             }
 
+
             if (basicRecruit == null)
             {
-                basicRecruit = culture.BasicTroop;
-                if (ATCSettings.Instance.DebugConfigRead)
+                string factionID;
+
+                if (recruitingParty != null)
                 {
-                    SubModule.log.Add(String.Concat("DEBUG: GetBasicRecruit called with ", factionID, "|", culture.StringId, " --> NO matching and NO \"default\" configuration found! Returning the culture's standard recruit \"", basicRecruit.StringId, "\"."));
+                    if (recruitingParty.MapFaction == Hero.MainHero.MapFaction && recruitingParty.MapFaction?.Leader == Hero.MainHero)
+                    {
+                        factionID = "player_faction";
+                    }
+                    else
+                    {
+                        factionID = recruitingParty.MapFaction.StringId;
+                    }
+                }
+                else
+                {
+                    if (notable.CurrentSettlement?.Owner?.MapFaction == Hero.MainHero.MapFaction && notable.CurrentSettlement?.Owner?.MapFaction?.Leader == Hero.MainHero)
+                    {
+                        // needed for populating player faction cities through UpdateVolunteersOfNotables where we have no recruiting party
+                        factionID = "player_faction";
+                    }
+                    else
+                    {
+                        factionID = notable.MapFaction.StringId;
+                    }
+                }
+
+                if (IsFactionConfigured(factionID))
+                {
+                    foreach (ATCMapFaction f in ATCConfig.factionList.Where(f => f.FactionID == factionID))
+                    {
+                        foreach (ATCCulture c in f.Cultures.Where(c => c.CultureID == culture.StringId))
+                        {
+
+                            if (NotableShouldGiveEliteTroop(notable, c))
+                            {
+                                basicRecruit = c.EliteTroops.GetRandomVolunteer(culture.EliteBasicTroop.StringId, recruitType);
+                                if (ATCSettings.DebugConfigRead)
+                                    SubModule.log.Add(String.Concat("DEBUG: GetFactionRecruit called with ", factionID, "|", culture.StringId, " --> configuration found! Returning \"", basicRecruit.StringId, "\"."));
+                            }
+                            else
+                            {
+                                basicRecruit = c.BasicTroops.GetRandomVolunteer(culture.BasicTroop.StringId, recruitType);
+                                if (ATCSettings.DebugConfigRead)
+                                    SubModule.log.Add(String.Concat("DEBUG: GetFactionRecruit called with ", factionID, "|", culture.StringId, " --> configuration found found! Returning \"", basicRecruit.StringId, "\"."));
+                            }
+                        }
+                        if (basicRecruit == null)  //no specific entry found, try default
+                        {
+                            foreach (ATCCulture c in f.Cultures.Where(c => c.CultureID == "default"))
+                            {
+                                if (NotableShouldGiveEliteTroop(notable, c))
+                                {
+                                    basicRecruit = c.EliteTroops.GetRandomVolunteer(culture.EliteBasicTroop.StringId, recruitType);
+                                    if (ATCSettings.DebugConfigRead)
+                                        SubModule.log.Add(String.Concat("DEBUG: GetFactionRecruit called with ", factionID, "|", culture.StringId, " --> configuration NOT found, but ", factionID, "|default", " configuration found! Returning \"", basicRecruit.StringId, "\"."));
+                                }
+                                else
+                                {
+                                    basicRecruit = c.BasicTroops.GetRandomVolunteer(culture.BasicTroop.StringId, recruitType);
+                                    if (ATCSettings.DebugConfigRead)
+                                        SubModule.log.Add(String.Concat("DEBUG: GetFactionRecruit called with ", factionID, "|", culture.StringId, " --> configuration NOT found, but ", factionID, "|default", " configuration found! Returning \"", basicRecruit.StringId, "\"."));
+
+                                }
+                            }
+                        }
+                    }
+                }
+
+                if (basicRecruit == null)
+                {
+                    foreach (ATCMapFaction f in ATCConfig.factionList.Where(f => f.FactionID == "default"))
+                    {
+                        foreach (ATCCulture c in f.Cultures.Where(c => c.CultureID == culture.StringId))
+                        {
+
+                            if (NotableShouldGiveEliteTroop(notable, c))
+                            {
+                                basicRecruit = c.EliteTroops.GetRandomVolunteer(culture.EliteBasicTroop.StringId, recruitType);
+                                //if (ATCSettings.Instance.DebugConfigRead)
+                                if (ATCSettings.DebugConfigRead)
+                                    SubModule.log.Add(String.Concat("DEBUG: GetFactionRecruit called with ", factionID, "|", culture.StringId, " --> configuration NOT found, but default|", culture.StringId, " found! Returning \"", basicRecruit.StringId, "\"."));
+                            }
+                            else
+                            {
+                                basicRecruit = c.BasicTroops.GetRandomVolunteer(culture.BasicTroop.StringId, recruitType);
+                                //if (ATCSettings.Instance.DebugConfigRead)
+                                if (ATCSettings.DebugConfigRead)
+                                    SubModule.log.Add(String.Concat("DEBUG: GetFactionRecruit called with ", factionID, "|", culture.StringId, " --> configuration NOT found, but default|", culture.StringId, " found! Returning \"", basicRecruit.StringId, "\"."));
+                            }
+                        }
+                    }
+                }
+            }
+
+
+
+            if (basicRecruit == null)
+            {
+                if (NotableShouldGiveEliteTroop(notable, null))
+                    basicRecruit = culture.EliteBasicTroop;
+                else
+                    basicRecruit = culture.BasicTroop;
+
+                //if (ATCSettings.Instance.DebugConfigRead)
+                if (ATCSettings.DebugConfigRead)
+                {
+                    SubModule.log.Add(String.Concat("DEBUG: GetFactionRecruit called with ", notable.MapFaction.StringId, "|", notable.CurrentSettlement?.Culture.StringId, " --> NO matching and NO \"default\" configuration found! Returning the culture's standard recruit \"", basicRecruit.StringId, "\"."));
                 }
             }
 
@@ -521,43 +622,52 @@ namespace AdonnaysTroopChanger.XMLReader
         }
 
 
-        public static CharacterObject GetEliteRecruit(string factionID, CultureObject culture, string recruitType = null)
+
+        public static bool NotableShouldGiveEliteTroop(Hero notable, ATCCulture cultureConfig = null)
         {
-            CharacterObject eliteRecruit = null;
+            //double notablePower = (notable.IsRuralNotable && notable.Power >= 200f) ? 1.5 : 0.5;
+            float powerThreshold;
+            float spawnChance;
+            float spawnChanceCap;
+            float factor;
 
-            foreach (ATCMapFaction f in ATCConfig.factionList.Where(f => f.FactionID == factionID))
+            if (notable.CurrentSettlement == null)
+                return false;
+
+            if (ATCSettings.EliteOnlyInCastleVillages && notable.IsRuralNotable && notable.CurrentSettlement.Village.Bound.IsCastle)
             {
-                foreach (ATCCulture c in f.Cultures.Where(c => c.CultureID == culture.StringId))
-                {
-                    eliteRecruit = c.EliteTroops.GetRandomVolunteer(culture.EliteBasicTroop.StringId, recruitType);
-                    if (ATCSettings.Instance.DebugConfigRead)
-                    {
-                        SubModule.log.Add(String.Concat("DEBUG: GetEliteRecruit called with ", factionID, "|", culture.StringId, " --> ", c.CultureID, " configuration found! Returning \"", eliteRecruit.StringId, "\"."));
-                    }
-                }
-                if (eliteRecruit == null)  //no specific entry found, try default
-                {
-                    foreach (ATCCulture c in f.Cultures.Where(c => c.CultureID == "default"))
-                    {
-                        eliteRecruit = c.EliteTroops.GetRandomVolunteer(culture.EliteBasicTroop.StringId, recruitType);
-                        if (ATCSettings.Instance.DebugConfigRead)
-                        {
-                            SubModule.log.Add(String.Concat("DEBUG: GetEliteRecruit called with ", factionID, "|", culture.StringId, " --> \"default\" configuration found! Returning \"", eliteRecruit.StringId, "\"."));
-                        }
-                    }
-                }
+                return true;
             }
 
-            if (eliteRecruit == null)
+
+            if (cultureConfig == null)
             {
-                eliteRecruit = culture.EliteBasicTroop;
-                if (ATCSettings.Instance.DebugConfigRead)
-                {
-                    SubModule.log.Add(String.Concat("DEBUG: GetEliteRecruit called with ", factionID, "|", culture.StringId, " --> NO matching and NO \"default\" configuration found! Returning the culture's standard recruit \"", eliteRecruit.StringId, "\"."));
-                }
+                powerThreshold = ATCSettings.ElitePowerThreshold;
+                spawnChance = ATCSettings.EliteSpawnChance;
+                spawnChanceCap = ATCSettings.EliteSpawnChanceCap;
+            }
+            else
+            {
+                powerThreshold = cultureConfig.EliteTroops.atPower;
+                spawnChance = cultureConfig.EliteTroops.SpawnChance;
+                spawnChanceCap = cultureConfig.EliteTroops.SpawnChanceCap;
             }
 
-            return eliteRecruit; 
+            if (notable.IsNotable)
+            {
+                factor = (powerThreshold * powerThreshold) / (Math.Max(50f, notable.Power) * Math.Max(50f, notable.Power));
+            }
+            else
+            {
+                factor = 2;
+            }
+            if (MBRandom.RandomInt(0, 100) <= (int)Math.Min(spawnChance * factor, spawnChanceCap))
+            {
+                return true;
+            }
+
+
+            return false;
         }
 
 
@@ -613,7 +723,7 @@ namespace AdonnaysTroopChanger.XMLReader
 
                             _percentBasic += v.TroopPercent;
                         }
-                            
+
                     }
 
                     foreach (ATCVolunteer v in c.EliteTroops.Volunteers.ToArray())
@@ -630,7 +740,7 @@ namespace AdonnaysTroopChanger.XMLReader
                             {
                                 SubModule.log.Add(String.Concat("WARNING: ", v.VolunteerID, " is not configured as base troop (is_basic_troop = true)!"));
                             }
-                            
+
 
                             // Check for flag combinations
                             if (v.AIOnly && v.PlayerOnly)
@@ -668,60 +778,43 @@ namespace AdonnaysTroopChanger.XMLReader
 
                     if (_percentBasic > 100)
                     {
-                        SubModule.log.Add(String.Concat("WARNING: Percentages of all basic volunteers for ", f.FactionID, "|", c.CultureID, " combined is > 100%; Normalizing distribution."));
+                        SubModule.log.Add(String.Concat("WARNING: Percentages of all basic volunteers for ", f.FactionID, "|", c.CultureID, " combined is ", _percentBasic, "%! Normalizing distribution."));
                         foreach (ATCVolunteer v in c.BasicTroops.Volunteers)
                         {
                             //tt.TroopPercent = tt.TroopPercent * 100 / _percent; //weighted on current percent
-                            v.TroopPercent = 100 / c.BasicTroops.Volunteers.Count;
+                            float _troopPercentOld = v.TroopPercent;
+                            v.TroopPercent = Convert.ToInt32(Convert.ToDouble(v.TroopPercent) / Convert.ToDouble(_percentBasic) * 100); //100 / c.BasicTroops.Volunteers.Count;
+                            SubModule.log.Add(String.Concat("Troop ", v.VolunteerID, " changed from ", _troopPercentOld, " to ", v.TroopPercent, "."));
                         }
                     }
 
                     if (_percentElite > 100)
                     {
-                        SubModule.log.Add(String.Concat("WARNING: Percentages of all elite volunteers for ", f.FactionID, "|", c.CultureID, " combined is > 100%; Normalizing distribution."));
+                        SubModule.log.Add(String.Concat("WARNING: Percentages of all elite volunteers for ", f.FactionID, "|", c.CultureID, " combined is ", _percentElite, "%! Normalizing distribution."));
                         foreach (ATCVolunteer v in c.EliteTroops.Volunteers)
                         {
                             //tt.TroopPercent = tt.TroopPercent * 100 / _percent; //weighted on current percent
-                            v.TroopPercent = 100 / c.EliteTroops.Volunteers.Count;
+                            int _troopPercentOld = v.TroopPercent;
+                            v.TroopPercent = Convert.ToInt32(Convert.ToDouble(v.TroopPercent) / Convert.ToDouble(_percentElite) * 100); //100 / c.EliteTroops.Volunteers.Count;
+                            SubModule.log.Add(String.Concat("Troop ", v.VolunteerID, " changed from ", _troopPercentOld, " to ", v.TroopPercent, "."));
                         }
                     }
                 }
             }
         }
-    }
 
-    public class ATCLegacyConfig
-    {
-        public List<string> FactionIDs { get; set; }
-        public string Culture { get; set; } = "default";
-        public bool IsElite { get; set; } = false;
-        public List<ATCVolunteer> TargetTroops { get; set; }
-
-        public ATCVolunteer GetATCVolunteerFromLegacyFile(XmlElement t)
-        { 
-            int  _percent;
-            bool _playerOnly;
-            bool _clanOnly;
-            bool _aiOnly;
-
-            try { _percent      = t.GetAttribute("percent") != null ? Convert.ToInt32(t.GetAttribute("percent")) : _percent = 100; } catch { _percent = 100; }
-            try { _playerOnly   = t.GetAttribute("playeronly") != null ? Convert.ToBoolean(t.GetAttribute("playeronly")) : _playerOnly = false ; } catch { _playerOnly = false; }
-            try { _clanOnly     = t.GetAttribute("clanonly") != null ? Convert.ToBoolean(t.GetAttribute("clanonly")) : _clanOnly = false; } catch { _clanOnly = false; }
-            try { _aiOnly       = t.GetAttribute("AIonly") != null ? Convert.ToBoolean(t.GetAttribute("AIonly")) : _aiOnly = false; } catch { _aiOnly = false; }
-            
-            ATCVolunteer volunteer = new ATCVolunteer()
-            {
-                VolunteerID     = t.GetAttribute("id"),
-                TroopPercent    = _percent,
-                PlayerOnly      = _playerOnly,
-                ClanOnly        = _clanOnly,
-                AIOnly          = _aiOnly,
-                ReplaceWith     = null
-            };
-
-        return volunteer;
+        public static bool IsFactionConfigured(string factionID)
+        {
+            return GetFaction(factionID) != null;
         }
+
+        public static bool IsClanConfigured(string clanID)
+        {
+            return GetClan(clanID) != null;
+        }
+
     }
+
 
     public class ATCMapFaction
     {
@@ -736,10 +829,23 @@ namespace AdonnaysTroopChanger.XMLReader
 
     }
 
+    public class ATCClan
+    {
+        public string ClanID { get; internal set; }
+        public List<ATCCulture> Cultures { get; set; }
+
+
+        public ATCCulture GetCulture(string stringID)
+        {
+            return Cultures.Find(x => x.CultureID == stringID);
+        }
+
+    }
+
 
     public class ATCCulture
     {
-        public string CultureID { get; set;  }
+        public string CultureID { get; set; }
         public ATCTroops BasicTroops { get; set; }
         public ATCTroops EliteTroops { get; set; }
 
@@ -759,6 +865,9 @@ namespace AdonnaysTroopChanger.XMLReader
 
     public class ATCTroops
     {
+        public int SpawnChance;
+        public int atPower;
+        public int SpawnChanceCap;
         public List<ATCVolunteer> Volunteers { get; set; }
         public bool IsEliteTree { get; set; }
 
@@ -785,7 +894,7 @@ namespace AdonnaysTroopChanger.XMLReader
                 {
                     //recruitType != null means we have a recruit action, not a spawning action and we only replace units
                     //on recruiting, NOT on spawning
-                    if (recruitType == "default") 
+                    if (recruitType == "default")
                     {
                         if (v.PlayerOnly || v.ClanOnly)
                         {

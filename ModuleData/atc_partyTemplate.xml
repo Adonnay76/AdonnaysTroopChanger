@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<partyTemplates>
+    <MBPartyTemplate id="atc_party_template_dummy" >
+      <stacks>
+        <PartyTemplateStack min_value="10" max_value="10" troop="NPCCharacter.imperial_recruit" />
+      </stacks>
+    </MBPartyTemplate>
+</partyTemplates>

@@ -1,16 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Module>
-	<Name value="Adonnays Troop Changer"/>
+	<Name value="Adonnay's Troop Changer"/>
 	<Id value="AdonnaysTroopChanger"/>
-	<Version value="v1.4.2"/>
+	<Version value="v1.8.0"/>
 	<SingleplayerModule value="true"/>
 	<MultiplayerModule value="false"/>
 	<DependedModules>
-		<DependedModule Id="Native"/>
-		<DependedModule Id="SandBoxCore"/>
-		<DependedModule Id="Sandbox"/>
-		<DependedModule Id="CustomBattle"/>
-		<DependedModule Id="StoryMode" />
+		<DependedModule Id="Native" DependentVersion="e1.0.0"/>
+		<DependedModule Id="SandBoxCore"  DependentVersion="e1.0.0"/>
+		<DependedModule Id="Sandbox"  DependentVersion="e1.0.0"/>
+		<DependedModule Id="CustomBattle"  DependentVersion="e1.0.0"/>
+		<DependedModule Id="StoryMode"  DependentVersion="e1.0.0"/>
 	</DependedModules>
 	<SubModules>
 		<SubModule>
@@ -22,16 +22,14 @@
 			<Tag key="IsNoRenderModeElement" value="false" />
 			</Tags>
 		</SubModule>
-		<SubModule>
-			<Name value="MCMv3 Integrated Loader" />
-			<DLLName value="MCMv3.dll" />
-			<SubModuleClassType value="MCM.IntegratedLoaderSubModule" />
-			<Tags>
-				<Tag key="DedicatedServerType" value="none" />
-				<Tag key="IsNoRenderModeElement" value="false" />
-			</Tags>
-		</SubModule>
 	</SubModules>
 	<Xmls>
+		<XmlNode>
+			<XmlName id="partyTemplates" path="atc_partyTemplate"/>
+			<IncludedGameTypes>
+				<GameType value = "Campaign"/>
+				<GameType value = "CampaignStoryMode"/>
+			</IncludedGameTypes>
+		</XmlNode>
 	</Xmls>
 </Module>

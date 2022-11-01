@@ -4,24 +4,57 @@
 	USE AT YOUR OWN RISK - I AM NOT RESPONSIBLE FOR YOUR SAVEGAMES!
 	******************************************************************************************************
 
+	!! IF YOU WANT TO USE THIS AS YOUR MAIN CONFIG FILE, RENAME TO ATC.modconfig.xml !!
+
+
 	GENERAL INFORMATION
 	***************************
-	Version of ATC.modconfig.xml: v1.4.0
-	Required ATC version:         v1.4.x
+	Version of ATC.modconfig.xml: v1.6.0
+	Required ATC version:         v1.6.x
 
 
-	 
-	VERSION 1.4.0
+	
+	CHANGELOG
 	***************************
-	NEW: Faction based configuration
-	From ATC.modconfig.xml version 1.4.0 on ATC allows you to configure you troops based on the ingame 
-	faction a settlement belongs to. Previously it was the culture which resulted in all empires sharing
-	the same troops
+	1.6.0
+	- New configuration element: <Clan>
+	  It is now possible to configure clans in addition to the already existing configurations for MapFactions
+	  and Cultures. The logic is as follows:
+	  1. Check if the Clan of the currently recruiting party is configured
+	  2. Check if the MapFaction of the currently recruiting party is configured
+	  3. Check if the Culture of the currently recruiting Party is configured (by using MapFaction id="default"
+	     <Culture id="MyCulture" - see also example below
+		 
+	  CAREFUL! The old method of configuring the player_clan as MapFaction will NOT work anymore. You now have
+	  to configure the player_clan as <Clan id="player_clan"> correctly.
+	  
+	  
+	1.5.0
+	- New attributes for <eliteTroops>: spawnChance, atPower & spawnChanceCap. Configuration 
+	  options to give the player more control over the amount of elite troops spawned per faction/culture.
+	
+	- New token for <MapFaction>: "default". This can be used to apply a configuration for AI Lords where the
+	  MapFaction is not known or too minor to be configured (i.e. for minor factions). Can be used as a fall-
+	  back for all independent minor factions or as an option when you don't need the granularity of the 
+	  faction configuration.
+	  
+	- New option in the ATC.settings.xml to allow ATC to create "dynamic" PartyTemplates based on the ATC
+	  configuration. When set to "true" ATC overwrites the default party templates, which are based on 
+	  the culture, with a custom party template based on the hero's faction/culture combination. So if the
+	  hero joined the Northern Empire but is Battanian himself ATC will look for troops from the
+	  empire_n|battania, empire_n|default or - NEW - from the default|battania configuration.
+	
+	
+	1.4.0
+	- Faction based configuration
+	  From ATC.modconfig.xml version 1.4.0 on ATC allows you to configure you troops based on the ingame 
+	  faction a settlement belongs to. Previously it was the culture which resulted in all empires sharing
+	  the same troops
 
-	NEW: Possible to configure Faction/Culture combinations
-	You can configure separate basic and elite troop trees for each faction/culture combination. What this
-	means is that if the Empire captured an Aserai settlement you can configure special troop trees that
-	only spawn in those Empire/Aserai settlements.
+	- Possible to configure Faction/Culture combinations
+	  You can configure separate basic and elite troop trees for each faction/culture combination. What this
+	  means is that if the Empire captured an Aserai settlement you can configure special troop trees that
+	  only spawn in those Empire/Aserai settlements.
 
 
 
@@ -70,10 +103,12 @@
 	                  a) if above 100% the percentages will be automatically redistributed
 					  b) if below 100% the remaining percent will be spawning the culture's base recruit
 					     (NOT the one's configured under <Culture id="default">!)
-	playeronly      - Used to designate a troop to be recruitable only by the player. See also replacewith!
+	playeronly      - Used to designate a troop to be recruitable only by the player. Use with replacewith!
+	clanonly        - Used to designate a troop to be recruitable only by the player's clan. Use with replacewith!
+	                  playeronly and clanonly must not be used together!
 	replacewith     - The troop ID that should be given to AI Lords if they attempt to recruit a recruit marked as
-	                  playeronly. Only usabele in conjunction with playeronly! If not provided ATC will spawn the
-					  culture's base recruits instead (NOT the one's configured under <Culture id="default">!)
+	                  playeronly. Only usabele in conjunction with playeronly or clanonly! If not provided ATC will 
+					  spawn the culture's base recruits instead (NOT the one's configured under <Culture id="default">!)
 	AIonly			- sadly still has no function yet as I have trouble with the recruiting UI
 					
 	
@@ -83,30 +118,52 @@
 
 <!-- STANDARD CONFIGURATION FOR ALL MAJOR FACTIONS WITH SOME EXAMPLES FOR SUBCULTURES  -->
 <ATCConfig>
+
+	<!-- Priority 1: Clan configuration -->
+	<!-- id taken from spclans.xml -->
+	<!-- special case: player_clan -->
+	<Clan id="player_clan">
+		<Culture id="default">
+			<basicTroops>
+				<volunteer id="chael_nadra_recruit_f" percent="50" />
+				<volunteer id="chael_nadra_recruit_m" percent="50" />
+			</basicTroops>
+			<eliteTroops spawnChance="15" atPower="200" spawnChanceCap="25">
+				<volunteer id="chael_nadra_elite_f" percent="50" />
+				<volunteer id="chael_nadra_elite_m" percent="50" />
+			</eliteTroops>
+		</Culture>
+	</Clan>
+	<Clan id="chaelnafain">
+		<Culture id="default">
+			<basicTroops>
+				<volunteer id="chael_nadra_recruit_f" percent="50" />
+				<volunteer id="chael_nadra_recruit_m" percent="50" />
+			</basicTroops>
+			<eliteTroops spawnChance="15" atPower="200" spawnChanceCap="25">
+				<volunteer id="chael_nadra_elite_f" percent="50" />
+				<volunteer id="chael_nadra_elite_m" percent="50" />
+			</eliteTroops>
+		</Culture>
+	</Clan>
+	
+	
+	<!-- Priority 2: MapFaction configuration -->
+	<!-- id taken from spkingdoms.xml -->
+	<!-- special case: player_faction -->
 	<MapFaction id="player_faction">
 		<Culture id="default">
 			<basicTroops>
 				<volunteer id="chael_nadra_recruit_f" percent="50" />   <!-- requires the separate Chael Nad'ra troop tree! -->
 				<volunteer id="chael_nadra_recruit_m" percent="50" />   <!-- requires the separate Chael Nad'ra troop tree! -->
 			</basicTroops> 
-			<eliteTroops>
+			<eliteTroops spawnChance="5" atPower="200" spawnChanceCap="25">
 				<volunteer id="chael_nadra_recruit_f" percent="50" />   <!-- requires the separate Chael Nad'ra troop tree! -->
 				<volunteer id="chael_nadra_recruit_m" percent="50" />   <!-- requires the separate Chael Nad'ra troop tree! -->
 			</eliteTroops>
 		</Culture>
 	</MapFaction>
-	<MapFaction id="player_clan">
-		<Culture id="default">
-			<basicTroops>
-				<volunteer id="chael_nadra_recruit_f" percent="50" />   <!-- requires the separate Chael Nad'ra troop tree! -->
-				<volunteer id="chael_nadra_recruit_m" percent="50" />   <!-- requires the separate Chael Nad'ra troop tree! -->
-			</basicTroops>
-			<eliteTroops>
-				<volunteer id="chael_nadra_recruit_f" percent="50" />   <!-- requires the separate Chael Nad'ra troop tree! -->
-				<volunteer id="chael_nadra_recruit_m" percent="50" />   <!-- requires the separate Chael Nad'ra troop tree! -->
-			</eliteTroops>
-		</Culture>
-	</MapFaction>
+
 	<MapFaction id="empire"> <!-- Northern Empire configuration with subcultures -->
 		<Culture id="default">
 			<basicTroops>
@@ -144,6 +201,7 @@
 			</eliteTroops>
 		</Culture>
 	</MapFaction>
+	
 	<mapfaction id="empire_w"> <!-- Standard Western Empire configuration -->
 		<culture id="default">
 			<basictroops>
@@ -154,6 +212,7 @@
 			</elitetroops>
 		</culture>
 	</mapfaction>
+	
 	<MapFaction id="empire_s"> <!-- Standard Southern Empire configuration -->
 		<Culture id="default">
 			<basicTroops>
@@ -164,6 +223,7 @@
 			</eliteTroops>
 		</Culture>
 	</MapFaction>	
+	
 	<MapFaction id="sturgia">   <!-- Standard Sturgia configuration -->
 		<Culture id="default">
 			<basicTroops>
@@ -174,6 +234,7 @@
 			</eliteTroops>
 		</Culture>
 	</MapFaction>
+	
 	<MapFaction id="aserai">   <!-- Standard Aserai configuration -->
 		<Culture id="default">
 			<basicTroops>
@@ -184,6 +245,7 @@
 			</eliteTroops>
 		</Culture>
 	</MapFaction>
+	
 	<MapFaction id="vlandia">  <!-- Standard Vlandia configuration -->
 		<Culture id="default">
 			<basicTroops>
@@ -194,18 +256,20 @@
 			</eliteTroops>
 		</Culture>
 	</MapFaction>
+	
 	<MapFaction id="battania"> <!-- Chael Nad'ra Battania configuration -->
 		<Culture id="default">
 			<basicTroops>
 				<volunteer id="battanian_volunteer" percent="40" />
-				<volunteer id="chael_nadra_recruit_f" percent="30" playeronly="true" replacewith="battanian_volunteer" />   <!-- requires the separate Chael Nad'ra troop tree! -->
-				<volunteer id="chael_nadra_recruit_m" percent="30" playeronly="true" replacewith="battanian_volunteer" />   <!-- requires the separate Chael Nad'ra troop tree! -->
+				<volunteer id="chael_nadra_recruit_f" percent="30" clanonly="true" replacewith="battanian_volunteer" />   <!-- requires the separate Chael Nad'ra troop tree! -->
+				<volunteer id="chael_nadra_recruit_m" percent="30" clanonly="true" replacewith="battanian_volunteer" />   <!-- requires the separate Chael Nad'ra troop tree! -->
 			</basicTroops>
 			<eliteTroops>
 				<volunteer id="battanian_highborn_youth" />
 			</eliteTroops>
 		</Culture>
 	</MapFaction>
+	
 	<MapFaction id="khuzait">   <!-- Standard Khuzait configuration -->
 		<Culture id="default">
 			<basicTroops>
@@ -216,4 +280,20 @@
 			</eliteTroops>
 		</Culture>
 	</MapFaction>
+	
+	
+	<!-- Priority 3: Culture configuration -->
+	<!-- Example for all minor factions or dynamically created factions using battanian culture -->
+	<MapFaction id="default">
+		<Culture id="battania">
+			<basicTroops>
+				<volunteer id="battanian_volunteer" percent="80" />
+				<volunteer id="chael_nadra_recruit_f" percent="10" clanonly="true" replacewith="battanian_volunteer" />
+				<volunteer id="chael_nadra_recruit_m" percent="10" clanonly="true" replacewith="battanian_volunteer" />
+			</basicTroops>
+			<eliteTroops spawnChance="5" atPower="200" spawnChanceCap="15">
+				<volunteer id="battanian_highborn_youth" percent="100"/>
+			</eliteTroops>
+		</Culture>
+	</MapFaction>	
 </ATCConfig> 

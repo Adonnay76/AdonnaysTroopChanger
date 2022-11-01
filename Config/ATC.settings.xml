@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- ATC settings for ATC 1.5.x
+
+	Since MCM and Modlib are still known for their compatibility problems
+	(which I'm sure they'll fix eventually) I decided to remove MCM for now.
+	
+	The following configuration is identical to what the MCM version 
+	provided, it is just not usable from in game anymore.
+	
+	EnableModScan 		  - This option enables or disables the mod's functionality
+							to scan for ATC configuration files in the subfolders
+							of active mods (and active mods only)
+					
+	EnableCustomTemplates - Allows ATC to replace the default party templates (found
+	                        in PartyTemplates.xml) with dynamically generated templates
+							created from your current ATC config.
+	
+	DebugConfigRead       - This setting lets you control the amount of debug
+							messages in the ATC.debug.log in regards to the 
+							configuration.
+					  
+	DebugRecruitSpawn 	  - This setting lets you control the amount of debug
+							messages in the ATC.debug.log in regards to the 
+							actual spawning of new recruits.
+					  
+	DebugAIRecruiting 	  - This setting lets you control the amount of debug
+							messages in the ATC.debug.log in regards to the 
+							actual troops AI lords are recruiting.
+					  						
+	RecruitSpawnFactor 	  - Can slow down or fasten up the spawning rate of new recruits
+						    Default value is 1.0, can be set to anything between 0.0 and 2.0
+						    Anything above 2.0 is unreasonable and untested.
+							
+	EliteSpawnChance	  - Determines how many % of spawned troops are elite troops. This 
+	                        Spawn Chance is achieved roughly at the given ElitePowerThreshold 
+							and	is lower below that threshold and can be higher above. the 
+							EliteSpawnChanceCap should always be set to prevent spawn chances
+							being to high.
+							This is the default value when no specific values are added
+							to the <eliteTroops> tag in the modconfig.xml files.
+	
+	EliteSpawnChanceCap	  - Maximum Spawn Chance of elite troops.
+							This is the default value when no specific values are added
+							to the <eliteTroops> tag in the modconfig.xml files.
+	
+	ElitePowerThreshold	  - Notable power required to spawn elite troops. At this threshold 
+	                        the configured EliteSpawnChance is reached. Notables with less
+							power can still receive elite troops but at a lower chance.
+							This is the default value when no spe values are added
+							to the <eliteTroops> tag in the modconfig.xml files.
+	
+	RecruitMaxUpgradeTier - Recruits in settlements have a daily possibility of getting
+	                        upgraded to the next tier. This value servers as an upper
+							limit on how far recruits can level up. The vanilla value is
+							Tier 4.
+							
+	LevelRecruitsUpToTier - Similar to the VolunteersUpTier addon from the Realistic Battle
+	                        Mod. Since ATC and the VolunteersUpTier addon are not compatible
+							I offer a similar function within ATC directly. Leave at 1 for
+							no automatic up tier. 
+							Difference to the setting RecruitMaxUpgradeTier: 
+							This will ALWAYS level the recruit up to the selected level!
+
+	MaxLogSizeinKB		  - As the name suggests the maximum log size in KiloBytes. A measure
+	                        to prevent huge log files in longer play sessions.
+-->
+<ATCSettings>
+  <EnableModScan>true</EnableModScan>
+  <EnableCustomTemplates>true</EnableCustomTemplates>
+  <DebugConfigRead>false</DebugConfigRead>
+  <DebugRecruitSpawn>false</DebugRecruitSpawn>
+  <DebugAIRecruiting>false</DebugAIRecruiting>
+  <RecruitSpawnFactor>1</RecruitSpawnFactor>
+  <EliteOnlyInCastleVillages>true</EliteOnlyInCastleVillages>
+  <EliteSpawnChance>5</EliteSpawnChance>
+  <EliteSpawnChanceCap>20</EliteSpawnChanceCap>
+  <ElitePowerThreshold>200</ElitePowerThreshold>
+  <RecruitMaxUpgradeTier>4</RecruitMaxUpgradeTier>
+  <LevelRecruitsUpToTier>1</LevelRecruitsUpToTier>
+  <MaxLogSizeInKB>5000</MaxLogSizeInKB>
+</ATCSettings>

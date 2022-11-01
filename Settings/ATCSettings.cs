@@ -1,53 +1,115 @@
-﻿using MCM.Abstractions.Attributes;
-using MCM.Abstractions.Attributes.v2;
-using MCM.Abstractions.Settings.Base.Global;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.IO;
+using System.Xml;
+using System.Xml.Linq;
 
-namespace AdonnaysTroopChanger
+namespace AdonnaysTroopChanger.Settings
 {
-    public class ATCSettings : AttributeGlobalSettings<ATCSettings>
+    public static class ATCSettings
     {
-
-        //public const string InstanceID = "AdonnaysTroopChanger";
-        public override string DisplayName => ("Adonnay\'s Troop Changer " + SubModule.version);
-        public override string FolderName => SubModule.ModuleFolderName;
-        public override string Id { get; } = "Adonnay.AdonnaysTroopChanger_v3";
-
-
-
-
-        [SettingPropertyBool(displayName: "Enable Mod Scan Functionality", Order = 0, RequireRestart = false, HintText = "Enables ATC to scan for files following the required naming pattern *ATC.modconfig.xml.")]
-        [SettingPropertyGroup("Basic ATC settings")]
-        public bool EnableModScan { get; set; } = false;
-
-        [SettingPropertyBool(displayName: "Debuginfo: Recruit Spawning", Order = 1,  RequireRestart = false, HintText = "Logs detailed information in the ATC.debug.log about the spawning of recruits (settlement/culture/faction/recruit).")]
-        [SettingPropertyGroup("Basic ATC settings")]
-        public bool DebugRecruitSpawn { get; set; } = false;
-
-        [SettingPropertyBool(displayName: "Debuginfo: Configuration", Order = 2, RequireRestart = false, HintText = "Logs detailed information in the ATC.debug.log related to the configuration and how it is read.")]
-        [SettingPropertyGroup("Basic ATC settings")]
-        public bool DebugConfigRead { get; set; } = false;
-
-        [SettingPropertyBool(displayName: "Debuginfo: AI Recruiting", Order = 3, RequireRestart = false, HintText = "Logs detailed information in the ATC.debug.log about AI Lords aquiring new troops from settlements.")]
-        [SettingPropertyGroup("Basic ATC settings")]
-        public bool DebugAIRecruiting { get; set; } = false;
+        public static bool EnableModScan              = true;
+        public static bool EnableCustomTemplates      = true;
+        public static bool DebugConfigRead            = true;
+        public static bool DebugRecruitSpawn          = true;
+        public static bool DebugAIRecruiting          = true;
+        public static float RecruitSpawnFactor        = 1.0f;
+        public static bool  EliteOnlyInCastleVillages = true;
+        public static float EliteSpawnChance          = 5.0f;
+        public static float ElitePowerThreshold       = 200.0f;
+        public static float EliteSpawnChanceCap       = 20.0f;
+        public static int RecruitMaxUpgradeTier       = 4;
+        public static int LevelRecruitsUpToTier       = 3;
+        public static int MaxLogSizeInKB              = 500;
 
 
+        public static void Initialize(string file)
+        {
+            if (file != "" && file != null)
+            {
+                XmlDocument doc = new XmlDocument();
 
-        [SettingPropertyBool(displayName: "Enable Faction Troops in Conquered Settlements", RequireRestart = false, HintText = "Allows to spawn faction troops (and their replacements) in conquered settlements.")]
-        [SettingPropertyGroup("Faction Troops in Conquered Settlements", IsMainToggle = true)]
-        public bool EnableCCC { get; set; } = false;
+                try
+                {
+                    if (File.Exists(file))
+                    {
+                        SubModule.log.Add("Loading " + file);
+                        doc.Load(file);
+                    }
+                    else
+                    {
+                        SubModule.log.Add("No Settings file found, creating new ATC.settings.xml!");
+                        CreateSettingsFile(file);
+                    }
 
-  
-        [SettingPropertyInteger(displayName: "Amount of Faction Troops", minValue: 1, maxValue: 100, RequireRestart = false, HintText = "Maximum amount of faction troops spawned in conquered settlements (in % - calculated with 100% Loyalty).")]
-        [SettingPropertyGroup("Faction Troops in Conquered Settlements")]
-        public int CCCAmount { get; set; } = 50;
+                }
+                catch
+                {
+                    SubModule.log.Add("Loading Failed! Creating new settings file!");
+                    CreateSettingsFile(file);
+                    return;
+                }
 
-        //[SettingPropertyBool(displayName: "Clanmates Can Recruit Custom Troops", RequireRestart = false, HintText = "Allow clan mates (companions) to recruit everything the player can. This overrules the playeronly configuration!")]
-        //[SettingPropertyGroup("Custom Unit Recruiting Options")]
-        //public bool ClanCanRecruit { get; set; } = true;
+                XmlElement root = doc.DocumentElement;
 
-        [SettingPropertyFloatingInteger(displayName: "TEST: Change Volunteer Spawning", minValue: 0.1f, maxValue: 2f, RequireRestart = false, HintText = "Reduce or increase the chance to spawn new recruits, applies to every settlement. Default (vanilla) spawn rate = 1.0!")]
-        [SettingPropertyGroup("Custom Unit Recruiting Options")]
-        public float RecruitSpawnFactor { get; set; } = 1.0f;
+
+                try { EnableModScan             = Convert.ToBoolean(root.SelectSingleNode("EnableModScan").InnerText); }                catch { SubModule.log.Add("WARNING: Option EnableModScan not found in ATC.settings.xml, assuming default value 'TRUE'.");               EnableModScan = true; }
+                try { EnableCustomTemplates     = Convert.ToBoolean(root.SelectSingleNode("EnableCustomTemplates").InnerText); }        catch { SubModule.log.Add("WARNING: Option EnableCustomTemplates not found in ATC.settings.xml, assuming default value 'TRUE'.");       EnableCustomTemplates = true; }
+                try { DebugConfigRead           = Convert.ToBoolean(root.SelectSingleNode("DebugConfigRead").InnerText); }              catch { SubModule.log.Add("WARNING: Option DebugConfigRead not found in ATC.settings.xml, assuming default value 'FALSE'.");            DebugConfigRead = false; }
+                try { DebugRecruitSpawn         = Convert.ToBoolean(root.SelectSingleNode("DebugRecruitSpawn").InnerText); }            catch { SubModule.log.Add("WARNING: Option DebugRecruitSpawn not found in ATC.settings.xml, assuming default value 'FALSE'.");          DebugRecruitSpawn = false; }
+                try { DebugAIRecruiting         = Convert.ToBoolean(root.SelectSingleNode("DebugAIRecruiting").InnerText); }            catch { SubModule.log.Add("WARNING: Option DebugAIRecruiting not found in ATC.settings.xml, assuming default value 'FALSE'.");          DebugAIRecruiting = false; }
+                try { RecruitSpawnFactor        = (float)Convert.ToDouble(root.SelectSingleNode("RecruitSpawnFactor").InnerText); }     catch { SubModule.log.Add("WARNING: Option RecruitSpawnFactor not found in ATC.settings.xml, assuming default value '1.0'.");           RecruitSpawnFactor = 1.0f; }
+                try { EliteOnlyInCastleVillages = Convert.ToBoolean(root.SelectSingleNode("DebugAIRecruiting").InnerText); }            catch { SubModule.log.Add("WARNING: Option EliteOnlyInCastleVillages not found in ATC.settings.xml, assuming default value 'FALSE'.");  EliteOnlyInCastleVillages = true; }
+                try { EliteSpawnChance          = (float)Convert.ToDouble(root.SelectSingleNode("EliteSpawnChance").InnerText); }       catch { SubModule.log.Add("WARNING: Option EliteSpawnChance not found in ATC.settings.xml, assuming default value '5.0'.");             EliteSpawnChance = 5.0f; }
+                try { ElitePowerThreshold       = (float)Convert.ToDouble(root.SelectSingleNode("ElitePowerThreshold").InnerText); }    catch { SubModule.log.Add("WARNING: Option ElitePowerThreshold not found in ATC.settings.xml, assuming default value '200'.");          ElitePowerThreshold = 200.0f; }
+                try { EliteSpawnChanceCap       = (float)Convert.ToDouble(root.SelectSingleNode("EliteSpawnChanceCap").InnerText); }    catch { SubModule.log.Add("WARNING: Option EliteSpawnChanceCap not found in ATC.settings.xml, assuming default value '20.0'.");         EliteSpawnChanceCap = 20.0f; }
+                try { RecruitMaxUpgradeTier     = Convert.ToInt32(root.SelectSingleNode("RecruitMaxUpgradeTier").InnerText); }          catch { SubModule.log.Add("WARNING: Option RecruitMaxUpgradeTier not found in ATC.settings.xml, assuming default value '5'.");          RecruitMaxUpgradeTier = 4; }
+                try { LevelRecruitsUpToTier     = Convert.ToInt32(root.SelectSingleNode("LevelRecruitsUpToTier").InnerText); }          catch { SubModule.log.Add("WARNING: Option LevelRecruitsUpToTier not found in ATC.settings.xml, assuming default value '3'.");          LevelRecruitsUpToTier = 1; }
+                try { MaxLogSizeInKB            = Convert.ToInt32(root.SelectSingleNode("MaxLogSizeInKB").InnerText); }                 catch { SubModule.log.Add("WARNING: Option MaxLogSizeInKB not found in ATC.settings.xml, assuming default value '500'.");               MaxLogSizeInKB = 500; }
+
+                try { 
+                    if (root.SelectSingleNode("EnableCultureBlending") != null)
+                        SubModule.log.Add("INFO: EnableCultureBlending is no longer supported. You can remove this from your ATC.settings.xml."); }
+                catch { }
+
+                try
+                {
+                    if (root.SelectSingleNode("CultureBlendingAmount") != null)
+                        SubModule.log.Add("INFO: CultureBlendingAmount is no longer supported. You can remove this from your ATC.settings.xml.");
+                }
+                catch { }
+
+            }
+        }
+
+        private static void CreateSettingsFile(string file)
+        {
+            XElement root = new XElement("ATCSettings");
+
+            root.Add(new XElement("EnableModScan", EnableModScan));
+            root.Add(new XElement("EnableCustomTemplates", EnableModScan));
+            root.Add(new XElement("DebugConfigRead", DebugConfigRead));
+            root.Add(new XElement("DebugRecruitSpawn",DebugRecruitSpawn));
+            root.Add(new XElement("DebugAIRecruiting", DebugAIRecruiting));
+            root.Add(new XElement("RecruitSpawnFactor", RecruitSpawnFactor));
+            root.Add(new XElement("EliteOnlyInCastleVillages", EliteOnlyInCastleVillages));
+            root.Add(new XElement("EliteSpawnChance", EliteSpawnChance));
+            root.Add(new XElement("ElitePowerThreshold", ElitePowerThreshold));
+            root.Add(new XElement("EliteSpawnChanceCap", EliteSpawnChanceCap));
+            root.Add(new XElement("RecruitMaxUpgradeTier", RecruitMaxUpgradeTier));
+            root.Add(new XElement("LevelRecruitsUpToTier", LevelRecruitsUpToTier));
+            root.Add(new XElement("MaxLogSizeInKB", MaxLogSizeInKB));
+
+
+        File.WriteAllText(file, "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n");
+            File.AppendAllText(file, Convert.ToString(root));
+
+        }
+
+
+
     }
 }
