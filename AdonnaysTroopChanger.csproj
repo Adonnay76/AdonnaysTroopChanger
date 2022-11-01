@@ -347,7 +347,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="ATC - Chael Nadra.csproj" />
     <None Include="packages.config" />
     <None Include="SubModule.xml" />
   </ItemGroup>

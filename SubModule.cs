@@ -19,7 +19,7 @@ namespace AdonnaysTroopChanger
     public class SubModule : MBSubModuleBase
     {
 
-        public static readonly string version = "1.8.0";
+        public static readonly string version = "1.8.1";
 
         public static readonly string ModuleFolderName = "AdonnaysTroopChanger";
 
@@ -32,9 +32,6 @@ namespace AdonnaysTroopChanger
         private static bool mergeConfigs = false;
 
 
-        //private readonly string configPath = String.Concat(BasePath.Name, "Modules/AdonnaysTroopChanger/Config/");
-        //private readonly string mergedFile = String.Concat(BasePath.Name, "Modules/AdonnaysTroopChanger/Config/ATC.config.merged.xml");
-        //private readonly string configFile = String.Concat(BasePath.Name, "Modules/AdonnaysTroopChanger/Config/ATC.settings.xml");
 
         private string configPath;
         public static string configFile;
